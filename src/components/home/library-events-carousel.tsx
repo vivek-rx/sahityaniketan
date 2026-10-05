@@ -9,6 +9,7 @@ import { ChevronLeft, ChevronRight, Camera, Calendar } from "lucide-react";
 import { LIBRARY_EVENTS, type LibraryEvent } from "@/lib/data/library-events";
 import { BLUR_PLACEHOLDER } from "@/lib/image-utils";
 import { useLanguage } from "@/context/language-context";
+import { ClipDiv } from "@/components/ui/skiper-ui/skiper66";
 
 export function LibraryEventsCarousel() {
   const router = useRouter();
@@ -122,34 +123,28 @@ export function LibraryEventsCarousel() {
               </div>
             </div>
 
-            {/* Right Column: Event Photograph */}
-            <div className="lg:col-span-5 flex justify-center">
+            {/* Right Column: Event Photograph with ClipDiv Custom Mask */}
+            <div className="lg:col-span-5 flex justify-center w-full">
               <Link
                 href={`/gallery?event=${currentEvent.id}`}
-                className="group relative w-full aspect-[4/3] max-w-lg rounded-2xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 shadow-md hover:shadow-xl transition-all cursor-pointer"
+                className="w-full max-w-lg cursor-pointer block group"
                 title={`${currentEvent.title} — छायाचित्रे पहा`}
               >
-                <Image
-                  src={currentEvent.coverImage}
+                <ClipDiv
+                  imgSrc={currentEvent.coverImage}
                   alt={currentEvent.title}
-                  fill
-                  priority
-                  sizes="(max-width: 768px) 100vw, 500px"
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
-                  placeholder="blur"
-                  blurDataURL={BLUR_PLACEHOLDER}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
-
-                <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-white text-xs font-bold">
-                  <span className="inline-flex items-center gap-1 bg-black/60 backdrop-blur-xs px-2.5 py-1 rounded-md">
-                    <Camera className="h-3.5 w-3.5 text-[#E5B869]" />
-                    <span>{currentEvent.photos.length} छायाचित्रे</span>
-                  </span>
-                  <span className="text-[#E5B869] group-hover:underline flex items-center gap-1">
-                    <span>गॅलरी उघडा</span>
-                  </span>
-                </div>
+                  className="aspect-[4/3] w-full rounded-2xl shadow-md group-hover:shadow-2xl transition-all"
+                >
+                  <div className="flex items-center justify-between text-white text-xs font-bold w-full">
+                    <span className="inline-flex items-center gap-1 bg-black/60 backdrop-blur-xs px-2.5 py-1 rounded-md">
+                      <Camera className="h-3.5 w-3.5 text-[#E5B869]" />
+                      <span>{currentEvent.photos.length} छायाचित्रे</span>
+                    </span>
+                    <span className="text-[#E5B869] group-hover:underline flex items-center gap-1">
+                      <span>गॅलरी उघडा</span>
+                    </span>
+                  </div>
+                </ClipDiv>
               </Link>
             </div>
           </motion.div>
