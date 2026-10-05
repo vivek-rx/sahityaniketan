@@ -10,6 +10,7 @@ import { LIBRARY_EVENTS, type LibraryEvent } from "@/lib/data/library-events";
 import { BLUR_PLACEHOLDER } from "@/lib/image-utils";
 import { useLanguage } from "@/context/language-context";
 import { ClipDiv } from "@/components/ui/skiper-ui/skiper66";
+import { ProgressiveBlur } from "@/components/ui/skiper-ui/skiper41";
 
 export function LibraryEventsCarousel() {
   const router = useRouter();
@@ -63,6 +64,10 @@ export function LibraryEventsCarousel() {
       onTouchEnd={handleTouchEnd}
       className="relative w-full overflow-hidden border-b border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 transition-colors"
     >
+      {/* Subtle Progressive Edge Blurs */}
+      <ProgressiveBlur position="top" height="48px" blurAmount="4px" className="opacity-30" />
+      <ProgressiveBlur position="bottom" height="48px" blurAmount="4px" className="opacity-30" />
+
       <div className="relative max-w-[1480px] mx-auto px-3.5 sm:px-6 lg:px-10 py-6 sm:py-10 min-h-[380px] flex flex-col justify-between">
         {/* Main 2-Column Content Slide */}
         <AnimatePresence mode="wait">

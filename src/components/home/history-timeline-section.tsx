@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useLanguage } from "@/context/language-context";
 import { ScrollTimeline } from "@/components/history/scroll-timeline";
 import { useAnimeScroll } from "@/hooks/use-anime-scroll";
+import { ProgressiveBlur } from "@/components/ui/skiper-ui/skiper41";
 
 /**
  * HistoryTimelineSection — The One Deliberate Animation Moment on the Homepage.
@@ -33,7 +34,11 @@ export function HistoryTimelineSection() {
     : "हैदराबाद मुक्ती संग्रामाच्या काळात १ ऑगस्ट १९४५ रोजी स्थापन झालेले ग्रंथालय आणि पुढील आठ दशकांतील संस्थात्मक वाटचाल.";
 
   return (
-    <section className="relative py-12 sm:py-16 md:py-20 bg-white dark:bg-zinc-950 border-b border-zinc-200 dark:border-zinc-800 font-marathi-body transition-colors">
+    <section className="relative py-12 sm:py-16 md:py-20 bg-white dark:bg-zinc-950 border-b border-zinc-200 dark:border-zinc-800 font-marathi-body transition-colors overflow-hidden">
+      {/* Subtle edge progressive blurs */}
+      <ProgressiveBlur position="top" height="50px" blurAmount="4px" className="opacity-25" />
+      <ProgressiveBlur position="bottom" height="50px" blurAmount="4px" className="opacity-25" />
+
       <div className="section">
         {/* Section Header: Pure Headings, NO Eyebrow Badge */}
         <div ref={headerRef} className="max-w-3xl mb-6 sm:mb-8 text-left">
