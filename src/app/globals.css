@@ -1,0 +1,718 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@import "@heroui/styles";
+
+/* =========================================================
+   SAHITYA NIKETAN GRANTHALAYA — Digital Heritage Typography
+   AMS Vasudeva (Calligraphy) & Gajraj One (Saurabh Sharma)
+   ========================================================= */
+
+@font-face {
+  font-family: 'AMS Vasudeva';
+  src: url('/fonts/AMS_Vasudeva.ttf') format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gajraj One';
+  src: url('/fonts/GajrajOne-Devanagari.woff2') format('woff2');
+  unicode-range: U+0900-097F, U+1CD0-1CF9, U+200C-200D, U+20A8, U+20B9, U+20F0, U+25CC, U+A830-A839, U+A8E0-A8FF;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gajraj One';
+  src: url('/fonts/GajrajOne-Latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gajraj One Local';
+  src: url('/fonts/GajrajOne-Devanagari.woff2') format('woff2');
+  unicode-range: U+0900-097F, U+1CD0-1CF9, U+200C-200D, U+20A8, U+20B9, U+20F0, U+25CC, U+A830-A839, U+A8E0-A8FF;
+  font-display: swap;
+}
+
+@variant dark (&:where(.dark, .dark *));
+
+
+
+/* ---------------------------------------------------------
+   Tailwind Theme Extensions
+   --------------------------------------------------------- */
+@theme inline {
+  /* Unified Font Stack:
+     - Geist for English & Clean UI
+     - Noto Sans Devanagari for Marathi/Hindi Body
+     - Baloo 2 for Devanagari Headings
+  */
+  --font-geist-sans: var(--font-geist-sans);
+  --font-geist: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-sans: var(--font-noto-devanagari), var(--font-geist-sans), -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-serif: var(--font-baloo), var(--font-noto-devanagari), sans-serif;
+  --font-heading: var(--font-baloo), var(--font-noto-devanagari), sans-serif;
+  --font-marathi: var(--font-noto-devanagari), var(--font-geist-sans), sans-serif;
+  --font-marathi-heading: var(--font-baloo), var(--font-noto-devanagari), sans-serif;
+  --font-marathi-serif: var(--font-baloo), var(--font-noto-devanagari), sans-serif;
+  --font-marathi-editorial: var(--font-noto-devanagari), var(--font-geist-sans), sans-serif;
+  --font-marathi-display: var(--font-baloo), var(--font-noto-devanagari), sans-serif;
+  --font-marathi-body: var(--font-noto-devanagari), var(--font-geist-sans), sans-serif;
+  --font-hindi: var(--font-noto-devanagari), var(--font-geist-sans), sans-serif;
+  --font-hindi-heading: var(--font-baloo), var(--font-noto-devanagari), sans-serif;
+
+  --font-noto-devanagari: var(--font-noto-devanagari);
+  --font-baloo: var(--font-baloo);
+  --font-mono: var(--font-geist-mono);
+  --font-gajraj: 'Gajraj One', 'Gajraj One Local', cursive, sans-serif;
+  --font-ams: 'AMS Vasudeva', cursive, sans-serif;
+
+  /* shadcn component tokens */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Committed Real Heritage Palette: Aged Paper Cream, Deep Maroon, Muted Gold, Charcoal Ink */
+  --color-paper-cream: #F6F0E6;
+  --color-paper-parchment: #EDE4D3;
+  --color-paper-warm: #FAF7F2;
+  --color-maroon-deep: #6B0F1A;
+  --color-maroon-royal: #800020;
+  --color-maroon-seal: #4A050E;
+  --color-gold-muted: #C5A059;
+  --color-gold-antique: #B8860B;
+  --color-gold-leaf: #D4AF37;
+  --color-ink-charcoal: #1A1615;
+  --color-ink-lampblack: #120B0D;
+  --color-ink-soft: #26211F;
+  --color-ink-muted: #4A4440;
+
+  /* Legacy & compatibility aliases */
+  --color-maroon: #6B0F1A;
+  --color-maroon-dark: #4A050E;
+  --color-maroon-light: #800020;
+  --color-gold: #C5A059;
+  --color-gold-light: #E5B869;
+  --color-gold-dark: #8C6508;
+  --color-sandstone: #E5DDD0;
+  --color-sandstone-light: #F6F0E6;
+  --color-cream: #EDE4D3;
+  --color-paper: #F6F0E6;
+  --color-text-primary: #1A1615;
+  --color-text-secondary: #26211F;
+  --color-text-light: #5A534E;
+  --color-border-subtle: #E5DDD0;
+  --color-border-strong: #C8BAA7;
+}
+
+/* ---------------------------------------------------------
+   Root Variables — Light & Accessibility Support
+   --------------------------------------------------------- */
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  position: relative;
+}
+
+:root {
+  --background: #F8F6F1;
+  --foreground: #18181b;
+  --card: #ffffff;
+  --card-foreground: #18181b;
+  --popover: #ffffff;
+  --popover-foreground: #18181b;
+  --primary: #800020;
+  --primary-foreground: #ffffff;
+  --secondary: #f4f4f5;
+  --secondary-foreground: #18181b;
+  --muted: #f4f4f5;
+  --muted-foreground: #71717a;
+  --accent: #f4f4f5;
+  --accent-foreground: #18181b;
+  --destructive: #ef4444;
+  --border: #e4e4e7;
+  --input: #e4e4e7;
+  --ring: #800020;
+  --radius: 0.75rem;
+}
+
+.dark {
+  --background: #09090b;
+  --foreground: #fafafa;
+  --card: #18181b;
+  --card-foreground: #fafafa;
+  --popover: #18181b;
+  --popover-foreground: #fafafa;
+  --primary: #e5b869;
+  --primary-foreground: #18181b;
+  --secondary: #27272a;
+  --secondary-foreground: #fafafa;
+  --muted: #27272a;
+  --muted-foreground: #a1a1aa;
+  --accent: #27272a;
+  --accent-foreground: #fafafa;
+  --destructive: #7f1d1d;
+  --border: #27272a;
+  --input: #27272a;
+  --ring: #e5b869;
+}
+
+/* ---------------------------------------------------------
+   Base Styles & Devanagari Typography Tuning
+   --------------------------------------------------------- */
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+
+  html {
+    font-size: 16px;
+    font-family: var(--font-geist-sans), var(--font-noto-devanagari), var(--font-anek), -apple-system, BlinkMacSystemFont, sans-serif;
+    scroll-behavior: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    background-color: var(--background);
+    color: #111827;
+    font-size: 1.0625rem;
+    line-height: 1.8;
+    letter-spacing: 0.005em;
+    font-weight: 500;
+    font-family: var(--font-geist-sans), var(--font-noto-devanagari), var(--font-anek), -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  /* English font across whole website */
+  html[lang="en"], :lang(en), [lang="en"] {
+    font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  html[lang="en"] body, :lang(en) body, [lang="en"] body {
+    font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 1rem;
+    line-height: 1.72;
+  }
+
+  html[lang="en"] h1, html[lang="en"] h2, html[lang="en"] h3, html[lang="en"] h4, html[lang="en"] h5, html[lang="en"] h6,
+  :lang(en) h1, :lang(en) h2, :lang(en) h3, :lang(en) h4, :lang(en) h5, :lang(en) h6 {
+    font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, sans-serif;
+    letter-spacing: -0.02em;
+  }
+
+  /* Language-based Marathi font defaults — Crisp, spacious, highly legible */
+  html[lang="mr"], :lang(mr) {
+    font-family: var(--font-noto-devanagari), var(--font-anek), -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  html[lang="mr"] body, :lang(mr) body {
+    font-family: var(--font-noto-devanagari), var(--font-anek), -apple-system, BlinkMacSystemFont, sans-serif;
+    line-height: 1.84;
+    letter-spacing: 0.01em;
+    font-size: 1.125rem; /* 18px base for Marathi for optimal reading comfort */
+    font-weight: 500;
+    color: #111827;
+  }
+
+  /* Headings — Crisp, Elegant Baloo 2 & Noto Sans Devanagari */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-baloo), var(--font-noto-devanagari), var(--font-anek), sans-serif;
+    font-weight: 700;
+    line-height: 1.34;
+    letter-spacing: -0.01em;
+    color: #111827;
+  }
+
+  h1 {
+    font-size: clamp(2.4rem, 5vw, 3.5rem);
+    line-height: 1.25;
+  }
+
+  h2 {
+    font-size: clamp(1.85rem, 3.6vw, 2.55rem);
+    line-height: 1.28;
+  }
+
+  h3 {
+    font-size: clamp(1.4rem, 2.8vw, 1.85rem);
+    line-height: 1.32;
+  }
+
+  h4 {
+    font-size: 1.35rem;
+    line-height: 1.36;
+  }
+
+  p {
+    color: #374151;
+    max-width: 75ch;
+    line-height: 1.8;
+    font-size: 1.0625rem;
+    font-weight: 500;
+  }
+
+  html[lang="mr"] p, :lang(mr) p {
+    font-size: 1.125rem;
+    line-height: 1.84;
+  }
+
+
+  /* Selection style */
+  ::selection {
+    background-color: rgba(139, 21, 27, 0.16);
+    color: #8B151B;
+  }
+
+  /* Scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #FAF7F2;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #D6CCC0;
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #8B151B;
+  }
+}
+
+/* ---------------------------------------------------------
+   Component Utilities & Font Helpers
+   --------------------------------------------------------- */
+@layer components {
+  /* Container width matching header — scaled wide for rich, immersive layout without excessive side gutters */
+  .section {
+    @apply mx-auto w-full max-w-[1480px] px-3.5 sm:px-6 lg:px-10;
+  }
+
+  /* Compact editorial rhythm — eliminates gaping empty vertical voids */
+  .section-padding {
+    @apply py-6 sm:py-8 lg:py-10;
+  }
+
+  /* Sacred Heritage Navbar Header */
+  .ndl-header-top {
+    background-color: #FAF7F2;
+    border-bottom: 1px solid #E7E0D6;
+  }
+
+  .ndl-navbar-bar {
+    background-color: #800020;
+  }
+
+  .ndl-tab-active {
+    background-color: #66001A;
+    color: #FFFFFF;
+  }
+
+  /* Heritage Card */
+  .heritage-card {
+    @apply rounded-2xl border bg-card p-5 sm:p-6 transition-all duration-300;
+    border-color: var(--border);
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+  }
+
+  .heritage-card:hover {
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
+    border-color: #800020;
+    transform: translateY(-2px);
+  }
+
+  /* =========================================================
+     HeroUI & Card Styling
+     ========================================================= */
+  .card, .card--default {
+    background-color: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 1.25rem;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .card:hover, .card--default:hover {
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+  }
+
+  .button--primary {
+    background-color: #800020 !important;
+    color: #FFFFFF !important;
+    font-weight: 700 !important;
+    border-radius: 9999px !important;
+    border: 1px solid rgba(184, 134, 11, 0.35) !important;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  }
+
+  .button--primary:hover {
+    background-color: #66001A !important;
+    border-color: #B8860B !important;
+    box-shadow: 0 4px 14px rgba(128, 0, 32, 0.25) !important;
+  }
+
+  .button--secondary, .button--outline {
+    background-color: #FFFFFF !important;
+    color: #800020 !important;
+    border: 1px solid #E5DDD0 !important;
+    font-weight: 700 !important;
+    border-radius: 9999px !important;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  }
+
+  .button--secondary:hover, .button--outline:hover {
+    background-color: #F3ECE3 !important;
+    border-color: #800020 !important;
+    color: #66001A !important;
+  }
+
+  .chip--primary {
+    background-color: rgba(128, 0, 32, 0.08) !important;
+    color: #800020 !important;
+    border: 1px solid rgba(128, 0, 32, 0.15) !important;
+    font-weight: 700 !important;
+  }
+
+  /* =========================================================
+     Unified Typography Utilities:
+     - Heading: Baloo 2 & Noto Sans Devanagari
+     - Body: Noto Sans Devanagari & Geist
+     ========================================================= */
+  .font-marathi-heading, 
+  .font-devanagari-heading, 
+  .font-heading, 
+  .font-marathi-serif, 
+  .font-devanagari-serif, 
+  .font-marathi-display, 
+  .font-baloo {
+    font-family: var(--font-baloo), var(--font-noto-devanagari), sans-serif;
+    letter-spacing: -0.01em;
+    line-height: 1.34;
+  }
+
+  .font-marathi-body, 
+  .font-devanagari-body, 
+  .font-devanagari, 
+  .font-editorial, 
+  .font-marathi-editorial, 
+  .font-marathi-friendly, 
+  .font-friendly, 
+  .font-roboto, 
+  .font-marcellus {
+    font-family: var(--font-noto-devanagari), var(--font-geist-sans), sans-serif;
+    letter-spacing: 0.005em;
+    line-height: 1.8;
+  }
+
+  .font-gajraj {
+    font-family: 'Gajraj One', 'Gajraj One Local', cursive, sans-serif !important;
+  }
+
+  .font-ams {
+    font-family: 'AMS Vasudeva', cursive, sans-serif !important;
+  }
+}
+
+/* ---------------------------------------------------------
+   Utility Extensions & Animations
+   --------------------------------------------------------- */
+@layer utilities {
+  .transition-heritage {
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+/* ---------------------------------------------------------
+   Dark Mode — Regal Maroon & Deep Velvet
+   --------------------------------------------------------- */
+html.dark {
+  --background: #120B0D;
+  --foreground: #FAF2E8;
+  --card: #1E1418;
+  --card-foreground: #FAF2E8;
+  --popover: #1E1418;
+  --popover-foreground: #FAF2E8;
+  --primary: #800020;
+  --primary-foreground: #FFFFFF;
+  --secondary: #26161B;
+  --secondary-foreground: #E5B869;
+  --muted: #26161B;
+  --muted-foreground: #D5C2B4;
+  --accent: #E5B869;
+  --accent-foreground: #120B0D;
+  --destructive: #E74C3C;
+  --border: #332228;
+  --input: #1E1418;
+  --ring: #E5B869;
+
+  /* Heritage & Hindu Cultural Color Palette Tokens in Dark Mode */
+  --color-ndl-teal: #E5B869;
+  --color-ndl-teal-dark: #F5D38A;
+  --color-ndl-teal-light: #FAF2E8;
+  --color-ndl-orange: #E5B869;
+  --color-ndl-orange-dark: #B8860B;
+  --color-maroon: #800020;
+  --color-maroon-dark: #66001A;
+  --color-maroon-light: #9B1B30;
+  --color-gold: #E5B869;
+  --color-gold-light: #F5D38A;
+  --color-gold-dark: #B8860B;
+  --color-sandstone: #26161B;
+  --color-sandstone-light: #1E1418;
+  --color-forest: #4ADE80;
+  --color-forest-light: #86EFAC;
+  --color-ivory: #120B0D;
+  --color-cream: #1A1014;
+  --color-paper: #120B0D;
+  --color-text-primary: #FAF2E8;
+  --color-text-secondary: #D5C2B4;
+  --color-text-light: #B8A699;
+  --color-border-subtle: #332228;
+  --color-border-strong: #442B34;
+
+  color-scheme: dark;
+}
+
+html.dark,
+html.dark body,
+html.dark html[lang="mr"] body,
+html.dark :lang(mr) body {
+  background-color: #120B0D !important;
+  color: #FAF2E8 !important;
+}
+
+html.dark h1,
+html.dark h2,
+html.dark h3,
+html.dark h4,
+html.dark h5,
+html.dark h6 {
+  color: #FAF2E8 !important;
+}
+
+html.dark p {
+  color: #D5C2B4 !important;
+}
+
+/* Card & Surface Containers in Dark Mode */
+html.dark .card,
+html.dark .card--default,
+html.dark .heritage-card,
+html.dark .bg-white,
+html.dark [class*="bg-white"] {
+  background-color: #1E1418 !important;
+  color: #FAF2E8 !important;
+  border-color: #332228 !important;
+}
+
+html.dark .bg-\[\#FAF6F0\],
+html.dark .bg-\[\#FFFBF5\],
+html.dark .bg-\[\#FFF5EB\],
+html.dark .bg-\[\#F8FAFC\], 
+html.dark .bg-\[\#F4F6F9\], 
+html.dark .bg-\[\#FAF9F6\], 
+html.dark .bg-\[\#FAF8F5\], 
+html.dark .bg-\[\#FDFBF7\], 
+html.dark .bg-\[\#F4EFE6\],
+html.dark .bg-\[\#F5EFE4\],
+html.dark .bg-\[\#F5EFE4\]\/60,
+html.dark [class*="bg-[#FAF6F0]"],
+html.dark [class*="bg-[#FFFBF5]"],
+html.dark [class*="bg-[#FFF5EB]"],
+html.dark [class*="bg-[#F8FAFC]"],
+html.dark [class*="bg-[#F4F6F9]"],
+html.dark [class*="bg-[#FAF9F6]"],
+html.dark [class*="bg-[#FAF8F5]"],
+html.dark [class*="bg-[#FDFBF7]"],
+html.dark [class*="bg-[#F4EFE6]"],
+html.dark [class*="bg-[#F5EFE4]"] {
+  background-color: #1B0406 !important;
+  color: #FAF2E8 !important;
+  border-color: #4A1217 !important;
+}
+
+/* High-Contrast Primary Heading & Title Text */
+html.dark .text-gray-900, 
+html.dark .text-gray-800, 
+html.dark .text-gray-700,
+html.dark .text-\[\#2D1810\],
+html.dark .text-\[\#1F1A18\],
+html.dark .text-\[\#111827\],
+html.dark .text-\[\#000\],
+html.dark .text-black,
+html.dark [class*="text-[#2D1810]"],
+html.dark [class*="text-[#1F1A18]"],
+html.dark [class*="text-[#111827]"],
+html.dark [class*="text-[#2D1212]"],
+html.dark [class*="text-[#3D2518]"],
+html.dark [class*="text-[#382110]"],
+html.dark [class*="text-[#1B432A]"],
+html.dark [class*="text-[#00657E]"] {
+  color: #FAF2E8 !important;
+}
+
+/* High-Contrast Subtitle & Body Text */
+html.dark .text-gray-600, 
+html.dark .text-gray-500,
+html.dark .text-\[\#5D4E42\],
+html.dark .text-\[\#4A4440\],
+html.dark .text-\[\#736C65\],
+html.dark .text-\[\#8C827A\],
+html.dark .text-\[\#8B7D72\],
+html.dark .text-\[\#374151\],
+html.dark [class*="text-[#5D4E42]"],
+html.dark [class*="text-[#4A4440]"],
+html.dark [class*="text-[#736C65]"],
+html.dark [class*="text-[#8C827A]"],
+html.dark [class*="text-[#8B7D72]"],
+html.dark [class*="text-[#78716C]"],
+html.dark [class*="text-[#374151]"] {
+  color: #D5C2B4 !important;
+}
+
+/* Accent & Secondary Labels */
+html.dark .text-\[\#A39890\],
+html.dark [class*="text-[#A39890]"],
+html.dark [class*="text-[#6B3A2A]"] {
+  color: #D5C2B4 !important;
+}
+
+html.dark .text-\[\#8C3410\],
+html.dark .text-\[\#922B21\],
+html.dark .text-\[\#8B5E3C\],
+html.dark [class*="text-[#8C3410]"],
+html.dark [class*="text-[#922B21]"],
+html.dark [class*="text-[#8B5E3C]"],
+html.dark [class*="text-[#78350F]"] {
+  color: #E5B869 !important;
+}
+
+html.dark .text-\[\#BF4B1A\],
+html.dark [class*="text-[#BF4B1A]"],
+html.dark [class*="text-[#ED6923]"] {
+  color: #F89B5C !important;
+}
+
+/* Borders in Dark Mode */
+html.dark .border-gray-200, 
+html.dark .border-gray-300, 
+html.dark .border-gray-100,
+html.dark .border-\[\#E8E0D5\],
+html.dark .border-\[\#E8D5C4\],
+html.dark .border-\[\#E0C9B5\],
+html.dark .border-\[\#E8E2D6\],
+html.dark .border-\[\#E2DAD0\],
+html.dark .border-\[\#DDD5C7\],
+html.dark .border-\[\#D5C9B8\],
+html.dark [class*="border-[#E8E0D5]"],
+html.dark [class*="border-[#E8D5C4]"],
+html.dark [class*="border-[#E0C9B5]"],
+html.dark [class*="border-[#E8E2D6]"],
+html.dark [class*="border-[#D5C9B8]"] {
+  border-color: #4A1217 !important;
+}
+/* High-contrast text overrides for dark mode */
+html.dark [class*="text-[#C0392B]"],
+html.dark [class*="text-[#B03A2E]"],
+html.dark [class*="text-[#8B151B]"],
+html.dark [class*="text-[#922B21]"] {
+  color: #E5B869 !important;
+}
+
+html.dark [class*="text-[#6B3A2A]"],
+html.dark [class*="text-[#7A2E1E]"],
+html.dark [class*="text-[#8D4004]"] {
+  color: #D5C2B4 !important;
+}
+
+/* Chips & Pills in Dark Mode */
+html.dark .bg-\[\#FAF2E6\],
+html.dark .bg-\[\#FAF0E6\],
+html.dark .bg-\[\#FFF0E5\],
+html.dark .bg-\[\#F7EFEF\],
+html.dark [class*="bg-[#FAF2E6]"],
+html.dark [class*="bg-[#FAF0E6]"],
+html.dark [class*="bg-[#FFF0E5]"],
+html.dark [class*="bg-[#EDF5F0]"],
+html.dark [class*="bg-[#F7EFEF]"] {
+  background-color: #38070C !important;
+  color: #FAF2E8 !important;
+  border-color: #5A141A !important;
+}
+
+html.dark .chip--primary,
+html.dark .chip--secondary,
+html.dark .chip--accent {
+  background-color: #38070C !important;
+  color: #E5B869 !important;
+  border-color: #5A141A !important;
+}
+
+/* Inputs & Form Fields in Dark Mode */
+html.dark input,
+html.dark textarea,
+html.dark select {
+  background-color: #240508 !important;
+  color: #FAF2E8 !important;
+  border-color: #5A141A !important;
+}
+
+html.dark label {
+  color: #FAF2E8 !important;
+}
+
+html.dark input::placeholder,
+html.dark textarea::placeholder {
+  color: #9C887B !important;
+}
+
+/* Mobile Safe-Area Bottom Padding to prevent content occlusion by bottom navbar */
+@media (max-width: 1023px) {
+  body {
+    padding-bottom: calc(4.25rem + env(safe-area-inset-bottom, 0px)) !important;
+  }
+}
+
+/* Hide Next.js Development Indicator so it doesn't obstruct bottom navigation */
+nextjs-portal {
+  display: none !important;
+}
+
+/* Native smooth scrolling with reduced-motion respect */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
