@@ -400,11 +400,24 @@ export function TestimonialPostPro({
 
   const isMobile = containerW < 840;
   const actualCardWidth = isMobile
-    ? Math.min(containerW - 32, cardWidth)
+    ? Math.min(containerW - 24, 480)
     : cardWidth;
   const actualCardHeight = isMobile
-    ? Math.round(actualCardWidth * 0.62)
+    ? Math.max(345, Math.min(390, Math.round(actualCardWidth * 1.02)))
     : cardHeight;
+
+  // Touch swipe support for mobile
+  const touchStartX = useRef<number | null>(null);
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null) return;
+    const diff = touchStartX.current - e.changedTouches[0].clientX;
+    if (diff > 45) nextNote();
+    else if (diff < -45) prevNote();
+    touchStartX.current = null;
+  };
 
   // Next / Prev navigation
   const nextNote = useCallback(() => {
@@ -438,6 +451,9 @@ export function TestimonialPostPro({
   // Postcard front side: Message & Postal details
   const renderMessageSide = (note: PostcardNote) => {
     const cardBg = note.cardColor || "#F1D8A8";
+    const currentPadding = isMobile ? 18 : cardPadding;
+    const currentStampSize = isMobile ? Math.round(stampSize * 0.82) : stampSize;
+
     return (
       <div
         style={{
@@ -445,10 +461,10 @@ export function TestimonialPostPro({
           inset: 0,
           background: cardBg,
           borderRadius: cardRadius,
-          padding: cardPadding,
+          padding: currentPadding,
           boxSizing: "border-box",
           display: "flex",
-          gap: Math.round(cardPadding * 0.8),
+          gap: isMobile ? 12 : Math.round(cardPadding * 0.8),
           overflow: "hidden",
           boxShadow: "0 22px 50px -15px rgba(40,24,12,.28)",
           border: `1px solid rgba(0,0,0,0.08)`,
@@ -464,7 +480,7 @@ export function TestimonialPostPro({
             display: "flex",
             flexDirection: "column",
             justifyContent: "space-between",
-            gap: 14,
+            gap: isMobile ? 10 : 14,
           }}
         >
           <div
@@ -473,12 +489,12 @@ export function TestimonialPostPro({
               overflow: "hidden",
               fontFamily: "var(--font-noto-devanagari), var(--font-geist-sans), sans-serif",
               fontSize: isMobile ? 13.5 : 15.5,
-              lineHeight: 1.78,
+              lineHeight: isMobile ? 1.65 : 1.78,
               letterSpacing: "0.01em",
               fontWeight: 500,
               display: "-webkit-box",
               WebkitBoxOrient: "vertical",
-              WebkitLineClamp: isMobile ? 5 : 6,
+              WebkitLineClamp: isMobile ? 6 : 6,
             }}
           >
             “{note.quote}”
@@ -491,7 +507,7 @@ export function TestimonialPostPro({
             <div
               style={{
                 color: inkColor,
-                marginTop: 6,
+                marginTop: 4,
                 fontWeight: 700,
                 fontSize: isMobile ? 15 : 17,
                 fontFamily: "var(--font-baloo), var(--font-noto-devanagari), sans-serif",
@@ -507,7 +523,7 @@ export function TestimonialPostPro({
                 color: inkColor,
                 opacity: 0.85,
                 marginTop: 2,
-                fontSize: isMobile ? 12 : 13.5,
+                fontSize: isMobile ? 11.5 : 13.5,
                 fontWeight: 500,
                 fontFamily: "var(--font-noto-devanagari), var(--font-geist-sans), sans-serif",
                 whiteSpace: "nowrap",
@@ -535,7 +551,7 @@ export function TestimonialPostPro({
         {/* Right Side: Postage stamp & Postal Address lines */}
         <div
           style={{
-            width: Math.round(stampSize * 1.8),
+            width: Math.round(currentStampSize * 1.8),
             flex: "0 0 auto",
             display: "flex",
             flexDirection: "column",
@@ -546,7 +562,7 @@ export function TestimonialPostPro({
         >
           <PostageStamp
             note={note}
-            stampSize={stampSize}
+            stampSize={currentStampSize}
             cardColor={cardBg}
             paperColor={paperColor}
           />
@@ -562,14 +578,14 @@ export function TestimonialPostPro({
           >
             <div
               style={{
-                height: 22,
+                height: 20,
                 borderBottom: `1px solid ${inkColor}`,
                 color: inkColor,
                 display: "flex",
                 alignItems: "flex-end",
                 paddingBottom: 2,
                 boxSizing: "border-box",
-                fontSize: 12,
+                fontSize: isMobile ? 11 : 12,
                 fontWeight: 600,
                 fontFamily: "var(--font-baloo), var(--font-noto-devanagari), sans-serif",
                 whiteSpace: "nowrap",
@@ -581,16 +597,16 @@ export function TestimonialPostPro({
             </div>
             <div
               style={{
-                height: 18,
+                height: 16,
                 borderBottom: `1px solid ${inkColor}`,
-                opacity: 0.4,
+                opacity: 0.35,
               }}
             />
             <div
               style={{
-                height: 18,
+                height: 16,
                 borderBottom: `1px solid ${inkColor}`,
-                opacity: 0.4,
+                opacity: 0.35,
               }}
             />
           </div>
@@ -608,14 +624,14 @@ export function TestimonialPostPro({
               }}
               style={{
                 position: "absolute",
-                top: stampSize * 0.48,
-                right: stampSize * 0.65,
+                top: currentStampSize * 0.48,
+                right: currentStampSize * 0.65,
                 pointerEvents: "none",
               }}
             >
               <PostmarkStamp
                 date={note.postmark}
-                stampSize={stampSize}
+                stampSize={currentStampSize}
                 accentColor={accentColor}
               />
             </motion.div>
@@ -627,7 +643,7 @@ export function TestimonialPostPro({
 
   // Postcard reverse side: Full photo artwork
   const renderPictureSide = (note: PostcardNote) => {
-    const pad = Math.max(6, Math.round(cardPadding * 0.42));
+    const pad = isMobile ? 6 : Math.max(6, Math.round(cardPadding * 0.42));
     const photoSrc = note.imageUrl || note.image?.src || "/images/real/library_reading_hall.png";
 
     return (
@@ -675,7 +691,7 @@ export function TestimonialPostPro({
               position: "absolute",
               inset: 0,
               background:
-                "linear-gradient(to top, rgba(0,0,0,0.65), rgba(0,0,0,0) 55%)",
+                "linear-gradient(to top, rgba(0,0,0,0.75), rgba(0,0,0,0) 55%)",
             }}
           />
           {/* Top Postmark tag */}
@@ -684,13 +700,13 @@ export function TestimonialPostPro({
               position: "absolute",
               top: pad + 4,
               left: pad + 4,
-              padding: "5px 10px",
+              padding: "4px 8px",
               borderRadius: 999,
               background: paperColor,
               color: inkColor,
               fontFamily: "var(--font-geist-mono), monospace",
               fontWeight: 600,
-              fontSize: 10,
+              fontSize: 9.5,
               letterSpacing: "0.06em",
               boxShadow: "0 2px 6px rgba(0,0,0,0.15)",
             }}
@@ -707,7 +723,7 @@ export function TestimonialPostPro({
                 right: pad + 8,
                 bottom: pad + 8,
                 color: "#FFFFFF",
-                fontSize: 14,
+                fontSize: isMobile ? 13 : 14,
                 fontWeight: 600,
                 fontFamily: "var(--font-geist-sans), sans-serif",
                 textShadow: "0 1px 3px rgba(0,0,0,0.7)",
@@ -764,8 +780,8 @@ export function TestimonialPostPro({
             ? "row-reverse"
             : "row",
           alignItems: "center",
-          gap: isMobile ? 24 : columnGap,
-          padding: isMobile ? "16px 8px" : 32,
+          gap: isMobile ? 18 : columnGap,
+          padding: isMobile ? "8px 4px 16px" : 32,
           boxSizing: "border-box",
           maxWidth: "100%",
         }}
@@ -777,6 +793,7 @@ export function TestimonialPostPro({
             flexDirection: "column",
             alignItems: "center",
             flex: "0 0 auto",
+            width: isMobile ? "100%" : "auto",
           }}
         >
           {showHeading && (
@@ -811,8 +828,57 @@ export function TestimonialPostPro({
             </div>
           )}
 
-          {/* 3D Stack container */}
+          {/* Dedicated Horizontal Reviewer Switcher on Mobile */}
+          {isMobile && total > 1 && (
+            <div
+              style={{
+                width: actualCardWidth,
+                display: "flex",
+                gap: 6,
+                overflowX: "auto",
+                paddingBottom: 12,
+                scrollbarWidth: "none",
+                WebkitOverflowScrolling: "touch",
+              }}
+            >
+              {notes.map((n, i) => {
+                const isActive = i === activeIndex;
+                return (
+                  <button
+                    key={i}
+                    type="button"
+                    onClick={() => {
+                      setActiveIndex(i);
+                      setIsFlipped(false);
+                    }}
+                    style={{
+                      flex: "0 0 auto",
+                      padding: "6px 12px",
+                      borderRadius: 999,
+                      border: isActive
+                        ? `1.5px solid ${accentColor}`
+                        : "1px solid rgba(0,0,0,0.12)",
+                      background: isActive ? accentColor : "rgba(255,255,255,0.7)",
+                      color: isActive ? "#FFFFFF" : inkColor,
+                      fontSize: 12,
+                      fontWeight: isActive ? 700 : 500,
+                      fontFamily: "var(--font-baloo), var(--font-noto-devanagari), sans-serif",
+                      cursor: "pointer",
+                      transition: "all 180ms ease",
+                      boxShadow: isActive ? "0 2px 8px rgba(113,59,74,0.25)" : "none",
+                    }}
+                  >
+                    {padZero(i + 1)} {n.name.split(" ")[0]}
+                  </button>
+                );
+              })}
+            </div>
+          )}
+
+          {/* 3D Stack container with Mobile Touch Swipe */}
           <div
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
             style={{
               position: "relative",
               width: actualCardWidth,
@@ -824,8 +890,8 @@ export function TestimonialPostPro({
             {notes.map((n, idx) => {
               const diff = (idx - activeIndex + total) % total;
               if (diff === 0 || diff > 2) return null;
-              const offY = diff * 7;
-              const offX = diff * 5;
+              const offY = diff * 6;
+              const offX = diff * 4;
               const rot = diff * (diff % 2 === 0 ? -1.8 : 2.2);
               return (
                 <div
@@ -851,7 +917,6 @@ export function TestimonialPostPro({
               drag={dragToss && !isMobile ? "x" : false}
               dragSnapToOrigin={true}
               dragMomentum={false}
-
               onDragEnd={(_, info) => {
                 const threshold = actualCardWidth * 0.24;
                 if (Math.abs(info.offset.x) > threshold || Math.abs(info.velocity.x) > 600) {
