@@ -2,9 +2,10 @@
 
 import { useEffect, useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Sun, Moon, ChevronDown, Check, Languages } from "lucide-react";
+import { ChevronDown, Check, Languages } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useLanguage } from "@/context/language-context";
+import { ThemeToggleButton4 } from "@/components/ui/skiper-ui/skiper4";
 
 export type LangCode = "mr" | "en" | "hi";
 
@@ -123,19 +124,11 @@ export function GoogleTranslateWidget({
           </button>
 
           {showThemeToggle && onToggleTheme && (
-            <button
-              type="button"
-              onClick={onToggleTheme}
-              className="p-1.5 rounded-full text-white/80 hover:text-white bg-black/25 hover:bg-black/40 border border-white/15 transition-colors cursor-pointer"
-              title={isDarkMode ? "Light Mode" : "Dark Mode"}
-              aria-label="Toggle color theme"
-            >
-              {isDarkMode ? (
-                <Sun className="h-3.5 w-3.5 text-amber-300" />
-              ) : (
-                <Moon className="h-3.5 w-3.5 text-amber-200" />
-              )}
-            </button>
+            <ThemeToggleButton4
+              isDark={isDarkMode}
+              onToggle={onToggleTheme}
+              className="size-7 p-1 text-white/80 hover:text-white bg-black/25 hover:bg-black/40 border border-white/15"
+            />
           )}
         </div>
       ) : variant === "compact" ? (
@@ -188,19 +181,11 @@ export function GoogleTranslateWidget({
           </button>
 
           {showThemeToggle && onToggleTheme && (
-            <button
-              type="button"
-              onClick={onToggleTheme}
-              className="p-1 rounded-full text-gray-500 hover:text-gray-900 dark:text-neutral-400 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-neutral-800 transition-colors cursor-pointer"
-              title={isDarkMode ? "Light Mode" : "Dark Mode"}
-              aria-label="Toggle color theme"
-            >
-              {isDarkMode ? (
-                <Sun className="h-3.5 w-3.5 text-amber-500" />
-              ) : (
-                <Moon className="h-3.5 w-3.5 text-indigo-500" />
-              )}
-            </button>
+            <ThemeToggleButton4
+              isDark={isDarkMode}
+              onToggle={onToggleTheme}
+              className="size-7 p-1 text-gray-700 hover:text-gray-900 dark:text-amber-300 hover:bg-gray-100 dark:hover:bg-neutral-800 border border-transparent"
+            />
           )}
         </div>
       )}

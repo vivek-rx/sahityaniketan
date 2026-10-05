@@ -10,6 +10,7 @@ import { GoogleTranslateWidget } from "@/components/layout/google-translate-widg
 import { GlobalSearchModal } from "@/components/layout/global-search-modal";
 import { NoiseBackground } from "@/components/ui/ambient-noise-background";
 import { SiteStickyBanner } from "@/components/layout/site-sticky-banner";
+import { ThemeToggleButton4 } from "@/components/ui/skiper-ui/skiper4";
 import {
   Menu,
   Home,
@@ -630,6 +631,12 @@ export function Navbar() {
                   variant="compact"
                   direction="down"
                   showThemeToggle={false}
+                />
+
+                <ThemeToggleButton4
+                  isDark={isDarkMode}
+                  onToggle={() => setIsDarkMode(!isDarkMode)}
+                  className="size-8 p-1.5 rounded-lg bg-black/20 hover:bg-black/30 text-[#E5B869] border border-white/10"
                 />
 
                 <button
