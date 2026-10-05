@@ -4,6 +4,7 @@ import React, { useState, type FC, type ReactNode } from 'react';
 import { cn } from '@/lib/utils';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import { CrowdCanvas } from '@/components/ui/skiper-ui/skiper39';
 
 /**
  * Props for the Footer component.
@@ -74,26 +75,39 @@ export const Footer: FC<FooterProps> = ({
   };
 
   return (
-    <footer className={cn('bg-muted/50 text-foreground', className)} {...props}>
-      <div className="container mx-auto grid grid-cols-1 gap-8 px-4 py-16 md:grid-cols-2 lg:grid-cols-4 lg:gap-12">
+    <footer className={cn('relative overflow-hidden bg-zinc-50/90 dark:bg-[#120B0D]/95 text-foreground border-t border-zinc-200 dark:border-zinc-800/80 font-marathi-body transition-colors select-none', className)} {...props}>
+      {/* ── Aesthetic Animated Crowd Canvas Background ── */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
+        <CrowdCanvas
+          src="/images/peeps/all-peeps.png"
+          rows={15}
+          cols={7}
+          className="absolute bottom-0 h-full w-full opacity-[0.22] dark:opacity-[0.14] grayscale contrast-125 dark:invert"
+        />
+        {/* Soft architectural gradient vignette so readers blend naturally into the library floor */}
+        <div className="absolute inset-0 bg-gradient-to-t from-transparent via-zinc-50/50 to-zinc-50 dark:via-[#120B0D]/60 dark:to-[#120B0D]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,transparent_35%,rgba(128,0,32,0.03)_100%)] dark:bg-[radial-gradient(ellipse_at_top,transparent_35%,rgba(0,0,0,0.5)_100%)]" />
+      </div>
+
+      <div className="container relative z-10 mx-auto grid grid-cols-1 gap-8 px-4 py-16 md:grid-cols-2 lg:grid-cols-4 lg:gap-12">
         {/* Company Info */}
         <div className="flex flex-col items-start gap-4">
           <div className="flex items-center gap-3">
-            <img src={logoSrc} alt={`${companyName} Logo`} className="h-10 w-10 rounded-full object-cover" />
-            <span className="text-xl font-bold">{companyName}</span>
+            <img src={logoSrc} alt={`${companyName} Logo`} className="h-10 w-10 rounded-full object-cover border border-zinc-200 dark:border-zinc-700 shadow-2xs" />
+            <span className="text-xl font-bold font-gajraj text-stone-900 dark:text-stone-100">{companyName}</span>
           </div>
-          <p className="text-sm text-muted-foreground">{description}</p>
+          <p className="text-sm text-stone-600 dark:text-stone-300 leading-relaxed font-marathi-body">{description}</p>
         </div>
 
         {/* Useful Links */}
         <div className="md:justify-self-center">
-          <h3 className="mb-4 text-base font-semibold">Useful Link</h3>
+          <h3 className="mb-4 text-base font-bold font-marathi-heading text-[#800020] dark:text-[#E5B869]">उपयुक्त दुवे / Navigation</h3>
           <ul className="space-y-2">
             {usefulLinks.map((link) => (
               <li key={link.label}>
                 <a
                   href={link.href}
-                  className="text-sm text-muted-foreground transition-colors hover:text-primary"
+                  className="text-sm text-stone-600 dark:text-stone-400 font-medium transition-colors hover:text-[#800020] dark:hover:text-[#E5B869]"
                 >
                   {link.label}
                 </a>
@@ -104,14 +118,16 @@ export const Footer: FC<FooterProps> = ({
 
         {/* Follow Us */}
         <div className="md:justify-self-center">
-          <h3 className="mb-4 text-base font-semibold">Follow Us</h3>
+          <h3 className="mb-4 text-base font-bold font-marathi-heading text-[#800020] dark:text-[#E5B869]">सोशल मीडिया / Social</h3>
           <ul className="space-y-2">
             {socialLinks.map((link) => (
               <li key={link.label}>
                 <a
                   href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   aria-label={link.label}
-                  className="flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-primary"
+                  className="flex items-center gap-2 text-sm text-stone-600 dark:text-stone-400 font-medium transition-colors hover:text-[#800020] dark:hover:text-[#E5B869]"
                 >
                   {link.icon}
                   <span>{link.label}</span>
@@ -123,37 +139,37 @@ export const Footer: FC<FooterProps> = ({
 
         {/* Newsletter */}
         <div>
-          <h3 className="mb-4 text-base font-semibold">{newsletterTitle}</h3>
+          <h3 className="mb-4 text-base font-bold font-marathi-heading text-[#800020] dark:text-[#E5B869]">{newsletterTitle}</h3>
           <form onSubmit={handleSubscribe} className="relative w-full max-w-sm">
             <div className="relative">
               <Input
                 type="email"
-                placeholder="Your email address"
+                placeholder="ईमेल पत्ता प्रविष्ट करा..."
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 disabled={isSubmitting || subscriptionStatus !== 'idle'}
                 required
                 aria-label="Email for newsletter"
-                className="pr-28"
+                className="pr-28 bg-white/80 dark:bg-zinc-900/80 border-zinc-300 dark:border-zinc-700"
               />
               <Button
                 type="submit"
                 disabled={isSubmitting || subscriptionStatus !== 'idle'}
-                className="absolute right-0 top-0 h-full rounded-l-none px-4"
+                className="absolute right-0 top-0 h-full rounded-l-none px-4 bg-[#800020] hover:bg-[#66001A] text-white font-bold cursor-pointer"
               >
-                {isSubmitting ? 'Subscribing...' : 'Subscribe'}
+                {isSubmitting ? 'नोंदणी...' : 'सदस्य व्हा'}
               </Button>
             </div>
             {/* Advanced Animation Overlay */}
             {(subscriptionStatus === 'success' || subscriptionStatus === 'error') && (
               <div
-                key={subscriptionStatus} // Re-trigger animation on status change
-                className="animate-in fade-in absolute inset-0 flex items-center justify-center rounded-lg bg-background/80 text-center backdrop-blur-sm"
+                key={subscriptionStatus}
+                className="animate-in fade-in absolute inset-0 flex items-center justify-center rounded-lg bg-background/90 text-center backdrop-blur-sm"
               >
                 {subscriptionStatus === 'success' ? (
-                  <span className="font-semibold text-green-500">Subscribed! 🎉</span>
+                  <span className="font-semibold text-emerald-600 dark:text-emerald-400">सदस्यता यशस्वी झाली! 🎉</span>
                 ) : (
-                  <span className="font-semibold text-destructive">Failed. Try again.</span>
+                  <span className="font-semibold text-destructive">कृपया पुन्हा प्रयत्न करा.</span>
                 )}
               </div>
             )}
