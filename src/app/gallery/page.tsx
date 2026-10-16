@@ -13,8 +13,11 @@ import {
   Calendar,
   Layers,
   Images,
-  ArrowRight
+  ArrowRight,
+  Sparkles
 } from "lucide-react";
+import { FacebookIcon } from "@/components/ui/icons";
+import { FacebookFeedSection } from "@/components/gallery/facebook-feed-section";
 import { LIBRARY_EVENTS, type LibraryEvent } from "@/lib/data/library-events";
 import { BLUR_PLACEHOLDER } from "@/lib/image-utils";
 import { BobbingDots } from "@/components/ui/bobbing-dots";
@@ -23,15 +26,27 @@ function GalleryContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const eventParam = searchParams.get("event");
+  const tabParam = searchParams.get("tab");
 
+  const [activeTab, setActiveTab] = useState<"albums" | "facebook">("albums");
   const [activeModalEvent, setActiveModalEvent] = useState<LibraryEvent | null>(null);
   const [currentPhotoIdx, setCurrentPhotoIdx] = useState<number>(0);
+
+  // Sync tab from query param if provided
+  useEffect(() => {
+    if (tabParam === "facebook") {
+      setActiveTab("facebook");
+    } else if (tabParam === "albums") {
+      setActiveTab("albums");
+    }
+  }, [tabParam]);
 
   // Automatically open modal when navigated with ?event=...
   useEffect(() => {
     if (eventParam) {
       const found = LIBRARY_EVENTS.find((e) => e.id === eventParam || e.slug === eventParam);
       if (found) {
+        setActiveTab("albums");
         setActiveModalEvent(found);
         setCurrentPhotoIdx(0);
       }
@@ -98,26 +113,100 @@ function GalleryContent() {
 
           {/* Page Title */}
           <h1 className="text-3xl md:text-5xl font-extrabold text-white font-marathi-heading tracking-wide drop-shadow-sm">
-            छायाचित्र दालन
+            छायाचित्र दालन व घडामोडी
           </h1>
 
           <p className="text-sm sm:text-base text-zinc-300 font-marathi-body max-w-xl mx-auto">
-            साहित्य निकेतन सार्वजनिक ग्रंथालयाचे वार्षिक व्याख्यानमाला, पुरस्कार सोहळे व वाचन उपक्रम.
+            साहित्य निकेतनचे वार्षिक व्याख्यानमाला, पुरस्कार सोहळे व दैनंदिन कार्यक्रमांचे ताजे क्षणचित्रे.
           </p>
+
+          {/* Tab Switcher */}
+          <div className="pt-2 flex items-center justify-center">
+            <div className="inline-flex p-1.5 rounded-2xl bg-black/50 backdrop-blur-md border border-white/15 shadow-xl">
+              <button
+                type="button"
+                onClick={() => setActiveTab("albums")}
+                className={`relative px-4 sm:px-5 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all duration-200 flex items-center gap-2 cursor-pointer ${
+                  activeTab === "albums"
+                    ? "bg-[#D4A373] text-[#0A1A2A] shadow-md"
+                    : "text-zinc-300 hover:text-white hover:bg-white/10"
+                }`}
+              >
+                <Images className="w-4 h-4" />
+                <span>निवडक आल्बम्स</span>
+                <span
+                  className={`px-2 py-0.5 rounded-full text-[11px] font-semibold ${
+                    activeTab === "albums"
+                      ? "bg-[#0A1A2A]/20 text-[#0A1A2A]"
+                      : "bg-white/15 text-zinc-300"
+                  }`}
+                >
+                  {LIBRARY_EVENTS.length}
+                </span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setActiveTab("facebook")}
+                className={`relative px-4 sm:px-5 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all duration-200 flex items-center gap-2 cursor-pointer ${
+                  activeTab === "facebook"
+                    ? "bg-[#1877F2] text-white shadow-md"
+                    : "text-zinc-300 hover:text-white hover:bg-white/10"
+                }`}
+              >
+                <FacebookIcon className="w-4 h-4 fill-current" />
+                <span>थेट फेसबुक फीड</span>
+                <span className="flex items-center gap-1 px-1.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500 text-white shadow-xs">
+                  <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
+                  LIVE
+                </span>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
 
-      {/* ===================== GALLERY SECTION ===================== */}
-      {/* 3-Column Event Album Grid matching nagarvachanalay.org row g-4 event-card */}
-      <section className="py-12 md:py-16 bg-[#FAF8F5] dark:bg-[#120B0D] transition-colors font-marathi-body">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-            {LIBRARY_EVENTS.map((event) => (
-              <div
-                key={event.id}
-                onClick={() => openGalleryModal(event)}
-                className="group h-full flex flex-col rounded-2xl bg-white dark:bg-[#1E1418] border border-[#D4A373]/40 dark:border-[#D4A373]/25 shadow-sm hover:shadow-xl hover:border-[#B8860B] dark:hover:border-[#E5B869] hover:-translate-y-2 transition-all duration-300 overflow-hidden cursor-pointer"
+      {/* ===================== TAB CONTENT SWITCHER ===================== */}
+      {activeTab === "facebook" ? (
+        <section className="py-8 md:py-12 bg-[#FAF8F5] dark:bg-[#120B0D] transition-colors min-h-[70vh]">
+          <FacebookFeedSection />
+        </section>
+      ) : (
+        /* ===================== CURATED GALLERY SECTION ===================== */
+        <section className="py-12 md:py-16 bg-[#FAF8F5] dark:bg-[#120B0D] transition-colors font-marathi-body">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+            {/* Quick Banner Linking to Live Facebook */}
+            <div className="rounded-2xl border border-[#D4A373]/30 bg-white/70 dark:bg-[#1A1215] p-4 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xs">
+              <div className="flex items-center gap-3 text-center sm:text-left">
+                <div className="w-10 h-10 rounded-xl bg-[#1877F2]/10 text-[#1877F2] flex items-center justify-center shrink-0">
+                  <FacebookIcon className="w-5 h-5 fill-current" />
+                </div>
+                <div>
+                  <p className="font-bold text-sm text-stone-900 dark:text-[#FAF2E8]">
+                    दैनंदिन कार्यक्रमांचे ताजे फोटो थेट फेसबुकवर पहा
+                  </p>
+                  <p className="text-xs text-stone-500 dark:text-stone-400">
+                    नवीन ग्रंथ आगमन, कवी कट्टा आणि वाचक प्रतिक्रियांचे रिअल-टाइम अपडेट्स उपलब्ध आहेत.
+                  </p>
+                </div>
+              </div>
+              <button
+                type="button"
+                onClick={() => setActiveTab("facebook")}
+                className="shrink-0 px-4 py-2 rounded-xl text-xs font-bold bg-[#1877F2] hover:bg-[#166FE5] text-white shadow-sm flex items-center gap-1.5 transition-colors cursor-pointer"
               >
+                <span>थेट फीड उघडा</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </button>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+              {LIBRARY_EVENTS.map((event) => (
+                <div
+                  key={event.id}
+                  onClick={() => openGalleryModal(event)}
+                  className="group h-full flex flex-col rounded-2xl bg-white dark:bg-[#1E1418] border border-[#D4A373]/40 dark:border-[#D4A373]/25 shadow-sm hover:shadow-xl hover:border-[#B8860B] dark:hover:border-[#E5B869] hover:-translate-y-2 transition-all duration-300 overflow-hidden cursor-pointer"
+                >
                 {/* Fixed height image container: 280px (exact match to nagarvachanalay .img-container) */}
                 <div className="relative h-[280px] w-full overflow-hidden bg-stone-900">
                   <Image
@@ -173,6 +262,7 @@ function GalleryContent() {
           </div>
         </div>
       </section>
+      )}
 
       {/* ===================== MODAL GALLERY SHOWCASE ===================== */}
       {/* Exact match to nagarvachanalay.org #galleryModal with carousel and full description block */}
