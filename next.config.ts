@@ -7,7 +7,7 @@ const cspHeader = `
   img-src 'self' blob: data: https:;
   font-src 'self' https://fonts.gstatic.com data:;
   connect-src 'self' https://*.supabase.co wss://*.supabase.co https://openlibrary.org https://*.openlibrary.org;
-  frame-src 'self' https://www.youtube.com https://youtube.com https://player.vimeo.com https://vimeo.com;
+  frame-src 'self' https://www.youtube.com https://youtube.com https://player.vimeo.com https://vimeo.com https://www.facebook.com https://facebook.com https://web.facebook.com;
   media-src 'self' blob: https://*.supabase.co;
   object-src 'none';
   base-uri 'self';
