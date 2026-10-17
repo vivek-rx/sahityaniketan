@@ -689,10 +689,10 @@ export function Navbar() {
                   />
                   <div className="flex flex-col leading-none">
                     <span className="font-marathi-heading font-black text-[14.5px] text-[#FAF2E8] tracking-wide whitespace-nowrap">
-                      साहित्य निकेतन
+                      {language === "en" ? "Sahitya Niketan" : "साहित्य निकेतन"}
                     </span>
                     <span className="text-[9.5px] font-semibold text-[#E5B869] tracking-wider uppercase">
-                      स्था. १९४५
+                      {language === "en" ? "Est. 1945" : "स्था. १९४५"}
                     </span>
                   </div>
                 </Link>

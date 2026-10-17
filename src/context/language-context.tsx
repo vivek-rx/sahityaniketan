@@ -2,6 +2,7 @@
 
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { Language, Translations, TRANSLATIONS } from "@/lib/translations";
+import i18n from "@/lib/i18n";
 
 interface LanguageContextType {
   language: Language;
@@ -22,6 +23,7 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     const saved = localStorage.getItem("sn_language") as Language | null;
     if (saved && (saved === "mr" || saved === "hi" || saved === "en")) {
       setLanguageState(saved);
+      i18n.changeLanguage(saved);
     }
   }, []);
 
@@ -29,6 +31,7 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     setLanguageState(lang);
     localStorage.setItem("sn_language", lang);
     document.documentElement.lang = lang;
+    i18n.changeLanguage(lang);
   };
 
   const t = TRANSLATIONS[language] || TRANSLATIONS.mr;

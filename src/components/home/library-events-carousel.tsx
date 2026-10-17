@@ -80,12 +80,21 @@ export function LibraryEventsCarousel() {
             className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center flex-1"
           >
 
-            {/* Left Column: Event Information in Natural Marathi */}
+            {/* Left Column: Event Information in Natural Marathi / English */}
             <div className="lg:col-span-7 space-y-4 sm:space-y-5 text-left">
-              {/* Quiet Editorial Category & Date (No eyebrow pill badge) */}
+              {/* Quiet Editorial Category & Date */}
               <div className="flex items-center gap-2 text-xs sm:text-sm font-marathi-body text-[#6B0F1A] dark:text-[#C5A059]">
-                <span className="font-bold">{currentEvent.category}</span>
-                <span className="text-[#4A4440] dark:text-[#D5C0AE] font-medium">— {currentEvent.date}</span>
+                <span className="font-bold">
+                  {language === "en" && currentEvent.categoryEn
+                    ? currentEvent.categoryEn
+                    : currentEvent.category}
+                </span>
+                <span className="text-[#4A4440] dark:text-[#D5C0AE] font-medium">
+                  —{" "}
+                  {language === "en" && currentEvent.dateEn
+                    ? currentEvent.dateEn
+                    : currentEvent.date}
+                </span>
               </div>
 
               {/* Event Title */}
@@ -93,12 +102,16 @@ export function LibraryEventsCarousel() {
                 onClick={() => navigateToGallery(currentEvent.id)}
                 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-stone-900 dark:text-[#FAF2E8] leading-tight font-marathi-heading hover:text-[#800020] dark:hover:text-[#E5B869] transition-colors cursor-pointer"
               >
-                {currentEvent.title}
+                {language === "en" && currentEvent.titleEn
+                  ? currentEvent.titleEn
+                  : currentEvent.title}
               </h2>
 
               {/* Event Description */}
               <p className="text-sm sm:text-base text-stone-700 dark:text-[#D5C2B4] leading-relaxed font-marathi-body line-clamp-4">
-                {currentEvent.description}
+                {language === "en" && currentEvent.descriptionEn
+                  ? currentEvent.descriptionEn
+                  : currentEvent.description}
               </p>
 
               {/* Action: Click to load all photos of the event in gallery */}
@@ -143,10 +156,13 @@ export function LibraryEventsCarousel() {
                   <div className="flex items-center justify-between text-white text-xs font-bold w-full">
                     <span className="inline-flex items-center gap-1 bg-black/60 backdrop-blur-xs px-2.5 py-1 rounded-md">
                       <Camera className="h-3.5 w-3.5 text-[#E5B869]" />
-                      <span>{currentEvent.photos.length} छायाचित्रे</span>
+                      <span>
+                        {currentEvent.photos.length}{" "}
+                        {language === "en" ? "Photos" : "छायाचित्रे"}
+                      </span>
                     </span>
                     <span className="text-[#E5B869] group-hover:underline flex items-center gap-1">
-                      <span>गॅलरी उघडा</span>
+                      <span>{language === "en" ? "Open Gallery" : "गॅलरी उघडा"}</span>
                     </span>
                   </div>
                 </ClipDiv>
