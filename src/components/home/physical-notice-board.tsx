@@ -62,26 +62,32 @@ export function PhysicalNoticeBoard() {
                     </span>
                   </div>
                   <h3 className="font-marathi-heading text-lg sm:text-xl font-bold text-stone-900 dark:text-[#FAF2E8] mt-1.5">
-                    साहित्य निकेतन सार्वजनिक वाचनालय, अंबाजोगाई
+                    {language === "en" ? "Sahitya Niketan Public Library, Ambajogai" : "साहित्य निकेतन सार्वजनिक वाचनालय, अंबाजोगाई"}
                   </h3>
                   <p className="text-xs text-stone-500 dark:text-stone-400 mt-0.5">
-                    शुक्रवार पेठ, अंबाजोगाई (जि. बीड) — वाचन सत्र २०२६
+                    {language === "en"
+                      ? "Shukrawar Peth, Ambajogai (Dist. Beed) — Reading Session 2026"
+                      : "शुक्रवार पेठ, अंबाजोगाई (जि. बीड) — वाचन सत्र २०२६"}
                   </p>
                 </div>
 
                 <div className="text-left sm:text-right shrink-0 bg-[#FAF8F5] dark:bg-[#160E11] px-3 py-1.5 rounded-xl border border-[#E5DDD0] dark:border-[#332228]">
-                  <span className="text-[10px] font-mono uppercase tracking-wider text-stone-500 block">परिपत्रक क्र.</span>
-                  <span className="text-xs font-bold text-[#800020] dark:text-[#E5B869] font-mono">सानिग्रं/२०२६/०४</span>
+                  <span className="text-[10px] font-mono uppercase tracking-wider text-stone-500 block">
+                    {language === "en" ? "Circular No." : "परिपत्रक क्र."}
+                  </span>
+                  <span className="text-xs font-bold text-[#800020] dark:text-[#E5B869] font-mono">SAN/2026/04</span>
                 </div>
               </div>
 
               {/* Circular Title */}
               <div className="mb-4">
                 <span className="inline-block text-xs font-bold text-[#800020] dark:text-[#E5B869] uppercase tracking-wide">
-                  वाचकांसाठी अधिकृत नियमावली व सूचना
+                  {language === "en" ? "Official Rules & Reader Guidelines" : "वाचकांसाठी अधिकृत नियमावली व सूचना"}
                 </span>
                 <h4 className="font-marathi-heading text-base sm:text-lg font-bold text-stone-900 dark:text-[#FAF2E8] mt-0.5">
-                  ग्रंथ देवाण-घेवाण, वाचन मुदत व दालन शिस्त
+                  {language === "en"
+                    ? "Book Circulation, Lending Period & Stack Discipline"
+                    : "ग्रंथ देवाण-घेवाण, वाचन मुदत व दालन शिस्त"}
                 </h4>
               </div>
 
@@ -90,21 +96,45 @@ export function PhysicalNoticeBoard() {
                 <div className="flex items-start gap-3 p-3 rounded-xl bg-[#FAF8F5] dark:bg-[#160E11] border border-[#E5DDD0] dark:border-[#332228]">
                   <CheckCircle2 className="h-4 w-4 text-[#800020] dark:text-[#E5B869] shrink-0 mt-0.5" />
                   <p>
-                    <strong className="text-stone-900 dark:text-[#FAF2E8]">१४ दिवसांची वाचन मुदत:</strong> सर्व सभासदांना एका वेळी घेतलेले पुस्तक कमाल <strong>१४ दिवसांच्या</strong> मुदतीत परत करणे आवश्यक आहे.
+                    {language === "en" ? (
+                      <>
+                        <strong className="text-stone-900 dark:text-[#FAF2E8]">14-Day Lending Period:</strong> All registered members must return borrowed books within a maximum of <strong>14 days</strong>.
+                      </>
+                    ) : (
+                      <>
+                        <strong className="text-stone-900 dark:text-[#FAF2E8]">१४ दिवसांची वाचन मुदत:</strong> सर्व सभासदांना एका वेळी घेतलेले पुस्तक कमाल <strong>१४ दिवसांच्या</strong> मुदतीत परत करणे आवश्यक आहे.
+                      </>
+                    )}
                   </p>
                 </div>
 
                 <div className="flex items-start gap-3 p-3 rounded-xl bg-[#FAF8F5] dark:bg-[#160E11] border border-[#E5DDD0] dark:border-[#332228]">
                   <CheckCircle2 className="h-4 w-4 text-[#800020] dark:text-[#E5B869] shrink-0 mt-0.5" />
                   <p>
-                    <strong className="text-stone-900 dark:text-[#FAF2E8]">दुर्मिळ हस्तलिखिते व संदर्भ ग्रंथ:</strong> आद्यकवि मुकुंदराज हस्तलिखिते, संत दासोपंत पसोडी व संदर्भ विश्वकोश केवळ ग्रंथालय दालनातच वाचनासाठी उपलब्ध आहेत.
+                    {language === "en" ? (
+                      <>
+                        <strong className="text-stone-900 dark:text-[#FAF2E8]">Rare Manuscripts & Reference Works:</strong> Adya Kavi Mukundraj manuscripts, Saint Dasopant Pasodi, and encyclopedias are exclusively readable within premises.
+                      </>
+                    ) : (
+                      <>
+                        <strong className="text-stone-900 dark:text-[#FAF2E8]">दुर्मिळ हस्तलिखिते व संदर्भ ग्रंथ:</strong> आद्यकवि मुकुंदराज हस्तलिखिते, संत दासोपंत पसोडी व संदर्भ विश्वकोश केवळ ग्रंथालय दालनातच वाचनासाठी उपलब्ध आहेत.
+                      </>
+                    )}
                   </p>
                 </div>
 
                 <div className="flex items-start gap-3 p-3 rounded-xl bg-[#FAF8F5] dark:bg-[#160E11] border border-[#E5DDD0] dark:border-[#332228]">
                   <CheckCircle2 className="h-4 w-4 text-[#800020] dark:text-[#E5B869] shrink-0 mt-0.5" />
                   <p>
-                    <strong className="text-stone-900 dark:text-[#FAF2E8]">वातानुकूलित अभ्यासिका दालन:</strong> स्पर्धा परीक्षा अभ्यासिका सकाळी ६:०० ते रात्री १०:०० पर्यंत अखंड सुरू असून शांतता राखणे बंधनकारक आहे.
+                    {language === "en" ? (
+                      <>
+                        <strong className="text-stone-900 dark:text-[#FAF2E8]">Air-Conditioned Study Hall:</strong> Competitive exam reading hall operates from 6:00 AM to 10:00 PM; maintaining silence is mandatory.
+                      </>
+                    ) : (
+                      <>
+                        <strong className="text-stone-900 dark:text-[#FAF2E8]">वातानुकूलित अभ्यासिका दालन:</strong> स्पर्धा परीक्षा अभ्यासिका सकाळी ६:०० ते रात्री १०:०० पर्यंत अखंड सुरू असून शांतता राखणे बंधनकारक आहे.
+                      </>
+                    )}
                   </p>
                 </div>
               </div>
@@ -114,10 +144,16 @@ export function PhysicalNoticeBoard() {
             <div className="mt-5 pt-4 border-t border-stone-100 dark:border-[#2D1B22] flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs text-stone-500 dark:text-stone-400">
               <div className="flex items-center gap-2">
                 <MapPin className="h-3.5 w-3.5 text-[#800020] dark:text-[#E5B869]" />
-                <span>मध्यवर्ती वाचन दालन, शुक्रवार पेठ, अंबाजोगाई</span>
+                <span>
+                  {language === "en"
+                    ? "Central Reading Hall, Shukrawar Peth, Ambajogai"
+                    : "मध्यवर्ती वाचन दालन, शुक्रवार पेठ, अंबाजोगाई"}
+                </span>
               </div>
               <div className="font-semibold text-stone-700 dark:text-stone-300">
-                आदेशानुसार: मुख्य ग्रंथपाल, साहित्य निकेतन
+                {language === "en"
+                  ? "By Order: Chief Librarian, Sahitya Niketan"
+                  : "आदेशानुसार: मुख्य ग्रंथपाल, साहित्य निकेतन"}
               </div>
             </div>
           </div>
@@ -131,19 +167,23 @@ export function PhysicalNoticeBoard() {
                 <div className="flex items-center justify-between pb-3 border-b border-white/20 mb-3">
                   <div className="flex items-center gap-1.5 text-xs font-bold text-amber-300">
                     <BookOpen className="h-3.5 w-3.5" />
-                    <span>सुविचार फलक</span>
+                    <span>{language === "en" ? "Thought of the Day" : "सुविचार फलक"}</span>
                   </div>
                   <span className="text-[11px] font-mono text-white/70">
-                    दैनिक विचार
+                    {language === "en" ? "Daily Wisdom" : "दैनिक विचार"}
                   </span>
                 </div>
 
                 <blockquote className="my-2 text-center">
                   <p className="font-marathi-heading text-base sm:text-lg font-bold leading-relaxed text-white">
-                    &ldquo;पुस्तके वाचणे म्हणजे केवळ माहिती गोळा करणे नव्हे, तर स्वतःच्या बुद्धीला व संस्कृतीला पंख देणे होय.&rdquo;
+                    {language === "en"
+                      ? "“Reading books is not merely collecting information; it is giving wings to your intellect and culture.”"
+                      : "“पुस्तके वाचणे म्हणजे केवळ माहिती गोळा करणे नव्हे, तर स्वतःच्या बुद्धीला व संस्कृतीला पंख देणे होय.”"}
                   </p>
                   <footer className="mt-2 text-xs font-semibold text-amber-200 font-marathi-body">
-                    — आद्यकवी मुकुंदराज (विवेकसिंधू रचनाकार, अंबाजोगाई)
+                    {language === "en"
+                      ? "— Adya Kavi Mukundraj (Author of Vivekasindhu, Ambajogai)"
+                      : "— आद्यकवी मुकुंदराज (विवेकसिंधू रचनाकार, अंबाजोगाई)"}
                   </footer>
                 </blockquote>
               </div>
@@ -155,11 +195,11 @@ export function PhysicalNoticeBoard() {
                 <div className="flex items-center gap-2">
                   <Newspaper className="h-4 w-4 text-[#800020] dark:text-[#E5B869]" />
                   <h4 className="font-marathi-heading text-base font-bold text-stone-900 dark:text-[#FAF2E8]">
-                    दैनिक वर्तमानपत्र दालन
+                    {language === "en" ? "Daily Periodicals Hall" : "दैनिक वर्तमानपत्र दालन"}
                   </h4>
                 </div>
                 <span className="text-[11px] font-medium text-stone-600 dark:text-stone-300 bg-stone-100 dark:bg-stone-800 px-2.5 py-0.5 rounded-full">
-                  सर्व नागरिकांसाठी खुले
+                  {language === "en" ? "Open to all citizens" : "सर्व नागरिकांसाठी खुले"}
                 </span>
               </div>
 
@@ -181,8 +221,14 @@ export function PhysicalNoticeBoard() {
               </div>
 
               <div className="mt-3 pt-3 border-t border-stone-100 dark:border-[#2D1B22] flex items-center justify-between text-[11px] text-stone-500 dark:text-stone-400">
-                <span>तळमजला वृत्तपत्र वाचन दालन (३५ दैनिके)</span>
-                <span className="text-[#800020] dark:text-[#E5B869] font-bold">सर्व नागरिकांसाठी खुले</span>
+                <span>
+                  {language === "en"
+                    ? "Ground Floor Newspaper Hall (35 Dailies)"
+                    : "तळमजला वृत्तपत्र वाचन दालन (३५ दैनिके)"}
+                </span>
+                <span className="text-[#800020] dark:text-[#E5B869] font-bold">
+                  {language === "en" ? "Free Public Access" : "सर्व नागरिकांसाठी खुले"}
+                </span>
               </div>
             </div>
 

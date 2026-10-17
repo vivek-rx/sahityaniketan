@@ -249,6 +249,7 @@ export function ListNotificationsStack() {
                     <NotificationCard
                       item={item}
                       isTop={true}
+                      language={language}
                       onDismiss={() => dismissNotification(item.id)}
                     />
                   </motion.div>
@@ -301,6 +302,7 @@ export function ListNotificationsStack() {
                       <NotificationCard
                         item={item}
                         isTop={isTop}
+                        language={language}
                         stackedCount={activeNotifications.length}
                         onDismiss={() => dismissNotification(item.id)}
                         onExpand={() => setIsExpanded(true)}
@@ -323,6 +325,7 @@ interface NotificationCardProps {
   stackedCount?: number;
   onDismiss: () => void;
   onExpand?: () => void;
+  language: string;
 }
 
 function NotificationCard({
@@ -331,8 +334,38 @@ function NotificationCard({
   stackedCount = 1,
   onDismiss,
   onExpand,
+  language,
 }: NotificationCardProps) {
   const isUrgent = item.priority === "urgent";
+  const isEn = language === "en";
+
+  const localizedBadge = isEn
+    ? item.badge === "तातडीची सूचना" || item.badge === "तातडीचे परिपत्रक"
+      ? "Urgent Notice"
+      : item.badge === "महत्त्वाची सूचना"
+      ? "Important Notice"
+      : item.badge === "ग्रंथालय सूचना" || item.badge === "अधिकृत सूचना"
+      ? "Library Notice"
+      : item.badge === "दैनिक सूचना"
+      ? "Daily Notice"
+      : isUrgent
+      ? "Urgent Notice"
+      : "Notice"
+    : item.badge || (isUrgent ? "तातडीची सूचना" : "सूचना");
+
+  const localizedSender = isEn
+    ? item.sender === "साहित्य निकेतन प्रशासन"
+      ? "Sahitya Niketan Admin"
+      : item.sender === "ग्रंथालय संचालक मंडळ"
+      ? "Library Board of Trustees"
+      : item.sender
+    : item.sender;
+
+  const localizedLinkText = isEn
+    ? item.linkText === "तपशील पहा"
+      ? "View Details"
+      : item.linkText || "View Details"
+    : item.linkText || "तपशील पहा";
 
   return (
     <div
@@ -361,12 +394,12 @@ function NotificationCard({
               ) : (
                 <Megaphone className="w-3 h-3 text-zinc-400" />
               )}
-              <span>{item.badge || (isUrgent ? "तातडीची सूचना" : "सूचना")}</span>
+              <span>{localizedBadge}</span>
             </span>
 
-            {item.sender && (
+            {localizedSender && (
               <span className="text-[10px] text-zinc-400 truncate">
-                • {item.sender}
+                • {localizedSender}
               </span>
             )}
           </div>
@@ -388,7 +421,7 @@ function NotificationCard({
                 href={item.link}
                 className="inline-flex items-center gap-1 text-[11px] font-medium text-blue-400 hover:text-blue-300 transition-colors underline-offset-2 hover:underline"
               >
-                <span>{item.linkText || "तपशील पहा"}</span>
+                <span>{localizedLinkText}</span>
                 <ExternalLink className="w-3 h-3" />
               </Link>
             ) : <span />}
@@ -399,7 +432,7 @@ function NotificationCard({
                 onClick={onExpand}
                 className="text-[10px] text-zinc-400 hover:text-white transition-colors cursor-pointer"
               >
-                +{stackedCount - 1} आणखी सूचना
+                {isEn ? `+${stackedCount - 1} more updates` : `+${stackedCount - 1} आणखी सूचना`}
               </button>
             )}
           </div>

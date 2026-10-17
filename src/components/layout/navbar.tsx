@@ -527,7 +527,11 @@ export function Navbar() {
             {/* Mobile Top Row: Heritage stamp & Membership CTA */}
             <div className="flex sm:hidden items-center justify-between w-full pb-2 mb-2 border-b border-zinc-200 dark:border-zinc-800">
               <span className="text-[11px] font-semibold text-zinc-600 dark:text-zinc-400 font-marathi-body">
-                स्थापना: १ ऑगस्ट १९४५ | वर्ग &apos;अ&apos;
+                {language === "en"
+                  ? "Est: 1 August 1945 | Grade 'A'"
+                  : language === "hi"
+                    ? "स्थापना: १ अगस्त १९४५ | वर्ग 'अ'"
+                    : "स्थापना: १ ऑगस्ट १९४५ | वर्ग 'अ'"}
               </span>
 
               <Link
