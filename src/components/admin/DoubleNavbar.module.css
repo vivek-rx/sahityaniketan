@@ -1,0 +1,224 @@
+/* Mantine DoubleNavbar Styles */
+
+.navbar {
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  user-select: none;
+  z-index: 40;
+  flex-shrink: 0;
+}
+
+.wrapper {
+  display: flex;
+  flex: 1;
+  height: 100%;
+}
+
+/* Narrow icon column */
+.aside {
+  width: 68px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-right: 1px solid #e2e8f0;
+  padding: 16px 0;
+  background-color: #ffffff;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.aside::-webkit-scrollbar {
+  display: none;
+}
+
+:global(.dark) .aside {
+  background-color: #0b0f17;
+  border-right-color: #1e293b;
+}
+
+.logo {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Main icon button in aside */
+.mainLink {
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #64748b;
+  margin-bottom: 8px;
+  transition: all 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  outline: none;
+  position: relative;
+}
+
+.mainLink:hover {
+  background-color: #f1f5f9;
+  color: #0f172a;
+  transform: translateY(-1px);
+}
+
+:global(.dark) .mainLink:hover {
+  background-color: #1e293b;
+  color: #f8fafc;
+}
+
+.mainLink[data-active="true"] {
+  background-color: rgba(0, 101, 126, 0.12);
+  color: #00657e;
+  box-shadow: 0 1px 3px rgba(0, 101, 126, 0.1);
+}
+
+:global(.dark) .mainLink[data-active="true"] {
+  background-color: rgba(30, 169, 196, 0.16);
+  color: #38bdf8;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* Secondary links column */
+.main {
+  width: 220px;
+  background-color: #f8fafc;
+  border-right: 1px solid #e2e8f0;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 14px;
+  transition: width 0.25s cubic-bezier(0.4, 0, 0.2, 1), padding 0.25s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+  overflow-y: auto;
+}
+
+.mainCollapsed {
+  width: 0 !important;
+  min-width: 0 !important;
+  padding: 0 !important;
+  border-right: none !important;
+  overflow: hidden !important;
+  opacity: 0;
+  pointer-events: none;
+}
+
+:global(.dark) .main {
+  background-color: #0f172a;
+  border-right-color: #1e293b;
+}
+
+.title {
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 16px;
+  font-size: 11px;
+  font-weight: 800;
+  color: #94a3b8;
+  padding-left: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+:global(.dark) .title {
+  color: #64748b;
+}
+
+/* Sub-links in secondary column */
+.link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-decoration: none;
+  font-size: 13px;
+  color: #475569;
+  padding: 9px 12px;
+  border-radius: 10px;
+  font-weight: 600;
+  margin-bottom: 4px;
+  transition: all 0.15s ease-in-out;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+.link:hover {
+  background-color: #e2e8f0;
+  color: #0f172a;
+}
+
+:global(.dark) .link {
+  color: #94a3b8;
+}
+
+:global(.dark) .link:hover {
+  background-color: #1e293b;
+  color: #f8fafc;
+}
+
+.link[data-active="true"] {
+  background-color: #ffffff;
+  color: #00657e;
+  font-weight: 700;
+  border-color: #cbd5e1;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+:global(.dark) .link[data-active="true"] {
+  background-color: #1e293b;
+  color: #38bdf8;
+  border-color: #334155;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Tooltip popover for aside icons */
+.tooltip {
+  position: absolute;
+  left: calc(100% + 8px);
+  background-color: #0f172a;
+  color: #f8fafc;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateX(-4px);
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  z-index: 50;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+}
+
+.tooltip::before {
+  content: "";
+  position: absolute;
+  right: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  border-width: 4px;
+  border-style: solid;
+  border-color: transparent #0f172a transparent transparent;
+}
+
+:global(.dark) .tooltip {
+  background-color: #f8fafc;
+  color: #0f172a;
+}
+
+:global(.dark) .tooltip::before {
+  border-color: transparent #f8fafc transparent transparent;
+}
+
+.mainLink:hover .tooltip,
+:global(.group):hover .tooltip {
+  opacity: 1;
+  transform: translateX(0);
+}
