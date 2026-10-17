@@ -76,9 +76,9 @@ export function Footer() {
       logoSrc="/images/logo.png"
       companyName={
         isEn
-          ? "Sahitya Niketan"
+          ? "Sahitya Niketan Library"
           : isHi
-          ? "साहित्य निकेतन"
+          ? "साहित्य निकेतन ग्रन्थालय"
           : "साहित्य निकेतन ग्रंथालय"
       }
       description={

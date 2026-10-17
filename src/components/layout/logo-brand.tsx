@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { useLanguage } from "@/context/language-context";
 
 interface LogoBrandProps {
   className?: string;
@@ -12,6 +13,8 @@ interface LogoBrandProps {
   colorScheme?: "light" | "dark" | "white";
   align?: "left" | "center";
   size?: "sm" | "md" | "lg" | "xl" | "2xl";
+  customTitle?: string;
+  customTagline?: string;
 }
 
 export function LogoBrand({
@@ -22,12 +25,30 @@ export function LogoBrand({
   colorScheme = "light",
   align = "left",
   size = "xl",
+  customTitle,
+  customTagline,
 }: LogoBrandProps) {
+  const { language } = useLanguage();
   const isDark = colorScheme === "dark";
   const isWhite = colorScheme === "white";
   const isCenter = align === "center";
 
-  // Responsive typography sizing maps - pure authentic Marathi calligraphy
+  // Dynamic typography text based on selected language
+  const brandTitle =
+    customTitle ||
+    (language === "en"
+      ? "Sahitya Niketan Library"
+      : language === "hi"
+        ? "साहित्य निकेतन ग्रन्थालय"
+        : "साहित्य निकेतन ग्रंथालय");
+
+  const brandTagline =
+    customTagline ||
+    (language === "en"
+      ? "|| One Heart, Mother India ||"
+      : "|| एक हृदय हो भारत जननी ||");
+
+  // Responsive typography sizing maps - pure authentic Marathi/English calligraphy in Gajraj One
   const gajrajSizeMap = {
     sm: "text-[14px] sm:text-[16px]",
     md: "text-[16px] sm:text-lg lg:text-[20px]",
@@ -44,6 +65,8 @@ export function LogoBrand({
     "2xl": "text-[11px] min-[360px]:text-[12px] min-[400px]:text-[13px] sm:text-[14px] md:text-[16px]",
   };
 
+  const ariaLabel = `${brandTitle} — ${brandTagline.replace(/\|/g, "").trim()}`;
+
   return (
     <Link
       href="/"
@@ -52,12 +75,12 @@ export function LogoBrand({
         isCenter ? "flex-col items-center justify-center text-center mx-auto" : "flex-col items-start text-left",
         className
       )}
-      aria-label="साहित्य निकेतन ग्रंथालय — एक हृदय हो भारत जननी"
+      aria-label={ariaLabel}
     >
-      {/* Hidden for accessibility & SEO indexing in authentic Marathi */}
-      <span className="sr-only">साहित्य निकेतन ग्रंथालय</span>
+      {/* Hidden for accessibility & SEO indexing */}
+      <span className="sr-only">{brandTitle}</span>
 
-      {/* Pure authentic Marathi typography branding without circular graphic */}
+      {/* Typography branding in Gajraj One font */}
       <motion.div
         whileHover={{ scale: 1.01, y: -0.5 }}
         whileTap={{ scale: 0.99 }}
@@ -67,11 +90,11 @@ export function LogoBrand({
           isCenter ? "items-center justify-center text-center" : "items-start text-left"
         )}
       >
-        {/* Primary Brand Typography — Authentic Devanagari 'साहित्य निकेतन ग्रंथालय' */}
+        {/* Primary Brand Typography — in Gajraj One */}
         <span
           aria-hidden="true"
           className={cn(
-            variant === "ams" ? "font-ams" : "font-gajraj",
+            variant === "ams" && language !== "en" ? "font-ams" : "font-gajraj",
             "leading-tight tracking-normal whitespace-nowrap transition-all duration-300",
             gajrajSizeMap[size],
             isWhite
@@ -81,7 +104,7 @@ export function LogoBrand({
                 : "text-[#800020] dark:text-[#FAF2E8] group-hover:text-[#66001A] dark:group-hover:text-[#E5B869] drop-shadow-[0_1px_2px_rgba(128,0,32,0.10)]"
           )}
         >
-          साहित्य निकेतन ग्रंथालय
+          {brandTitle}
         </span>
 
         {/* Sacred Motto Subheading */}
@@ -107,7 +130,7 @@ export function LogoBrand({
                     : "text-[#B8860B] dark:text-[#E5B869] group-hover:text-[#8C6508] dark:group-hover:text-[#F3D59B]"
               )}
             >
-              || एक हृदय हो भारत जननी ||
+              {brandTagline}
             </span>
 
             {isCenter && (

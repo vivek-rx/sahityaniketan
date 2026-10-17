@@ -797,8 +797,12 @@ export function Navbar() {
                   className="h-10 w-10 object-contain shrink-0 rounded-full drop-shadow-sm"
                 />
                 <div>
-                  <h3 className="font-gajraj text-base font-bold leading-tight">साहित्य निकेतन ग्रंथालय</h3>
-                  <p className="text-[11px] text-[#E5B869] mt-0.5">शुक्रवार पेठ, अंबाजोगाई (स्था. १९४५)</p>
+                  <h3 className="font-gajraj text-base font-bold leading-tight">
+                    {language === "en" ? "Sahitya Niketan Library" : language === "hi" ? "साहित्य निकेतन ग्रन्थालय" : "साहित्य निकेतन ग्रंथालय"}
+                  </h3>
+                  <p className="text-[11px] text-[#E5B869] mt-0.5">
+                    {language === "en" ? "Shukrawar Peth, Ambajogai (Est. 1945)" : language === "hi" ? "शुक्रवार पेठ, अंबाजोगाई (स्था. १९४५)" : "शुक्रवार पेठ, अंबाजोगाई (स्था. १९४५)"}
+                  </p>
                 </div>
               </div>
               <button

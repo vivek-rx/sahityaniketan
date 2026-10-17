@@ -28,7 +28,7 @@ const geist = Geist({
  */
 const baloo2 = Baloo_2({
   weight: ["600", "700"],
-  subsets: ["devanagari"],
+  subsets: ["devanagari", "latin"],
   variable: "--font-baloo",
   display: "swap",
 });
