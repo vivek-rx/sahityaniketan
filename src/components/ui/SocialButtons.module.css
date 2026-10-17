@@ -1,0 +1,55 @@
+/* Mantine UI SocialButtons styling */
+.facebookButton {
+  background-color: #4267b2;
+  color: #fff;
+  white-space: nowrap;
+  transition: all 0.15s ease-in-out;
+}
+
+.facebookButton:hover {
+  background-color: #365899;
+}
+
+.discordButton {
+  background-color: #5865f2;
+  color: #fff;
+  white-space: nowrap;
+  transition: all 0.15s ease-in-out;
+}
+
+.discordButton:hover {
+  background-color: #4752c4;
+}
+
+.githubButton {
+  background-color: #000;
+  color: #fff;
+  white-space: nowrap;
+  transition: all 0.15s ease-in-out;
+}
+
+.githubButton:hover {
+  background-color: #24292e;
+}
+
+.youtubeButton {
+  background-color: #cc0000;
+  color: #fff;
+  white-space: nowrap;
+  transition: all 0.15s ease-in-out;
+}
+
+.youtubeButton:hover {
+  background-color: #a80000;
+}
+
+.whatsappButton {
+  background-color: #25d366;
+  color: #fff;
+  white-space: nowrap;
+  transition: all 0.15s ease-in-out;
+}
+
+.whatsappButton:hover {
+  background-color: #20ba5a;
+}
