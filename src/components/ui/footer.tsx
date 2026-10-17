@@ -5,6 +5,7 @@ import { cn } from '@/lib/utils';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { CrowdCanvas } from '@/components/ui/skiper-ui/skiper39';
+import { SocialButtons } from '@/components/ui/social-buttons';
 
 /**
  * Props for the Footer component.
@@ -116,25 +117,10 @@ export const Footer: FC<FooterProps> = ({
           </ul>
         </div>
 
-        {/* Follow Us */}
-        <div className="md:justify-self-center">
+        {/* Follow Us / Social Buttons */}
+        <div className="md:justify-self-center w-full max-w-[280px]">
           <h3 className="mb-4 text-base font-bold font-marathi-heading text-[#800020] dark:text-[#E5B869]">सोशल मीडिया / Social</h3>
-          <ul className="space-y-2">
-            {socialLinks.map((link) => (
-              <li key={link.label}>
-                <a
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={link.label}
-                  className="flex items-center gap-2 text-sm text-stone-600 dark:text-stone-400 font-medium transition-colors hover:text-[#800020] dark:hover:text-[#E5B869]"
-                >
-                  {link.icon}
-                  <span>{link.label}</span>
-                </a>
-              </li>
-            ))}
-          </ul>
+          <SocialButtons />
         </div>
 
         {/* Newsletter */}
