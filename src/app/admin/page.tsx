@@ -35,6 +35,7 @@ import {
 } from "lucide-react";
 import { AdminTopbar } from "@/components/admin/admin-topbar";
 import { AdminModal } from "@/components/admin/admin-modal";
+import { DropzoneButton } from "@/components/admin/dropzone-button";
 import { BobbingDots } from "@/components/ui/bobbing-dots";
 import { useAdminLanguage } from "@/context/admin-language-context";
 import { createClient } from "@/lib/supabase/client";
@@ -97,6 +98,7 @@ export default function AdminDashboardPage() {
   const [albumModalOpen, setAlbumModalOpen] = useState(false);
   const [albumTitle, setAlbumTitle] = useState("");
   const [albumCategory, setAlbumCategory] = useState("Events");
+  const [albumCoverUrl, setAlbumCoverUrl] = useState("");
   const [savingAlbum, setSavingAlbum] = useState(false);
 
   /* WhatsApp Media Ingestion Station */
@@ -494,7 +496,7 @@ export default function AdminDashboardPage() {
         title: albumTitle.trim(),
         category: albumCategory,
         description: null,
-        cover_url: null,
+        cover_url: albumCoverUrl.trim() || null,
         is_archived: false,
         display_order: albums.length,
         is_featured: false,
@@ -504,6 +506,7 @@ export default function AdminDashboardPage() {
       setSelectedAlbumId(created.id);
       setAlbumModalOpen(false);
       setAlbumTitle("");
+      setAlbumCoverUrl("");
     } catch (err: any) {
       alert(err?.message || "Error creating album");
     } finally {
@@ -1601,6 +1604,19 @@ export default function AdminDashboardPage() {
               <option value="Celebrations">{lang === "mr" ? "उत्सव व जयंती" : "Celebrations"}</option>
               <option value="General">{lang === "mr" ? "सर्वसाधारण" : "General"}</option>
             </select>
+          </div>
+
+          <div>
+            <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-2">
+              {lang === "mr" ? "अल्बम कव्हर फोटो (पर्यायी)" : "Album Cover Photo (Optional)"}
+            </label>
+            <DropzoneButton
+              currentValue={albumCoverUrl}
+              onUploadSuccess={(url) => setAlbumCoverUrl(url)}
+              onClear={() => setAlbumCoverUrl("")}
+              title={lang === "mr" ? "कव्हर फोटो येथे ड्रॅग करा" : "Drop Cover Photo Here"}
+              buttonText={lang === "mr" ? "फोटो निवडा" : "Select Photo"}
+            />
           </div>
         </div>
       </AdminModal>

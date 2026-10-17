@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { Plus, GripVertical, Eye, EyeOff, Edit2, Trash2, Layers, RefreshCw, ExternalLink, Loader2 } from "lucide-react";
 import { AdminTopbar } from "@/components/admin/admin-topbar";
 import { AdminModal } from "@/components/admin/admin-modal";
+import { DropzoneButton } from "@/components/admin/dropzone-button";
 import { getCarouselSlides, createSlide, updateSlide, deleteSlide, toggleSlideActive } from "@/lib/actions/carousel";
 import { useAdminLanguage } from "@/context/admin-language-context";
 import type { CarouselSlide } from "@/types/database";
@@ -367,18 +368,21 @@ export default function AdminCarouselPage() {
           </div>
 
           <div>
-            <label className="block text-sm font-bold text-slate-800 dark:text-slate-200 mb-1.5">
+            <label className="block text-sm font-bold text-slate-800 dark:text-slate-200 mb-2">
               {t.carouselImageLabel}
             </label>
-            <input
-              type="text"
-              value={imageUrl}
-              onChange={(e) => setImageUrl(e.target.value)}
-              placeholder="https://..."
-              className="w-full rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-4 py-3 text-sm text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-[#800020]"
+
+            <DropzoneButton
+              currentValue={imageUrl}
+              onUploadSuccess={(url) => setImageUrl(url)}
+              onClear={() => setImageUrl("")}
+              title={lang === "mr" ? "कॅरोसेल स्लाइड प्रतिमा येथे ड्रॅग करा" : "Drop Carousel Slide Image Here"}
+              description={lang === "mr" ? "सुंदर होमपेज स्लाइडसाठी उच्च दर्जाची प्रतिमा निवडा. WhatsApp वरून थेट Ctrl+V ने पेस्ट करू शकता." : "High quality landscape photo for the homepage hero. Direct WhatsApp Ctrl+V paste supported."}
+              buttonText={lang === "mr" ? "स्लाइड फोटो निवडा" : "Select Slide Image"}
             />
+
             {/* Quick Authentic Photo Presets */}
-            <div className="flex flex-wrap items-center gap-1.5 pt-2">
+            <div className="flex flex-wrap items-center gap-1.5 pt-1">
               <span className="text-[11px] text-slate-500 font-medium">
                 {lang === "mr" ? "अधिकृत छायाचित्रे:" : "Library Presets:"}
               </span>
@@ -392,7 +396,7 @@ export default function AdminCarouselPage() {
                   type="button"
                   key={p.url}
                   onClick={() => setImageUrl(p.url)}
-                  className="px-2 py-0.5 rounded-md border border-slate-200 dark:border-slate-700 text-[11px] font-semibold text-slate-600 dark:text-slate-300 hover:bg-[#800020] hover:text-white transition-colors"
+                  className="px-2 py-0.5 rounded-md border border-slate-200 dark:border-slate-700 text-[11px] font-semibold text-slate-600 dark:text-slate-300 hover:bg-[#800020] hover:text-white transition-colors cursor-pointer"
                 >
                   {p.label}
                 </button>

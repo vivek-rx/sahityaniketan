@@ -10,3 +10,4 @@ export { AdminAuthGuard } from "./admin-auth-guard";
 export { default as HoldButton } from "@/components/ui/HoldButton";
 export { AdminHoldDeleteButton } from "./admin-hold-button";
 export { DoubleNavbar } from "./double-navbar";
+export { DropzoneButton } from "./dropzone-button";

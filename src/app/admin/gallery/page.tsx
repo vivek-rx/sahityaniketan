@@ -22,6 +22,7 @@ import {
 import { AdminTopbar } from "@/components/admin/admin-topbar";
 import { BobbingDots } from "@/components/ui/bobbing-dots";
 import { AdminModal } from "@/components/admin/admin-modal";
+import { DropzoneButton } from "@/components/admin/dropzone-button";
 import { useAdminLanguage } from "@/context/admin-language-context";
 import {
   getAlbums,
@@ -1001,14 +1002,16 @@ export default function AdminGalleryPage() {
           </div>
 
           <div>
-            <label className="block text-sm font-bold text-slate-800 dark:text-slate-200 mb-1.5">
+            <label className="block text-sm font-bold text-slate-800 dark:text-slate-200 mb-2">
               {t.albumCoverLabel}
             </label>
-            <input
-              value={coverUrl}
-              onChange={(e) => setCoverUrl(e.target.value)}
-              placeholder={t.albumCoverPlaceholder}
-              className="w-full rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-4 py-3 text-sm text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-[#800020]"
+            <DropzoneButton
+              currentValue={coverUrl}
+              onUploadSuccess={(url) => setCoverUrl(url)}
+              onClear={() => setCoverUrl("")}
+              title={lang === "mr" ? "अल्बम कव्हर फोटो येथे ड्रॅग करा" : "Drop Album Cover Photo Here"}
+              description={lang === "mr" ? "अल्बमच्या मुख्य ओळखीसाठी आकर्षक कव्हर फोटो निवडा. WhatsApp (Ctrl+V) समर्थित." : "Select an appealing cover photo for this album. WhatsApp paste supported."}
+              buttonText={lang === "mr" ? "कव्हर फोटो निवडा" : "Select Cover Photo"}
             />
           </div>
 
@@ -1080,12 +1083,30 @@ export default function AdminGalleryPage() {
                 <label className="block text-xs font-bold text-slate-600 mb-1">
                   {mediaType === "video" ? "YouTube Video Embed / URL *" : t.mediaUrlLabel}
                 </label>
-                <input
-                  value={mediaUrl}
-                  onChange={(e) => setMediaUrl(e.target.value)}
-                  placeholder={mediaType === "video" ? "https://www.youtube.com/embed/..." : "https://..."}
-                  className="w-full rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2 text-xs"
-                />
+                {mediaType === "video" ? (
+                  <input
+                    value={mediaUrl}
+                    onChange={(e) => setMediaUrl(e.target.value)}
+                    placeholder="https://www.youtube.com/embed/..."
+                    className="w-full rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2 text-xs"
+                  />
+                ) : (
+                  <div className="space-y-2">
+                    <DropzoneButton
+                      currentValue={mediaUrl}
+                      onUploadSuccess={(url) => setMediaUrl(url)}
+                      onClear={() => setMediaUrl("")}
+                      title={lang === "mr" ? "अल्बम फोटो येथे ड्रॅग करा" : "Drop Album Photo Here"}
+                      buttonText={lang === "mr" ? "फोटो निवडा" : "Select Photo"}
+                    />
+                    <input
+                      value={mediaUrl}
+                      onChange={(e) => setMediaUrl(e.target.value)}
+                      placeholder="किंवा थेट लिंक प्रविष्ट करा (https://...)"
+                      className="w-full rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2 text-xs font-mono"
+                    />
+                  </div>
+                )}
               </div>
             </div>
             <div className="flex justify-end pt-1">
