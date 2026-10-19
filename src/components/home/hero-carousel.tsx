@@ -42,6 +42,8 @@ interface CarouselSlide {
   tagEn: string;
   tagBg: string;
   buttonText?: string;
+  buttonTextEn?: string;
+  buttonTextHi?: string;
   buttonLink?: string;
 }
 
@@ -72,6 +74,8 @@ const DEFAULT_HERO_SLIDES: CarouselSlide[] = [
     tagEn: "Heritage Foundation",
     tagBg: "bg-[#800020]",
     buttonText: "इतिहास पहा",
+    buttonTextHi: "इतिहास देखें",
+    buttonTextEn: "Explore History",
     buttonLink: "/history",
   },
   {
@@ -93,6 +97,8 @@ const DEFAULT_HERO_SLIDES: CarouselSlide[] = [
     tagEn: "Rare Archives",
     tagBg: "bg-[#BF4B1A]",
     buttonText: "हस्तलिखिते पहा",
+    buttonTextHi: "पाण्डुलिपियां देखें",
+    buttonTextEn: "View Manuscripts",
     buttonLink: "/catalogue?category=manuscripts",
   },
   {
@@ -114,6 +120,8 @@ const DEFAULT_HERO_SLIDES: CarouselSlide[] = [
     tagEn: "Book Treasures",
     tagBg: "bg-[#800020]",
     buttonText: "ग्रंथसूची शोधा",
+    buttonTextHi: "ग्रन्थ सूची खोजें",
+    buttonTextEn: "Search Catalogue",
     buttonLink: "/catalogue",
   },
   {
@@ -135,6 +143,8 @@ const DEFAULT_HERO_SLIDES: CarouselSlide[] = [
     tagEn: "Study Sanctuary",
     tagBg: "bg-[#BF4B1A]",
     buttonText: "सभासद व्हा",
+    buttonTextHi: "सदस्य बनें",
+    buttonTextEn: "Apply Membership",
     buttonLink: "/membership",
   },
 ];
@@ -381,11 +391,11 @@ export function HeroCarousel() {
                           >
                             <BookOpen className="h-3.5 w-3.5 text-[#FFD9CC]" />
                             <span>
-                              {slide.buttonText || (language === "mr"
-                                ? "सविस्तर माहिती"
+                              {language === "en"
+                                ? slide.buttonTextEn || "Read Story"
                                 : language === "hi"
-                                  ? "विस्तृत जानकारी"
-                                  : "Read Story")}
+                                  ? slide.buttonTextHi || slide.buttonText || "विस्तृत जानकारी"
+                                  : slide.buttonText || "सविस्तर माहिती"}
                             </span>
                           </Link>
                         )}
