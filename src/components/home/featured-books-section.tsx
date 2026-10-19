@@ -25,19 +25,64 @@ interface HeritageBook {
   id: string;
   title: string;
   titleMarathi: string;
+  titleHindi?: string;
   author: string;
   authorMarathi: string;
+  authorHindi?: string;
   coverImage: string;
   categoryKey: "recent" | "marathi" | "hindi" | "sanskrit" | "heritage";
   languageLabel: string;
+  languageLabelEn?: string;
+  languageLabelHi?: string;
   year: string;
+  yearEn?: string;
+  yearHi?: string;
   callNumber: string;
   shelf: string;
+  shelfEn?: string;
+  shelfHi?: string;
   publisher: string;
   description: string;
   descriptionMarathi: string;
+  descriptionHindi?: string;
   isRecent?: boolean;
   isRare?: boolean;
+}
+
+export function getBookTitle(book: HeritageBook, lang: string): string {
+  if (lang === "en") return book.title || book.titleMarathi;
+  if (lang === "hi") return book.titleHindi || book.titleMarathi || book.title;
+  return book.titleMarathi || book.title;
+}
+
+export function getBookAuthor(book: HeritageBook, lang: string): string {
+  if (lang === "en") return book.author || book.authorMarathi;
+  if (lang === "hi") return book.authorHindi || book.authorMarathi || book.author;
+  return book.authorMarathi || book.author;
+}
+
+export function getBookDescription(book: HeritageBook, lang: string): string {
+  if (lang === "en") return book.description || book.descriptionMarathi;
+  if (lang === "hi") return book.descriptionHindi || book.descriptionMarathi || book.description;
+  return book.descriptionMarathi || book.description;
+}
+
+export function getBookShelf(book: HeritageBook, lang: string): string {
+  if (lang === "en") return book.shelfEn || book.shelf;
+  if (lang === "hi") return book.shelfHi || book.shelf;
+  return book.shelf;
+}
+
+export function getBookLanguageLabel(book: HeritageBook, lang: string): string {
+  if (lang === "en") return book.languageLabelEn || book.languageLabel;
+  if (lang === "hi") return book.languageLabelHi || book.languageLabel;
+  return book.languageLabel;
+}
+
+export function getBookYear(book: HeritageBook, lang: string): string {
+  if (lang === "en") return book.yearEn || book.year;
+  if (lang === "hi") return book.yearHi || book.year;
+  return book.year;
 }
 
 const INITIAL_BOOKS: HeritageBook[] = [
@@ -46,469 +91,712 @@ const INITIAL_BOOKS: HeritageBook[] = [
     id: "b4",
     title: "Vivekasindhu (Ambajogai Manuscript)",
     titleMarathi: "विवेकसिंधू (अंबाजोगाई प्रत)",
+    titleHindi: "विवेकसिंधु (अंबाजोगाई पाण्डुलिपि)",
     author: "Adikavi Mukundraj",
     authorMarathi: "आद्यकवि मुकुंदराज",
+    authorHindi: "आद्यकवि मुकुंदराज",
     coverImage: "/images/real/library_vintage_books.png",
     categoryKey: "heritage",
     languageLabel: "मराठी (शके ११८८)",
+    languageLabelEn: "Marathi (Shaka 1188)",
+    languageLabelHi: "मराठी (शक ११८८)",
     year: "११८८",
+    yearEn: "1188 CE",
+    yearHi: "११८८ वि.",
     callNumber: "891.461 MUK",
     shelf: "कप्पा क्र. १ (दुर्मीळ दालन)",
+    shelfEn: "Shelf 1 (Rare Stacks)",
+    shelfHi: "कक्ष १ (दुर्लभ संग्रह)",
     publisher: "अंबाजोगाई हस्तलिखित",
-    description: "मराठी भाषेतील आद्यग्रंथ. अद्वैत वेदान्ताचे मराठीतील पहिले प्रकटीकरण जे अंबाजोगाई येथे रचले गेले.",
+    description: "The earliest classical philosophical treatise of Marathi literature and first poetic exposition of Advaita Vedanta, composed in Ambajogai.",
     descriptionMarathi: "मराठी भाषेतील आद्यग्रंथ. अद्वैत वेदान्ताचे मराठीतील पहिले प्रकटीकरण जे अंबाजोगाई येथे रचले गेले.",
+    descriptionHindi: "मराठी भाषा का आदिग्रन्थ। अद्वैत वेदान्त का प्रथम काव्यात्मक प्रकटीकरण, जिसकी रचना अंबाजोगाई में हुई।",
     isRare: true,
   },
   {
     id: "b5",
-    title: "Dasopant Pasodi va Padasangraha",
+    title: "Dasopant Pasodi and Collected Verses",
     titleMarathi: "दासोपंत पासोडी व पदसंग्रह",
+    titleHindi: "दासोपंत पासोडी एवं पद संग्रह",
     author: "Sant Dasopant",
     authorMarathi: "संत दासोपंत (अंबाजोगाई)",
+    authorHindi: "संत दासोपंत",
     coverImage: "",
     categoryKey: "heritage",
     languageLabel: "मराठी (प्राचीन)",
+    languageLabelEn: "Classical Marathi",
+    languageLabelHi: "मराठी (प्राचीन)",
     year: "१६००",
+    yearEn: "1600 CE",
+    yearHi: "१६०० वि.",
     callNumber: "891.461 DAS",
     shelf: "कप्पा क्र. १ (दासोपंत दालन)",
+    shelfEn: "Shelf 1 (Dasopant Wing)",
+    shelfHi: "कक्ष १ (दासोपंत कक्ष)",
     publisher: "साहित्य निकेतन संग्रहालय",
-    description: "अंबाजोगाईचे महासंत दासोपंत यांच्या ४० फुटी कापडी पासोडीवरील अध्यात्मिक पदांचे विश्लेषण व दुर्मीळ हस्तलिखित संदर्भ.",
+    description: "Rare archival reference and spiritual exposition of Saint Dasopant's legendary 40-foot cloth manuscript preserved at Ambajogai.",
     descriptionMarathi: "अंबाजोगाईचे महासंत दासोपंत यांच्या ४० फुटी कापडी पासोडीवरील अध्यात्मिक पदांचे विश्लेषण व दुर्मीळ हस्तलिखित संदर्भ.",
+    descriptionHindi: "अंबाजोगाई के सन्त दासोपंत की ४० फुट वस्त्र पाण्डुलिपि (पासोडी) का आध्यात्मिक विश्लेषण व दुर्लभ संदर्भ।",
     isRare: true,
   },
   {
     id: "b2",
-    title: "1857 Che Swatantryasamar",
+    title: "The Indian War of Independence 1857",
     titleMarathi: "१८५७ चे स्वातंत्र्यसमर",
+    titleHindi: "१८५७ का स्वातंत्र्य समर",
     author: "Vinayak Damodar Savarkar",
     authorMarathi: "स्वातंत्र्यवीर वि. दा. सावरकर",
+    authorHindi: "स्वातंत्र्यवीर वि. दा. सावरकर",
     coverImage: "",
     categoryKey: "heritage",
     languageLabel: "मराठी (ऐतिहासिक)",
+    languageLabelEn: "Marathi (Historical)",
+    languageLabelHi: "मराठी (ऐतिहासिक)",
     year: "१९०९",
+    yearEn: "1909",
+    yearHi: "१९०९",
     callNumber: "954.03 SAV",
     shelf: "कप्पा क्र. ४ (स्वातंत्र्य दालन)",
+    shelfEn: "Shelf 4 (Freedom Wing)",
+    shelfHi: "कक्ष ४ (स्वतंत्रता कक्ष)",
     publisher: "साहित्य निकेतन",
-    description: "भारताच्या पहिल्या स्वातंत्र्यलढ्याची तेजस्वी गाथा, दुर्मीळ पहिली आवृत्ती संदर्भ.",
+    description: "The stirring chronicle of India's first war of national independence; rare first edition archival copy preserved in our stacks.",
     descriptionMarathi: "भारताच्या पहिल्या स्वातंत्र्यलढ्याची तेजस्वी गाथा, दुर्मीळ पहिली आवृत्ती संदर्भ.",
+    descriptionHindi: "भारत के प्रथम स्वाधीनता संग्राम का प्रामाणिक इतिहास, दुर्लभ प्रथम संस्करण।",
     isRare: true,
   },
   {
     id: "b12",
-    title: "Abhijnanasakuntalam",
+    title: "Abhijnanasakuntalam (Commentary Edition)",
     titleMarathi: "अभिज्ञानशाकुन्तलम् (हस्तलिखित भाष्य)",
+    titleHindi: "अभिज्ञानशाकुन्तलम् (भाष्य सहित)",
     author: "Mahakavi Kalidasa",
     authorMarathi: "महाकवि कालिदास",
+    authorHindi: "महाकवि कालिदास",
     coverImage: "",
     categoryKey: "sanskrit",
     languageLabel: "संस्कृत / मराठी भाष्य",
+    languageLabelEn: "Sanskrit / Marathi",
+    languageLabelHi: "संस्कृत / हिन्दी",
     year: "१९२४",
+    yearEn: "1924",
+    yearHi: "१९२४",
     callNumber: "891.22 KAL",
     shelf: "कप्पा क्र. २ (संस्कृत)",
+    shelfEn: "Shelf 2 (Sanskrit)",
+    shelfHi: "कक्ष २ (संस्कृत)",
     publisher: "संस्कृत अभिजात",
-    description: "महाकवि कालिदासांचे अमर नाट्यकाव्य, मूळ श्लोक व सविस्तर मराठी भाष्यासह.",
+    description: "Kalidasa's immortal Sanskrit drama featuring original verses alongside comprehensive literary commentary.",
     descriptionMarathi: "महाकवि कालिदासांचे अमर नाट्यकाव्य, मूळ श्लोक व सविस्तर मराठी भाष्यासह.",
+    descriptionHindi: "महाकवि कालिदास की अमर नाट्य कृति, मूल श्लोक एवं विस्तृत भाष्य सहित।",
     isRare: true,
   },
   {
     id: "b13",
-    title: "Rigveda Samhita va Sayan Bhashya",
+    title: "Rigveda Samhita with Sayana Bhashya",
     titleMarathi: "ऋग्वेद संहिता (सायणभाष्य)",
+    titleHindi: "ऋग्वेद संहिता (सायण भाष्य)",
     author: "Maharshi Vyasa / Sayanacharya",
     authorMarathi: "महर्षि व्यास / सायण भाष्य",
+    authorHindi: "महर्षि व्यास / सायण भाष्य",
     coverImage: "",
     categoryKey: "sanskrit",
     languageLabel: "संस्कृत (वैदिक)",
+    languageLabelEn: "Vedic Sanskrit",
+    languageLabelHi: "वैदिक संस्कृत",
     year: "१९३२",
+    yearEn: "1932",
+    yearHi: "१९३२",
     callNumber: "294.592 VYA",
     shelf: "कप्पा क्र. २ (वैदिक दालन)",
+    shelfEn: "Shelf 2 (Vedic Wing)",
+    shelfHi: "कक्ष २ (वैदिक कक्ष)",
     publisher: "वैदिक संशोधन मंडळ",
-    description: "प्राचीनतम वैदिक ऋचा, स्वरचिन्हे व सायणाचार्यांच्या भाष्यासह संदर्भ प्रत.",
+    description: "Earliest Vedic hymns with authentic accents and classical theological commentary by Sayanacharya.",
     descriptionMarathi: "प्राचीनतम वैदिक ऋचा, स्वरचिन्हे व सायणाचार्यांच्या भाष्यासह संदर्भ प्रत.",
+    descriptionHindi: "प्राचीनतम वैदिक ऋचाएं, स्वरचिह्न एवं सायणाचार्य के भाष्य सहित।",
     isRare: true,
   },
 
   // ── 2. RECENT ARRIVALS (नुकतीच आलेली पुस्तके) ──
   {
     id: "b10",
-    title: "Maharashtracha Samagra Itihas va Bhugol",
+    title: "Comprehensive History & Geography of Maharashtra",
     titleMarathi: "महाराष्ट्राचा समग्र इतिहास व भूगोल (२०२५)",
+    titleHindi: "महाराष्ट्र का समग्र इतिहास एवं भूगोल (२०२५)",
     author: "Dr. Sadanand More / Prof. Khatib",
     authorMarathi: "डॉ. सदानंद मोरे / प्रा. के. ए. खतीब",
+    authorHindi: "डॉ. सदानंद मोरे / प्रा. के. ए. खतीब",
     coverImage: "",
     categoryKey: "recent",
     languageLabel: "मराठी (नवे आगमन)",
+    languageLabelEn: "Marathi (New Arrival)",
+    languageLabelHi: "मराठी (नवीन आगमन)",
     year: "२०२५",
+    yearEn: "2025",
+    yearHi: "२०२५",
     callNumber: "351.076 MOR",
     shelf: "कप्पा क्र. १२ (अभ्यासिका)",
+    shelfEn: "Shelf 12 (Study Center)",
+    shelfHi: "कक्ष १२ (अध्ययन केंद्र)",
     publisher: "अद्ययावत स्पर्धा परीक्षा संदर्भ",
-    description: "MPSC राज्यसेवा, गट ब व क स्पर्धा परीक्षांच्या तयारीसाठी वातानुकूलित अभ्यासिकेतील नवीन संदर्भ ग्रंथ.",
+    description: "Updated reference text for MPSC State Services and competitive examination preparation in our reading room.",
     descriptionMarathi: "MPSC राज्यसेवा, गट ब व क स्पर्धा परीक्षांच्या तयारीसाठी वातानुकूलित अभ्यासिकेतील नवीन संदर्भ ग्रंथ.",
+    descriptionHindi: "MPSC राज्य सेवा एवं प्रशासनिक परीक्षाओं की तैयारी हेतु वातानुकूलित अध्ययन केंद्र का नवीन संदर्भ ग्रन्थ।",
     isRecent: true,
   },
   {
     id: "b11",
-    title: "Bharatiya Samvidhan va Rajyavyavastha",
+    title: "Indian Polity & Constitution (Marathi Edition)",
     titleMarathi: "भारतीय संविधान व राज्यव्यवस्था (२०२५ अद्ययावत)",
-    author: "M. Laxmikanth (Marathi)",
+    titleHindi: "भारतीय संविधान एवं राजव्यवस्था (२०२५)",
+    author: "M. Laxmikanth (Marathi Translation)",
     authorMarathi: "एम. लक्ष्मीकांत (मराठी अनुवाद)",
+    authorHindi: "एम. लक्ष्मीकांत (मराठी अनुवाद)",
     coverImage: "",
     categoryKey: "recent",
     languageLabel: "मराठी (नवीन आवृत्ती)",
+    languageLabelEn: "Marathi (Latest Edition)",
+    languageLabelHi: "मराठी (नवीन संस्करण)",
     year: "२०२५",
+    yearEn: "2025",
+    yearHi: "२०२५",
     callNumber: "342.54 LAX",
     shelf: "कप्पा क्र. १२ (नवीन आगमन)",
+    shelfEn: "Shelf 12 (New Arrivals)",
+    shelfHi: "कक्ष १२ (नवीन आगमन)",
     publisher: "साहित्य निकेतन अभ्यासिका",
-    description: "प्रशासकीय परीक्षांच्या विद्यार्थ्यांसाठी संविधानाचा सखोल अद्ययावत अभ्यास ग्रंथ.",
+    description: "Authoritative comprehensive guide to the Indian Constitution for administrative and competitive examinations.",
     descriptionMarathi: "प्रशासकीय परीक्षांच्या विद्यार्थ्यांसाठी संविधानाचा सखोल अद्ययावत अभ्यास ग्रंथ.",
+    descriptionHindi: "प्रशासनिक परीक्षा के अभ्यर्थियों हेतु भारतीय संविधान का प्रामाणिक अध्ययन ग्रन्थ।",
     isRecent: true,
   },
   {
     id: "b14",
-    title: "Marathwada Muktisangram: Adnyaat Sandarbha",
+    title: "Marathwada Liberation: Unknown Historical Records",
     titleMarathi: "मराठवाडा मुक्तीसंग्राम: अज्ञात संदर्भ (२०२४)",
+    titleHindi: "मराठवाड़ा मुक्ति संग्राम: अज्ञात संदर्भ (२०२४)",
     author: "Itihas Sanshodhan Mandal",
     authorMarathi: "इतिहास संशोधन मंडळ",
+    authorHindi: "इतिहास संशोधन मंडल",
     coverImage: "",
     categoryKey: "recent",
     languageLabel: "मराठी (नवीन संशोधन)",
+    languageLabelEn: "Marathi (New Research)",
+    languageLabelHi: "मराठी (नवीन शोध)",
     year: "२०२४",
+    yearEn: "2024",
+    yearHi: "२०२४",
     callNumber: "954.79 MUK",
     shelf: "कप्पा क्र. ४ (इतिहास)",
+    shelfEn: "Shelf 4 (History Wing)",
+    shelfHi: "कक्ष ४ (इतिहास कक्ष)",
     publisher: "मराठवाडा संशोधन",
-    description: "स्वामी रामानंद तीर्थ आणि मराठवाडा मुक्ती लढ्यातील गुप्त कागदपत्रांचे अद्ययावत संकलन.",
+    description: "Declassified documents and archival letters regarding Swami Ramanand Teerth and the Marathwada liberation movement.",
     descriptionMarathi: "स्वामी रामानंद तीर्थ आणि मराठवाडा मुक्ती लढ्यातील गुप्त कागदपत्रांचे अद्ययावत संकलन.",
+    descriptionHindi: "स्वामी रामानंद तीर्थ एवं मराठवाड़ा मुक्ति संघर्ष के अप्रकाशित दस्तावेजों का संकलन।",
     isRecent: true,
   },
   {
     id: "b15",
-    title: "Adhunik Bharatacha Itihas",
+    title: "Modern Indian History and Social Reformers",
     titleMarathi: "आधुनिक भारताचा इतिहास व समाजसुधारक (२०२४)",
+    titleHindi: "आधुनिक भारत का इतिहास एवं समाज सुधारक",
     author: "Prof. Bipin Chandra (Marathi)",
     authorMarathi: "प्रा. बिपिन चंद्र (मराठी आवृत्ती)",
+    authorHindi: "प्रो. बिपिन चंद्र (मराठी अनुवाद)",
     coverImage: "",
     categoryKey: "recent",
     languageLabel: "मराठी (नवीन)",
+    languageLabelEn: "Marathi (Recent)",
+    languageLabelHi: "मराठी (नवीन)",
     year: "२०२४",
+    yearEn: "2024",
+    yearHi: "२०२४",
     callNumber: "954.04 CHA",
     shelf: "कप्पा क्र. १२ (अभ्यासिका)",
+    shelfEn: "Shelf 12 (Study Center)",
+    shelfHi: "कक्ष १२ (अध्ययन केंद्र)",
     publisher: "साहित्य निकेतन अभ्यासिका",
-    description: "स्पर्धा परीक्षा व आधुनिक भारताच्या सामाजिक-राजकीय घडामोडींचा सखोल इतिहास.",
+    description: "Detailed narrative on social-political milestones and reformist movements of modern India.",
     descriptionMarathi: "स्पर्धा परीक्षा व आधुनिक भारताच्या सामाजिक-राजकीय घडामोडींचा सखोल इतिहास.",
+    descriptionHindi: "प्रतियोगी परीक्षाओं एवं आधुनिक भारत के सामाजिक-राजनीतिक आंदोलनों का प्रामाणिक इतिहास।",
     isRecent: true,
   },
   {
     id: "b16",
-    title: "Vidnyan ani Manavi Pragati",
+    title: "Science and Human Progress",
     titleMarathi: "विज्ञान आणि मानवी प्रगती (२०२४)",
+    titleHindi: "विज्ञान और मानवीय प्रगति",
     author: "Dr. Jayant Narlikar",
     authorMarathi: "डॉ. जयंत नारळीकर",
+    authorHindi: "डॉ. जयंत नारलीकर",
     coverImage: "",
     categoryKey: "recent",
     languageLabel: "मराठी (विज्ञान)",
+    languageLabelEn: "Marathi (Science)",
+    languageLabelHi: "मराठी (विज्ञान)",
     year: "२०२४",
+    yearEn: "2024",
+    yearHi: "२०२४",
     callNumber: "500 NAR",
     shelf: "कप्पा क्र. ८ (विज्ञान दालन)",
+    shelfEn: "Shelf 8 (Science Wing)",
+    shelfHi: "कक्ष ८ (विज्ञान कक्ष)",
     publisher: "राजहंस प्रकाशन",
-    description: "खगोलशास्त्र, आधुनिक संशोधन आणि वैज्ञानिक दृष्टिकोनाचा प्रवास उलगडणारा ग्रंथ.",
+    description: "Astrophysics, modern scientific explorations, and the evolution of a rational scientific worldview.",
     descriptionMarathi: "खगोलशास्त्र, आधुनिक संशोधन आणि वैज्ञानिक दृष्टिकोनाचा प्रवास उलगडणारा ग्रंथ.",
+    descriptionHindi: "खगोल विज्ञान, आधुनिक शोध एवं वैज्ञानिक दृष्टिकोण के विकास पर केंद्रित ग्रन्थ।",
     isRecent: true,
   },
 
   // ── 3. MARATHI CLASSICS (मराठी अभिजात) ──
   {
     id: "b7",
-    title: "Swami",
+    title: "Swami (Sahitya Akademi Winner)",
     titleMarathi: "स्वामी (अभिजात कादंबरी)",
+    titleHindi: "स्वामी (साहित्य अकादमी विजेता)",
     author: "Ranjit Desai",
     authorMarathi: "रणजित देसाई",
+    authorHindi: "रणजीत देसाई",
     coverImage: "",
     categoryKey: "marathi",
     languageLabel: "मराठी",
+    languageLabelEn: "Marathi",
+    languageLabelHi: "मराठी",
     year: "१९६२",
+    yearEn: "1962",
+    yearHi: "१९६२",
     callNumber: "891.463 DES",
     shelf: "कप्पा क्र. ६ (कादंबरी)",
+    shelfEn: "Shelf 6 (Fiction Wing)",
+    shelfHi: "कक्ष ६ (उपन्यास कक्ष)",
     publisher: "साहित्य अकादमी पुरस्कार",
-    description: "थोरले माधवराव पेशवे आणि रमाबाई यांच्या उदात्त जीवनावरील अजरामर मराठी कादंबरी.",
+    description: "Immortal Sahitya Akademi winning Marathi epic portraying the life and sacrifices of Madhavrao Peshwa.",
     descriptionMarathi: "थोरले माधवराव पेशवे आणि रमाबाई यांच्या उदात्त जीवनावरील अजरामर मराठी कादंबरी.",
+    descriptionHindi: "श्रीमंत माधवराव पेशवा एवं रमाबाई के पावन जीवन पर आधारित कालजयी ऐतिहासिक उपन्यास।",
     isRare: false,
   },
   {
     id: "b8",
-    title: "Yayati",
+    title: "Yayati (Jnanpith Award Classic)",
     titleMarathi: "ययाति (ज्ञानपीठ पुरस्कार)",
+    titleHindi: "ययाति (ज्ञानपीठ पुरस्कार)",
     author: "V. S. Khandekar",
     authorMarathi: "वि. स. खांडेकर",
+    authorHindi: "वि. स. खांडेकर",
     coverImage: "",
     categoryKey: "marathi",
     languageLabel: "मराठी",
+    languageLabelEn: "Marathi",
+    languageLabelHi: "मराठी",
     year: "१९५९",
+    yearEn: "1959",
+    yearHi: "१९५९",
     callNumber: "891.463 KHA",
     shelf: "कप्पा क्र. ६ (ज्ञानपीठ)",
+    shelfEn: "Shelf 6 (Jnanpith Wing)",
+    shelfHi: "कक्ष ६ (ज्ञानपीठ कक्ष)",
     publisher: "ज्ञानपीठ पुरस्कार",
-    description: "मराठीतील पहिल्या ज्ञानपीठ पुरस्कार प्राप्त कादंबरी. भोग आणि त्याग यातील सनातन संघर्षाचे तत्त्वचिंतन.",
+    description: "First Jnanpith Award winner in Marathi, exploring eternal philosophical conflicts between indulgence and renunciation.",
     descriptionMarathi: "मराठीतील पहिल्या ज्ञानपीठ पुरस्कार प्राप्त कादंबरी. भोग आणि त्याग यातील सनातन संघर्षाचे तत्त्वचिंतन.",
+    descriptionHindi: "मराठी का प्रथम ज्ञानपीठ पुरस्कार प्राप्त उपन्यास; वासना एवं त्याग के सनातन द्वन्द्व का तात्विक विवेचन।",
     isRare: false,
   },
   {
     id: "b17",
-    title: "Mrityunjay",
+    title: "Mrityunjay (The Epic Life of Karna)",
     titleMarathi: "मृत्युंजय (अभिजात महाकादंबरी)",
+    titleHindi: "मृत्युंजय (कर्ण चरित)",
     author: "Shivaji Sawant",
     authorMarathi: "शिवाजी सावंत",
+    authorHindi: "शिवाजी सावंत",
     coverImage: "",
     categoryKey: "marathi",
     languageLabel: "मराठी",
+    languageLabelEn: "Marathi",
+    languageLabelHi: "मराठी",
     year: "१९६७",
+    yearEn: "1967",
+    yearHi: "१९६७",
     callNumber: "891.463 SAW",
     shelf: "कप्पा क्र. ६ (कादंबरी)",
+    shelfEn: "Shelf 6 (Fiction Wing)",
+    shelfHi: "कक्ष ६ (उपन्यास कक्ष)",
     publisher: "कॉनटिनेन्टल प्रकाशन",
-    description: "महाभारतातील महानायक कर्ण याच्या अंतर्मनाचा आणि अद्वितीय दातृत्वाचा कालजयी आविष्कार.",
+    description: "A timeless literary masterpiece delving into the profound inner tribulations and unequalled valour of Karna.",
     descriptionMarathi: "महाभारतातील महानायक कर्ण याच्या अंतर्मनाचा आणि अद्वितीय दातृत्वाचा कालजयी आविष्कार.",
+    descriptionHindi: "महाभारत के महानायक कर्ण की अंतर्वेदना, शौर्य और अद्वितीय दानवीरता का कालजयी उपन्यास।",
     isRare: false,
   },
   {
     id: "b18",
     title: "Shyamchi Aai",
     titleMarathi: "श्यामची आई",
+    titleHindi: "श्याम की माँ (श्यामची आई)",
     author: "Sane Guruji",
     authorMarathi: "साने गुरुजी",
+    authorHindi: "साने गुरुजी",
     coverImage: "",
     categoryKey: "marathi",
     languageLabel: "मराठी",
+    languageLabelEn: "Marathi",
+    languageLabelHi: "मराठी",
     year: "१९५३",
+    yearEn: "1953",
+    yearHi: "१९५३",
     callNumber: "891.463 SAN",
     shelf: "कप्पा क्र. ५ (संस्कार साहित्य)",
+    shelfEn: "Shelf 5 (Heritage Values)",
+    shelfHi: "कक्ष ५ (संस्कार साहित्य)",
     publisher: "साधना प्रकाशन",
-    description: "मातृप्रेमाचे अथांग आणि पवित्र महाकाव्य, ज्याने महाराष्ट्राच्या पिढ्यान्पिढ्यांना घडवले.",
+    description: "A reverent, touching epic of maternal love, self-sacrifice, and human dignity cherished across generations.",
     descriptionMarathi: "मातृप्रेमाचे अथांग आणि पवित्र महाकाव्य, ज्याने महाराष्ट्राच्या पिढ्यान्पिढ्यांना घडवले.",
+    descriptionHindi: "मातृप्रेम एवं उदात्त मानवीय संस्कारों का अमर महाकाव्य, जिसने पीढ़ियों को संस्कारित किया।",
     isRare: false,
   },
   {
     id: "b19",
     title: "Batatyachi Chaal",
     titleMarathi: "बटाट्याची चाळ",
+    titleHindi: "बटाट्याची चाल (व्यंग्य कथा)",
     author: "P. L. Deshpande",
     authorMarathi: "पु. ल. देशपांडे",
+    authorHindi: "पु. ल. देशपांडे",
     coverImage: "",
     categoryKey: "marathi",
     languageLabel: "मराठी",
+    languageLabelEn: "Marathi",
+    languageLabelHi: "मराठी",
     year: "१९५८",
+    yearEn: "1958",
+    yearHi: "१९५८",
     callNumber: "891.467 DES",
     shelf: "कप्पा क्र. ७ (विनोद साहित्य)",
+    shelfEn: "Shelf 7 (Humour Literature)",
+    shelfHi: "कक्ष ७ (हास्य साहित्य)",
     publisher: "मौजे प्रकाशन",
-    description: "महाराष्ट्राचे लाडके व्यक्तिमत्त्व पु. ल. देशपांडे यांची मध्यमवर्गीय जीवनावरील विलोभनीय विनोदी कलाकृती.",
+    description: "An iconic, warm-hearted humorous portrayal of middle-class chawl life by Maharashtra's beloved humorist.",
     descriptionMarathi: "महाराष्ट्राचे लाडके व्यक्तिमत्त्व पु. ल. देशपांडे यांची मध्यमवर्गीय जीवनावरील विलोभनीय विनोदी कलाकृती.",
+    descriptionHindi: "महाराष्ट्रीयन मध्यमवर्गीय चाल जीवन पर आधारित पु. ल. देशपांडे की कालजयी हास्य रचना।",
     isRare: false,
   },
 
   // ── 4. HISTORICAL & MODI (ऐतिहासिक व मोडी) ──
   {
     id: "b20",
-    title: "Modi Lipi Prathmik va Pragati Vachanmala",
+    title: "Modi Script Primary & Advanced Reader",
     titleMarathi: "मोडी लिपी प्राथमिक व प्रगत वाचनमाला",
+    titleHindi: "मोडी लिपि प्राथमिक एवं प्रगत वाचनमाला",
     author: "Bharat Itihas Sanshodhak Mandal",
     authorMarathi: "भारत इतिहास संशोधक मंडळ",
+    authorHindi: "भारत इतिहास संशोधक मंडल",
     coverImage: "",
     categoryKey: "heritage",
     languageLabel: "मोडी लिपी संदर्भ",
+    languageLabelEn: "Modi Script Reference",
+    languageLabelHi: "मोडी लिपि संदर्भ",
     year: "१९३८",
+    yearEn: "1938",
+    yearHi: "१९३८",
     callNumber: "491.461 MOD",
     shelf: "कप्पा क्र. ३ (मोडी दालन)",
+    shelfEn: "Shelf 3 (Modi Wing)",
+    shelfHi: "कक्ष ३ (मोडी कक्ष)",
     publisher: "इतिहास संशोधक मंडळ",
-    description: "मराठी राजवटीच्या ऐतिहासिक मोडी कागदपत्रांचे वाचन व लिप्यंतर करण्यासाठी प्रामाणिक संदर्भ ग्रंथ.",
+    description: "Indispensable archival guide and reference for reading and transcribing historical Maratha Modi script documents.",
     descriptionMarathi: "मराठी राजवटीच्या ऐतिहासिक मोडी कागदपत्रांचे वाचन व लिप्यंतर करण्यासाठी प्रामाणिक संदर्भ ग्रंथ.",
+    descriptionHindi: "मराठा साम्राज्य के ऐतिहासिक मोडी दस्तावेजों को पढ़ने व लिप्यंतरण का प्रामाणिक संदर्भ ग्रन्थ।",
     isRare: true,
   },
   {
     id: "b21",
-    title: "Shivkalin Patrasar Sangraha",
+    title: "Shivaji Period Archival Letters & Documents",
     titleMarathi: "शिवकालीन पत्रसार संग्रह (दुर्मीळ खंड)",
+    titleHindi: "शिवकालीन पत्रसार संग्रह (दुर्लभ खंड)",
     author: "Itihas Sanshodhan Mandal",
     authorMarathi: "इतिहास संशोधन मंडळ",
+    authorHindi: "इतिहास संशोधन मंडल",
     coverImage: "",
     categoryKey: "heritage",
     languageLabel: "मराठी (शिवकालीन)",
+    languageLabelEn: "Marathi (Shivaji Era)",
+    languageLabelHi: "मराठी (शिवकालीन)",
     year: "१९३०",
+    yearEn: "1930",
+    yearHi: "१९३०",
     callNumber: "954.791 SHI",
     shelf: "कप्पा क्र. ३ (शिवकालीन)",
+    shelfEn: "Shelf 3 (Chhatrapati Shivaji Wing)",
+    shelfHi: "कक्ष ३ (शिवकालीन कक्ष)",
     publisher: "पुणे विद्यापीठ संदर्भ",
-    description: "छत्रपती शिवाजी महाराजांच्या काळातील अस्सल आज्ञापत्रे, सनदा आणि पत्रव्यवहारांचे दुर्मीळ संकलन.",
+    description: "Rare collection of authentic royal decrees, grants, and administrative letters from the reign of Chhatrapati Shivaji Maharaj.",
     descriptionMarathi: "छत्रपती शिवाजी महाराजांच्या काळातील अस्सल आज्ञापत्रे, सनदा आणि पत्रव्यवहारांचे दुर्मीळ संकलन.",
+    descriptionHindi: "छत्रपति शिवाजी महाराज के समय के प्रामाणिक सनद, आज्ञापत्र एवं पत्राचार का दुर्लभ संग्रह।",
     isRare: true,
   },
   {
     id: "b22",
-    title: "Peshwe Daftar Nivadak Kagadpatre",
+    title: "Selected Papers from the Peshwa Archives",
     titleMarathi: "पेशवे दफ्तर निवडक कागदपत्रे",
+    titleHindi: "पेशवा दफ्तर चयनित दस्तावेज",
     author: "G. S. Sardesai",
     authorMarathi: "रियासतकार गो. स. सरदेसाई",
+    authorHindi: "रियासतकार गो. स. सरदेसाई",
     coverImage: "",
     categoryKey: "heritage",
     languageLabel: "मराठी (ऐतिहासिक)",
+    languageLabelEn: "Marathi (Historical)",
+    languageLabelHi: "मराठी (ऐतिहासिक)",
     year: "१९३३",
+    yearEn: "1933",
+    yearHi: "१९३३",
     callNumber: "954.792 SAR",
     shelf: "कप्पा क्र. ३ (पेशवे दफ्तर)",
+    shelfEn: "Shelf 3 (Peshwa Archives)",
+    shelfHi: "कक्ष ३ (पेशवा दफ्तर)",
     publisher: "बॉम्बे गव्हर्नमेंट प्रेस",
-    description: "मराठा साम्राज्याच्या राजकारणाचे आणि सैनिकी मोहिमांचे मूळ कागदपत्र व विश्लेषण.",
+    description: "Primary state correspondence, diplomatic dispatches, and military campaign analyses of the Maratha Empire.",
     descriptionMarathi: "मराठा साम्राज्याच्या राजकारणाचे आणि सैनिकी मोहिमांचे मूळ कागदपत्र व विश्लेषण.",
+    descriptionHindi: "मराठा साम्राज्य के कूटनीतिक पत्राचार एवं सैन्य अभियानों के मूल अभिलेख व विश्लेषण।",
     isRare: true,
   },
 
   // ── 5. SANSKRIT CLASSICS (संस्कृत काव्य) ──
   {
     id: "b23",
-    title: "Shrimad Bhagavad Gita (Shankar Bhashya)",
+    title: "Shrimad Bhagavad Gita with Shankara Bhashya",
     titleMarathi: "श्रीमद्भगवद्गीता (शांकरभाष्य व मराठी अर्थ)",
+    titleHindi: "श्रीमद्भगवद्गीता (शांकर भाष्य)",
     author: "Adi Shankaracharya",
     authorMarathi: "आद्य शंकराचार्य",
+    authorHindi: "आदि शंकराचार्य",
     coverImage: "",
     categoryKey: "sanskrit",
     languageLabel: "संस्कृत / मराठी",
+    languageLabelEn: "Sanskrit / Marathi",
+    languageLabelHi: "संस्कृत / हिन्दी",
     year: "१९३६",
+    yearEn: "1936",
+    yearHi: "१९३६",
     callNumber: "294.5924 SHA",
     shelf: "कप्पा क्र. २ (वेदान्त)",
+    shelfEn: "Shelf 2 (Vedanta Wing)",
+    shelfHi: "कक्ष २ (वेदान्त कक्ष)",
     publisher: "गीताप्रेस / साहित्य निकेतन",
-    description: "भगवद्गीतेचे आद्य शंकराचार्यकृत अद्वैत शांकरभाष्य व विद्वानांनी केलेले सविस्तर मराठी विवेचन.",
+    description: "Adi Shankaracharya's seminal Advaita commentary on the Gita alongside scholarly philosophical explanations.",
     descriptionMarathi: "भगवद्गीतेचे आद्य शंकराचार्यकृत अद्वैत शांकरभाष्य व विद्वानांनी केलेले सविस्तर मराठी विवेचन.",
+    descriptionHindi: "आदि शंकराचार्य विरचित अद्वैत शांकर भाष्य एवं विद्वानों द्वारा विस्तृत दार्शनिक विवेचन।",
     isRare: true,
   },
   {
     id: "b24",
-    title: "Meghadutam",
+    title: "Meghadutam (The Cloud Messenger)",
     titleMarathi: "मेघदूतम् (समश्लोकी मराठी)",
+    titleHindi: "मेघदूतम् (कालिदास)",
     author: "Mahakavi Kalidasa",
     authorMarathi: "महाकवि कालिदास",
+    authorHindi: "महाकवि कालिदास",
     coverImage: "",
     categoryKey: "sanskrit",
     languageLabel: "संस्कृत / मराठी",
+    languageLabelEn: "Sanskrit / Marathi",
+    languageLabelHi: "संस्कृत / हिन्दी",
     year: "१९२८",
+    yearEn: "1928",
+    yearHi: "१९२८",
     callNumber: "891.21 KAL",
     shelf: "कप्पा क्र. २ (संस्कृत)",
+    shelfEn: "Shelf 2 (Sanskrit Classics)",
+    shelfHi: "कक्ष २ (संस्कृत काव्य)",
     publisher: "निर्णयसागर प्रेस",
-    description: "कालिदासांचे अजरामर खंडकाव्य, मंदाक्रांता वृत्तातील मूळ श्लोक व भावस्पर्शी मराठी समश्लोकी भाषांतर.",
+    description: "Kalidasa's lyrical Sanskrit masterpiece in Mandakranta metre with elegant metric translation.",
     descriptionMarathi: "कालिदासांचे अजरामर खंडकाव्य, मूळ श्लोक व भावस्पर्शी मराठी समश्लोकी भाषांतर.",
+    descriptionHindi: "महाकवि कालिदास का अमर काव्य, मंदाक्रांता छंद के मूल श्लोक एवं काव्यानुवाद सहित।",
     isRare: true,
   },
   {
     id: "b25",
-    title: "Dashopanishad Sangraha",
+    title: "Dashopanishad Samgraha (Ten Principal Upanishads)",
     titleMarathi: "दशोपनिषद् संग्रह",
+    titleHindi: "दशोपनिषद् संग्रह",
     author: "Vaidik Sanshodhan Mandal",
     authorMarathi: "वैदिक संशोधन मंडळ",
+    authorHindi: "वैदिक संशोधन मंडल",
     coverImage: "",
     categoryKey: "sanskrit",
     languageLabel: "संस्कृत",
+    languageLabelEn: "Sanskrit",
+    languageLabelHi: "संस्कृत",
     year: "१९४०",
+    yearEn: "1940",
+    yearHi: "१९४०",
     callNumber: "294.5921 UPA",
     shelf: "कप्पा क्र. २ (उपनिषदे)",
+    shelfEn: "Shelf 2 (Upanishad Wing)",
+    shelfHi: "कक्ष २ (उपनिषद कक्ष)",
     publisher: "पुणे वैदिक संशोधन",
-    description: "ईश, केन, कठ, मुंडक, मांडूक्य आदी १० प्रमुख उपनिषदांचे मूळ श्लोक व अन्वय.",
+    description: "Original Sanskrit verses, word-by-word syntax, and Vedic commentary for the ten core Upanishads.",
     descriptionMarathi: "ईश, केन, कठ, मुंडक, मांडूक्य आदी १० प्रमुख उपनिषदांचे मूळ श्लोक व अन्वय.",
+    descriptionHindi: "ईश, केन, कठ, मुंडक आदि १० प्रमुख उपनिषदों के मूल श्लोक, अन्वय एवं भाष्य।",
     isRare: true,
   },
   {
     id: "b26",
     title: "Chanakya Niti Darpana",
     titleMarathi: "चाणक्य नीतिदर्पण",
+    titleHindi: "चाणक्य नीति दर्पण",
     author: "Acharya Chanakya",
     authorMarathi: "आचार्य चाणक्य",
+    authorHindi: "आचार्य चाणक्य",
     coverImage: "",
     categoryKey: "sanskrit",
     languageLabel: "संस्कृत / मराठी",
+    languageLabelEn: "Sanskrit / Marathi",
+    languageLabelHi: "संस्कृत / हिन्दी",
     year: "१९३५",
+    yearEn: "1935",
+    yearHi: "१९३५",
     callNumber: "181.4 CHA",
     shelf: "कप्पा क्र. २ (नीतिशास्त्र)",
+    shelfEn: "Shelf 2 (Ethics & Governance)",
+    shelfHi: "कक्ष २ (नीतिशास्त्र)",
     publisher: "प्राच्य विद्या मंदिर",
-    description: "राजनीती, समाजशास्त्र आणि व्यवहाराची सनातन चाणक्य सूत्रे मूळ संस्कृत व मराठी अनुवादात.",
+    description: "Timeless Chanakya maxims on statecraft, diplomacy, and worldly wisdom with complete translations.",
     descriptionMarathi: "राजनीती, समाजशास्त्र आणि व्यवहाराची सनातन चाणक्य सूत्रे मूळ संस्कृत व मराठी अनुवादात.",
+    descriptionHindi: "कूटनीति, समाजशास्त्र एवं नीतिशास्त्र के सनातन चाणक्य सूत्र, मूल संस्कृत एवं अनुवाद सहित।",
     isRare: true,
   },
 
   // ── 6. HINDI CLASSICS (हिन्दी साहित्य) ──
   {
     id: "b27",
-    title: "Godan",
+    title: "Godan (The Gift of a Cow)",
     titleMarathi: "गोदान (अमर उपन्यास)",
+    titleHindi: "गोदान (अमर उपन्यास)",
     author: "Munshi Premchand",
     authorMarathi: "मुंशी प्रेमचंद",
+    authorHindi: "मुंशी प्रेमचंद",
     coverImage: "",
     categoryKey: "hindi",
     languageLabel: "हिन्दी",
+    languageLabelEn: "Hindi",
+    languageLabelHi: "हिन्दी",
     year: "१९३६",
+    yearEn: "1936",
+    yearHi: "१९३६",
     callNumber: "891.433 PRE",
     shelf: "कप्पा क्र. ९ (हिन्दी)",
+    shelfEn: "Shelf 9 (Hindi Literature)",
+    shelfHi: "कक्ष ९ (हिन्दी साहित्य)",
     publisher: "सरस्वती प्रेस",
-    description: "भारतीय ग्रामीण जीवन, शेतकरी संघर्ष आणि मानवी मूल्यांचा महाकाव्यात्मक हिन्दी उपन्यास.",
+    description: "Premchand's monumental epic depicting the socio-economic struggles of the Indian rural peasantry.",
     descriptionMarathi: "भारतीय ग्रामीण जीवन, शेतकरी संघर्ष आणि मानवी मूल्यांचा महाकाव्यात्मक हिन्दी उपन्यास.",
+    descriptionHindi: "भारतीय ग्रामीण जीवन, कृषक संघर्ष एवं मानवीय संवेदनाओं का अमर महाकाव्यात्मक उपन्यास।",
     isRare: false,
   },
   {
     id: "b28",
     title: "Kamayani",
     titleMarathi: "कामायनी (छायावादी महाकाव्य)",
+    titleHindi: "कामायनी (महाकाव्य)",
     author: "Jaishankar Prasad",
     authorMarathi: "जयशंकर प्रसाद",
+    authorHindi: "जयशंकर प्रसाद",
     coverImage: "",
     categoryKey: "hindi",
     languageLabel: "हिन्दी",
+    languageLabelEn: "Hindi",
+    languageLabelHi: "हिन्दी",
     year: "१९३६",
+    yearEn: "1936",
+    yearHi: "१९३६",
     callNumber: "891.431 PRA",
     shelf: "कप्पा क्र. ९ (हिन्दी काव्य)",
+    shelfEn: "Shelf 9 (Hindi Poetry)",
+    shelfHi: "कक्ष ९ (हिन्दी काव्य)",
     publisher: "भारती भंडार",
-    description: "मानवी मन, श्रद्धा आणि बुद्धी यांच्या समन्वयाचे हिन्दी साहित्यातील सर्वोच्च महाकाव्य.",
+    description: "Supreme masterpiece of Chhayavadi Hindi poetry exploring the harmony of human intellect, emotion, and action.",
     descriptionMarathi: "मानवी मन, श्रद्धा आणि बुद्धी यांच्या समन्वयाचे हिन्दी साहित्यातील सर्वोच्च महाकाव्य.",
+    descriptionHindi: "मानव मन, श्रद्धा और बुद्धि के समन्वय का छायावादी हिन्दी साहित्य का सर्वश्रेष्ठ महाकाव्य।",
     isRare: false,
   },
   {
     id: "b29",
-    title: "Rashmirathi",
+    title: "Rashmirathi (Karna's Glory)",
     titleMarathi: "रश्मिरथी (कर्ण चरित)",
+    titleHindi: "रश्मिरथी (दिनकर)",
     author: "Ramdhari Singh 'Dinkar'",
     authorMarathi: "रामधारी सिंह 'दिनकर'",
+    authorHindi: "रामधारी सिंह 'दिनकर'",
     coverImage: "",
     categoryKey: "hindi",
     languageLabel: "हिन्दी",
+    languageLabelEn: "Hindi",
+    languageLabelHi: "हिन्दी",
     year: "१९५२",
+    yearEn: "1952",
+    yearHi: "१९५२",
     callNumber: "891.431 DIN",
     shelf: "कप्पा क्र. ९ (हिन्दी)",
+    shelfEn: "Shelf 9 (Hindi Wing)",
+    shelfHi: "कक्ष ९ (हिन्दी कक्ष)",
     publisher: "उदयचल प्रकाशन",
-    description: "महाभारत के महादानी कर्ण के शौर्य, स्वाभिमान और त्याग पर आधारित ओजस्वी खण्डकाव्य.",
+    description: "Stirring, heroic Hindi narrative poem celebrating the indomitable courage, dignity, and generosity of Karna.",
     descriptionMarathi: "महाभारतातील कर्ण याच्या शौर्य आणि त्यागावर आधारित ओजस्वी खंडकाव्य.",
+    descriptionHindi: "महाभारत के दानवीर कर्ण के शौर्य, स्वाभिमान और त्याग पर आधारित ओजस्वी खण्डकाव्य।",
     isRare: false,
   },
   {
     id: "b30",
     title: "Madhushala",
     titleMarathi: "मधुशाला",
+    titleHindi: "मधुशाला (बच्चन)",
     author: "Harivansh Rai Bachchan",
     authorMarathi: "हरिवंशराय बच्चन",
+    authorHindi: "हरिवंशराय बच्चन",
     coverImage: "",
     categoryKey: "hindi",
     languageLabel: "हिन्दी",
+    languageLabelEn: "Hindi",
+    languageLabelHi: "हिन्दी",
     year: "१९३५",
+    yearEn: "1935",
+    yearHi: "१९३५",
     callNumber: "891.431 BAC",
     shelf: "कप्पा क्र. ९ (हिन्दी)",
+    shelfEn: "Shelf 9 (Hindi Wing)",
+    shelfHi: "कक्ष ९ (हिन्दी कक्ष)",
     publisher: "राजपाल एंड संस",
-    description: "जीवन, प्रेम आणि मृत्यूचे गूढ तत्त्वज्ञान मांडणाऱ्या रुबाईयांचा अजरामर संग्रह.",
+    description: "Immortal poetic quatrains capturing profound life philosophy through the allegorical tavern.",
     descriptionMarathi: "जीवन, प्रेम आणि मृत्यूचे गूढ तत्त्वज्ञान मांडणाऱ्या रुबायांचा अजरामर संग्रह.",
+    descriptionHindi: "जीवन, प्रेम और मृत्यु के गूढ़ दर्शन को अभिव्यक्त करने वाली रुबाइयों का कालजयी संग्रह।",
     isRare: false,
   },
   {
     id: "b31",
-    title: "Rag Darbari",
+    title: "Raag Darbari",
     titleMarathi: "राग दरबारी",
+    titleHindi: "राग दरबारी (उपन्यास)",
     author: "Shrilal Shukla",
     authorMarathi: "श्रीलाल शुक्ल",
+    authorHindi: "श्रीलाल शुक्ल",
     coverImage: "",
     categoryKey: "hindi",
     languageLabel: "हिन्दी",
+    languageLabelEn: "Hindi",
+    languageLabelHi: "हिन्दी",
     year: "१९६८",
+    yearEn: "1968",
+    yearHi: "१९६८",
     callNumber: "891.433 SHU",
     shelf: "कप्पा क्र. ९ (हिन्दी)",
+    shelfEn: "Shelf 9 (Hindi Wing)",
+    shelfHi: "कक्ष ९ (हिन्दी कक्ष)",
     publisher: "साहित्य अकादमी",
-    description: "स्वातंत्र्योत्तर भारतातील ग्रामीण समाज, व्यवस्था आणि राजकीय विद्रूपतेवर अचूक उपरोधिक भाष्य.",
-    descriptionMarathi: "स्वातंत्र्योत्तर व्यवस्थेवर अचूक उपरोधिक भाष्य करणारा साहित्य अकादमी विजेता उपन्यास.",
+    description: "Sahitya Akademi winning biting satire examining political corruption and post-independence Indian rural society.",
+    descriptionMarathi: "स्वातंत्र्योत्तर भारतातील ग्रामीण समाज, व्यवस्था आणि राजकीय विद्रूपतेवर अचूक उपरोधिक भाष्य.",
+    descriptionHindi: "स्वातंत्र्योत्तर भारतीय ग्रामीण व्यवस्था व राजनीति पर तीखा व्यंग्य करने वाला साहित्य अकादमी विजेता उपन्यास।",
     isRare: false,
   },
 ];
@@ -547,14 +835,21 @@ export function FeaturedBooksSection() {
                 id: b.id || `book-${idx}`,
                 title: b.title,
                 titleMarathi: b.title_marathi || b.titleMarathi || b.title,
+                titleHindi: b.title_hindi || b.titleHindi,
                 author: b.author,
                 authorMarathi: b.author_marathi || b.authorMarathi || b.author,
+                authorHindi: b.author_hindi || b.authorHindi,
                 coverImage: b.cover_url || b.coverImage || "",
                 categoryKey: catKey,
                 languageLabel: b.language === "hi" ? "हिन्दी" : b.language === "sa" ? "संस्कृत" : "मराठी",
+                languageLabelEn: b.language === "hi" ? "Hindi" : b.language === "sa" ? "Sanskrit" : "Marathi",
+                languageLabelHi: b.language === "hi" ? "हिन्दी" : b.language === "sa" ? "संस्कृत" : "मराठी",
                 year: b.publication_year ? String(b.publication_year) : b.year ? String(b.year) : "—",
+                yearEn: b.publication_year ? String(b.publication_year) : b.year ? String(b.year) : "—",
                 callNumber: b.isbn || b.callNumber || "891.463",
                 shelf: b.shelf_number ? `कप्पा क्र. ${b.shelf_number}` : b.shelf || "मुख्य वाचन कक्ष",
+                shelfEn: b.shelf_number ? `Shelf ${b.shelf_number}` : "Main Stacks",
+                shelfHi: b.shelf_number ? `कक्ष क्र. ${b.shelf_number}` : "मुख्य वाचन कक्ष",
                 publisher: b.publisher || b.category || "साहित्य निकेतन ग्रंथालय",
                 description: b.description || (b.title + " by " + b.author),
                 descriptionMarathi: b.descriptionMarathi || b.description || `${b.title} — लेखक: ${b.author} (${b.category || "ग्रंथालय संग्रह"})`,
@@ -740,19 +1035,19 @@ export function FeaturedBooksSection() {
 
                     <div className="absolute top-4 left-4 right-4 flex items-center justify-between pointer-events-none">
                       <span className="font-marathi-body text-[11px] font-semibold text-zinc-100 bg-zinc-900/80 backdrop-blur-xs px-3 py-1 rounded-full border border-white/10">
-                        {activeManuscript.shelf}
+                        {getBookShelf(activeManuscript, language)}
                       </span>
                       <span className="font-marathi-heading text-xs font-semibold text-zinc-100 bg-zinc-900/80 backdrop-blur-xs px-3 py-1 rounded-full border border-white/10">
-                        {activeManuscript.year} {language === "en" ? "(Shaka Era)" : language === "hi" ? "(शक संवत)" : "(शके कालखंड)"}
+                        {getBookYear(activeManuscript, language)} {language === "en" ? "(Shaka Era)" : language === "hi" ? "(शक संवत)" : "(शके कालखंड)"}
                       </span>
                     </div>
 
                     <div className="absolute bottom-4 left-4 right-4 text-white">
                       <p className="font-marathi-heading text-xs sm:text-sm text-zinc-300 font-semibold tracking-wider">
-                        {activeManuscript.authorMarathi}
+                        {getBookAuthor(activeManuscript, language)}
                       </p>
                       <h3 className="font-marathi-heading text-xl sm:text-2xl lg:text-3xl font-extrabold leading-tight text-white mt-0.5">
-                        {activeManuscript.titleMarathi}
+                        {getBookTitle(activeManuscript, language)}
                       </h3>
                     </div>
                   </div>
@@ -761,16 +1056,32 @@ export function FeaturedBooksSection() {
                   <div className="mt-4 p-5 rounded-2xl bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 space-y-2.5">
                     <blockquote className="font-marathi-heading text-sm sm:text-base font-semibold italic text-zinc-900 dark:text-zinc-100 border-l-2 border-zinc-400 dark:border-zinc-500 pl-3.5">
                       {activeManuscript.id === "b4"
-                        ? "« ब्रह्मानंद तोचि निजानंदू । जो प्रकटला विवेकसिंधू ॥ — आद्य मराठी तत्त्वज्ञान ग्रंथ (शके ११८८, अंबाजोगाई प्रत)"
+                        ? language === "en"
+                          ? "“The earliest Marathi philosophical treatise on Advaita Vedanta (Shaka 1188, Ambajogai manuscript)”"
+                          : language === "hi"
+                          ? "« ब्रह्मानंद तोचि निजानंदू । जो प्रकटला विवेकसिंधू ॥ — आद्य मराठी दर्शन ग्रन्थ (शक ११८८, अंबाजोगाई पाण्डुलिपि)"
+                          : "« ब्रह्मानंद तोचि निजानंदू । जो प्रकटला विवेकसिंधू ॥ — आद्य मराठी तत्त्वज्ञान ग्रंथ (शके ११८८, अंबाजोगाई प्रत)"
                         : activeManuscript.id === "b5"
-                        ? "« सव्वा लक्ष पदांची निर्मिती आणि ४० फुटी कापडी वस्त्र-पासोडीवरील अध्यात्मिक निरूपण » — संत दासोपंत (अंबाजोगाई)"
+                        ? language === "en"
+                          ? "“Spiritual exposition and archival cloth manuscript created at Ambajogai” — Sant Dasopant"
+                          : language === "hi"
+                          ? "« सव्वा लक्ष पदों की रचना एवं ४० फुट वस्त्र पाण्डुलिपि पर आध्यात्मिक निरूपण » — सन्त दासोपंत"
+                          : "« सव्वा लक्ष पदांची निर्मिती आणि ४० फुटी कापडी वस्त्र-पासोडीवरील अध्यात्मिक निरूपण » — संत दासोपंत (अंबाजोगाई)"
                         : activeManuscript.id === "b2"
-                        ? "« भारताच्या पहिल्या स्वातंत्र्यसमराचा जप्त झालेला पहिला अस्सल इतिहास » — स्वा. वि. दा. सावरकर"
+                        ? language === "en"
+                          ? "“The confiscated first authentic chronicle of India's 1857 War of Independence” — Veer Savarkar"
+                          : language === "hi"
+                          ? "« भारत के प्रथम स्वाधीनता संग्राम का प्रामाणिक व प्रतिबंधित इतिहास » — स्वा. वि. दा. सावरकर"
+                          : "« भारताच्या पहिल्या स्वातंत्र्यसमराचा जप्त झालेला पहिला अस्सल इतिहास » — स्वा. वि. दा. सावरकर"
+                        : language === "en"
+                        ? "“A living historical heritage document of classical knowledge culture”"
+                        : language === "hi"
+                        ? "« अभिजात ज्ञान संस्कृति का ऐतिहासिक दस्तावेज »"
                         : "« अभिजात ज्ञानसंस्कृतीचा जिताजागता ऐतिहासिक दस्तऐवज »"}
                     </blockquote>
 
                     <p className="font-marathi-body text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
-                      {activeManuscript.descriptionMarathi}
+                      {getBookDescription(activeManuscript, language)}
                     </p>
                   </div>
                 </div>
@@ -822,19 +1133,19 @@ export function FeaturedBooksSection() {
                         >
                           <div className="flex items-center justify-between text-[11px] text-zinc-500 dark:text-zinc-400 font-mono mb-0.5">
                             <span>{language === "en" ? `Record 0${idx + 1}` : language === "hi" ? `प्रविष्टि ०${idx + 1}` : `नोंद ०${idx + 1}`}</span>
-                            <span className="font-semibold text-zinc-700 dark:text-zinc-300">{item.year}</span>
+                            <span className="font-semibold text-zinc-700 dark:text-zinc-300">{getBookYear(item, language)}</span>
                           </div>
 
                           <h5 className="font-marathi-heading text-sm sm:text-base font-bold text-zinc-900 dark:text-zinc-100 leading-tight">
-                            {language === "en" ? item.title : item.titleMarathi}
+                            {getBookTitle(item, language)}
                           </h5>
 
                           <p className="font-marathi-body text-xs text-zinc-600 dark:text-zinc-400 font-medium mt-0.5">
-                            {language === "en" ? item.author : item.authorMarathi}
+                            {getBookAuthor(item, language)}
                           </p>
 
                           <p className="font-marathi-body text-[11px] sm:text-xs text-zinc-500 dark:text-zinc-400 line-clamp-1 mt-1">
-                            {language === "en" ? item.description : item.descriptionMarathi}
+                            {getBookDescription(item, language)}
                           </p>
                         </div>
                       );
@@ -871,8 +1182,8 @@ export function FeaturedBooksSection() {
                   <div className="flex items-start gap-4 sm:gap-6 flex-1 min-w-0">
                     <div className="shrink-0 flex items-center justify-center">
                       <Framer3DBook
-                        title={language === "en" ? book.title : book.titleMarathi}
-                        author={language === "en" ? book.author : book.authorMarathi}
+                        title={getBookTitle(book, language)}
+                        author={getBookAuthor(book, language)}
                         coverImage={book.coverImage}
                         category={book.categoryKey}
                         width={105}
@@ -887,28 +1198,28 @@ export function FeaturedBooksSection() {
                           size="sm"
                           className="bg-zinc-100 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200 font-semibold text-[10.5px] border border-zinc-200 dark:border-zinc-700"
                         >
-                          {book.languageLabel}
+                          {getBookLanguageLabel(book, language)}
                         </Chip>
                         <span className="text-xs text-zinc-600 dark:text-zinc-400 font-medium bg-zinc-100 dark:bg-zinc-800 px-2 py-0.5 rounded border border-zinc-200 dark:border-zinc-700">
-                          {book.shelf}
+                          {getBookShelf(book, language)}
                         </span>
                         <span className="text-[10px] text-zinc-400 font-mono">
-                          {book.year}
+                          {getBookYear(book, language)}
                         </span>
                       </div>
 
                       <h3 className="font-marathi-heading text-lg sm:text-xl font-bold text-zinc-900 dark:text-zinc-100 leading-snug group-hover:text-zinc-600 dark:group-hover:text-zinc-300 transition-colors">
                         <Link href={`/catalogue/${book.id}`}>
-                          {language === "en" ? book.title : book.titleMarathi}
+                          {getBookTitle(book, language)}
                         </Link>
                       </h3>
 
                       <p className="text-xs sm:text-sm font-semibold text-zinc-600 dark:text-zinc-400 font-marathi-body">
-                        {language === "en" ? book.author : book.authorMarathi}
+                        {getBookAuthor(book, language)}
                       </p>
 
                       <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 line-clamp-2 leading-relaxed font-marathi-body font-normal">
-                        {language === "en" ? book.description : book.descriptionMarathi}
+                        {getBookDescription(book, language)}
                       </p>
                     </div>
                   </div>
@@ -991,8 +1302,8 @@ export function FeaturedBooksSection() {
                       {/* 3D Interactive Book Cover Area */}
                       <div className="flex justify-center mb-4 py-2">
                         <Framer3DBook
-                          title={language === "en" ? book.title : book.titleMarathi}
-                          author={language === "en" ? book.author : book.authorMarathi}
+                          title={getBookTitle(book, language)}
+                          author={getBookAuthor(book, language)}
                           coverImage={book.coverImage}
                           category={book.categoryKey}
                           width={180}
@@ -1004,9 +1315,9 @@ export function FeaturedBooksSection() {
                       <div className="space-y-2">
                         <div className="flex items-center justify-between text-xs text-zinc-500 dark:text-zinc-400 font-mono font-semibold">
                           <span className="bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 px-2 py-0.5 rounded border border-zinc-200 dark:border-zinc-700">
-                            {book.shelf}
+                            {getBookShelf(book, language)}
                           </span>
-                          <span>{book.year}</span>
+                          <span>{getBookYear(book, language)}</span>
                         </div>
 
                         <div className="flex items-center gap-2 pt-1">
@@ -1015,23 +1326,23 @@ export function FeaturedBooksSection() {
                             size="sm"
                             className="bg-zinc-100 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200 font-semibold text-[11px] border border-zinc-200 dark:border-zinc-700"
                           >
-                            {book.languageLabel}
+                            {getBookLanguageLabel(book, language)}
                           </Chip>
-                          <span className="text-xs text-zinc-600 dark:text-zinc-400 font-medium">
-                            {book.shelf}
+                          <span className="text-xs text-zinc-500 dark:text-zinc-400 font-mono">
+                            {book.callNumber}
                           </span>
                         </div>
 
                         <CardTitle className="font-marathi-heading text-lg sm:text-xl font-bold text-zinc-900 dark:text-zinc-100 leading-snug group-hover:text-zinc-600 dark:group-hover:text-zinc-300 transition-colors pt-1">
-                          {language === "en" ? book.title : book.titleMarathi}
+                          {getBookTitle(book, language)}
                         </CardTitle>
 
                         <p className="text-xs sm:text-sm font-semibold text-zinc-600 dark:text-zinc-400 font-marathi-body">
-                          {language === "en" ? book.author : book.authorMarathi}
+                          {getBookAuthor(book, language)}
                         </p>
 
                         <CardDescription className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 line-clamp-2 leading-relaxed font-marathi-body font-normal pt-1">
-                          {language === "en" ? book.description : book.descriptionMarathi}
+                          {getBookDescription(book, language)}
                         </CardDescription>
                       </div>
                     </div>
