@@ -14,7 +14,7 @@ import { MobileBottomNav } from "@/components/layout/mobile-bottom-nav";
 import "./globals.css";
 
 const geist = Geist({
-  subsets: ["latin"],
+  subsets: ["latin", "latin-ext"],
   variable: "--font-geist-sans",
   display: "swap",
   preload: true,
@@ -27,15 +27,15 @@ const geist = Geist({
  * - Geist: Ultra-clean English & UI base
  */
 const baloo2 = Baloo_2({
-  weight: ["600", "700"],
-  subsets: ["devanagari", "latin"],
+  weight: ["500", "600", "700", "800"],
+  subsets: ["devanagari", "latin", "latin-ext"],
   variable: "--font-baloo",
   display: "swap",
 });
 
 const notoSansDevanagari = Noto_Sans_Devanagari({
   weight: ["400", "500", "600", "700", "800"],
-  subsets: ["devanagari"],
+  subsets: ["devanagari", "latin", "latin-ext"],
   variable: "--font-noto-devanagari",
   display: "swap",
   preload: true,

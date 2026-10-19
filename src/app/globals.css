@@ -58,7 +58,7 @@
   --font-geist-sans: var(--font-geist-sans);
   --font-geist: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, sans-serif;
   --font-sans: var(--font-noto-devanagari), var(--font-geist-sans), -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-serif: var(--font-baloo), var(--font-noto-devanagari), sans-serif;
+  --font-serif: var(--font-noto-devanagari), var(--font-geist-sans), -apple-system, BlinkMacSystemFont, sans-serif;
   --font-heading: var(--font-baloo), var(--font-noto-devanagari), sans-serif;
   --font-marathi: var(--font-noto-devanagari), var(--font-geist-sans), sans-serif;
   --font-marathi-heading: var(--font-baloo), var(--font-noto-devanagari), sans-serif;
@@ -189,9 +189,10 @@ body {
     border-color: var(--border);
   }
 
+  /* Universal Default Font: Noto Sans Devanagari first, then Geist Sans */
   html {
     font-size: 16px;
-    font-family: var(--font-geist-sans), var(--font-noto-devanagari), var(--font-anek), -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: var(--font-noto-devanagari), var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     scroll-behavior: auto;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -205,43 +206,51 @@ body {
     line-height: 1.8;
     letter-spacing: 0.005em;
     font-weight: 500;
-    font-family: var(--font-geist-sans), var(--font-noto-devanagari), var(--font-anek), -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: var(--font-noto-devanagari), var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   }
 
   /* English font across whole website */
   html[lang="en"], :lang(en), [lang="en"] {
-    font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: var(--font-geist-sans), var(--font-noto-devanagari), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   }
 
   html[lang="en"] body, :lang(en) body, [lang="en"] body {
-    font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: var(--font-geist-sans), var(--font-noto-devanagari), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     font-size: 1rem;
     line-height: 1.72;
   }
 
   html[lang="en"] h1, html[lang="en"] h2, html[lang="en"] h3, html[lang="en"] h4, html[lang="en"] h5, html[lang="en"] h6,
   :lang(en) h1, :lang(en) h2, :lang(en) h3, :lang(en) h4, :lang(en) h5, :lang(en) h6 {
-    font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     letter-spacing: -0.02em;
   }
 
-  /* Language-based Marathi font defaults — Crisp, spacious, highly legible */
-  html[lang="mr"], :lang(mr) {
-    font-family: var(--font-noto-devanagari), var(--font-anek), -apple-system, BlinkMacSystemFont, sans-serif;
+  /* Language-based Marathi & Hindi font defaults — Crisp, spacious, highly legible */
+  html[lang="mr"], :lang(mr),
+  html[lang="hi"], :lang(hi),
+  [lang="mr"], [lang="hi"] {
+    font-family: var(--font-noto-devanagari), var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   }
 
-  html[lang="mr"] body, :lang(mr) body {
-    font-family: var(--font-noto-devanagari), var(--font-anek), -apple-system, BlinkMacSystemFont, sans-serif;
+  html[lang="mr"] body, :lang(mr) body,
+  html[lang="hi"] body, :lang(hi) body {
+    font-family: var(--font-noto-devanagari), var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     line-height: 1.84;
     letter-spacing: 0.01em;
-    font-size: 1.125rem; /* 18px base for Marathi for optimal reading comfort */
+    font-size: 1.125rem;
     font-weight: 500;
     color: #111827;
   }
 
+  /* Ensure buttons and form controls inherit consistent typography */
+  button, input, select, textarea, optgroup {
+    font-family: inherit;
+  }
+
   /* Headings — Crisp, Elegant Baloo 2 & Noto Sans Devanagari */
   h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-baloo), var(--font-noto-devanagari), var(--font-anek), sans-serif;
+    font-family: var(--font-baloo), var(--font-noto-devanagari), sans-serif;
     font-weight: 700;
     line-height: 1.34;
     letter-spacing: -0.01em;

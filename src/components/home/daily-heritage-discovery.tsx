@@ -152,15 +152,15 @@ export function DailyHeritageDiscovery() {
                   </p>
 
                   {/* Letter / Manuscript Excerpt Quote */}
-                  <div className="p-3.5 sm:p-4 rounded-xl bg-[#FAF8F5] dark:bg-[#160E11] border-l-3 border-[#800020] dark:border-[#E5B869] text-xs sm:text-sm font-serif italic text-stone-800 dark:text-stone-200 leading-relaxed">
+                  <div className="p-3.5 sm:p-4 rounded-xl bg-[#FAF8F5] dark:bg-[#160E11] border-l-3 border-[#800020] dark:border-[#E5B869] text-xs sm:text-sm font-marathi-body italic text-stone-800 dark:text-stone-200 leading-relaxed">
                     {item.excerptMarathi}
                   </div>
 
                   {/* Action Buttons */}
-                  <div className="pt-2 flex flex-wrap items-center gap-3">
+                  <div className="pt-2 flex flex-wrap items-center gap-3 font-marathi-body">
                     <button
                       onClick={() => setIsUnfolded(!isUnfolded)}
-                      className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#800020] hover:bg-[#66001A] text-white text-xs font-bold transition-all shadow-2xs cursor-pointer"
+                      className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#800020] hover:bg-[#66001A] text-white text-xs font-bold transition-all shadow-2xs cursor-pointer font-marathi-body"
                     >
                       <Scroll className="w-3.5 h-3.5" />
                       <span>{isUnfolded ? "अभिलेख घडी घाला" : "📜 संपूर्ण दस्तऐवज उलगडा"}</span>
@@ -168,7 +168,7 @@ export function DailyHeritageDiscovery() {
 
                     <Link
                       href={item.actionUrl}
-                      className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-white dark:bg-[#1E1418] hover:bg-stone-50 dark:hover:bg-[#25181E] text-stone-800 dark:text-stone-200 text-xs font-bold border border-[#E5DDD0] dark:border-[#332228] transition-colors"
+                      className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-white dark:bg-[#1E1418] hover:bg-stone-50 dark:hover:bg-[#25181E] text-stone-800 dark:text-stone-200 text-xs font-bold border border-[#E5DDD0] dark:border-[#332228] transition-colors font-marathi-body"
                     >
                       <span>{item.callToActionTextMarathi}</span>
                     </Link>
@@ -187,7 +187,7 @@ export function DailyHeritageDiscovery() {
                     transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
                     className="mt-6 pt-6 border-t border-dashed border-[#E5DDD0] dark:border-[#332228] overflow-hidden origin-top"
                   >
-                    <div className="relative p-6 sm:p-8 rounded-2xl bg-[#FAF8F5] dark:bg-[#160E11] border border-[#E5DDD0] dark:border-[#332228] font-serif">
+                    <div className="relative p-6 sm:p-8 rounded-2xl bg-[#FAF8F5] dark:bg-[#160E11] border border-[#E5DDD0] dark:border-[#332228] font-marathi-body">
                       
                       {/* Top Paper Header Stamp */}
                       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 mb-5 border-b border-[#E5DDD0] dark:border-[#332228] text-xs text-stone-500 dark:text-stone-400">

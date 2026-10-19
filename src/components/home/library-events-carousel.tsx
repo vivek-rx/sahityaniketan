@@ -126,7 +126,7 @@ export function LibraryEventsCarousel() {
               <div className="pt-2 flex flex-wrap items-center gap-3">
                 <Link
                   href={`/gallery?event=${currentEvent.id}`}
-                  className="inline-flex items-center gap-2 rounded-xl bg-[#800020] hover:bg-[#66001A] text-white px-5 sm:px-6 py-2.5 sm:py-3 text-xs sm:text-sm font-bold shadow-sm hover:shadow-md transition-all cursor-pointer"
+                  className="inline-flex items-center gap-2 rounded-xl bg-[#800020] hover:bg-[#66001A] text-white px-5 sm:px-6 py-2.5 sm:py-3 text-xs sm:text-sm font-bold shadow-sm hover:shadow-md transition-all cursor-pointer font-marathi-body"
                 >
                   <Camera className="h-4 w-4 text-[#E5B869]" />
                   <span>
@@ -140,7 +140,7 @@ export function LibraryEventsCarousel() {
 
                 <Link
                   href="/gallery"
-                  className="inline-flex items-center gap-1.5 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white/80 dark:bg-zinc-900/80 hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-800 dark:text-zinc-200 px-4 py-2.5 sm:py-3 text-xs sm:text-sm font-bold transition-all shadow-2xs"
+                  className="inline-flex items-center gap-1.5 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white/80 dark:bg-zinc-900/80 hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-800 dark:text-zinc-200 px-4 py-2.5 sm:py-3 text-xs sm:text-sm font-bold transition-all shadow-2xs font-marathi-body"
                 >
                   <span>
                     {language === "en" ? "All Event Galleries" : language === "hi" ? "सभी कार्यक्रम गैलरी" : "सर्व कार्यक्रम गॅलरी"}

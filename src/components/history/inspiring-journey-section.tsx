@@ -48,7 +48,7 @@ export function InspiringJourneySection() {
           <p className="text-xs uppercase tracking-widest font-bold text-[#800020] dark:text-amber-400 mb-1">
             {isEn ? "The Founding Motto (1945)" : isHi ? "संस्था का मूल ध्येय वाक्य (१९४५)" : "संस्थेचे मूळ ब्रीदवाक्य"}
           </p>
-          <div className="text-2xl sm:text-3xl md:text-4xl font-black font-serif italic text-stone-900 dark:text-amber-100">
+          <div className="text-2xl sm:text-3xl md:text-4xl font-extrabold font-marathi-heading text-stone-900 dark:text-amber-100">
             “{isEn ? motto.en : motto.mr}”
           </div>
           <p className="text-xs sm:text-sm text-stone-600 dark:text-stone-300 mt-2 max-w-xl mx-auto">

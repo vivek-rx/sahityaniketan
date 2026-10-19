@@ -23,7 +23,10 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     const saved = localStorage.getItem("sn_language") as Language | null;
     if (saved && (saved === "mr" || saved === "hi" || saved === "en")) {
       setLanguageState(saved);
+      document.documentElement.lang = saved;
       i18n.changeLanguage(saved);
+    } else {
+      document.documentElement.lang = "mr";
     }
   }, []);
 
