@@ -248,15 +248,6 @@ export default function StoryDetailPage() {
               {/* Share Trigger Buttons */}
               <div className="flex items-center gap-2">
                 <button
-                  onClick={shareToFacebook}
-                  className="inline-flex items-center gap-1.5 rounded-lg bg-[#1877F2] hover:bg-[#166FE5] text-white px-3 py-1.5 text-xs font-bold shadow-xs transition-colors cursor-pointer"
-                  title="Share 3-line teaser to Facebook"
-                >
-                  <FacebookIcon className="h-3.5 w-3.5 fill-current" />
-                  <span>फेसबुकवर शेअर</span>
-                </button>
-
-                <button
                   onClick={shareToWhatsApp}
                   className="inline-flex items-center gap-1.5 rounded-lg bg-[#25D366] hover:bg-[#20BD5A] text-white px-3 py-1.5 text-xs font-bold shadow-xs transition-colors cursor-pointer"
                   title="Share to WhatsApp"
@@ -266,12 +257,21 @@ export default function StoryDetailPage() {
                 </button>
 
                 <button
+                  onClick={shareToFacebook}
+                  className="inline-flex items-center gap-1.5 rounded-lg bg-[#1877F2] hover:bg-[#166FE5] text-white px-3 py-1.5 text-xs font-bold shadow-xs transition-colors cursor-pointer"
+                  title="Share to Facebook"
+                >
+                  <FacebookIcon className="h-3.5 w-3.5 fill-current" />
+                  <span>फेसबुक</span>
+                </button>
+
+                <button
                   onClick={copyToClipboard}
                   className="inline-flex items-center gap-1.5 rounded-lg border border-[#E5DDD0] dark:border-[#332228] bg-[#FAF8F5] dark:bg-[#25181C] hover:bg-[#800020]/10 text-stone-700 dark:text-stone-200 px-3 py-1.5 text-xs font-bold transition-colors cursor-pointer"
-                  title="Copy formatted 3-line teaser & URL"
+                  title="Copy link"
                 >
                   {copied ? <Check className="h-3.5 w-3.5 text-emerald-600" /> : <Copy className="h-3.5 w-3.5" />}
-                  <span>{copied ? "मसुदा कॉपी झाला!" : "मसुदा कॉपी करा"}</span>
+                  <span>{copied ? "लिंक कॉपी झाली!" : "लिंक कॉपी करा"}</span>
                 </button>
               </div>
             </div>
@@ -289,31 +289,42 @@ export default function StoryDetailPage() {
               </div>
             </div>
 
-            {/* Bottom Facebook Sharing Callout Card */}
+            {/* Bottom Sharing Callout Card */}
             <div className="m-6 sm:m-10 p-5 rounded-2xl bg-[#F3ECE3] dark:bg-[#180E11] border border-[#E5DDD0] dark:border-[#332228] flex flex-col sm:flex-row items-center justify-between gap-4">
               <div className="space-y-1 text-center sm:text-left">
                 <h4 className="text-sm font-bold text-stone-900 dark:text-white">
-                  हा लेख फेसबुकवर शेअर करा
+                  {language === "en" ? "Share this article" : language === "hi" ? "यह लेख साझा करें" : "हा लेख इतरांसोबत शेअर करा"}
                 </h4>
                 <p className="text-xs text-stone-500 dark:text-stone-400">
-                  ३ ओळींचा सारांश व वाचन लिंक आपोआप तयार केली जाईल, ज्यामुळे वाचक थेट वेबसाइटवर येतील.
+                  {language === "en"
+                    ? "Spread the wealth of literature and knowledge with fellow readers."
+                    : language === "hi"
+                    ? "साहित्य एवं अध्ययन प्रेमियों के साथ ज्ञान का यह प्रवाह साझा करें।"
+                    : "ज्ञान व वाचन संस्कृतीचा हा वारसा आपल्या मित्र-परिवारासोबत नक्की शेअर करा."}
                 </p>
               </div>
 
-              <div className="flex items-center gap-2 shrink-0">
+              <div className="flex items-center gap-2 shrink-0 flex-wrap justify-center">
+                <button
+                  onClick={shareToWhatsApp}
+                  className="inline-flex items-center gap-2 rounded-lg bg-[#25D366] hover:bg-[#20BD5A] text-white px-3.5 py-2 text-xs font-bold shadow-xs transition-colors cursor-pointer"
+                >
+                  <MessageCircle className="h-4 w-4" />
+                  <span>{language === "en" ? "WhatsApp" : "व्हॉट्सॲप"}</span>
+                </button>
                 <button
                   onClick={shareToFacebook}
-                  className="inline-flex items-center gap-2 rounded-lg bg-[#1877F2] hover:bg-[#166FE5] text-white px-4 py-2 text-xs font-bold shadow-xs transition-colors cursor-pointer"
+                  className="inline-flex items-center gap-2 rounded-lg bg-[#1877F2] hover:bg-[#166FE5] text-white px-3.5 py-2 text-xs font-bold shadow-xs transition-colors cursor-pointer"
                 >
                   <FacebookIcon className="h-4 w-4 fill-current" />
-                  <span>फेसबुकवर पोस्ट करा</span>
+                  <span>{language === "en" ? "Facebook" : "फेसबुक"}</span>
                 </button>
                 <button
                   onClick={copyToClipboard}
                   className="inline-flex items-center gap-1.5 rounded-lg border border-[#E5DDD0] dark:border-[#332228] bg-white dark:bg-[#1E1418] hover:bg-[#800020]/10 text-stone-700 dark:text-stone-200 px-3.5 py-2 text-xs font-bold transition-colors cursor-pointer"
                 >
                   {copied ? <Check className="h-4 w-4 text-emerald-600" /> : <Copy className="h-4 w-4" />}
-                  <span>{copied ? "कॉपी झाले" : "मसुदा कॉपी"}</span>
+                  <span>{copied ? (language === "en" ? "Copied!" : "कॉपी झाली!") : (language === "en" ? "Copy Link" : "लिंक कॉपी")}</span>
                 </button>
               </div>
             </div>
