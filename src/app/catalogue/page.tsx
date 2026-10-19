@@ -137,154 +137,287 @@ function CatalogueContent() {
             </p>
           </div>
 
-          {/* Language Filter */}
+          {/* Language Filter (Pill Chips) */}
           <div>
-            <label className="text-xs font-bold text-stone-700 dark:text-[#FAF2E8] uppercase tracking-wider block mb-2 font-marathi-heading">
-              {language === "mr" ? "पुस्तकाची भाषा" : language === "hi" ? "पुस्तक की भाषा" : "Book Language"}
-            </label>
-            <div className="space-y-1 text-sm font-marathi-body">
+            <div className="flex items-center justify-between mb-2.5">
+              <label className="text-xs font-extrabold text-stone-700 dark:text-[#FAF2E8] uppercase tracking-wider block font-marathi-heading">
+                {language === "mr" ? "पुस्तकाची भाषा" : language === "hi" ? "पुस्तक की भाषा" : "Book Language"}
+              </label>
+              {selectedLanguage !== "all" && (
+                <button
+                  type="button"
+                  onClick={() => setSelectedLanguage("all")}
+                  className="text-[11px] text-[#800020] dark:text-[#E5B869] font-semibold hover:underline cursor-pointer"
+                >
+                  {language === "en" ? "Clear" : "रीसेट"}
+                </button>
+              )}
+            </div>
+            <div className="flex flex-wrap gap-1.5 font-marathi-body">
               {[
                 { id: "all", label: language === "mr" ? "सर्व भाषा" : language === "hi" ? "सभी भाषाएं" : "All Languages" },
                 { id: "mr", label: language === "en" ? "Marathi" : "मराठी" },
                 { id: "hi", label: language === "en" ? "Hindi" : "हिन्दी" },
                 { id: "sa", label: language === "en" ? "Sanskrit" : "संस्कृत" },
                 { id: "en", label: language === "mr" ? "इंग्रजी" : language === "hi" ? "अंग्रेजी" : "English" },
-              ].map((lang) => (
-                <button
-                  key={lang.id}
-                  onClick={() => setSelectedLanguage(lang.id)}
-                  className={cn(
-                    "w-full text-left px-3 py-2 rounded-lg transition-colors font-semibold cursor-pointer flex items-center justify-between text-sm",
-                    selectedLanguage === lang.id
-                      ? "bg-[#800020]/10 dark:bg-[#800020]/25 text-[#800020] dark:text-[#E5B869] font-bold border-l-2 border-[#800020] dark:border-[#E5B869]"
-                      : "hover:bg-[#F3ECE3] dark:hover:bg-[#180E11] text-stone-700 dark:text-stone-300"
-                  )}
-                >
-                  <span>{lang.label}</span>
-                </button>
-              ))}
+              ].map((lang) => {
+                const isSelected = selectedLanguage === lang.id;
+                return (
+                  <button
+                    key={lang.id}
+                    type="button"
+                    onClick={() => setSelectedLanguage(lang.id)}
+                    className={cn(
+                      "px-3 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 shadow-2xs active:scale-95",
+                      isSelected
+                        ? "bg-[#800020] text-white dark:bg-[#E5B869] dark:text-[#18080A] shadow-xs ring-2 ring-[#800020]/25 dark:ring-[#E5B869]/30"
+                        : "bg-[#F3ECE3]/80 dark:bg-[#25181C] text-stone-700 dark:text-stone-300 hover:bg-[#E5DDD0] dark:hover:bg-[#332228] border border-[#E5DDD0] dark:border-[#332228]"
+                    )}
+                  >
+                    <span>{lang.label}</span>
+                    {isSelected && lang.id !== "all" && (
+                      <span className="text-[10px] leading-none opacity-80 font-mono">✕</span>
+                    )}
+                  </button>
+                );
+              })}
             </div>
           </div>
 
-          {/* Category Filter */}
+          {/* Category Filter (Pill Chips) */}
           <div>
-            <label className="text-xs font-bold text-stone-700 dark:text-[#FAF2E8] uppercase tracking-wider block mb-2 font-marathi-heading">
-              {language === "mr" ? "विषय दालन" : language === "hi" ? "विषय दीर्घा" : "Collection Category"}
-            </label>
-            <div className="space-y-1 text-sm font-marathi-body">
+            <div className="flex items-center justify-between mb-2.5">
+              <label className="text-xs font-extrabold text-stone-700 dark:text-[#FAF2E8] uppercase tracking-wider block font-marathi-heading">
+                {language === "mr" ? "विषय दालन" : language === "hi" ? "विषय दीर्घा" : "Collection Category"}
+              </label>
+              {selectedCategory !== "all" && (
+                <button
+                  type="button"
+                  onClick={() => setSelectedCategory("all")}
+                  className="text-[11px] text-[#800020] dark:text-[#E5B869] font-semibold hover:underline cursor-pointer"
+                >
+                  {language === "en" ? "Clear" : "रीसेट"}
+                </button>
+              )}
+            </div>
+            <div className="flex flex-wrap gap-1.5 font-marathi-body">
               {[
                 { id: "all", label: language === "mr" ? "सर्व दालने" : language === "hi" ? "सभी संग्रह" : "All Collections" },
-                { id: "बालसाहित्य", label: language === "mr" ? "बालमित्र व किशोर साहित्य" : language === "hi" ? "बाल साहित्य" : "Children & Youth" },
-                { id: "संतसाहित्य", label: language === "mr" ? "संतसाहित्य व मोडी" : language === "hi" ? "संत साहित्य" : "Saint Literature & Modi" },
+                { id: "बालसाहित्य", label: language === "mr" ? "बालमित्र व किशोर" : language === "hi" ? "बाल साहित्य" : "Children & Youth" },
+                { id: "संतसाहित्य", label: language === "mr" ? "संतसाहित्य व मोडी" : language === "hi" ? "संत साहित्य" : "Saint & Modi" },
                 { id: "ऐतिहासिक", label: language === "mr" ? "ऐतिहासिक कादंबरी" : language === "hi" ? "ऐतिहासिक उपन्यास" : "Historical Novels" },
                 { id: "कादंबरी", label: language === "mr" ? "अभिजात कादंबरी" : language === "hi" ? "क्लासिक उपन्यास" : "Marathi Classics" },
-                { id: "स्पर्धा परीक्षा", label: language === "mr" ? "स्पर्धा परीक्षा अभ्यासिका" : language === "hi" ? "प्रतियोगी परीक्षा" : "Competitive Exam Books" },
+                { id: "स्पर्धा परीक्षा", label: language === "mr" ? "स्पर्धा परीक्षा" : language === "hi" ? "प्रतियोगी परीक्षा" : "Competitive Exam" },
                 { id: "नाटक", label: language === "mr" ? "नाटक व काव्य" : language === "hi" ? "नाटक व काव्य" : "Theatre & Poetry" },
-                { id: "इतिहास", label: language === "mr" ? "इतिहास व मुक्ती संग्राम" : language === "hi" ? "इतिहास व शोध" : "History & Research" },
+                { id: "इतिहास", label: language === "mr" ? "इतिहास व शोध" : language === "hi" ? "इतिहास व शोध" : "History & Research" },
                 { id: "विनोदी", label: language === "mr" ? "विनोदी साहित्य" : language === "hi" ? "हास्य व व्यंग्य" : "Humour & Satire" },
-                { id: "आत्मचरित्र", label: language === "mr" ? "आत्मचरित्र व चरित्र" : language === "hi" ? "जीवनी व आत्मकथा" : "Biographies" },
+                { id: "आत्मचरित्र", label: language === "mr" ? "आत्मचरित्र" : language === "hi" ? "जीवनी व आत्मकथा" : "Biographies" },
                 { id: "हिन्दी", label: language === "mr" ? "हिन्दी साहित्य" : language === "hi" ? "हिन्दी साहित्य" : "Hindi Classics" },
-                { id: "संस्कृत", label: language === "mr" ? "संस्कृत काव्य व तत्त्वज्ञान" : language === "hi" ? "संस्कृत ग्रन्थ" : "Sanskrit Classics" },
-              ].map((cat) => (
-                <button
-                  key={cat.id}
-                  onClick={() => setSelectedCategory(cat.id)}
-                  className={cn(
-                    "w-full text-left px-3 py-2 rounded-lg transition-colors font-semibold cursor-pointer text-sm",
-                    selectedCategory === cat.id
-                      ? "bg-[#800020]/10 dark:bg-[#800020]/25 text-[#800020] dark:text-[#E5B869] font-bold border-l-2 border-[#800020] dark:border-[#E5B869]"
-                      : "hover:bg-[#F3ECE3] dark:hover:bg-[#180E11] text-stone-700 dark:text-stone-300"
-                  )}
-                >
-                  {cat.label}
-                </button>
-              ))}
+                { id: "संस्कृत", label: language === "mr" ? "संस्कृत ग्रन्थ" : language === "hi" ? "संस्कृत ग्रन्थ" : "Sanskrit Classics" },
+              ].map((cat) => {
+                const isSelected = selectedCategory === cat.id;
+                return (
+                  <button
+                    key={cat.id}
+                    type="button"
+                    onClick={() => setSelectedCategory(cat.id)}
+                    className={cn(
+                      "px-3 py-1.5 rounded-full text-xs font-semibold transition-all cursor-pointer flex items-center gap-1.5 shadow-2xs active:scale-95",
+                      isSelected
+                        ? "bg-[#800020] text-white dark:bg-[#E5B869] dark:text-[#18080A] font-bold shadow-xs ring-2 ring-[#800020]/25 dark:ring-[#E5B869]/30"
+                        : "bg-[#F3ECE3]/80 dark:bg-[#25181C] text-stone-700 dark:text-stone-300 hover:bg-[#E5DDD0] dark:hover:bg-[#332228] border border-[#E5DDD0] dark:border-[#332228]"
+                    )}
+                  >
+                    <span>{cat.label}</span>
+                    {isSelected && cat.id !== "all" && (
+                      <span className="text-[10px] leading-none opacity-80 font-mono">✕</span>
+                    )}
+                  </button>
+                );
+              })}
             </div>
           </div>
         </div>
 
 
         {/* Main Catalogue Grid */}
-        <div className="lg:col-span-3 space-y-6">
-          {/* Search Input Bar */}
-          <div className="bg-white dark:bg-[#1E1418] p-4 rounded-2xl border border-[#E5DDD0] dark:border-[#332228] shadow-2xs flex flex-col sm:flex-row items-center justify-between gap-4 transition-colors">
-            <div className="relative w-full sm:w-96">
-              <input
-                type="text"
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                placeholder={
-                  language === "mr"
-                    ? "पुस्तकाचे नाव, लेखक किंवा विषय शोधा..."
-                    : language === "hi"
-                      ? "पुस्तक, लेखक या विषय से खोजें..."
-                      : "Search books by title, author, or subject..."
-                }
-                className="w-full rounded-full border border-[#E5DDD0] dark:border-[#332228] bg-[#FAF8F5] dark:bg-[#180E11] py-2.5 pl-4 pr-10 text-xs sm:text-sm text-gray-900 dark:text-[#FAF2E8] placeholder:text-stone-400 dark:placeholder-stone-500 focus:border-[#800020] dark:focus:border-[#E5B869] focus:bg-white dark:focus:bg-[#1E1418] focus:outline-none focus:ring-1 focus:ring-[#800020]"
-              />
-              {isLoading ? (
-                <div className="absolute right-3.5 top-1/2 -translate-y-1/2 flex items-center pr-0.5">
-                  <BobbingDots size="sm" className="text-[#800020] dark:text-[#E5B869]" duration={0.8} />
+        <div className="lg:col-span-3 space-y-4">
+          {/* Top Horizontal Quick-Filter Pill Bar (Shopping-Site Carousel) */}
+          <div className="bg-white dark:bg-[#1E1418] p-2.5 sm:p-3 rounded-2xl border border-[#E5DDD0] dark:border-[#332228] shadow-2xs flex items-center gap-2 overflow-x-auto no-scrollbar transition-colors">
+            <span className="text-[11px] font-bold text-stone-400 dark:text-stone-500 uppercase shrink-0 flex items-center gap-1 pl-1">
+              <Filter className="h-3 w-3 text-[#800020] dark:text-[#E5B869]" />
+              <span>{language === "en" ? "Filter:" : "दालन:"}</span>
+            </span>
+            {[
+              { id: "all", label: language === "mr" ? "सर्व दालने" : language === "hi" ? "सभी संग्रह" : "All" },
+              { id: "कादंबरी", label: language === "mr" ? "अभिजात कादंबरी" : language === "hi" ? "क्लासिक उपन्यास" : "Classics" },
+              { id: "ऐतिहासिक", label: language === "mr" ? "ऐतिहासिक" : language === "hi" ? "ऐतिहासिक" : "Historical" },
+              { id: "संतसाहित्य", label: language === "mr" ? "संतसाहित्य व मोडी" : language === "hi" ? "संत साहित्य" : "Saint & Modi" },
+              { id: "स्पर्धा परीक्षा", label: language === "mr" ? "स्पर्धा परीक्षा" : language === "hi" ? "प्रतियोगी परीक्षा" : "Competitive" },
+              { id: "बालसाहित्य", label: language === "mr" ? "बालसाहित्य" : language === "hi" ? "बाल साहित्य" : "Children" },
+              { id: "इतिहास", label: language === "mr" ? "इतिहास व शोध" : language === "hi" ? "इतिहास" : "History" },
+              { id: "नाटक", label: language === "mr" ? "नाटक व काव्य" : language === "hi" ? "काव्य" : "Poetry" },
+              { id: "विनोदी", label: language === "mr" ? "विनोदी साहित्य" : language === "hi" ? "हास्य" : "Humour" },
+              { id: "आत्मचरित्र", label: language === "mr" ? "आत्मचरित्र" : language === "hi" ? "जीवनी" : "Biographies" },
+              { id: "संस्कृत", label: language === "mr" ? "संस्कृत" : language === "hi" ? "संस्कृत" : "Sanskrit" },
+              { id: "हिन्दी", label: language === "mr" ? "हिन्दी" : language === "hi" ? "हिन्दी" : "Hindi" },
+            ].map((cat) => {
+              const isSelected = selectedCategory === cat.id;
+              return (
+                <button
+                  key={`quick-${cat.id}`}
+                  type="button"
+                  onClick={() => setSelectedCategory(cat.id)}
+                  className={cn(
+                    "shrink-0 px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all cursor-pointer flex items-center gap-1.5 active:scale-95",
+                    isSelected
+                      ? "bg-[#800020] text-white dark:bg-[#E5B869] dark:text-[#18080A] font-bold shadow-xs ring-2 ring-[#800020]/25 dark:ring-[#E5B869]/30"
+                      : "bg-[#F3ECE3]/70 dark:bg-[#25181C] text-stone-700 dark:text-stone-300 hover:bg-[#E5DDD0] dark:hover:bg-[#332228] border border-[#E5DDD0] dark:border-[#332228]"
+                  )}
+                >
+                  <span>{cat.label}</span>
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Search Input Bar & Applied Filter Pills */}
+          <div className="bg-white dark:bg-[#1E1418] p-4 rounded-2xl border border-[#E5DDD0] dark:border-[#332228] shadow-2xs space-y-3 transition-colors">
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+              <div className="relative w-full sm:w-96">
+                <input
+                  type="text"
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                  placeholder={
+                    language === "mr"
+                      ? "पुस्तकाचे नाव, लेखक किंवा विषय शोधा..."
+                      : language === "hi"
+                        ? "पुस्तक, लेखक या विषय से खोजें..."
+                        : "Search books by title, author, or subject..."
+                  }
+                  className="w-full rounded-full border border-[#E5DDD0] dark:border-[#332228] bg-[#FAF8F5] dark:bg-[#180E11] py-2.5 pl-4 pr-10 text-xs sm:text-sm text-gray-900 dark:text-[#FAF2E8] placeholder:text-stone-400 dark:placeholder-stone-500 focus:border-[#800020] dark:focus:border-[#E5B869] focus:bg-white dark:focus:bg-[#1E1418] focus:outline-none focus:ring-1 focus:ring-[#800020]"
+                />
+                {isLoading ? (
+                  <div className="absolute right-3.5 top-1/2 -translate-y-1/2 flex items-center pr-0.5">
+                    <BobbingDots size="sm" className="text-[#800020] dark:text-[#E5B869]" duration={0.8} />
+                  </div>
+                ) : (
+                  <Search className="absolute right-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-stone-400 dark:text-stone-500" />
+                )}
+              </div>
+
+              <div className="flex flex-wrap items-center justify-between gap-3 text-xs text-stone-500 dark:text-stone-400 font-devanagari">
+                <div className="flex items-center gap-3">
+                  <span>
+                    {language === "mr" ? "एकूण संग्रह:" : "Total Stacks:"}{" "}
+                    <span className="font-extrabold text-[#800020] dark:text-[#E5B869] text-sm">३९,९५३</span>{" "}
+                    <span className="text-stone-300 dark:text-[#332228]">|</span>{" "}
+                    {language === "mr" ? "निवडक सूची:" : "Showing:"}{" "}
+                    <span className="font-bold text-[#800020] dark:text-[#E5B869] text-sm">{filteredItems.length}</span>{" "}
+                    {language === "mr" ? "ग्रंथ" : "books"}
+                  </span>
+
+                  <button
+                    type="button"
+                    onClick={() => setIsRequestModalOpen(true)}
+                    className="px-3.5 py-1.5 rounded-full bg-[#800020] hover:bg-[#66001A] text-white font-bold text-xs flex items-center gap-1.5 transition-colors shadow-2xs cursor-pointer font-marathi-body"
+                  >
+                    <BookPlus className="h-3.5 w-3.5" />
+                    <span>+ ग्रंथ मागणी</span>
+                  </button>
                 </div>
-              ) : (
-                <Search className="absolute right-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-stone-400 dark:text-stone-500" />
-              )}
+
+                {/* View Format Switcher (Default: List) */}
+                <div className="flex items-center gap-1 bg-[#F3ECE3] dark:bg-[#180E11] p-1 rounded-xl border border-[#E5DDD0] dark:border-[#332228]">
+                  <button
+                    type="button"
+                    onClick={() => setViewMode("list")}
+                    className={cn(
+                      "px-2.5 py-1 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer",
+                      viewMode === "list"
+                        ? "bg-white dark:bg-[#1E1418] text-[#800020] dark:text-[#E5B869] shadow-2xs font-extrabold border border-[#E5DDD0] dark:border-[#332228]"
+                        : "text-stone-500 dark:text-stone-400 hover:text-stone-800 dark:hover:text-[#FAF2E8]"
+                    )}
+                    title={language === "en" ? "List View" : "सूची स्वरूप"}
+                  >
+                    <LayoutList className="h-3.5 w-3.5" />
+                    <span>{language === "en" ? "List" : language === "hi" ? "सूची" : "सूची"}</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => setViewMode("grid")}
+                    className={cn(
+                      "px-2.5 py-1 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer",
+                      viewMode === "grid"
+                        ? "bg-white dark:bg-[#1E1418] text-[#800020] dark:text-[#E5B869] shadow-2xs font-extrabold border border-[#E5DDD0] dark:border-[#332228]"
+                        : "text-stone-500 dark:text-stone-400 hover:text-stone-800 dark:hover:text-[#FAF2E8]"
+                    )}
+                    title={language === "en" ? "Grid View" : "दालन स्वरूप"}
+                  >
+                    <LayoutGrid className="h-3.5 w-3.5" />
+                    <span>{language === "en" ? "Grid" : language === "hi" ? "ग्रिड" : "दालन"}</span>
+                  </button>
+                </div>
+              </div>
             </div>
 
-            <div className="flex flex-wrap items-center justify-between gap-3 text-xs text-stone-500 dark:text-stone-400 font-devanagari">
-              <div className="flex items-center gap-3">
-                <span>
-                  {language === "mr" ? "एकूण संग्रह:" : "Total Stacks:"}{" "}
-                  <span className="font-extrabold text-[#800020] dark:text-[#E5B869] text-sm">३९,९५३</span>{" "}
-                  <span className="text-stone-300 dark:text-[#332228]">|</span>{" "}
-                  {language === "mr" ? "निवडक सूची:" : "Showing:"}{" "}
-                  <span className="font-bold text-[#800020] dark:text-[#E5B869] text-sm">{filteredItems.length}</span>{" "}
-                  {language === "mr" ? "ग्रंथ" : "books"}
+            {/* Shopping-Site Applied Filter Pills Bar */}
+            {(selectedLanguage !== "all" || selectedCategory !== "all" || query) && (
+              <div className="flex flex-wrap items-center gap-2 pt-2.5 border-t border-[#E5DDD0]/70 dark:border-[#332228]/70 text-xs">
+                <span className="text-stone-500 dark:text-stone-400 font-semibold text-[11px]">
+                  {language === "en" ? "Applied Filters:" : language === "hi" ? "लागू फिल्टर:" : "निवडलेली गाळणी:"}
                 </span>
 
+                {selectedLanguage !== "all" && (
+                  <button
+                    type="button"
+                    onClick={() => setSelectedLanguage("all")}
+                    className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#800020]/10 dark:bg-[#800020]/25 text-[#800020] dark:text-[#E5B869] border border-[#800020]/30 font-bold hover:bg-[#800020]/20 transition-all cursor-pointer"
+                  >
+                    <span>
+                      {selectedLanguage === "mr" ? "मराठी" : selectedLanguage === "hi" ? "हिन्दी" : selectedLanguage === "sa" ? "संस्कृत" : "English"}
+                    </span>
+                    <span className="text-[10px] leading-none opacity-80 font-mono">✕</span>
+                  </button>
+                )}
+
+                {selectedCategory !== "all" && (
+                  <button
+                    type="button"
+                    onClick={() => setSelectedCategory("all")}
+                    className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#800020]/10 dark:bg-[#800020]/25 text-[#800020] dark:text-[#E5B869] border border-[#800020]/30 font-bold hover:bg-[#800020]/20 transition-all cursor-pointer"
+                  >
+                    <span>{selectedCategory}</span>
+                    <span className="text-[10px] leading-none opacity-80 font-mono">✕</span>
+                  </button>
+                )}
+
+                {query && (
+                  <button
+                    type="button"
+                    onClick={() => setQuery("")}
+                    className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-stone-200 dark:bg-stone-800 text-stone-800 dark:text-stone-200 border border-stone-300 dark:border-stone-700 font-bold hover:bg-stone-300 transition-all cursor-pointer"
+                  >
+                    <span>&ldquo;{query}&rdquo;</span>
+                    <span className="text-[10px] leading-none opacity-80 font-mono">✕</span>
+                  </button>
+                )}
+
                 <button
                   type="button"
-                  onClick={() => setIsRequestModalOpen(true)}
-                  className="px-3.5 py-1.5 rounded-full bg-[#800020] hover:bg-[#66001A] text-white font-bold text-xs flex items-center gap-1.5 transition-colors shadow-2xs cursor-pointer font-marathi-body"
+                  onClick={() => {
+                    setSelectedLanguage("all");
+                    setSelectedCategory("all");
+                    setQuery("");
+                  }}
+                  className="text-xs text-[#800020] dark:text-[#E5B869] font-bold hover:underline cursor-pointer ml-1"
                 >
-                  <BookPlus className="h-3.5 w-3.5" />
-                  <span>+ ग्रंथ मागणी</span>
+                  {language === "en" ? "Clear all" : "सर्व काढा"}
                 </button>
               </div>
-
-              {/* View Format Switcher (Default: List) */}
-              <div className="flex items-center gap-1 bg-[#F3ECE3] dark:bg-[#180E11] p-1 rounded-xl border border-[#E5DDD0] dark:border-[#332228]">
-                <button
-                  type="button"
-                  onClick={() => setViewMode("list")}
-                  className={cn(
-                    "px-2.5 py-1 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer",
-                    viewMode === "list"
-                      ? "bg-white dark:bg-[#1E1418] text-[#800020] dark:text-[#E5B869] shadow-2xs font-extrabold border border-[#E5DDD0] dark:border-[#332228]"
-                      : "text-stone-500 dark:text-stone-400 hover:text-stone-800 dark:hover:text-[#FAF2E8]"
-                  )}
-                  title={language === "en" ? "List View" : "सूची स्वरूप"}
-                >
-                  <LayoutList className="h-3.5 w-3.5" />
-                  <span>{language === "en" ? "List" : language === "hi" ? "सूची" : "सूची"}</span>
-                </button>
-
-                <button
-                  type="button"
-                  onClick={() => setViewMode("grid")}
-                  className={cn(
-                    "px-2.5 py-1 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer",
-                    viewMode === "grid"
-                      ? "bg-white dark:bg-[#1E1418] text-[#800020] dark:text-[#E5B869] shadow-2xs font-extrabold border border-[#E5DDD0] dark:border-[#332228]"
-                      : "text-stone-500 dark:text-stone-400 hover:text-stone-800 dark:hover:text-[#FAF2E8]"
-                  )}
-                  title={language === "en" ? "Grid View" : "दालन स्वरूप"}
-                >
-                  <LayoutGrid className="h-3.5 w-3.5" />
-                  <span>{language === "en" ? "Grid" : language === "hi" ? "ग्रिड" : "दालन"}</span>
-                </button>
-              </div>
-            </div>
+            )}
           </div>
 
           {/* Books Results (Default: List Format) */}
