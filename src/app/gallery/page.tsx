@@ -21,12 +21,16 @@ import { FacebookFeedSection } from "@/components/gallery/facebook-feed-section"
 import { LIBRARY_EVENTS, type LibraryEvent } from "@/lib/data/library-events";
 import { BLUR_PLACEHOLDER } from "@/lib/image-utils";
 import { BobbingDots } from "@/components/ui/bobbing-dots";
+import { useLanguage } from "@/context/language-context";
 
 function GalleryContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const eventParam = searchParams.get("event");
   const tabParam = searchParams.get("tab");
+  const { language } = useLanguage();
+  const isEn = language === "en";
+  const isHi = language === "hi";
 
   const [activeTab, setActiveTab] = useState<"albums" | "facebook">("albums");
   const [activeModalEvent, setActiveModalEvent] = useState<LibraryEvent | null>(null);
@@ -113,11 +117,19 @@ function GalleryContent() {
 
           {/* Page Title */}
           <h1 className="text-3xl md:text-5xl font-extrabold text-white font-marathi-heading tracking-wide drop-shadow-sm">
-            छायाचित्र दालन व घडामोडी
+            {isEn
+              ? "Photo Gallery & Events"
+              : isHi
+              ? "चित्र दीर्घा एवं गतिविधियाँ"
+              : "छायाचित्र दालन व घडामोडी"}
           </h1>
 
           <p className="text-sm sm:text-base text-zinc-300 font-marathi-body max-w-xl mx-auto">
-            साहित्य निकेतनचे वार्षिक व्याख्यानमाला, पुरस्कार सोहळे व दैनंदिन कार्यक्रमांचे ताजे क्षणचित्रे.
+            {isEn
+              ? "Moments from annual lectures, literary award celebrations, and reader programs at Sahitya Niketan."
+              : isHi
+              ? "साहित्य निकेतन के वार्षिक व्याख्यानमाला, पुरस्कार समारोह एवं दैनिक कार्यक्रमों के स्मरणीय क्षण।"
+              : "साहित्य निकेतनचे वार्षिक व्याख्यानमाला, पुरस्कार सोहळे व दैनंदिन कार्यक्रमांचे ताजे क्षणचित्रे."}
           </p>
 
           {/* Tab Switcher */}
@@ -133,7 +145,7 @@ function GalleryContent() {
                 }`}
               >
                 <Images className="w-4 h-4" />
-                <span>निवडक आल्बम्स</span>
+                <span>{isEn ? "Curated Albums" : isHi ? "चयनित एल्बम" : "निवडक आल्बम्स"}</span>
                 <span
                   className={`px-2 py-0.5 rounded-full text-[11px] font-semibold ${
                     activeTab === "albums"
@@ -155,7 +167,7 @@ function GalleryContent() {
                 }`}
               >
                 <FacebookIcon className="w-4 h-4 fill-current" />
-                <span>थेट फेसबुक फीड</span>
+                <span>{isEn ? "Live Facebook Feed" : isHi ? "लाइव फेसबुक फीड" : "थेट फेसबुक फीड"}</span>
                 <span className="flex items-center gap-1 px-1.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500 text-white shadow-xs">
                   <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
                   LIVE
@@ -183,10 +195,18 @@ function GalleryContent() {
                 </div>
                 <div>
                   <p className="font-bold text-sm text-stone-900 dark:text-[#FAF2E8]">
-                    दैनंदिन कार्यक्रमांचे ताजे फोटो थेट फेसबुकवर पहा
+                    {isEn
+                      ? "Explore Real-Time Event Updates on Facebook"
+                      : isHi
+                      ? "दैनिक कार्यक्रमों के ताजे चित्र फेसबुक पर देखें"
+                      : "दैनंदिन कार्यक्रमांचे ताजे फोटो थेट फेसबुकवर पहा"}
                   </p>
                   <p className="text-xs text-stone-500 dark:text-stone-400">
-                    नवीन ग्रंथ आगमन, कवी कट्टा आणि वाचक प्रतिक्रियांचे रिअल-टाइम अपडेट्स उपलब्ध आहेत.
+                    {isEn
+                      ? "Live updates for book arrivals, poetry meets, and community reactions are posted regularly."
+                      : isHi
+                      ? "नवीन ग्रन्थ आगमन, कवि सम्मेलन एवं पाठक प्रतिक्रियाओं के वास्तविक समय अपडेट।"
+                      : "नवीन ग्रंथ आगमन, कवी कट्टा आणि वाचक प्रतिक्रियांचे रिअल-टाइम अपडेट्स उपलब्ध आहेत."}
                   </p>
                 </div>
               </div>
@@ -195,73 +215,85 @@ function GalleryContent() {
                 onClick={() => setActiveTab("facebook")}
                 className="shrink-0 px-4 py-2 rounded-xl text-xs font-bold bg-[#1877F2] hover:bg-[#166FE5] text-white shadow-sm flex items-center gap-1.5 transition-colors cursor-pointer"
               >
-                <span>थेट फीड उघडा</span>
+                <span>{isEn ? "Open Live Feed" : isHi ? "लाइव फीड खोलें" : "थेट फीड उघडा"}</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </button>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-              {LIBRARY_EVENTS.map((event) => (
-                <div
-                  key={event.id}
-                  onClick={() => openGalleryModal(event)}
-                  className="group h-full flex flex-col rounded-2xl bg-white dark:bg-[#1E1418] border border-[#D4A373]/40 dark:border-[#D4A373]/25 shadow-sm hover:shadow-xl hover:border-[#B8860B] dark:hover:border-[#E5B869] hover:-translate-y-2 transition-all duration-300 overflow-hidden cursor-pointer"
-                >
-                {/* Fixed height image container: 280px (exact match to nagarvachanalay .img-container) */}
-                <div className="relative h-[280px] w-full overflow-hidden bg-stone-900">
-                  <Image
-                    src={event.coverImage}
-                    alt={event.title}
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    placeholder="blur"
-                    blurDataURL={BLUR_PLACEHOLDER}
-                  />
+              {LIBRARY_EVENTS.map((event) => {
+                const eventTitle = isEn ? event.titleEn || event.title : isHi ? event.titleHi || event.title : event.title;
+                const eventDate = isEn ? event.dateEn || event.date : isHi ? event.dateHi || event.date : event.date;
+                const eventCategory = isEn ? event.categoryEn || event.category : isHi ? event.categoryHi || event.category : event.category;
+                const eventDesc = isEn ? event.descriptionEn || event.description : isHi ? event.descriptionHi || event.description : event.description;
 
-                  {/* Dark subtle gradient overlay on image */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20 opacity-40 group-hover:opacity-60 transition-opacity" />
+                return (
+                  <div
+                    key={event.id}
+                    onClick={() => openGalleryModal(event)}
+                    className="group h-full flex flex-col rounded-2xl bg-white dark:bg-[#1E1418] border border-[#D4A373]/40 dark:border-[#D4A373]/25 shadow-sm hover:shadow-xl hover:border-[#B8860B] dark:hover:border-[#E5B869] hover:-translate-y-2 transition-all duration-300 overflow-hidden cursor-pointer"
+                  >
+                    {/* Fixed height image container */}
+                    <div className="relative h-[280px] w-full overflow-hidden bg-stone-900">
+                      <Image
+                        src={event.coverImage}
+                        alt={eventTitle}
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        placeholder="blur"
+                        blurDataURL={BLUR_PLACEHOLDER}
+                      />
 
-                  {/* Photo count pill */}
-                  <div className="absolute bottom-3 right-3 rounded-full bg-black/75 backdrop-blur-sm px-3 py-1 text-xs font-bold text-[#E5B869] border border-[#E5B869]/30 flex items-center gap-1.5 shadow-md">
-                    <Images className="h-3.5 w-3.5" />
-                    <span>{event.photos.length} छायाचित्रे</span>
-                  </div>
+                      {/* Dark subtle gradient overlay on image */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20 opacity-40 group-hover:opacity-60 transition-opacity" />
 
-                  {/* Category badge top left */}
-                  <div className="absolute top-3 left-3 rounded-md bg-[#800020] text-white px-2.5 py-1 text-xs font-bold shadow-md">
-                    {event.category}
-                  </div>
-                </div>
+                      {/* Photo count pill */}
+                      <div className="absolute bottom-3 right-3 rounded-full bg-black/75 backdrop-blur-sm px-3 py-1 text-xs font-bold text-[#E5B869] border border-[#E5B869]/30 flex items-center gap-1.5 shadow-md">
+                        <Images className="h-3.5 w-3.5" />
+                        <span>
+                          {event.photos.length}{" "}
+                          {isEn ? "Photos" : isHi ? "छायाचित्र" : "छायाचित्रे"}
+                        </span>
+                      </div>
 
-                {/* Card Body: Title, Date, Description */}
-                <div className="p-5 sm:p-6 flex-1 flex flex-col justify-between space-y-3">
-                  <div className="space-y-2">
-                    <div className="flex items-center gap-1.5 text-xs text-stone-500 dark:text-[#B8A699]">
-                      <Calendar className="h-3.5 w-3.5 text-[#B8860B] dark:text-[#E5B869]" />
-                      <span>{event.date}</span>
+                      {/* Category badge top left */}
+                      <div className="absolute top-3 left-3 rounded-md bg-[#800020] text-white px-2.5 py-1 text-xs font-bold shadow-md">
+                        {eventCategory}
+                      </div>
                     </div>
 
-                    <h4 className="font-bold text-lg sm:text-xl text-stone-900 dark:text-[#FAF2E8] font-marathi-heading leading-snug group-hover:text-[#800020] dark:group-hover:text-[#E5B869] transition-colors line-clamp-2">
-                      {event.title}
-                    </h4>
+                    {/* Card Body: Title, Date, Description */}
+                    <div className="p-5 sm:p-6 flex-1 flex flex-col justify-between space-y-3">
+                      <div className="space-y-2">
+                        <div className="flex items-center gap-1.5 text-xs text-stone-500 dark:text-[#B8A699]">
+                          <Calendar className="h-3.5 w-3.5 text-[#B8860B] dark:text-[#E5B869]" />
+                          <span>{eventDate}</span>
+                        </div>
 
-                    <p className="text-xs sm:text-sm text-stone-600 dark:text-[#D5C2B4] line-clamp-2 leading-relaxed">
-                      {event.description}
-                    </p>
-                  </div>
+                        <h4 className="font-bold text-lg sm:text-xl text-stone-900 dark:text-[#FAF2E8] font-marathi-heading leading-snug group-hover:text-[#800020] dark:group-hover:text-[#E5B869] transition-colors line-clamp-2">
+                          {eventTitle}
+                        </h4>
 
-                  {/* View Album Link */}
-                  <div className="pt-3 border-t border-[#E5DDD0] dark:border-[#332228] flex items-center justify-between text-xs font-bold text-[#800020] dark:text-[#E5B869]">
-                    <span className="group-hover:underline">सर्व छायाचित्रे पहा</span>
-                    <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
+                        <p className="text-xs sm:text-sm text-stone-600 dark:text-[#D5C2B4] line-clamp-2 leading-relaxed">
+                          {eventDesc}
+                        </p>
+                      </div>
+
+                      {/* View Album Link */}
+                      <div className="pt-3 border-t border-[#E5DDD0] dark:border-[#332228] flex items-center justify-between text-xs font-bold text-[#800020] dark:text-[#E5B869]">
+                        <span className="group-hover:underline">
+                          {isEn ? "View All Photos" : isHi ? "सभी तस्वीरें देखें" : "सर्व छायाचित्रे पहा"}
+                        </span>
+                        <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-            ))}
+                );
+              })}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
       )}
 
       {/* ===================== MODAL GALLERY SHOWCASE ===================== */}
@@ -286,14 +318,18 @@ function GalleryContent() {
               {/* Modal Header: Fixed top */}
               <div className="flex-shrink-0 bg-[#0A1A2A] px-5 py-4 border-b border-[#D4A373]/40 flex items-center justify-between gap-4">
                 <h5 className="text-base sm:text-lg font-bold text-[#D4A373] font-marathi-heading leading-tight line-clamp-1">
-                  {activeModalEvent.photos[currentPhotoIdx]?.caption || activeModalEvent.title}
+                  {isEn
+                    ? activeModalEvent.photos[currentPhotoIdx]?.captionEn || activeModalEvent.titleEn || activeModalEvent.title
+                    : isHi
+                    ? activeModalEvent.photos[currentPhotoIdx]?.captionHi || activeModalEvent.titleHi || activeModalEvent.title
+                    : activeModalEvent.photos[currentPhotoIdx]?.caption || activeModalEvent.title}
                 </h5>
 
                 <button
                   type="button"
                   onClick={closeGalleryModal}
                   className="rounded-full p-1.5 text-stone-300 hover:text-white hover:bg-white/10 transition-colors cursor-pointer shrink-0"
-                  aria-label="दालन बंद करा"
+                  aria-label={isEn ? "Close gallery dialog" : "दालन बंद करा"}
                 >
                   <X className="h-5 w-5" />
                 </button>
@@ -305,7 +341,13 @@ function GalleryContent() {
                 <div className="relative w-full h-full flex items-center justify-center p-4">
                   <Image
                     src={activeModalEvent.photos[currentPhotoIdx]?.url || activeModalEvent.coverImage}
-                    alt={activeModalEvent.photos[currentPhotoIdx]?.caption || activeModalEvent.title}
+                    alt={
+                      isEn
+                        ? activeModalEvent.photos[currentPhotoIdx]?.captionEn || activeModalEvent.titleEn || activeModalEvent.title
+                        : isHi
+                        ? activeModalEvent.photos[currentPhotoIdx]?.captionHi || activeModalEvent.titleHi || activeModalEvent.title
+                        : activeModalEvent.photos[currentPhotoIdx]?.caption || activeModalEvent.title
+                    }
                     fill
                     className="object-contain p-2"
                     sizes="(max-width: 1024px) 100vw, 85vw"
@@ -327,7 +369,7 @@ function GalleryContent() {
                       prevPhoto();
                     }}
                     className="absolute left-3 top-1/2 -translate-y-1/2 z-10 rounded-full bg-[#D4A373] hover:bg-[#E5B869] text-[#0A1A2A] p-2.5 sm:p-3 shadow-lg transition-transform hover:scale-110 cursor-pointer"
-                    aria-label="मागील छायाचित्र"
+                    aria-label={isEn ? "Previous photo" : "मागील छायाचित्र"}
                   >
                     <ChevronLeft className="h-5 w-5 sm:h-6 sm:w-6" />
                   </button>
@@ -342,7 +384,7 @@ function GalleryContent() {
                       nextPhoto();
                     }}
                     className="absolute right-3 top-1/2 -translate-y-1/2 z-10 rounded-full bg-[#D4A373] hover:bg-[#E5B869] text-[#0A1A2A] p-2.5 sm:p-3 shadow-lg transition-transform hover:scale-110 cursor-pointer"
-                    aria-label="पुढील छायाचित्र"
+                    aria-label={isEn ? "Next photo" : "पुढील छायाचित्र"}
                   >
                     <ChevronRight className="h-5 w-5 sm:h-6 sm:w-6" />
                   </button>
@@ -364,7 +406,7 @@ function GalleryContent() {
                             ? "w-6 bg-[#D4A373]"
                             : "w-2 bg-white/40 hover:bg-white/70"
                         }`}
-                        aria-label={`छायाचित्र क्रमांक ${idx + 1}`}
+                        aria-label={`Photo ${idx + 1}`}
                       />
                     ))}
                   </div>
@@ -374,11 +416,27 @@ function GalleryContent() {
               {/* Modal Description Wrapper: Exactly matching nagarvachanalay #modalDescWrapper */}
               <div className="flex-shrink-0 bg-[#0A1A2A]/95 text-white border-t border-[#D4A373]/40 p-4 sm:p-5 rounded-b-xl space-y-2">
                 <div className="flex items-center justify-between text-xs text-[#D4A373] font-bold">
-                  <span>{activeModalEvent.title}</span>
-                  <span>{activeModalEvent.date}</span>
+                  <span>
+                    {isEn
+                      ? activeModalEvent.titleEn || activeModalEvent.title
+                      : isHi
+                      ? activeModalEvent.titleHi || activeModalEvent.title
+                      : activeModalEvent.title}
+                  </span>
+                  <span>
+                    {isEn
+                      ? activeModalEvent.dateEn || activeModalEvent.date
+                      : isHi
+                      ? activeModalEvent.dateHi || activeModalEvent.date
+                      : activeModalEvent.date}
+                  </span>
                 </div>
                 <p className="text-xs sm:text-sm text-stone-200 leading-relaxed font-marathi-body whitespace-pre-line">
-                  {activeModalEvent.description}
+                  {isEn
+                    ? activeModalEvent.descriptionEn || activeModalEvent.description
+                    : isHi
+                    ? activeModalEvent.descriptionHi || activeModalEvent.description
+                    : activeModalEvent.description}
                 </p>
               </div>
             </motion.div>

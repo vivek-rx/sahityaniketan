@@ -1,8 +1,9 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { Navbar, Footer, PageHeader } from "@/components/layout";
-import { Users, Landmark, ArrowRight } from "lucide-react";
+import { Users, Landmark, ArrowRight, BookOpen, ShieldCheck, History, Award, Sparkles, Building2, CheckCircle2 } from "lucide-react";
 import { MotionSkeleton } from "@/components/ui/loader-skeleton";
 import { TiltCard } from "@/components/ui/tilt-card";
 import { useLanguage } from "@/context/language-context";
@@ -145,18 +146,170 @@ export default function AboutPage() {
         className="font-marathi-body bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 min-h-screen transition-colors pb-24"
       >
         <PageHeader
-          title={isEn ? "Executive Board & Trustees" : isHi ? "कार्यकारिणी एवं न्यासी मंडल" : "कार्यकारिणी व विश्वस्त मंडळ"}
+          title={isEn ? "About Sahitya Niketan" : isHi ? "साहित्य निकेतन परिचय व प्रशासन" : "साहित्य निकेतन परिचय व प्रशासन"}
           subtitle={
             isEn
-              ? "Sahitya Niketan Public Library, Ambajogai (Term 2023–24 to 2028–29)"
+              ? "80 Years of literary legacy, public service, and institutional governance (Est. 1 August 1945)"
               : isHi
-              ? "साहित्य निकेतन सार्वजनिक पुस्तकालय, अंबाजोगाई (सत्र २०२३-२४ से २०२८-२९)"
-              : "साहित्य निकेतन सार्वजनिक ग्रंथालय, अंबाजोगाई (सन २०२३-२४ ते २०२८-२९)"
+              ? "८० वर्षों की साहित्यिक धरोहर, ज्ञान सेवा एवं संस्थागत प्रशासन (स्थापना १ अगस्त १९४५)"
+              : "८० वर्षांची समृद्ध साहित्यिक परंपरा, ज्ञानतपस्या आणि संस्थात्मक प्रशासन (स्थापना १ ऑगस्ट १९४५)"
           }
         />
 
         {/* =========================================================
-            कार्यकारिणी व विश्वस्त मंडळ
+            १. परिचय व संस्थेचा गौरवशाली वारसा (#intro)
+            ========================================================= */}
+        <section id="intro" className="section py-12 scroll-mt-20">
+          <div className="max-w-5xl mx-auto px-4 space-y-12">
+            
+            {/* Heritage Narrative Grid */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+              <div className="lg:col-span-7 space-y-4">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 text-amber-800 dark:text-amber-300 border border-amber-500/20 text-xs font-bold uppercase tracking-wider">
+                  <Sparkles className="h-3.5 w-3.5" />
+                  <span>{isEn ? "Heritage & Mission" : isHi ? "संस्था परिचय एवं ध्येय" : "संस्था परिचय व ध्येय"}</span>
+                </div>
+
+                <h2 className="text-2xl sm:text-4xl font-extrabold text-zinc-900 dark:text-white font-marathi-heading leading-tight">
+                  {isEn
+                    ? "80 Years of Inspiring Minds in Marathwada"
+                    : isHi
+                    ? "मराठवाड़ा में ८० वर्षों की अखंड ज्ञान साधना"
+                    : "मराठवाड्यातील ८० वर्षांची अखंड ज्ञानतपस्या व साहित्यिक वारसा"}
+                </h2>
+
+                <p className="text-sm sm:text-base text-zinc-600 dark:text-zinc-300 font-marathi-body leading-relaxed">
+                  {isEn
+                    ? "Established on 1 August 1945 during the pre-liberation Nizam era, Sahitya Niketan Public Library was founded by patriotic thinkers to protect Marathi literature, culture, and democratic expression. Today, recognized with the highest Grade 'A' status by the Government of Maharashtra, it serves thousands of readers, scholars, and youth."
+                    : isHi
+                    ? "हैदराबाद रियासत के दौर में १ अगस्त १९४५ को स्वतंत्रता सेनानियों एवं विचारकों द्वारा साहित्य निकेतन सार्वजनिक पुस्तकालय की आधारशिला रखी गई। महाराष्ट्र शासन द्वारा सर्वोच्च वर्ग 'अ' मान्यता प्राप्त यह संस्था आज हजारों पाठकों और प्रतियोगी परीक्षा परीक्षार्थियों की ज्ञान स्थली है।"
+                    : "हैदराबाद संस्थानातील पारतंत्र्यात मराठी भाषा, संस्कृती आणि साहित्याचे रक्षण करण्यासाठी १ ऑगस्ट १९४५ रोजी साहित्य निकेतन ग्रंथालयाची स्थापना झाली. स्वातंत्र्योत्तर काळात लोकसहभागातून वाढलेले हे ग्रंथालय आज महाराष्ट्र शासनाच्या सर्वोच्च 'वर्ग अ' दर्जासह अंबाजोगाई व मराठवाड्यातील प्रमुख सांस्कृतिक केंद्र म्हणून कार्यरत आहे."}
+                </p>
+
+                <div className="pt-2 flex flex-wrap gap-3">
+                  <Link
+                    href="/history"
+                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#800020] hover:bg-[#66001A] text-white text-xs font-bold transition-all shadow-xs cursor-pointer"
+                  >
+                    <History className="h-4 w-4" />
+                    <span>{isEn ? "Explore Historical Journey" : isHi ? "ऐतिहासिक यात्रा देखें" : "ऐतिहासिक वाटचाल पहा"}</span>
+                    <ArrowRight className="h-3.5 w-3.5" />
+                  </Link>
+
+                  <Link
+                    href="/library"
+                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 hover:border-[#800020] text-zinc-800 dark:text-zinc-200 text-xs font-bold transition-all shadow-xs cursor-pointer"
+                  >
+                    <BookOpen className="h-4 w-4 text-[#800020] dark:text-amber-400" />
+                    <span>{isEn ? "View Reading Halls & Facilities" : isHi ? "वाचनालय दालन व सुविधाएं" : "वाचनालय दालने व सुविधा"}</span>
+                  </Link>
+                </div>
+              </div>
+
+              {/* Archival Preview Card */}
+              <div className="lg:col-span-5">
+                <div className="relative rounded-2xl overflow-hidden border border-zinc-200 dark:border-zinc-800 shadow-lg bg-zinc-900 group">
+                  <div className="relative h-64 sm:h-72 w-full">
+                    <Image
+                      src="/images/real/library_inauguration_plaque.webp"
+                      alt="Sahitya Niketan Founding Inscription"
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
+                  </div>
+                  <div className="absolute bottom-0 inset-x-0 p-5 text-white space-y-1">
+                    <span className="text-[10px] uppercase tracking-widest text-amber-300 font-bold block">
+                      {isEn ? "Founding Inscription (1945)" : "मूळ ऐतिहासिक स्थापना शिलालेख (१९४५)"}
+                    </span>
+                    <p className="text-sm font-bold font-marathi-heading">
+                      {isEn ? "Sahitya Niketan Public Library, Ambajogai" : "साहित्य निकेतन सार्वजनिक ग्रंथालय, अंबाजोगाई"}
+                    </p>
+                    <p className="text-xs text-zinc-300">
+                      {isEn ? "Reg. No. BHR/3/1962 • Grade 'A' Recognized" : "नोंदणी क्र. BHR/3/1962 • महाराष्ट्र शासन 'वर्ग अ' मान्यताप्राप्त"}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* 4 Pillars of the Institution */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+              <div className="p-5 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 shadow-xs space-y-2">
+                <div className="h-10 w-10 rounded-xl bg-[#800020]/10 text-[#800020] dark:bg-amber-400/10 dark:text-amber-300 flex items-center justify-center font-bold">
+                  <BookOpen className="h-5 w-5" />
+                </div>
+                <h4 className="font-bold text-base text-zinc-900 dark:text-white font-marathi-heading">
+                  {isEn ? "39,950+ Volumes" : isHi ? "३९,९५०+ ग्रन्थ" : "३९,९५०+ ग्रंथसंग्रह"}
+                </h4>
+                <p className="text-xs text-zinc-500 leading-relaxed">
+                  {isEn
+                    ? "Rare Marathi, Sanskrit, Hindi, and English literature with open shelf access."
+                    : isHi
+                    ? "मराठी, संस्कृत, हिन्दी एवं अंग्रेजी ग्रन्थों का समृद्ध एवं सुव्यवस्थित संकलन।"
+                    : "अभिजात मराठी, संस्कृत, हिंदी आणि इंग्रजी कादंबरी, इतिहास व संदर्भ ग्रंथांचा खजिना."}
+                </p>
+              </div>
+
+              <div className="p-5 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 shadow-xs space-y-2">
+                <div className="h-10 w-10 rounded-xl bg-[#800020]/10 text-[#800020] dark:bg-amber-400/10 dark:text-amber-300 flex items-center justify-center font-bold">
+                  <Building2 className="h-5 w-5" />
+                </div>
+                <h4 className="font-bold text-base text-zinc-900 dark:text-white font-marathi-heading">
+                  {isEn ? "200+ Seat AC Wing" : isHi ? "२००+ सीट अभ्यासिका" : "२००+ आसनी अभ्यासिका"}
+                </h4>
+                <p className="text-xs text-zinc-500 leading-relaxed">
+                  {isEn
+                    ? "Peaceful air-conditioned study environment for UPSC, MPSC, and civil service aspirants."
+                    : isHi
+                    ? "प्रतियोगी परीक्षा (MPSC, UPSC) की तैयारी हेतु वातानुकूलित शांत अध्ययन कक्ष।"
+                    : "MPSC, UPSC व स्पर्धा परीक्षा देणाऱ्या ग्रामीण विद्यार्थ्यांसाठी शांत व वातानुकूलित दालन."}
+                </p>
+              </div>
+
+              <div className="p-5 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 shadow-xs space-y-2">
+                <div className="h-10 w-10 rounded-xl bg-[#800020]/10 text-[#800020] dark:bg-amber-400/10 dark:text-amber-300 flex items-center justify-center font-bold">
+                  <Award className="h-5 w-5" />
+                </div>
+                <h4 className="font-bold text-base text-zinc-900 dark:text-white font-marathi-heading">
+                  {isEn ? "Grade 'A' Accreditation" : isHi ? "वर्ग 'अ' मान्यता" : "शासकीय 'वर्ग अ' दर्जा"}
+                </h4>
+                <p className="text-xs text-zinc-500 leading-relaxed">
+                  {isEn
+                    ? "Highest standard accreditation awarded by the Directorate of Libraries, Maharashtra."
+                    : isHi
+                    ? "ग्रन्थालय संचालनालय, महाराष्ट्र शासन द्वारा प्रदत्त सर्वोच्च गुणवत्ता मान्यता।"
+                    : "ग्रंथालय संचालनालय, महाराष्ट्र शासनाचा सर्वोच्च दर्जा व गौरव प्राप्त संस्था."}
+                </p>
+              </div>
+
+              <div className="p-5 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 shadow-xs space-y-2">
+                <div className="h-10 w-10 rounded-xl bg-[#800020]/10 text-[#800020] dark:bg-amber-400/10 dark:text-amber-300 flex items-center justify-center font-bold">
+                  <Users className="h-5 w-5" />
+                </div>
+                <h4 className="font-bold text-base text-zinc-900 dark:text-white font-marathi-heading">
+                  {isEn ? "Community Centered" : isHi ? "जनभागीदारी" : "वाचककेंद्रित उपक्रम"}
+                </h4>
+                <p className="text-xs text-zinc-500 leading-relaxed">
+                  {isEn
+                    ? "Lectures, book exhibitions, senior citizens daily reading, and children's literature corner."
+                    : isHi
+                    ? "वार्षिक व्याख्यानमाला, बालवाचनालय, ज्येष्ठ नागरिक वाचन मंच एवं साहित्यिक विमर्श।"
+                    : "वार्षिक व्याख्यानमाला, बालविभाग, ज्येष्ठ नागरिक वृत्तपत्र वाचन व साहित्यिक परिसंवाद."}
+                </p>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        {/* Divider between Intro and Team */}
+        <div className="max-w-5xl mx-auto px-4">
+          <div className="border-t border-zinc-200 dark:border-zinc-800" />
+        </div>
+
+        {/* =========================================================
+            २. नियामक व कार्यकारी प्रशासन (#team)
             ========================================================= */}
         <section id="team" className="section py-12 scroll-mt-20">
           <div className="max-w-5xl mx-auto px-4">

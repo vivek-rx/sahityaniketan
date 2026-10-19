@@ -36,6 +36,9 @@ import { useLanguage } from "@/context/language-context";
 
 export default function RememberingAmbajogaiPage() {
   const { language } = useLanguage();
+  const isEn = language === "en";
+  const isHi = language === "hi";
+
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [activeItem, setActiveItem] = useState<AmbajogaiMemoryItem | null>(null);
@@ -46,12 +49,19 @@ export default function RememberingAmbajogaiPage() {
   // Filter items
   const filteredItems = AMBAJOGAI_MEMORY_ITEMS.filter((item) => {
     const matchesCategory = selectedCategory === "all" || item.categoryId === selectedCategory;
-    const matchesSearch = 
-      searchQuery === "" ||
-      item.titleMarathi.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item.summaryMarathi.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item.locationMarathi.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item.era.toLowerCase().includes(searchQuery.toLowerCase());
+    const query = searchQuery.toLowerCase().trim();
+    if (!query) return matchesCategory;
+
+    const matchesSearch =
+      item.titleMarathi.toLowerCase().includes(query) ||
+      (item.titleEnglish && item.titleEnglish.toLowerCase().includes(query)) ||
+      item.summaryMarathi.toLowerCase().includes(query) ||
+      (item.summaryEnglish && item.summaryEnglish.toLowerCase().includes(query)) ||
+      item.locationMarathi.toLowerCase().includes(query) ||
+      (item.locationEnglish && item.locationEnglish.toLowerCase().includes(query)) ||
+      item.era.toLowerCase().includes(query) ||
+      item.tags.some((t) => t.toLowerCase().includes(query));
+
     return matchesCategory && matchesSearch;
   });
 
@@ -72,23 +82,41 @@ export default function RememberingAmbajogaiPage() {
             </div>
 
             <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight font-marathi-heading text-white leading-tight">
-              अंबाजोगाईच्या ऐतिहासिक स्मृती
+              {isEn
+                ? "Historic Memories of Ambajogai"
+                : isHi
+                ? "अंबाजोगाई की ऐतिहासिक स्मृतियाँ"
+                : "अंबाजोगाईच्या ऐतिहासिक स्मृती"}
             </h1>
 
             <p className="max-w-2xl mx-auto text-xs sm:text-sm text-stone-200 font-medium leading-relaxed">
-              जुनी छायाचित्रे, ऐतिहासिक वृत्तपत्रे, प्राचीन वास्तू, साहित्यिक आणि लोकचळवळींचा जिवंत वारसा. केवळ ग्रंथालयापुरते मर्यादित न राहता संपूर्ण अंबाजोगाईचा डिजिटल ज्ञानवारसा.
+              {isEn
+                ? "Vintage photographs, historic periodicals, heritage monuments, literature, and living community archives preserved by Sahitya Niketan."
+                : isHi
+                ? "पुरानी तस्वीरें, ऐतिहासिक समाचार पत्र, प्राचीन इमारतें एवं सांस्कृतिक आंदोलनों की समृद्ध डिजिटल ज्ञान धरोहर।"
+                : "जुनी छायाचित्रे, ऐतिहासिक वृत्तपत्रे, प्राचीन वास्तू, साहित्यिक आणि लोकचळवळींचा जिवंत वारसा. केवळ ग्रंथालयापुरते मर्यादित न राहता संपूर्ण अंबाजोगाईचा डिजिटल ज्ञानवारसा."}
             </p>
 
             {/* In-Page Quick Stats */}
             <div className="pt-2 flex flex-wrap items-center justify-center gap-4 text-xs text-stone-300 font-medium">
               <span className="flex items-center gap-1.5">
                 <span className="w-2 h-2 rounded-full bg-[#E5B869]" />
-                <span>{AMBAJOGAI_MEMORY_ITEMS.length}+ ऐतिहासिक नोंदी</span>
+                <span>
+                  {isEn
+                    ? `${AMBAJOGAI_MEMORY_ITEMS.length}+ Archival Records`
+                    : isHi
+                    ? `${AMBAJOGAI_MEMORY_ITEMS.length}+ ऐतिहासिक अभिलेख`
+                    : `${AMBAJOGAI_MEMORY_ITEMS.length}+ ऐतिहासिक नोंदी`}
+                </span>
               </span>
               <span>•</span>
-              <span>स्थापना १ ऑगस्ट १९४५</span>
+              <span>
+                {isEn ? "Est. 1 August 1945" : isHi ? "स्थापना १ अगस्त १९४५" : "स्थापना १ ऑगस्ट १९४५"}
+              </span>
               <span>•</span>
-              <span>शुक्रवार पेठ, अंबाजोगाई</span>
+              <span>
+                {isEn ? "Shukrawar Peth, Ambajogai" : isHi ? "शुक्रवार पेठ, अंबाजोगाई" : "शुक्रवार पेठ, अंबाजोगाई"}
+              </span>
             </div>
           </div>
         </section>
@@ -109,7 +137,11 @@ export default function RememberingAmbajogaiPage() {
                     : "bg-white dark:bg-[#1E1418] text-stone-700 dark:text-stone-300 border border-[#E5DDD0] dark:border-[#332228] hover:border-[#800020]"
                 }`}
               >
-                सर्व दालने ({AMBAJOGAI_MEMORY_ITEMS.length})
+                {isEn
+                  ? `All Categories (${AMBAJOGAI_MEMORY_ITEMS.length})`
+                  : isHi
+                  ? `सभी दालन (${AMBAJOGAI_MEMORY_ITEMS.length})`
+                  : `सर्व दालने (${AMBAJOGAI_MEMORY_ITEMS.length})`}
               </button>
 
               {launchedCategories.map((cat) => (
@@ -122,7 +154,7 @@ export default function RememberingAmbajogaiPage() {
                       : "bg-white dark:bg-[#1E1418] text-stone-700 dark:text-stone-300 border border-[#E5DDD0] dark:border-[#332228] hover:border-[#800020]"
                   }`}
                 >
-                  {cat.titleMarathi}
+                  {isEn ? cat.titleEnglish : cat.titleMarathi}
                 </button>
               ))}
             </div>
@@ -134,7 +166,13 @@ export default function RememberingAmbajogaiPage() {
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="स्मृतींमध्ये शोधा..."
+                placeholder={
+                  isEn
+                    ? "Search memories, places, era..."
+                    : isHi
+                    ? "स्मृतियों, स्थानों व कालखंड में खोजें..."
+                    : "स्मृतींमध्ये शोधा..."
+                }
                 className="w-full pl-8 pr-3 py-1.5 rounded-full bg-white dark:bg-[#1E1418] border border-[#E5DDD0] dark:border-[#332228] text-xs text-stone-800 dark:text-stone-200 focus:outline-hidden focus:border-[#800020] dark:focus:border-[#E5B869]"
               />
               {searchQuery && (
@@ -157,8 +195,16 @@ export default function RememberingAmbajogaiPage() {
           {filteredItems.length === 0 ? (
             <div className="text-center py-16 bg-white dark:bg-[#1E1418] rounded-3xl border border-[#E5DDD0] dark:border-[#332228] p-8">
               <FileText className="w-12 h-12 text-stone-400 mx-auto mb-3" />
-              <h3 className="font-marathi-heading text-lg font-bold">कोणतीही नोंद सापडली नाही</h3>
-              <p className="text-xs text-stone-500 mt-1">कृपया शोध शब्द बदलून पहा किंवा सर्व दालने निवडा.</p>
+              <h3 className="font-marathi-heading text-lg font-bold">
+                {isEn ? "No records found" : isHi ? "कोई अभिलेख नहीं मिला" : "कोणतीही नोंद सापडली नाही"}
+              </h3>
+              <p className="text-xs text-stone-500 mt-1">
+                {isEn
+                  ? "Try adjusting your search terms or select all categories."
+                  : isHi
+                  ? "कृपया खोज शब्द बदलें अथवा सभी दालन चुनें।"
+                  : "कृपया शोध शब्द बदलून पहा किंवा सर्व दालने निवडा."}
+              </p>
               <button
                 onClick={() => {
                   setSelectedCategory("all");
@@ -166,7 +212,7 @@ export default function RememberingAmbajogaiPage() {
                 }}
                 className="mt-4 px-4 py-2 rounded-xl bg-[#800020] hover:bg-[#66001A] text-white text-xs font-bold transition-colors cursor-pointer"
               >
-                सर्व नोंदी पहा
+                {isEn ? "View All Records" : isHi ? "सभी अभिलेख देखें" : "सर्व नोंदी पहा"}
               </button>
             </div>
           ) : (
@@ -182,7 +228,7 @@ export default function RememberingAmbajogaiPage() {
                     <div className="relative h-56 w-full overflow-hidden bg-stone-100 dark:bg-stone-800">
                       <Image
                         src={item.image}
-                        alt={item.titleMarathi}
+                        alt={isEn ? item.titleEnglish : item.titleMarathi}
                         fill
                         className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                         sizes="(max-width: 768px) 100vw, 33vw"
@@ -192,7 +238,7 @@ export default function RememberingAmbajogaiPage() {
                       </div>
 
                       <div className="absolute bottom-3 left-3 right-3 px-2.5 py-1 rounded-md bg-white/95 dark:bg-[#1E1418]/95 text-[10px] font-semibold text-stone-700 dark:text-stone-300 border border-[#E5DDD0] dark:border-[#332228] truncate shadow-xs">
-                        📍 {item.locationMarathi}
+                        📍 {isEn ? item.locationEnglish : item.locationMarathi}
                       </div>
                     </div>
 
@@ -201,16 +247,16 @@ export default function RememberingAmbajogaiPage() {
                       <div className="flex items-center justify-between text-[11px] text-stone-500 dark:text-stone-400 font-mono">
                         <span>{item.archiveReference}</span>
                         <span className="text-[#800020] dark:text-[#E5B869] font-sans font-bold">
-                          तपशील पहा
+                          {isEn ? "View Details" : isHi ? "विवरण देखें" : "तपशील पहा"}
                         </span>
                       </div>
 
                       <h3 className="font-marathi-heading text-lg font-bold text-stone-900 dark:text-[#FAF2E8] group-hover:text-[#800020] dark:group-hover:text-[#E5B869] transition-colors">
-                        {item.titleMarathi}
+                        {isEn ? item.titleEnglish : item.titleMarathi}
                       </h3>
 
                       <p className="text-xs text-stone-600 dark:text-stone-300 font-medium leading-relaxed line-clamp-3">
-                        {item.summaryMarathi}
+                        {isEn ? item.summaryEnglish : item.summaryMarathi}
                       </p>
 
                       {/* Tag badges */}
@@ -229,7 +275,7 @@ export default function RememberingAmbajogaiPage() {
 
                   {/* Card bottom bar */}
                   <div className="p-4 pt-0 border-t border-transparent text-[11px] font-bold text-[#800020] dark:text-[#E5B869] flex items-center justify-end">
-                    <span>संपूर्ण संदर्भ वाचा</span>
+                    <span>{isEn ? "Read Full Record" : isHi ? "सम्पूर्ण संदर्भ पढ़ें" : "संपूर्ण संदर्भ वाचा"}</span>
                   </div>
                 </div>
               ))}
@@ -246,11 +292,19 @@ export default function RememberingAmbajogaiPage() {
               
               <div className="lg:col-span-8 space-y-4">
                 <h2 className="font-marathi-heading text-2xl sm:text-3xl font-extrabold text-stone-900 dark:text-white">
-                  अंबाजोगाईच्या ऐतिहासिक आठवणींचे जतन व विस्तार
+                  {isEn
+                    ? "Preserving & Expanding the Heritage of Ambajogai"
+                    : isHi
+                    ? "अंबाजोगाई की ऐतिहासिक स्मृतियों का संरक्षण व विस्तार"
+                    : "अंबाजोगाईच्या ऐतिहासिक आठवणींचे जतन व विस्तार"}
                 </h2>
 
                 <p className="text-xs sm:text-sm text-stone-600 dark:text-stone-300 font-medium leading-relaxed">
-                  हा प्रकल्प केवळ ग्रंथालयापुरता मर्यादित नसून, अंबाजोगाईच्या प्रत्येक पैलूला एकत्र आणणारे व्यासपीठ आहे. खालील दालने पुढील टप्प्यात उपलब्ध करून दिली जात आहेत:
+                  {isEn
+                    ? "This archival initiative connects the history of Ambajogai with future generations. The following archives are currently being expanded:"
+                    : isHi
+                    ? "यह परियोजना सम्पूर्ण अंबाजोगाई की धरोहर को सहेजने का सामूहिक प्रयास है। आगामी दालन:"
+                    : "हा प्रकल्प केवळ ग्रंथालयापुरता मर्यादित नसून, अंबाजोगाईच्या प्रत्येक पैलूला एकत्र आणणारे व्यासपीठ आहे. खालील दालने पुढील टप्प्यात उपलब्ध करून दिली जात आहेत:"}
                 </p>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
@@ -262,7 +316,7 @@ export default function RememberingAmbajogaiPage() {
                       <span className="w-2 h-2 rounded-full bg-[#B8860B] mt-1.5 shrink-0" />
                       <div>
                         <h4 className="text-xs font-bold text-stone-900 dark:text-stone-100">
-                          {c.titleMarathi}
+                          {isEn ? c.titleEnglish : c.titleMarathi}
                         </h4>
                         <p className="text-[11px] text-stone-500 dark:text-stone-400 mt-0.5 leading-tight">
                           {c.descriptionMarathi}
@@ -277,19 +331,31 @@ export default function RememberingAmbajogaiPage() {
               <div className="lg:col-span-4 p-6 rounded-2xl bg-white dark:bg-[#1E1418] border border-[#E5DDD0] dark:border-[#332228] shadow-xs space-y-3">
                 <div className="flex items-center gap-2 text-xs font-bold text-[#800020] dark:text-[#E5B869]">
                   <HeartHandshake className="w-4 h-4" />
-                  <span>आपल्या आठवणींचे योगदान द्या</span>
+                  <span>
+                    {isEn ? "Contribute Your Memories" : isHi ? "अपनी स्मृतियों का योगदान दें" : "आपल्या आठवणींचे योगदान द्या"}
+                  </span>
                 </div>
                 <h3 className="font-marathi-heading text-base font-bold text-stone-900 dark:text-white">
-                  आपल्याकडे जुनी छायाचित्रे अथवा पत्रे आहेत का?
+                  {isEn
+                    ? "Do you have vintage photos or historical letters?"
+                    : isHi
+                    ? "क्या आपके पास पुरानी तस्वीरें अथवा पत्र हैं?"
+                    : "आपल्याकडे जुनी छायाचित्रे अथवा पत्रे आहेत का?"}
                 </h3>
                 <p className="text-xs text-stone-600 dark:text-stone-300 leading-relaxed">
-                  अंबाजोगाईच्या ऐतिहासिक वारशाचे रक्षण करण्यासाठी आपले जुने कौटुंबिक अल्बम किंवा दस्तऐवज ग्रंथालयात स्कॅन करून परत मिळवा.
+                  {isEn
+                    ? "Help us safeguard Ambajogai's collective memory. Bring your family albums or documents to the library for free high-resolution scanning."
+                    : isHi
+                    ? "अंबाजोगाई के ऐतिहासिक गौरव के संरक्षण हेतु अपने पुराने पारिवारिक एल्बम या दस्तावेज पुस्तकालय में सुरक्षित स्कैन करवाएं।"
+                    : "अंबाजोगाईच्या ऐतिहासिक वारशाचे रक्षण करण्यासाठी आपले जुने कौटुंबिक अल्बम किंवा दस्तऐवज ग्रंथालयात स्कॅन करून परत मिळवा."}
                 </p>
                 <Link
                   href="/contact?subject=ambajogai-heritage-donation"
                   className="w-full inline-flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-[#800020] hover:bg-[#66001A] text-white text-xs font-bold transition-all shadow-xs cursor-pointer"
                 >
-                  <span>ग्रंथालयाशी संपर्क साधा</span>
+                  <span>
+                    {isEn ? "Contact Library Archives" : isHi ? "पुस्तकालय से संपर्क करें" : "ग्रंथालयाशी संपर्क साधा"}
+                  </span>
                 </Link>
               </div>
 
@@ -314,6 +380,7 @@ export default function RememberingAmbajogaiPage() {
                 <button
                   onClick={() => setActiveItem(null)}
                   className="absolute top-5 right-5 p-2 rounded-full bg-stone-100 hover:bg-stone-200 dark:bg-stone-800 dark:hover:bg-stone-700 text-stone-700 dark:text-stone-200 cursor-pointer"
+                  aria-label={isEn ? "Close dialog" : "बंद करा"}
                 >
                   <X className="w-4 h-4" />
                 </button>
@@ -321,18 +388,20 @@ export default function RememberingAmbajogaiPage() {
                 {/* Modal Header */}
                 <div className="flex items-center gap-2 text-xs font-bold text-[#800020] dark:text-[#E5B869] mb-2">
                   <Landmark className="w-3.5 h-3.5" />
-                  <span>{activeItem.era} • {activeItem.locationMarathi}</span>
+                  <span>
+                    {activeItem.era} • {isEn ? activeItem.locationEnglish : activeItem.locationMarathi}
+                  </span>
                 </div>
 
                 <h2 className="font-marathi-heading text-xl sm:text-2xl font-bold text-stone-900 dark:text-white mb-4">
-                  {activeItem.titleMarathi}
+                  {isEn ? activeItem.titleEnglish : activeItem.titleMarathi}
                 </h2>
 
                 {/* Plate View */}
                 <div className="relative h-64 sm:h-80 w-full rounded-2xl overflow-hidden bg-stone-100 dark:bg-stone-800 border border-[#E5DDD0] dark:border-[#332228] mb-5">
                   <Image
                     src={activeItem.image}
-                    alt={activeItem.titleMarathi}
+                    alt={isEn ? activeItem.titleEnglish : activeItem.titleMarathi}
                     fill
                     className="object-cover"
                   />
@@ -344,13 +413,13 @@ export default function RememberingAmbajogaiPage() {
                 {/* Detailed Summary */}
                 <div className="space-y-3.5 text-xs sm:text-sm text-stone-700 dark:text-stone-200 leading-relaxed font-marathi-body">
                   <p className="font-semibold text-stone-900 dark:text-white">
-                    {activeItem.summaryMarathi}
+                    {isEn ? activeItem.summaryEnglish : activeItem.summaryMarathi}
                   </p>
 
                   {activeItem.historicalContextMarathi && (
                     <div className="p-4 rounded-xl bg-[#FAF8F5] dark:bg-[#160E11] border-l-4 border-[#800020] dark:border-[#E5B869]">
                       <span className="font-bold text-[#800020] dark:text-[#E5B869] block mb-1">
-                        ऐतिहासिक संदर्भ:
+                        {isEn ? "Historical Context:" : isHi ? "ऐतिहासिक संदर्भ:" : "ऐतिहासिक संदर्भ:"}
                       </span>
                       {activeItem.historicalContextMarathi}
                     </div>
@@ -358,7 +427,9 @@ export default function RememberingAmbajogaiPage() {
 
                   {activeItem.curatorNoteMarathi && (
                     <p className="text-stone-600 dark:text-stone-400 italic">
-                      <span className="font-bold not-italic">अभिलेखागार नोंद: </span>
+                      <span className="font-bold not-italic">
+                        {isEn ? "Archival Record Note: " : isHi ? "अभिलेखागार टिप्पणी: " : "अभिलेखागार नोंद: "}
+                      </span>
                       {activeItem.curatorNoteMarathi}
                     </p>
                   )}
@@ -367,13 +438,13 @@ export default function RememberingAmbajogaiPage() {
                 {/* Footer Actions */}
                 <div className="mt-6 pt-4 border-t border-[#E5DDD0] dark:border-[#332228] flex items-center justify-between">
                   <span className="text-[11px] font-mono text-stone-400">
-                    साहित्य निकेतन ग्रंथालय, अंबाजोगाई
+                    {isEn ? "Sahitya Niketan Public Library, Ambajogai" : "साहित्य निकेतन ग्रंथालय, अंबाजोगाई"}
                   </span>
                   <button
                     onClick={() => setActiveItem(null)}
                     className="px-4 py-2 rounded-xl bg-stone-100 hover:bg-stone-200 dark:bg-stone-800 text-stone-800 dark:text-stone-200 text-xs font-bold cursor-pointer"
                   >
-                    बंद करा
+                    {isEn ? "Close" : isHi ? "बंद करें" : "बंद करा"}
                   </button>
                 </div>
 
