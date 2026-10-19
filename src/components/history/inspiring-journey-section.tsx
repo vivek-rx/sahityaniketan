@@ -18,6 +18,7 @@ import {
 export function InspiringJourneySection() {
   const { language } = useLanguage();
   const isEn = language === "en";
+  const isHi = language === "hi";
 
   const { chapters, registration, motto, foundingMembers, earlyTeachers } = OFFICIAL_LIBRARY_HISTORY;
 
@@ -26,18 +27,26 @@ export function InspiringJourneySection() {
       {/* ── SECTION HEADER & MOTTO PLAQUE ── */}
       <div className="text-center max-w-3xl mx-auto space-y-4">
         <p className="text-xs sm:text-sm font-semibold tracking-wider text-[#800020] dark:text-amber-400 uppercase">
-          {isEn ? `Official Archival Records • Reg. No. ${registration.regNumber}` : `अधिकृत ऐतिहासिक दस्तऐवज • नोंदणी क्र. ${registration.regNumber}`}
+          {isEn
+            ? `Official Archival Records • Reg. No. ${registration.regNumber}`
+            : isHi
+              ? `आधिकारिक ऐतिहासिक दस्तावेज • पंजीकरण सं. ${registration.regNumber}`
+              : `अधिकृत ऐतिहासिक दस्तऐवज • नोंदणी क्र. ${registration.regNumber}`}
         </p>
 
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-black font-marathi-heading text-stone-900 dark:text-white leading-tight">
-          {isEn ? OFFICIAL_LIBRARY_HISTORY.mainHeadingEn : OFFICIAL_LIBRARY_HISTORY.mainHeading}
+          {isEn
+            ? OFFICIAL_LIBRARY_HISTORY.mainHeadingEn
+            : isHi
+              ? "हमारी प्रेरक यात्रा: साहित्य निकेतन, अंबाजोगाई"
+              : OFFICIAL_LIBRARY_HISTORY.mainHeading}
         </h2>
 
         {/* Founding Motto Inscription Callout */}
         <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-[#800020]/5 via-amber-500/5 to-transparent border border-[#800020]/20 dark:border-amber-500/20 text-center relative overflow-hidden my-6">
           <Quote className="w-10 h-10 text-[#800020]/15 dark:text-amber-400/15 absolute -top-1 -left-1" />
           <p className="text-xs uppercase tracking-widest font-bold text-[#800020] dark:text-amber-400 mb-1">
-            {isEn ? "The Founding Motto (1945)" : "संस्थेचे मूळ ब्रीदवाक्य"}
+            {isEn ? "The Founding Motto (1945)" : isHi ? "संस्था का मूल ध्येय वाक्य (१९४५)" : "संस्थेचे मूळ ब्रीदवाक्य"}
           </p>
           <div className="text-2xl sm:text-3xl md:text-4xl font-black font-serif italic text-stone-900 dark:text-amber-100">
             “{isEn ? motto.en : motto.mr}”
@@ -45,7 +54,9 @@ export function InspiringJourneySection() {
           <p className="text-xs sm:text-sm text-stone-600 dark:text-stone-300 mt-2 max-w-xl mx-auto">
             {isEn
               ? "Laying the foundation of public awareness, social reform, and patriotic unity through literature."
-              : "साहित्याच्या माध्यमातून लोकजागृती, सामाजिक सुधारणा आणि राष्ट्रीय एकात्मता दृढ करणारा दीपस्तंभ."}
+              : isHi
+                ? "साहित्य के माध्यम से जनजागृति, सामाजिक सुधार एवं राष्ट्रीय एकता को सुदृढ़ करने वाला प्रकाशपुंज।"
+                : "साहित्याच्या माध्यमातून लोकजागृती, सामाजिक सुधारणा आणि राष्ट्रीय एकात्मता दृढ करणारा दीपस्तंभ."}
           </p>
         </div>
       </div>
@@ -53,8 +64,6 @@ export function InspiringJourneySection() {
       {/* ── 7 AUTHENTIC CHRONICLE CHAPTERS ── */}
       <div className="space-y-12 sm:space-y-16">
         {chapters.map((chapter, idx) => {
-          const isEven = idx % 2 === 0;
-
           return (
             <article
               key={chapter.id}
@@ -90,7 +99,11 @@ export function InspiringJourneySection() {
                   <div className="pt-2">
                     <h4 className="text-xs font-bold text-stone-900 dark:text-stone-200 uppercase tracking-wider mb-2.5 flex items-center gap-1.5">
                       <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
-                      {isEn ? "Key Historical Takeaways:" : "महत्त्वाचे ऐतिहासिक संदर्भ:"}
+                      {isEn
+                        ? "Key Historical Takeaways:"
+                        : isHi
+                          ? "प्रमुख ऐतिहासिक संदर्भ:"
+                          : "महत्त्वाचे ऐतिहासिक संदर्भ:"}
                     </h4>
                     <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-stone-600 dark:text-stone-300">
                       {chapter.keyHighlights.map((hl, i) => (
@@ -130,15 +143,23 @@ export function InspiringJourneySection() {
       <div className="p-8 sm:p-10 rounded-3xl bg-gradient-to-br from-stone-900 to-stone-950 text-white border border-stone-800 shadow-xl space-y-8">
         <div className="text-center max-w-2xl mx-auto space-y-2">
           <span className="text-xs font-bold text-amber-400 uppercase tracking-widest">
-            {registration.act} (नोंदणी क्र. {registration.regNumber})
+            {isEn ? registration.actEn : registration.act} (
+            {isEn ? "Reg. No." : isHi ? "पंजीकरण सं." : "नोंदणी क्र."}{" "}
+            {registration.regNumber})
           </span>
           <h3 className="text-2xl sm:text-3xl font-black font-marathi-heading">
-            {isEn ? "Board of Trustees & Leadership Legacy" : "विश्वस्त मंडळ व मार्गदर्शक वारसा"}
+            {isEn
+              ? "Board of Trustees & Leadership Legacy"
+              : isHi
+                ? "न्यासी मण्डल एवं मार्गदर्शक धरोहर"
+                : "विश्वस्त मंडळ व मार्गदर्शक वारसा"}
           </h3>
           <p className="text-xs sm:text-sm text-stone-300">
             {isEn
               ? "Guided by legendary pioneers in 1962 and sustained by distinguished public trustees today."
-              : "१९६२ मधील पहिल्या विश्वस्त मंडळाने रचलेल्या पायावर आजची अखंड ज्ञानपरंपरा दिमाखात कार्यरत आहे."}
+              : isHi
+                ? "१९६२ के प्रथम न्यासी मण्डल की मजबूत नींव पर आज की अखंड ज्ञानपरम्परा निरंतर सेवारत है।"
+                : "१९६२ मधील पहिल्या विश्वस्त मंडळाने रचलेल्या पायावर आजची अखंड ज्ञानपरंपरा दिमाखात कार्यरत आहे."}
           </p>
         </div>
 
@@ -147,7 +168,13 @@ export function InspiringJourneySection() {
           <div className="p-6 rounded-2xl bg-white/5 border border-white/10 space-y-3">
             <div className="flex items-center gap-2 text-amber-400 font-bold text-sm">
               <Award className="w-5 h-5" />
-              <span>{isEn ? "First Trustees (1962)" : "पहिले विश्वस्त मंडळ (१९६२)"}</span>
+              <span>
+                {isEn
+                  ? "First Trustees (1962)"
+                  : isHi
+                    ? "प्रथम न्यासी मण्डल (१९६२)"
+                    : "पहिले विश्वस्त मंडळ (१९६२)"}
+              </span>
             </div>
             <ul className="space-y-2 text-xs sm:text-sm text-stone-200">
               {(isEn ? registration.firstTrusteesEn : registration.firstTrustees).map((t, idx) => (
@@ -163,7 +190,13 @@ export function InspiringJourneySection() {
           <div className="p-6 rounded-2xl bg-white/5 border border-white/10 space-y-3">
             <div className="flex items-center gap-2 text-amber-400 font-bold text-sm">
               <Users className="w-5 h-5" />
-              <span>{isEn ? "Current Board of Trustees" : "विद्यमान विश्वस्त मंडळ"}</span>
+              <span>
+                {isEn
+                  ? "Current Board of Trustees"
+                  : isHi
+                    ? "वर्तमान न्यासी मण्डल"
+                    : "विद्यमान विश्वस्त मंडळ"}
+              </span>
             </div>
             <ul className="space-y-2 text-xs sm:text-sm text-stone-200">
               {(isEn ? registration.currentTrusteesEn : registration.currentTrustees).map((t, idx) => (
@@ -179,13 +212,25 @@ export function InspiringJourneySection() {
         {/* Founding Youth & Dedicated Teachers Memorial Strip */}
         <div className="pt-6 border-t border-white/10 grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs text-stone-300">
           <div>
-            <span className="text-amber-300 font-bold block mb-1">स्थापनेतील ध्येयवादी तरुण (१९४५):</span>
+            <span className="text-amber-300 font-bold block mb-1">
+              {isEn
+                ? "Pioneering Youth Founders (1945):"
+                : isHi
+                  ? "स्थापना के ध्येयवादी युवा (१९४५):"
+                  : "स्थापनेतील ध्येयवादी तरुण (१९४५):"}
+            </span>
             <span className="leading-relaxed">
               {foundingMembers.join(" • ")}
             </span>
           </div>
           <div>
-            <span className="text-amber-300 font-bold block mb-1">प्रारंभीचे समर्पित शिक्षक (अल्प मानधन सेवा):</span>
+            <span className="text-amber-300 font-bold block mb-1">
+              {isEn
+                ? "Early Dedicated Teachers (Honorary Service):"
+                : isHi
+                  ? "प्रारंभिक समर्पित शिक्षक (अल्प मानदेय सेवा):"
+                  : "प्रारंभीचे समर्पित शिक्षक (अल्प मानधन सेवा):"}
+            </span>
             <span className="leading-relaxed">
               {earlyTeachers.join(" • ")}
             </span>

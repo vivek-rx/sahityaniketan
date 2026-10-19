@@ -80,19 +80,23 @@ export function LibraryEventsCarousel() {
             className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center flex-1"
           >
 
-            {/* Left Column: Event Information in Natural Marathi / English */}
+            {/* Left Column: Event Information in Natural Marathi / Hindi / English */}
             <div className="lg:col-span-7 space-y-4 sm:space-y-5 text-left">
               {/* Quiet Editorial Category & Date */}
               <div className="flex items-center gap-2 text-xs sm:text-sm font-marathi-body text-[#6B0F1A] dark:text-[#C5A059]">
                 <span className="font-bold">
                   {language === "en" && currentEvent.categoryEn
                     ? currentEvent.categoryEn
+                    : language === "hi" && currentEvent.categoryHi
+                    ? currentEvent.categoryHi
                     : currentEvent.category}
                 </span>
                 <span className="text-[#4A4440] dark:text-[#D5C0AE] font-medium">
                   —{" "}
                   {language === "en" && currentEvent.dateEn
                     ? currentEvent.dateEn
+                    : language === "hi" && currentEvent.dateHi
+                    ? currentEvent.dateHi
                     : currentEvent.date}
                 </span>
               </div>
@@ -104,6 +108,8 @@ export function LibraryEventsCarousel() {
               >
                 {language === "en" && currentEvent.titleEn
                   ? currentEvent.titleEn
+                  : language === "hi" && currentEvent.titleHi
+                  ? currentEvent.titleHi
                   : currentEvent.title}
               </h2>
 
@@ -111,6 +117,8 @@ export function LibraryEventsCarousel() {
               <p className="text-sm sm:text-base text-stone-700 dark:text-[#D5C2B4] leading-relaxed font-marathi-body line-clamp-4">
                 {language === "en" && currentEvent.descriptionEn
                   ? currentEvent.descriptionEn
+                  : language === "hi" && currentEvent.descriptionHi
+                  ? currentEvent.descriptionHi
                   : currentEvent.description}
               </p>
 
@@ -146,11 +154,11 @@ export function LibraryEventsCarousel() {
               <Link
                 href={`/gallery?event=${currentEvent.id}`}
                 className="w-full max-w-lg cursor-pointer block group"
-                title={`${currentEvent.title} — छायाचित्रे पहा`}
+                title={`${language === "en" ? currentEvent.titleEn || currentEvent.title : language === "hi" ? currentEvent.titleHi || currentEvent.title : currentEvent.title}`}
               >
                 <ClipDiv
                   imgSrc={currentEvent.coverImage}
-                  alt={currentEvent.title}
+                  alt={language === "en" ? currentEvent.titleEn || currentEvent.title : language === "hi" ? currentEvent.titleHi || currentEvent.title : currentEvent.title}
                   className="aspect-[4/3] w-full rounded-2xl shadow-md group-hover:shadow-2xl transition-all"
                 >
                   <div className="flex items-center justify-between text-white text-xs font-bold w-full">
@@ -158,11 +166,11 @@ export function LibraryEventsCarousel() {
                       <Camera className="h-3.5 w-3.5 text-[#E5B869]" />
                       <span>
                         {currentEvent.photos.length}{" "}
-                        {language === "en" ? "Photos" : "छायाचित्रे"}
+                        {language === "en" ? "Photos" : language === "hi" ? "छायाचित्र" : "छायाचित्रे"}
                       </span>
                     </span>
                     <span className="text-[#E5B869] group-hover:underline flex items-center gap-1">
-                      <span>{language === "en" ? "Open Gallery" : "गॅलरी उघडा"}</span>
+                      <span>{language === "en" ? "Open Gallery" : language === "hi" ? "गैलरी खोलें" : "गॅलरी उघडा"}</span>
                     </span>
                   </div>
                 </ClipDiv>
@@ -177,7 +185,7 @@ export function LibraryEventsCarousel() {
           <button
             type="button"
             onClick={handlePrev}
-            aria-label="मागील कार्यक्रम"
+            aria-label={language === "en" ? "Previous Event" : language === "hi" ? "पिछला कार्यक्रम" : "मागील कार्यक्रम"}
             className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-zinc-700 dark:text-zinc-300 hover:text-zinc-900 hover:bg-zinc-100 shadow-2xs transition-all cursor-pointer"
           >
             <ChevronLeft className="h-5 w-5" />
@@ -192,7 +200,7 @@ export function LibraryEventsCarousel() {
                   key={event.id}
                   type="button"
                   onClick={() => setCurrentIndex(index)}
-                  aria-label={`कार्यक्रम क्रमांक ${index + 1}: ${event.title}`}
+                  aria-label={`${language === "en" ? "Event #" : language === "hi" ? "कार्यक्रम संख्या " : "कार्यक्रम क्रमांक "}${index + 1}`}
                   className={`h-2 sm:h-2.5 rounded-full transition-all duration-300 cursor-pointer ${
                     isActive
                       ? "w-8 sm:w-10 bg-[#800020] dark:bg-[#E5B869]"
@@ -207,7 +215,7 @@ export function LibraryEventsCarousel() {
           <button
             type="button"
             onClick={handleNext}
-            aria-label="पुढील कार्यक्रम"
+            aria-label={language === "en" ? "Next Event" : language === "hi" ? "अगला कार्यक्रम" : "पुढील कार्यक्रम"}
             className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full border border-[#E5DDD0] dark:border-[#332228] bg-white dark:bg-[#1E1418] text-stone-700 dark:text-stone-300 hover:text-[#800020] dark:hover:text-[#E5B869] hover:border-[#800020] shadow-2xs transition-all cursor-pointer"
           >
             <ChevronRight className="h-5 w-5" />

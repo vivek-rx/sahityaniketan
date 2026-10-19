@@ -743,7 +743,7 @@ export function FeaturedBooksSection() {
                         {activeManuscript.shelf}
                       </span>
                       <span className="font-marathi-heading text-xs font-semibold text-zinc-100 bg-zinc-900/80 backdrop-blur-xs px-3 py-1 rounded-full border border-white/10">
-                        {activeManuscript.year} (शके कालखंड)
+                        {activeManuscript.year} {language === "en" ? "(Shaka Era)" : language === "hi" ? "(शक संवत)" : "(शके कालखंड)"}
                       </span>
                     </div>
 
@@ -782,14 +782,14 @@ export function FeaturedBooksSection() {
                     className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-zinc-900 hover:bg-zinc-800 text-white dark:bg-white dark:hover:bg-zinc-100 dark:text-zinc-900 text-xs sm:text-sm font-semibold shadow-xs transition-all active:scale-95"
                   >
                     <Eye className="w-4 h-4" />
-                    <span>ग्रंथसूची संदर्भ नोंद पहा</span>
+                    <span>{language === "en" ? "View Catalogue Record" : language === "hi" ? "ग्रन्थ सूची संदर्भ देखें" : "ग्रंथसूची संदर्भ नोंद पहा"}</span>
                   </Link>
 
                   <Link
                     href="/membership"
                     className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 hover:bg-zinc-50 dark:hover:bg-zinc-700 text-zinc-900 dark:text-zinc-100 text-xs sm:text-sm font-semibold transition-all"
                   >
-                    <span>संशोधक वाचन विनंती</span>
+                    <span>{language === "en" ? "Researcher Reading Request" : language === "hi" ? "शोधार्थी वाचन अनुरोध" : "संशोधक वाचन विनंती"}</span>
                   </Link>
                 </div>
               </div>
@@ -799,10 +799,10 @@ export function FeaturedBooksSection() {
                 <div>
                   <div className="flex items-center justify-between pb-2 border-b border-zinc-200 dark:border-zinc-800 mb-3">
                     <h4 className="font-marathi-heading text-xs sm:text-sm font-bold text-zinc-900 dark:text-zinc-100 uppercase tracking-wider">
-                      दुर्मीळ हस्तलिखित नोंदवही
+                      {language === "en" ? "Rare Manuscript Register" : language === "hi" ? "दुर्लभ पाण्डुलिपि पंजिका" : "दुर्मीळ हस्तलिखित नोंदवही"}
                     </h4>
                     <span className="font-mono text-[11px] text-zinc-500 dark:text-zinc-400">
-                      ५ संकलित दस्तऐवज
+                      {language === "en" ? "5 Archived Documents" : language === "hi" ? "५ संकलित दस्तावेज" : "५ संकलित दस्तऐवज"}
                     </span>
                   </div>
 
@@ -821,20 +821,20 @@ export function FeaturedBooksSection() {
                           )}
                         >
                           <div className="flex items-center justify-between text-[11px] text-zinc-500 dark:text-zinc-400 font-mono mb-0.5">
-                            <span>नोंद ०{idx + 1}</span>
+                            <span>{language === "en" ? `Record 0${idx + 1}` : language === "hi" ? `प्रविष्टि ०${idx + 1}` : `नोंद ०${idx + 1}`}</span>
                             <span className="font-semibold text-zinc-700 dark:text-zinc-300">{item.year}</span>
                           </div>
 
                           <h5 className="font-marathi-heading text-sm sm:text-base font-bold text-zinc-900 dark:text-zinc-100 leading-tight">
-                            {item.titleMarathi}
+                            {language === "en" ? item.title : item.titleMarathi}
                           </h5>
 
                           <p className="font-marathi-body text-xs text-zinc-600 dark:text-zinc-400 font-medium mt-0.5">
-                            {item.authorMarathi}
+                            {language === "en" ? item.author : item.authorMarathi}
                           </p>
 
                           <p className="font-marathi-body text-[11px] sm:text-xs text-zinc-500 dark:text-zinc-400 line-clamp-1 mt-1">
-                            {item.descriptionMarathi}
+                            {language === "en" ? item.description : item.descriptionMarathi}
                           </p>
                         </div>
                       );
@@ -846,7 +846,7 @@ export function FeaturedBooksSection() {
                   href="/catalogue?category=इतिहास"
                   className="mt-4 inline-flex items-center justify-between w-full p-3 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-xs font-semibold text-zinc-900 dark:text-zinc-100 hover:underline"
                 >
-                  <span>सर्व ४५०+ दुर्मीळ हस्तलिखिते व मोडी दस्तऐवज पहा</span>
+                  <span>{language === "en" ? "View All 450+ Rare Manuscripts & Modi Records" : language === "hi" ? "सभी ४५०+ दुर्लभ पाण्डुलिपियां एवं मोडी दस्तावेज देखें" : "सर्व ४५०+ दुर्मीळ हस्तलिखिते व मोडी दस्तऐवज पहा"}</span>
                 </Link>
               </div>
 
@@ -937,7 +937,7 @@ export function FeaturedBooksSection() {
                         className="w-full rounded-xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 hover:bg-zinc-50 dark:hover:bg-zinc-700 text-zinc-900 dark:text-zinc-100 py-2 px-3 text-xs font-semibold transition-colors shadow-2xs cursor-pointer flex items-center justify-center gap-1.5"
                       >
                         <Bookmark className="h-3.5 w-3.5 text-zinc-400" />
-                        <span>ग्रंथालयात शोधा</span>
+                        <span>{language === "en" ? "Find in Library" : language === "hi" ? "पुस्तकालय में खोजें" : "ग्रंथालयात शोधा"}</span>
                       </Button>
                     </Link>
                   </div>
@@ -1142,7 +1142,7 @@ export function FeaturedBooksSection() {
                   {language === "mr" ? "ग्रंथालयातील मुद्रित व संदर्भ ग्रंथसंग्रह" : language === "hi" ? "ग्रंथालय का मुद्रित एवं संदर्भ संग्रह" : "Institutional Printed & Reference Catalogue"}
                 </h4>
                 <span className="text-[11px] font-bold px-2 py-0.5 rounded-full bg-[#800020] text-white dark:bg-[#E5B869] dark:text-[#18080A]">
-                  ३९,९५३ ग्रंथ
+                  {language === "en" ? "39,953 Books" : language === "hi" ? "३९,९५३ ग्रन्थ" : "३९,९५३ ग्रंथ"}
                 </span>
               </div>
               <p className="text-xs text-stone-600 dark:text-stone-300 font-marathi-body mt-0.5 font-medium">

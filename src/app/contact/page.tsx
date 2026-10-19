@@ -146,7 +146,7 @@ export default function ContactPage() {
         <section className="section py-12">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Contact Details Column */}
-            <div className="bg-white dark:bg-[#1E1418] rounded-2xl border border-[#E5DDD0] dark:border-[#332228] p-6 sm:p-7 shadow-xs space-y-6">
+            <div id="location" className="bg-white dark:bg-[#1E1418] rounded-2xl border border-[#E5DDD0] dark:border-[#332228] p-6 sm:p-7 shadow-xs space-y-6">
               <div className="flex items-center gap-3">
                 <div className="h-10 w-10 rounded-xl bg-[#800020]/10 dark:bg-[#800020]/25 text-[#800020] dark:text-[#E5B869] flex items-center justify-center">
                   <MapPin className="h-5 w-5" />
@@ -156,7 +156,7 @@ export default function ContactPage() {
                     {language === "mr" ? "ग्रंथालय कार्यालय" : language === "hi" ? "ग्रन्थालय कार्यालय" : "Library Secretariat"}
                   </h3>
                   <span className="text-xs text-stone-500 dark:text-stone-400">
-                    अंबाजोगाई, महाराष्ट्र
+                    {language === "en" ? "Ambajogai, Maharashtra" : "अंबाजोगाई, महाराष्ट्र"}
                   </span>
                 </div>
               </div>
@@ -165,7 +165,11 @@ export default function ContactPage() {
                 <div className="flex items-start gap-2.5">
                   <MapPin className="h-4 w-4 text-[#800020] dark:text-[#E5B869] shrink-0 mt-1" />
                   <span>
-                    साहित्य निकेतन सार्वजनिक ग्रंथालय, शुक्रवार पेठ, अंबाजोगाई - ४३१५१७, जि. बीड, महाराष्ट्र.
+                    {language === "en"
+                      ? "Sahitya Niketan Public Library, Shukrawar Peth, Ambajogai - 431517, Dist. Beed, Maharashtra."
+                      : language === "hi"
+                        ? "साहित्य निकेतन सार्वजनिक पुस्तकालय, शुक्रवार पेठ, अंबाजोगाई - ४३१५१७, जि. बीड, महाराष्ट्र।"
+                        : "साहित्य निकेतन सार्वजनिक ग्रंथालय, शुक्रवार पेठ, अंबाजोगाई - ४३१५१७, जि. बीड, महाराष्ट्र."}
                   </span>
                 </div>
 
@@ -176,7 +180,7 @@ export default function ContactPage() {
                       +91 90966 42583
                     </a>
                     <span className="text-[11px] text-stone-500 dark:text-stone-400">
-                      कार्यालय: +91 2446 247125
+                      {language === "en" ? "Office: +91 2446 247125" : language === "hi" ? "कार्यालय: +91 2446 247125" : "कार्यालय: +91 2446 247125"}
                     </span>
                   </div>
                 </div>
@@ -188,7 +192,7 @@ export default function ContactPage() {
                       ta2601001@gmail.com
                     </a>
                     <span className="text-[11px] text-stone-500 dark:text-stone-400">
-                      पर्यायी: sahityaniketan.ambajogai@gmail.com
+                      {language === "en" ? "Alt: sahityaniketan.ambajogai@gmail.com" : language === "hi" ? "वैकल्पिक: sahityaniketan.ambajogai@gmail.com" : "पर्यायी: sahityaniketan.ambajogai@gmail.com"}
                     </span>
                   </div>
                 </div>
@@ -209,7 +213,7 @@ export default function ContactPage() {
                   </a>
                 </div>
 
-                <div className="flex items-start gap-2.5 border-t border-[#E5DDD0] dark:border-[#332228] pt-3">
+                <div id="timings" className="flex items-start gap-2.5 border-t border-[#E5DDD0] dark:border-[#332228] pt-3 scroll-mt-24">
                   <Clock className="h-4 w-4 text-[#800020] dark:text-[#E5B869] shrink-0 mt-1" />
                   <div>
                     <span className="font-bold text-gray-900 dark:text-[#FAF2E8] block">

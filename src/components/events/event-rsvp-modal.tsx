@@ -82,10 +82,14 @@ END:VCALENDAR`;
             </div>
             <div>
               <h3 className="text-base font-bold font-marathi-heading">
-                {language === "mr" ? "उपस्थिती नोंदणी (Event RSVP)" : "Event Seat Registration"}
+                {language === "en"
+                  ? "Seat Registration (RSVP)"
+                  : language === "hi"
+                    ? "उपस्थिति पंजीकरण (RSVP)"
+                    : "उपस्थिती नोंदणी (Event RSVP)"}
               </h3>
               <p className="text-xs text-[#E5B869] font-marathi-body">
-                साहित्य निकेतन ग्रंथालय, अंबाजोगाई
+                {language === "en" ? "Sahitya Niketan Library, Ambajogai" : "साहित्य निकेतन ग्रंथालय, अंबाजोगाई"}
               </p>
             </div>
           </div>
@@ -128,10 +132,18 @@ END:VCALENDAR`;
               </div>
 
               <h4 className="text-lg font-bold text-gray-900 dark:text-[#FAF2E8] font-marathi-heading">
-                उपस्थिती यशस्वीरित्या नोंदवली गेली!
+                {language === "en"
+                  ? "Registration Confirmed!"
+                  : language === "hi"
+                    ? "उपस्थिति सफलतापूर्वक दर्ज की गई!"
+                    : "उपस्थिती यशस्वीरित्या नोंदवली गेली!"}
               </h4>
               <p className="text-xs text-stone-600 dark:text-stone-400 max-w-sm mx-auto leading-relaxed">
-                तुमची सीट आरक्षित करण्यात आली आहे. कार्यक्रमाचे रिमांडर तुमच्या कॅलेंडरमध्ये जोडा:
+                {language === "en"
+                  ? "Your seat has been reserved. Add an event reminder to your calendar:"
+                  : language === "hi"
+                    ? "आपकी सीट आरक्षित कर दी गई है। कार्यक्रम स्मरण पत्र अपने कैलेंडर में जोड़ें:"
+                    : "तुमची सीट आरक्षित करण्यात आली आहे. कार्यक्रमाचे रिमांडर तुमच्या कॅलेंडरमध्ये जोडा:"}
               </p>
 
               <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
@@ -142,7 +154,13 @@ END:VCALENDAR`;
                   className="w-full sm:w-auto rounded-xl bg-[#800020] hover:bg-[#66001A] text-white px-5 py-2.5 text-xs font-bold transition-all flex items-center justify-center gap-2 shadow-sm font-marathi-body cursor-pointer"
                 >
                   <ExternalLink className="h-4 w-4" />
-                  <span>Google Calendar मध्ये जोडा</span>
+                  <span>
+                    {language === "en"
+                      ? "Add to Google Calendar"
+                      : language === "hi"
+                        ? "Google Calendar में जोड़ें"
+                        : "Google Calendar मध्ये जोडा"}
+                  </span>
                 </a>
 
                 <button
@@ -151,7 +169,13 @@ END:VCALENDAR`;
                   className="w-full sm:w-auto rounded-xl border border-[#E5DDD0] dark:border-[#332228] bg-white dark:bg-[#1E1418] text-stone-800 dark:text-[#FAF2E8] px-4 py-2.5 text-xs font-bold transition-all flex items-center justify-center gap-2 hover:bg-[#F3ECE3] dark:hover:bg-[#25151C] font-marathi-body cursor-pointer"
                 >
                   <Download className="h-4 w-4 text-[#800020] dark:text-[#E5B869]" />
-                  <span>.ICS फाइल डाउनलोड करा</span>
+                  <span>
+                    {language === "en"
+                      ? "Download .ICS file"
+                      : language === "hi"
+                        ? ".ICS फाइल डाउनलोड करें"
+                        : ".ICS फाइल डाउनलोड करा"}
+                  </span>
                 </button>
               </div>
 
@@ -159,21 +183,21 @@ END:VCALENDAR`;
                 onClick={onClose}
                 className="mt-3 text-xs font-bold text-stone-500 hover:underline cursor-pointer"
               >
-                बंद करा
+                {language === "en" ? "Close" : language === "hi" ? "बंद करें" : "बंद करा"}
               </button>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-4 font-marathi-body">
               <div>
                 <label className="block text-xs font-extrabold text-stone-700 dark:text-stone-300 mb-1">
-                  पूर्ण नाव *
+                  {language === "en" ? "Full Name *" : language === "hi" ? "पूरा नाम *" : "पूर्ण नाव *"}
                 </label>
                 <input
                   type="text"
                   required
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  placeholder="उदा. राहुल देशपांडे"
+                  placeholder={language === "en" ? "e.g. Rahul Deshpande" : "उदा. राहुल देशपांडे"}
                   className="w-full rounded-xl border border-[#E5DDD0] dark:border-[#332228] bg-[#FAF8F5] dark:bg-[#120B0D] px-3.5 py-2.5 text-xs text-stone-900 dark:text-[#FAF2E8] focus:border-[#800020] dark:focus:border-[#E5B869] focus:outline-none"
                 />
               </div>
@@ -181,7 +205,7 @@ END:VCALENDAR`;
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-xs font-extrabold text-stone-700 dark:text-stone-300 mb-1">
-                    मोबाईल नंबर *
+                    {language === "en" ? "Mobile Number *" : language === "hi" ? "मोबाइल नंबर *" : "मोबाईल नंबर *"}
                   </label>
                   <input
                     type="tel"
@@ -195,17 +219,25 @@ END:VCALENDAR`;
 
                 <div>
                   <label className="block text-xs font-extrabold text-stone-700 dark:text-stone-300 mb-1">
-                    आसन संख्या
+                    {language === "en" ? "Seats / Attendees" : language === "hi" ? "सीट संख्या" : "आसन संख्या"}
                   </label>
                   <select
                     value={attendees}
                     onChange={(e) => setAttendees(e.target.value)}
                     className="w-full rounded-xl border border-[#E5DDD0] dark:border-[#332228] bg-[#FAF8F5] dark:bg-[#120B0D] px-3.5 py-2.5 text-xs text-stone-900 dark:text-[#FAF2E8] focus:border-[#800020] dark:focus:border-[#E5B869] focus:outline-none"
                   >
-                    <option value="1">१ व्यक्ती</option>
-                    <option value="2">२ व्यक्ती</option>
-                    <option value="3">३ व्यक्ती</option>
-                    <option value="4">४+ कौटुंबिक</option>
+                    <option value="1">
+                      {language === "en" ? "1 Person" : language === "hi" ? "१ व्यक्ति" : "१ व्यक्ती"}
+                    </option>
+                    <option value="2">
+                      {language === "en" ? "2 Persons" : language === "hi" ? "२ व्यक्ति" : "२ व्यक्ती"}
+                    </option>
+                    <option value="3">
+                      {language === "en" ? "3 Persons" : language === "hi" ? "३ व्यक्ति" : "३ व्यक्ती"}
+                    </option>
+                    <option value="4">
+                      {language === "en" ? "4+ Family" : language === "hi" ? "४+ पारिवारिक" : "४+ कौटुंबिक"}
+                    </option>
                   </select>
                 </div>
               </div>
@@ -216,16 +248,34 @@ END:VCALENDAR`;
                   onClick={onClose}
                   className="rounded-xl border border-[#E5DDD0] dark:border-[#332228] px-4 py-2.5 text-xs font-bold text-stone-700 dark:text-stone-300 hover:bg-[#F3ECE3] dark:hover:bg-[#180E11] transition-colors cursor-pointer"
                 >
-                  रद्द करा
+                  {language === "en" ? "Cancel" : language === "hi" ? "रद्द करें" : "रद्द करा"}
                 </button>
                 <MotionSubmitButton
                   type="submit"
                   disabled={loading}
                   isPending={loading}
                   isSuccess={isRSVPed}
-                  label="सीट आरक्षित करा"
-                  pendingLabel="नोंदवत आहे..."
-                  successLabel="आरक्षण यशस्वी! धन्यवाद."
+                  label={
+                    language === "en"
+                      ? "Reserve Seat"
+                      : language === "hi"
+                        ? "सीट आरक्षित करें"
+                        : "सीट आरक्षित करा"
+                  }
+                  pendingLabel={
+                    language === "en"
+                      ? "Reserving..."
+                      : language === "hi"
+                        ? "आरक्षित किया जा रहा है..."
+                        : "नोंदवत आहे..."
+                  }
+                  successLabel={
+                    language === "en"
+                      ? "Reserved! Thank You."
+                      : language === "hi"
+                        ? "आरक्षण सफल! धन्यवाद।"
+                        : "आरक्षण यशस्वी! धन्यवाद."
+                  }
                   variant="primary"
                 />
               </div>

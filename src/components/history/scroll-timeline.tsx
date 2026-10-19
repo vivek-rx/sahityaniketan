@@ -220,11 +220,123 @@ const ENGLISH_MILESTONES: ContourTimelineItem[] = [
   },
 ];
 
+const HINDI_MILESTONES: ContourTimelineItem[] = [
+  {
+    year: "१९४५",
+    label: "स्थापना पर्व",
+    title: "स्थापना: एक पावन संकल्प का उदय",
+    description:
+      "“अनेक हृदय हो भारत जननी” के पवित्र ध्येय से १ अगस्त १९४५ को अंबाजोगाई में साहित्य निकेतन की स्थापना हुई। स्वाधीनता आंदोलन के दौरान लोकचेतना जागृत करने हेतु युवाओं ने इस ग्रन्थालय का शुभारम्भ किया।",
+    image: {
+      src: "/images/real/library_inauguration_plaque.webp",
+      alt: "स्थापना शिलालेख पट्टिका १९४५",
+    },
+    linkLabel: "स्थापना इतिहास पढ़ें",
+    link: "/history#founding-chapter",
+    newTab: false,
+    showImage: true,
+  },
+  {
+    year: "१९५०",
+    label: "आधारशिला",
+    title: "राष्ट्रभाषा हिन्दी कक्षाएं एवं समर्पित शिक्षक सेवा",
+    description:
+      "प्रारंभिक दौर में विभिन्न भवनों में पुस्तकालय संचालित हुआ। साथ ही 'हिन्दी प्रचार सभा, हैदराबाद' के अंतर्गत कक्षाएं शुरू की गईं। समर्पित शिक्षकों ने अल्प मानदेय पर पुस्तकालय संवर्धन में ऐतिहासिक योगदान दिया।",
+    image: {
+      src: "/images/real/library_vintage_books.webp",
+      alt: "दुर्लभ ऐतिहासिक ग्रन्थ संग्रह",
+    },
+    linkLabel: "प्रारंभिक कार्य",
+    link: "/history#early-years",
+    newTab: false,
+    showImage: true,
+  },
+  {
+    year: "१९५८",
+    label: "स्थान संघर्ष",
+    title: "सब्जी मंडी प्लॉट क्र. १२७ का आवंटन एवं संगीत कार्यक्रम निधि",
+    description:
+      "बढ़ती पाठक संख्या के कारण १९५८ में नगर परिषद ने सब्जी मंडी में प्लॉट क्र. १२७ आवंटित किया। जनसहयोग एवं प्रख्यात गायिका माणिक वर्मा के संगीत कार्यक्रम से भवन निर्माण हेतु निधि संकलित की गई।",
+    image: {
+      src: "/images/real/library_signboard.webp",
+      alt: "सब्जी मंडी ग्रन्थालय पट्ट",
+    },
+    linkLabel: "स्थान इतिहास",
+    link: "/history#struggle-for-space",
+    newTab: false,
+    showImage: true,
+  },
+  {
+    year: "१९६२-६४",
+    label: "पंजीकरण व मान्यता",
+    title: "सोसायटी पंजीकरण (BHR/3/1962) एवं शासकीय तालुका ग्रन्थालय दर्जा",
+    description:
+      "सोसायटीज रजिस्ट्रेशन एक्ट १८६० के अंतर्गत पंजीकरण। प्रथम न्यासी श्री एकनाथ माधवराव कुलकर्णी, श्री भगवानदासजी लोहिया एवं श्री चंद्रगुप्त गुप्त बने। १९६३-६४ में तालुका ग्रन्थालय व बाद में वर्ग 'अ' मान्यता प्राप्त हुई।",
+    image: {
+      src: "/images/real/library_savarkar_portrait.webp",
+      alt: "साहित्य निकेतन ऐतिहासिक दीर्घा",
+    },
+    linkLabel: "न्यासी एवं मान्यता",
+    link: "/about#team",
+    newTab: false,
+    showImage: true,
+  },
+  {
+    year: "१९८६-९२",
+    label: "नया भवन",
+    title: "सब्जी मंडी स्थायी परिसर में स्थानांतरण व केन्द्रीय सभागार",
+    description:
+      "सन १९८६ से अपने निजी परिसर में ग्रन्थालय क्रियाशील हुआ। महिला, बाल व संदर्भ अनुभागों का विस्तार हुआ। शासन के सहयोग से विशाल वाचनालय और सुविधाएं विकसित की गईं।",
+    image: {
+      src: "/images/real/library_cupboards.webp",
+      alt: "विशाल ग्रन्थ दीर्घा व अलमारियां",
+    },
+    linkLabel: "भवन विस्तार",
+    link: "/history#modern-building",
+    newTab: false,
+    showImage: true,
+  },
+  {
+    year: "१९९६",
+    label: "दो मंजिला भवन",
+    title: "सहकारिता अनुदान से निर्मित दो मंजिला वाचनालय परिसर",
+    description:
+      "तत्कालीन सहकारिता मंत्री श्री जयसिंगराव गायकवाड़ के सहयोग से ३ लाख की शासकीय सहायता प्राप्त हुई और १९९६ में दो मंजिला सुसज्जित भवन का निर्माण सम्पन्न हुआ।",
+    image: {
+      src: "/images/real/library_window.webp",
+      alt: "ग्रन्थालय अध्ययन कक्ष",
+    },
+    linkLabel: "भवन निर्माण इतिहास",
+    link: "/history#modern-building",
+    newTab: false,
+    showImage: true,
+  },
+  {
+    year: "२०१८-आज",
+    label: "सभागार एवं वर्तमान",
+    title: "द्वितीय तल सभागार, ३९,९५३+ ग्रन्थ एवं अविरत ज्ञान सेवा",
+    description:
+      "२०१७-१८ में द्वितीय तल पर वातानुकूलित आधुनिक सभागार निर्मित हुआ। वर्तमान न्यासी मंडल के मार्गदर्शन में ३९,९५३ पंजीकृत पुस्तकों व प्राचीन पाण्डुलिपियों के साथ ज्ञानयज्ञ निरंतर प्रज्वलित है।",
+    image: {
+      src: "/images/real/marathi_books_display.png",
+      alt: "आधुनिक ग्रन्थ दीर्घा",
+    },
+    linkLabel: "वर्तमान स्थिति देखें",
+    link: "/catalogue",
+    newTab: false,
+    showImage: true,
+  },
+];
+
 export function ScrollTimeline() {
   const { language } = useLanguage();
 
   const milestones = useMemo(() => {
-    return language === "en" ? ENGLISH_MILESTONES : MARATHI_MILESTONES;
+    return language === "en"
+      ? ENGLISH_MILESTONES
+      : language === "hi"
+      ? HINDI_MILESTONES
+      : MARATHI_MILESTONES;
   }, [language]);
 
   return (

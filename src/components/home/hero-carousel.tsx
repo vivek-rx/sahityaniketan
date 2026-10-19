@@ -52,10 +52,97 @@ function extractYoutubeId(url: string) {
   return match && match[2].length === 11 ? match[2] : undefined;
 }
 
+const DEFAULT_HERO_SLIDES: CarouselSlide[] = [
+  {
+    id: "default-slide-1",
+    type: "photo",
+    title: "Sahitya Niketan Public Library, Ambajogai",
+    titleMarathi: "साहित्य निकेतन सार्वजनिक ग्रंथालय, अंबाजोगाई",
+    titleHindi: "साहित्य निकेतन सार्वजनिक ग्रन्थालय, अंबाजोगाई",
+    subtitle: "Government recognized Class 'A' Library founded on 1 August 1945.",
+    subtitleMarathi: "महाराष्ट्र शासन वर्ग 'अ' मान्यताप्राप्त सार्वजनिक ग्रंथालय • स्थापना: १ ऑगस्ट १९४५",
+    subtitleHindi: "महाराष्ट्र शासन वर्ग 'अ' मान्यता प्राप्त सार्वजनिक पुस्तकालय • स्थापना: १ अगस्त १९४५",
+    date: "१ ऑगस्ट १९४५ पासून अविरत",
+    dateEn: "Serving since 1 August 1945",
+    location: "अंबाजोगाई, जि. बीड (महाराष्ट्र)",
+    locationEn: "Ambajogai, Dist. Beed (Maharashtra)",
+    image: "/images/real/library_inauguration_plaque.webp",
+    tagMarathi: "स्थापना व वारसा",
+    tagHindi: "स्थापना एवं धरोहर",
+    tagEn: "Heritage Foundation",
+    tagBg: "bg-[#800020]",
+    buttonText: "इतिहास पहा",
+    buttonLink: "/history",
+  },
+  {
+    id: "default-slide-2",
+    type: "photo",
+    title: "12th Century Ancient Manuscripts & Modi Script Archives",
+    titleMarathi: "१२ व्या शतकातील दुर्मीळ हस्तलिखिते व मोडी सनदा",
+    titleHindi: "१२वीं सदी की दुर्लभ पाण्डुलिपियां एवं मोडी सनदें",
+    subtitle: "Conserving Adikavi Mukundraj's Vivekasindhu and Saint Dasopant's sacred writings.",
+    subtitleMarathi: "आद्यकवी मुकुंदराजकृत 'विवेकसिंधू' आणि संत दासोपंतांच्या प्राचीन हस्तलिखितांचे शास्त्रोक्त जतन.",
+    subtitleHindi: "आद्यकवि मुकुंदराज कृत 'विवेकसिंधु' और सन्त दासोपंत की पाण्डुलिपियों का संरक्षण।",
+    date: "१२ व्या शतकापासूनचा ठेवा",
+    dateEn: "Treasures from 12th Century",
+    location: "दुर्मीळ ग्रंथ दालन, कप्पा क्र. १",
+    locationEn: "Rare Manuscript Wing, Shelf No. 1",
+    image: "/images/real/library_vintage_books.webp",
+    tagMarathi: "दुर्मीळ दस्तऐवज",
+    tagHindi: "दुर्लभ पाण्डुलिपियां",
+    tagEn: "Rare Archives",
+    tagBg: "bg-[#BF4B1A]",
+    buttonText: "हस्तलिखिते पहा",
+    buttonLink: "/catalogue?category=manuscripts",
+  },
+  {
+    id: "default-slide-3",
+    type: "photo",
+    title: "39,953+ Registered Printed Volumes & Multilingual Stacks",
+    titleMarathi: "३९,९५३+ मुद्रित ग्रंथसंपदा व बहुभाषिक संदर्भ दालन",
+    titleHindi: "३९,९५३+ मुद्रित ग्रन्थ संग्रह एवं बहुभाषी संदर्भ कक्ष",
+    subtitle: "Invaluable treasures across Marathi, Sanskrit, Hindi, and English literature.",
+    subtitleMarathi: "मराठी, संस्कृत, हिंदी व इंग्रजी भाषेतील समृद्ध ग्रंथसंग्रह आणि संदर्भ दालन.",
+    subtitleHindi: "मराठी, संस्कृत, हिन्दी और अंग्रेजी भाषा का समृद्ध ग्रन्थ संग्रह।",
+    date: "अद्ययावत ग्रंथसंग्रह",
+    dateEn: "Continuously Updated Catalogue",
+    location: "मुख्य ग्रंथालय वास्तू, शुक्रवार पेठ",
+    locationEn: "Main Library Building, Shukrawar Peth",
+    image: "/images/real/marathi_books_display.png",
+    tagMarathi: "ग्रंथसंपदा",
+    tagHindi: "ग्रन्थ धरोहर",
+    tagEn: "Book Treasures",
+    tagBg: "bg-[#800020]",
+    buttonText: "ग्रंथसूची शोधा",
+    buttonLink: "/catalogue",
+  },
+  {
+    id: "default-slide-4",
+    type: "photo",
+    title: "Air-Conditioned Competitive Exam Study Sanctuary",
+    titleMarathi: "वातानुकूलित अभ्यासिका व स्पर्धा परीक्षा वाचन दालन",
+    titleHindi: "वातानुकूलित अध्ययन कक्ष एवं प्रतियोगी परीक्षा वाचनालय",
+    subtitle: "200+ seating quiet sanctuary for civil service and competitive exam aspirants.",
+    subtitleMarathi: "ग्रामीण भागातील विद्यार्थ्यांसाठी २००+ आसनक्षमतेची शांत, वातानुकूलित अभ्यासिका.",
+    subtitleHindi: "ग्रामीण विद्यार्थियों हेतु २००+ सीट क्षमता युक्त शांत, वातानुकूलित अध्ययन कक्ष।",
+    date: "दैनिक सकाळी ७ ते रात्री १०",
+    dateEn: "Daily 7:00 AM to 10:00 PM",
+    location: "अभ्यासिका संकुल, शुक्रवार पेठ",
+    locationEn: "Study Hall Complex, Shukrawar Peth",
+    image: "/images/real/library_window.webp",
+    tagMarathi: "अभ्यासिका दालन",
+    tagHindi: "अध्ययन कक्ष",
+    tagEn: "Study Sanctuary",
+    tagBg: "bg-[#BF4B1A]",
+    buttonText: "सभासद व्हा",
+    buttonLink: "/membership",
+  },
+];
+
 export function HeroCarousel() {
   const { language } = useLanguage();
   const [activeVideoUrl, setActiveVideoUrl] = useState<string | null>(null);
-  const [slides, setSlides] = useState<CarouselSlide[]>([]);
+  const [slides, setSlides] = useState<CarouselSlide[]>(DEFAULT_HERO_SLIDES);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -81,10 +168,14 @@ export function HeroCarousel() {
               type: (isVideo || ytId) ? "video" : "photo",
               title: s.title,
               titleMarathi: s.title,
+              titleHindi: s.title,
               subtitle: s.subtitle || "",
               subtitleMarathi: s.subtitle || "",
+              subtitleHindi: s.subtitle || "",
               date: "साहित्य निकेतन ग्रंथालय",
+              dateEn: "Sahitya Niketan Library",
               location: "अंबाजोगाई",
+              locationEn: "Ambajogai",
               image: slideImageUrl,
               youtubeId: ytId || (isVideo ? "vB39xHj_Rmg" : undefined),
               tagMarathi: s.button_text || (isVideo ? "माहितीपट" : "विशेष सोहळा"),
@@ -97,11 +188,11 @@ export function HeroCarousel() {
           });
           setSlides(mapped);
         } else {
-          setSlides([]);
+          setSlides(DEFAULT_HERO_SLIDES);
         }
       } catch (err) {
         console.error("Failed to fetch dynamic carousel slides:", err);
-        setSlides([]);
+        setSlides(DEFAULT_HERO_SLIDES);
       } finally {
         setLoading(false);
       }
@@ -138,8 +229,7 @@ export function HeroCarousel() {
     emblaApi.on("select", onSelect);
   }, [emblaApi, onSelect]);
 
-  // Omit carousel if no real slides exist in database
-  if (loading || slides.length === 0) {
+  if (slides.length === 0) {
     return null;
   }
 

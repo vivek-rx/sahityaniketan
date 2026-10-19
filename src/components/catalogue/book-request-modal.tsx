@@ -57,10 +57,18 @@ export function BookRequestModal({ isOpen, onClose }: BookRequestModalProps) {
             </div>
             <div>
               <h3 className="text-base font-bold font-marathi-heading">
-                {language === "mr" ? "नवीन पुस्तक / ग्रंथ मागणी" : "Request a New Book"}
+                {language === "en"
+                  ? "Request a Book"
+                  : language === "hi"
+                    ? "नवीन पुस्तक मांग"
+                    : "नवीन पुस्तक / ग्रंथ मागणी"}
               </h3>
               <p className="text-xs text-[#E5B869] font-marathi-body">
-                साहित्य निकेतन ग्रंथ खरेदी समिती (Book Acquisition Committee)
+                {language === "en"
+                  ? "Sahitya Niketan Book Acquisition Committee"
+                  : language === "hi"
+                    ? "साहित्य निकेतन पुस्तक खरीद समिति"
+                    : "साहित्य निकेतन ग्रंथ खरेदी समिती"}
               </p>
             </div>
           </div>
@@ -81,30 +89,44 @@ export function BookRequestModal({ isOpen, onClose }: BookRequestModalProps) {
                 <CheckCircle2 className="h-8 w-8" />
               </div>
               <h4 className="text-lg font-bold text-gray-900 dark:text-white font-marathi-heading">
-                पुस्तक मागणी यशस्वीरित्या नोंदवली गेली!
+                {language === "en"
+                  ? "Book Request Successfully Submitted!"
+                  : language === "hi"
+                    ? "पुस्तक मांग सफलतापूर्वक दर्ज की गई!"
+                    : "पुस्तक मागणी यशस्वीरित्या नोंदवली गेली!"}
               </h4>
               <p className="text-xs text-stone-600 dark:text-stone-400 max-w-sm mx-auto leading-relaxed">
-                ग्रंथ खरेदी समिती पुढील महिन्यात ग्रंथालयात दाखल करण्यासाठी तुमच्या शिफारशीची नोंद करेल.
+                {language === "en"
+                  ? "The Acquisition Committee will evaluate your recommendation for inclusion in the upcoming monthly catalogue."
+                  : language === "hi"
+                    ? "ग्रन्थ खरीद समिति अगले माह ग्रन्थालय में जोड़ने हेतु आपकी अनुशंसा पर विचार करेगी।"
+                    : "ग्रंथ खरेदी समिती पुढील महिन्यात ग्रंथालयात दाखल करण्यासाठी तुमच्या शिफारशीची नोंद करेल."}
               </p>
               <button
                 onClick={handleReset}
                 className="mt-4 rounded-xl bg-[#800020] hover:bg-[#66001A] text-white px-6 py-2.5 text-xs font-bold transition-all shadow-md cursor-pointer font-marathi-body"
               >
-                बंद करा (Close)
+                {language === "en" ? "Close" : language === "hi" ? "बंद करें" : "बंद करा"}
               </button>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-4 font-marathi-body">
               <div>
                 <label className="block text-xs font-extrabold text-stone-700 dark:text-stone-300 mb-1">
-                  पुस्तकाचे नाव (Book Title) *
+                  {language === "en" ? "Book Title *" : language === "hi" ? "पुस्तक का नाम *" : "पुस्तकाचे नाव *"}
                 </label>
                 <input
                   type="text"
                   required
                   value={bookTitle}
                   onChange={(e) => setBookTitle(e.target.value)}
-                  placeholder="उदा. राजा शिवछत्रपती / MPSC General Studies Manual"
+                  placeholder={
+                    language === "en"
+                      ? "e.g. Discovery of India / MPSC GS Manual"
+                      : language === "hi"
+                        ? "उदा. राजा शिवछत्रपति / प्रतियोगी परीक्षा मार्गदर्शिका"
+                        : "उदा. राजा शिवछत्रपती / MPSC मार्गदर्शिका"
+                  }
                   className="w-full rounded-xl border border-[#E5DDD0] dark:border-[#332228] bg-[#FAF8F5] dark:bg-[#120B0D] px-3.5 py-2.5 text-xs text-stone-900 dark:text-[#FAF2E8] focus:border-[#800020] dark:focus:border-[#E5B869] focus:outline-none"
                 />
               </div>
@@ -112,58 +134,68 @@ export function BookRequestModal({ isOpen, onClose }: BookRequestModalProps) {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-xs font-extrabold text-stone-700 dark:text-stone-300 mb-1">
-                    लेखक (Author)
+                    {language === "en" ? "Author" : language === "hi" ? "लेखक" : "लेखक"}
                   </label>
                   <input
                     type="text"
                     value={author}
                     onChange={(e) => setAuthor(e.target.value)}
-                    placeholder="लेखकाचे नाव"
+                    placeholder={language === "en" ? "Author Name" : language === "hi" ? "लेखक का नाम" : "लेखकाचे नाव"}
                     className="w-full rounded-xl border border-[#E5DDD0] dark:border-[#332228] bg-[#FAF8F5] dark:bg-[#120B0D] px-3.5 py-2.5 text-xs text-stone-900 dark:text-[#FAF2E8] focus:border-[#800020] dark:focus:border-[#E5B869] focus:outline-none"
                   />
                 </div>
 
                 <div>
                   <label className="block text-xs font-extrabold text-stone-700 dark:text-stone-300 mb-1">
-                    विभाग / श्रेणी (Category)
+                    {language === "en" ? "Category / Genre" : language === "hi" ? "विभाग / श्रेणी" : "विभाग / श्रेणी"}
                   </label>
                   <select
                     value={category}
                     onChange={(e) => setCategory(e.target.value)}
                     className="w-full rounded-xl border border-[#E5DDD0] dark:border-[#332228] bg-[#FAF8F5] dark:bg-[#120B0D] px-3.5 py-2.5 text-xs text-stone-900 dark:text-[#FAF2E8] focus:border-[#800020] dark:focus:border-[#E5B869] focus:outline-none"
                   >
-                    <option value="मराठी साहित्य">मराठी साहित्य / कादंबरी</option>
-                    <option value="स्पर्धा परीक्षा">स्पर्धा परीक्षा (MPSC/UPSC)</option>
-                    <option value="हिन्दी साहित्य">हिन्दी साहित्य</option>
-                    <option value="संस्कृत व इतिहास">संस्कृत व इतिहास</option>
-                    <option value="बाल साहित्य">बाल साहित्य</option>
+                    <option value="मराठी साहित्य">
+                      {language === "en" ? "Marathi Literature & Novels" : language === "hi" ? "मराठी साहित्य / उपन्यास" : "मराठी साहित्य / कादंबरी"}
+                    </option>
+                    <option value="स्पर्धा परीक्षा">
+                      {language === "en" ? "Competitive Exams (MPSC/UPSC)" : language === "hi" ? "प्रतियोगी परीक्षा (MPSC/UPSC)" : "स्पर्धा परीक्षा (MPSC/UPSC)"}
+                    </option>
+                    <option value="हिन्दी साहित्य">
+                      {language === "en" ? "Hindi Literature" : language === "hi" ? "हिन्दी साहित्य" : "हिन्दी साहित्य"}
+                    </option>
+                    <option value="संस्कृत व इतिहास">
+                      {language === "en" ? "Sanskrit & History" : language === "hi" ? "संस्कृत एवं इतिहास" : "संस्कृत व इतिहास"}
+                    </option>
+                    <option value="बाल साहित्य">
+                      {language === "en" ? "Children's Literature" : language === "hi" ? "बाल साहित्य" : "बाल साहित्य"}
+                    </option>
                   </select>
                 </div>
               </div>
 
               <div>
                 <label className="block text-xs font-extrabold text-stone-700 dark:text-stone-300 mb-1">
-                  तुमचे नाव (Your Name) *
+                  {language === "en" ? "Your Full Name *" : language === "hi" ? "आपका पूरा नाम *" : "तुमचे पूर्ण नाव *"}
                 </label>
                 <input
                   type="text"
                   required
                   value={requesterName}
                   onChange={(e) => setRequesterName(e.target.value)}
-                  placeholder="वाचकाचे नाव"
+                  placeholder={language === "en" ? "Patron Name" : language === "hi" ? "पाठक का नाम" : "वाचकाचे नाव"}
                   className="w-full rounded-xl border border-[#E5DDD0] dark:border-[#332228] bg-[#FAF8F5] dark:bg-[#120B0D] px-3.5 py-2.5 text-xs text-stone-900 dark:text-[#FAF2E8] focus:border-[#800020] dark:focus:border-[#E5B869] focus:outline-none"
                 />
               </div>
 
               <div>
                 <label className="block text-xs font-extrabold text-stone-700 dark:text-stone-300 mb-1">
-                  संपर्क / फोन (Phone Number)
+                  {language === "en" ? "Contact Number" : language === "hi" ? "सम्पर्क नंबर" : "संपर्क / मोबाईल नंबर"}
                 </label>
                 <input
                   type="text"
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
-                  placeholder="उदा. 9876543210"
+                  placeholder="9876543210"
                   className="w-full rounded-xl border border-[#E5DDD0] dark:border-[#332228] bg-[#FAF8F5] dark:bg-[#120B0D] px-3.5 py-2.5 text-xs text-stone-900 dark:text-[#FAF2E8] focus:border-[#800020] dark:focus:border-[#E5B869] focus:outline-none"
                 />
               </div>
@@ -177,16 +209,34 @@ export function BookRequestModal({ isOpen, onClose }: BookRequestModalProps) {
                   onClick={onClose}
                   className="rounded-full border border-[#E5DDD0] dark:border-[#332228] px-4 py-2.5 text-xs font-bold text-stone-700 dark:text-stone-300 hover:bg-[#F3ECE3] dark:hover:bg-[#180E11] transition-colors cursor-pointer"
                 >
-                  रद्द करा (Cancel)
+                  {language === "en" ? "Cancel" : language === "hi" ? "रद्द करें" : "रद्द करा"}
                 </button>
                 <MotionSubmitButton
                   type="submit"
                   disabled={loading}
                   isPending={loading}
                   isSuccess={submitted}
-                  label="मागणी नोंदवा (Submit Request)"
-                  pendingLabel="नोंदवत आहे... (Submitting...)"
-                  successLabel="मागणी नोंदवली! धन्यवाद."
+                  label={
+                    language === "en"
+                      ? "Submit Request"
+                      : language === "hi"
+                        ? "मांग दर्ज करें"
+                        : "मागणी नोंदवा"
+                  }
+                  pendingLabel={
+                    language === "en"
+                      ? "Submitting..."
+                      : language === "hi"
+                        ? "दर्ज की जा रही है..."
+                        : "नोंदवत आहे..."
+                  }
+                  successLabel={
+                    language === "en"
+                      ? "Request Submitted! Thank you."
+                      : language === "hi"
+                        ? "मांग दर्ज हुई! धन्यवाद।"
+                        : "मागणी नोंदवली! धन्यवाद."
+                  }
                   variant="primary"
                 />
               </div>

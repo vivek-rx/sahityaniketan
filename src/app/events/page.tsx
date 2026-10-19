@@ -10,6 +10,8 @@ import { EventRSVPModal } from "@/components/events/event-rsvp-modal";
 import { BobbingDots } from "@/components/ui/bobbing-dots";
 import { EventGridSkeleton } from "@/components/ui/loader-skeleton";
 
+import { LIBRARY_EVENTS } from "@/lib/data/library-events";
+
 interface LiteraryEvent {
   id: string;
   title: { mr: string; hi: string; en: string };
@@ -22,9 +24,49 @@ interface LiteraryEvent {
   isFeatured?: boolean;
 }
 
+const DEFAULT_LITERARY_EVENTS: LiteraryEvent[] = LIBRARY_EVENTS.map((ev, idx) => ({
+  id: ev.id,
+  isFeatured: idx === 0,
+  title: {
+    mr: ev.title,
+    hi: ev.titleHi || ev.title,
+    en: ev.titleEn || ev.title,
+  },
+  date: {
+    mr: ev.date,
+    hi: ev.dateHi || ev.date,
+    en: ev.dateEn || ev.date,
+  },
+  time: {
+    mr: "सायंकाळी ५:३० वा.",
+    hi: "सायं ५:३० बजे",
+    en: "5:30 PM IST",
+  },
+  venue: {
+    mr: "साहित्य निकेतन सभागृह, अंबाजोगाई",
+    hi: "साहित्य निकेतन सभागार, अंबाजोगाई",
+    en: "Sahitya Niketan Auditorium, Ambajogai",
+  },
+  category: {
+    mr: ev.category,
+    hi: ev.categoryHi || ev.category,
+    en: ev.categoryEn || ev.category,
+  },
+  speaker: {
+    mr: "ग्रंथालय विश्वस्त मंडळ व मान्यवर",
+    hi: "ग्रन्थालय न्यासी मण्डल एवं अतिथि",
+    en: "Library Board & Honored Scholars",
+  },
+  desc: {
+    mr: ev.description,
+    hi: ev.descriptionHi || ev.description,
+    en: ev.descriptionEn || ev.description,
+  },
+}));
+
 export default function EventsPage() {
   const { language } = useLanguage();
-  const [eventsList, setEventsList] = useState<LiteraryEvent[]>([]);
+  const [eventsList, setEventsList] = useState<LiteraryEvent[]>(DEFAULT_LITERARY_EVENTS);
   const [isLoading, setIsLoading] = useState(true);
   const [selectedRsvpEvent, setSelectedRsvpEvent] = useState<LiteraryEvent | null>(null);
 
@@ -47,11 +89,11 @@ export default function EventsPage() {
           }));
           setEventsList(mapped);
         } else {
-          setEventsList([]);
+          setEventsList(DEFAULT_LITERARY_EVENTS);
         }
       } catch (err) {
         console.error("Failed to load dynamic events:", err);
-        setEventsList([]);
+        setEventsList(DEFAULT_LITERARY_EVENTS);
       } finally {
         setIsLoading(false);
       }

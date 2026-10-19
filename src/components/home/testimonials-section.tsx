@@ -60,6 +60,116 @@ const FALLBACK_POSTCARDS: PostcardNote[] = [
   },
 ];
 
+const FALLBACK_POSTCARDS_EN: PostcardNote[] = [
+  {
+    id: "test-1",
+    name: "Prof. Dr. Sadanand More",
+    role: "Senior Scholar & Historian",
+    company: "Maharashtra State Board for Literature & Culture",
+    quote:
+      "The rare manuscripts vault and the Adikavi Mukundraj archival collections in Sahitya Niketan are an invaluable heritage of Marathwada. For researchers, this library is an irreplaceable sanctuary of knowledge.",
+    caption: "Rare Manuscripts Wing & Reference Hall",
+    postmark: "15 AUG 1945",
+    imageUrl: "/images/real/marathi_books_display.png",
+    cardColor: "#FFFDF5",
+    stampTint: "#800020",
+  },
+  {
+    id: "test-2",
+    name: "Pratik Kulkarni",
+    role: "Tehsildar (Govt. of Maharashtra)",
+    company: "Maharashtra Revenue Service",
+    quote:
+      "I studied continuously in Sahitya Niketan's silent study hall for two years preparing for civil service exams. The quiet atmosphere, extensive reference stacks, and reader discipline were decisive factors in my success.",
+    caption: "Air-Conditioned Study Sanctuary",
+    postmark: "26 JAN 1962",
+    imageUrl: "/images/real/library_window.png",
+    cardColor: "#F0F7F2",
+    stampTint: "#1E4D38",
+  },
+  {
+    id: "test-3",
+    name: "Dr. Alka Joshi",
+    role: "Marathi Scholar & Author",
+    company: "Sahitya Niketan Readers Committee",
+    quote:
+      "A Class 'A' public library that has served readers uninterrupted since pre-independence times. Its rich collection of over 39,000 volumes and periodicals room is the very pulse of Ambajogai's intellectual life.",
+    caption: "39,953+ Registered Volumes",
+    postmark: "01 MAY 1975",
+    imageUrl: "/images/real/library_vintage_books.png",
+    cardColor: "#FFF4EC",
+    stampTint: "#9C3A24",
+  },
+  {
+    id: "test-4",
+    name: "Adv. Sudhir Joshi",
+    role: "Senior Life Member (40 Years Reader)",
+    company: "Ambajogai Bar & Cultural Association",
+    quote:
+      "I have been a regular reader at this library for forty years. Seeing the 1945 heritage preserved so respectfully in digital form by the new generation fills me with immense pride.",
+    caption: "80 Years of Continuous Service",
+    postmark: "01 AUG 2020",
+    imageUrl: "/images/real/library_cupboards.png",
+    cardColor: "#EDF4FA",
+    stampTint: "#1D3B64",
+  },
+];
+
+const FALLBACK_POSTCARDS_HI: PostcardNote[] = [
+  {
+    id: "test-1",
+    name: "प्रो. डॉ. सदानंद मोरे",
+    role: "वरिष्ठ साहित्यकार एवं शोधार्थी",
+    company: "महाराष्ट्र राज्य साहित्य एवं संस्कृति मंडल",
+    quote:
+      "साहित्य निकेतन ग्रन्थालय का दुर्लभ पाण्डुलिपि अनुभाग और आद्यकवि मुकुंदराज कालीन संदर्भ मराठवाड़ा की ऐतिहासिक धरोहर हैं। शोधार्थियों हेतु यह ग्रन्थालय ज्ञान का अनुपम तीर्थ है।",
+    caption: "दुर्लभ पाण्डुलिपि कक्ष एवं संदर्भ विभाग",
+    postmark: "15 AUG 1945",
+    imageUrl: "/images/real/marathi_books_display.png",
+    cardColor: "#FFFDF5",
+    stampTint: "#800020",
+  },
+  {
+    id: "test-2",
+    name: "प्रतीक कुलकर्णी",
+    role: "तहसीलदार (महाराष्ट्र शासन राजस्व)",
+    company: "महाराष्ट्र शासन राजस्व विभाग",
+    quote:
+      "साहित्य निकेतन के अध्ययन कक्ष में बैठकर मैंने लगातार दो वर्ष प्रतियोगी परीक्षा की तैयारी की। शांत वातावरण, समृद्ध संदर्भ ग्रन्थ और पाठकों का अनुशासन मेरी सफलता में निर्णायक सिद्ध हुए।",
+    caption: "वातानुकूलित अध्ययन कक्ष",
+    postmark: "26 JAN 1962",
+    imageUrl: "/images/real/library_window.png",
+    cardColor: "#F0F7F2",
+    stampTint: "#1E4D38",
+  },
+  {
+    id: "test-3",
+    name: "डॉ. अलका जोशी",
+    role: "भाषाविद् एवं लेखिका",
+    company: "साहित्य निकेतन वाचक समिति",
+    quote:
+      "स्वाधीनता पूर्व काल से अविरत ज्ञान सेवा प्रदान करने वाला यह वर्ग 'अ' ग्रन्थालय है। ३९ हजार से अधिक पुस्तकों का समृद्ध संकलन अंबाजोगाई के सांस्कृतिक जीवन का प्राण है।",
+    caption: "३९,९५३+ मुद्रित ग्रन्थ संपदा",
+    postmark: "01 MAY 1975",
+    imageUrl: "/images/real/library_vintage_books.png",
+    cardColor: "#FFF4EC",
+    stampTint: "#9C3A24",
+  },
+  {
+    id: "test-4",
+    name: "एड. सुधीर जोशी",
+    role: "वरिष्ठ आजीवन सदस्य (४० वर्ष वाचक)",
+    company: "अंबाजोगाई विधि एवं सांस्कृतिक परिषद",
+    quote:
+      "मैं पिछले चालीस वर्षों से इस ग्रन्थालय का नियमित वाचक हूँ। १९४५ से चली आ रही इस महान परम्परा को युवा पीढ़ी द्वारा डिजिटल स्वरूप में संजोते देख अत्यंत गौरव की अनुभूति होती है।",
+    caption: "८० वर्षों की अविरत ज्ञान सेवा",
+    postmark: "01 AUG 2020",
+    imageUrl: "/images/real/library_cupboards.png",
+    cardColor: "#EDF4FA",
+    stampTint: "#1D3B64",
+  },
+];
+
 interface TestimonialsSectionProps {
   initialTestimonials?: PostcardNote[];
 }
@@ -71,11 +181,21 @@ export function TestimonialsSection({
   const isEn = language === "en";
   const isHi = language === "hi";
 
+  const defaultPostcards = useMemo(() => {
+    return isEn ? FALLBACK_POSTCARDS_EN : isHi ? FALLBACK_POSTCARDS_HI : FALLBACK_POSTCARDS;
+  }, [isEn, isHi]);
+
   const [notes, setNotes] = useState<PostcardNote[]>(
     initialTestimonials && initialTestimonials.length > 0
       ? initialTestimonials
-      : FALLBACK_POSTCARDS
+      : defaultPostcards
   );
+
+  useEffect(() => {
+    if (!initialTestimonials || initialTestimonials.length === 0) {
+      setNotes(defaultPostcards);
+    }
+  }, [defaultPostcards, initialTestimonials]);
 
   useEffect(() => {
     async function loadDynamic() {

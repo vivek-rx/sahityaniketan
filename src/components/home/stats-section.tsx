@@ -87,7 +87,7 @@ export function StatsSection() {
 
             <div className="inline-flex items-center gap-2 text-stone-500 dark:text-stone-400 text-xs sm:text-sm font-medium">
               <Landmark className="w-3.5 h-3.5 text-[#800020] dark:text-amber-500" />
-              <span>अंबाजोगाई, जि. बीड (महाराष्ट्र)</span>
+              <span>{isEn ? "Ambajogai, Dist. Beed (Maharashtra)" : isHi ? "अंबाजोगाई, जिला बीड (महाराष्ट्र)" : "अंबाजोगाई, जि. बीड (महाराष्ट्र)"}</span>
             </div>
           </div>
 
@@ -99,7 +99,7 @@ export function StatsSection() {
               <div className="relative rounded-2xl overflow-hidden border-2 border-stone-200 dark:border-zinc-700 shadow-md aspect-4/3 bg-stone-100 dark:bg-zinc-800">
                 <Image
                   src="/images/real/library_inauguration_plaque.webp"
-                  alt="साहित्य निकेतन मूळ स्थापना शिलालेख - १ ऑगस्ट १९४५"
+                  alt={isEn ? "Sahitya Niketan Original Founding Inscription - 1 August 1945" : isHi ? "साहित्य निकेतन मूल स्थापना शिलालेख - १ अगस्त १९४५" : "साहित्य निकेतन मूळ स्थापना शिलालेख - १ ऑगस्ट १९४५"}
                   fill
                   className="object-cover group-hover:scale-103 transition-transform duration-500"
                   sizes="(max-width: 1024px) 100vw, 420px"
@@ -112,10 +112,10 @@ export function StatsSection() {
                 {/* Overlaid Historical Tag */}
                 <div className="absolute bottom-3 left-3 right-3 text-white">
                   <span className="inline-block px-2.5 py-1 rounded bg-[#800020]/90 backdrop-blur-xs text-[11px] font-bold tracking-wider uppercase mb-1">
-                    {isEn ? "Historic Foundation Inscription" : "मूळ स्थापना शिलालेख"}
+                    {isEn ? "Historic Foundation Inscription" : isHi ? "मूल स्थापना शिलालेख" : "मूळ स्थापना शिलालेख"}
                   </span>
                   <p className="text-xs text-stone-200 font-medium leading-snug">
-                    {isEn ? "Unveiled on 1 August 1945 at Ambajogai" : "१ ऑगस्ट १९४५ रोजी अनावरण झालेली ऐतिहासिक कोनशिला"}
+                    {isEn ? "Unveiled on 1 August 1945 at Ambajogai" : isHi ? "१ अगस्त १९४५ को अनावरित ऐतिहासिक कोनशिला" : "१ ऑगस्ट १९४५ रोजी अनावरण झालेली ऐतिहासिक कोनशिला"}
                   </p>
                 </div>
               </div>
@@ -131,7 +131,7 @@ export function StatsSection() {
             <div className="lg:col-span-7 flex flex-col justify-center text-left">
               <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#800020] dark:text-amber-400 mb-2">
                 <Clock className="w-3.5 h-3.5" />
-                <span>१९४५ — २०२६ : गौरवशाली ८० वर्षे</span>
+                <span>{isEn ? "1945 — 2026: 80 Glorious Years" : isHi ? "१९४५ — २०२६ : गौरवशाली ८० वर्ष" : "१९४५ — २०२६ : गौरवशाली ८० वर्षे"}</span>
               </div>
 
               <h2 className="font-marathi-heading text-2xl sm:text-3xl lg:text-4xl font-extrabold text-stone-900 dark:text-stone-50 leading-tight mb-4">
@@ -147,13 +147,13 @@ export function StatsSection() {
                 <div className="flex items-center gap-2.5 p-3 rounded-xl bg-stone-50 dark:bg-zinc-800/80 border border-stone-200 dark:border-zinc-700/80">
                   <BookOpen className="w-4 h-4 text-[#800020] dark:text-amber-400 shrink-0" />
                   <span className="text-xs sm:text-sm font-semibold text-stone-800 dark:text-stone-200">
-                    {isEn ? "39,953+ Registered Volumes" : "३९,९५३+ नोंदणीकृत ग्रंथसंग्रह"}
+                    {isEn ? "39,953+ Registered Volumes" : isHi ? "३९,९५३+ पंजीकृत ग्रन्थ संग्रह" : "३९,९५३+ नोंदणीकृत ग्रंथसंग्रह"}
                   </span>
                 </div>
                 <div className="flex items-center gap-2.5 p-3 rounded-xl bg-stone-50 dark:bg-zinc-800/80 border border-stone-200 dark:border-zinc-700/80">
                   <Award className="w-4 h-4 text-[#800020] dark:text-amber-400 shrink-0" />
                   <span className="text-xs sm:text-sm font-semibold text-stone-800 dark:text-stone-200">
-                    {isEn ? "12th Century Ancient Manuscripts" : "१२व्या शतकातील आद्यग्रंथ व मोडी सनदा"}
+                    {isEn ? "12th Century Ancient Manuscripts" : isHi ? "१२वीं सदी के आद्यग्रन्थ व मोडी सनदें" : "१२व्या शतकातील आद्यग्रंथ व मोडी सनदा"}
                   </span>
                 </div>
               </div>
@@ -164,7 +164,7 @@ export function StatsSection() {
                   href="/history"
                   className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#800020] hover:bg-[#6b0f1a] text-white text-xs sm:text-sm font-bold shadow-xs hover:shadow-md transition-all active:scale-95"
                 >
-                  <span>{isEn ? "Read the Complete 80-Year History" : "८० वर्षांचा संपूर्ण इतिहास व दस्तऐवज वाचा"}</span>
+                  <span>{isEn ? "Read the Complete 80-Year History" : isHi ? "८० वर्षों का सम्पूर्ण इतिहास व दस्तावेज पढ़ें" : "८० वर्षांचा संपूर्ण इतिहास व दस्तऐवज वाचा"}</span>
                   <ArrowRight className="w-4 h-4" />
                 </Link>
               </div>

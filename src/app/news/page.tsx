@@ -19,9 +19,84 @@ interface NewsItem {
   content: { mr: string; hi: string; en: string };
 }
 
+const DEFAULT_NEWS_ITEMS: NewsItem[] = [
+  {
+    id: "notice-study-timings",
+    isPinned: true,
+    title: {
+      mr: "वातानुकूलित अभ्यासिका व वाचनालय वेळ सूचना (२०२६)",
+      hi: "वातानुकूलित अध्ययन कक्ष एवं वाचनालय समय सूचना (२०२६)",
+      en: "AC Study Wing & Daily Reading Hall Schedule Notice (2026)",
+    },
+    date: {
+      mr: "अधिकृत परिपत्रक",
+      hi: "आधिकारिक परिपत्र",
+      en: "Official Circular",
+    },
+    category: {
+      mr: "महत्त्वाची सूचना",
+      hi: "महत्वपूर्ण सूचना",
+      en: "Important Notice",
+    },
+    content: {
+      mr: "सर्व वाचक व विद्यार्थ्यांच्या माहितीस्तव, ग्रंथालयाचे दैनिक वृत्तपत्र दालन सकाळी ७:०० ते रात्री ८:३० वाजेपर्यंत सुरू राहील. वातानुकूलित अभ्यासिका सकाळी ६:०० ते रात्री १०:०० पर्यंत सुरू असून, स्पर्धा परीक्षा संदर्भ पुस्तकांचा लाभ घेण्याचे आवाहन करण्यात येत आहे.",
+      hi: "समस्त पाठकों एवं विद्यार्थियों की जानकारी हेतु, ग्रन्थालय का दैनिक समाचार पत्र कक्ष प्रातः ७:०० से रात्रि ८:३० तक खुला रहेगा। वातानुकूलित अध्ययन कक्ष प्रातः ६:०० से रात्रि १०:०० तक संचालित है।",
+      en: "For the attention of all patrons and students, the Daily Reading Hall operates from 7:00 AM to 8:30 PM. The Air-Conditioned Study Wing remains open from 6:00 AM to 10:00 PM with dedicated reference desks for civil service aspirants.",
+    },
+  },
+  {
+    id: "notice-catalogue-update",
+    isPinned: false,
+    title: {
+      mr: "३९,९५३+ ग्रंथसंपदा ऑनलाइन शोध व संगणकीकरण पूर्तता",
+      hi: "३९,९५३+ ग्रन्थ संग्रह ऑनलाइन खोज एवं कम्प्यूटरीकरण पूर्ण",
+      en: "39,953+ Volumes Complete Digitization & Online Catalogue Live",
+    },
+    date: {
+      mr: "अद्ययावत नोंदणी",
+      hi: "अद्यतन पंजीकरण",
+      en: "Recent Update",
+    },
+    category: {
+      mr: "ग्रंथसंपदा",
+      hi: "ग्रन्थ धरोहर",
+      en: "Catalogue",
+    },
+    content: {
+      mr: "साहित्य निकेतन ग्रंथालयातील सर्व ३९,९५३ मुद्रित ग्रंथांचे वर्गीकरण संगणकीय डेटाबेसमध्ये समाविष्ट करण्यात आले आहे. वाचक आता लेखक, शीर्षक आणि विषयवार ऑनलाइन कॅटलॉग शोधू शकतात.",
+      hi: "साहित्य निकेतन पुस्तकालय के समस्त ३९,९५३ मुद्रित ग्रन्थों का वर्गीकरण डिजिटल डेटाबेस में सुरक्षित कर दिया गया है। पाठक अब ऑनलाइन कैटलॉग से अपनी पसंदीदा पुस्तकें खोज सकते हैं।",
+      en: "The entire inventory of 39,953 printed books at Sahitya Niketan is now digitized and searchable. Patrons and researchers can explore records by title, author, and subject in the public catalogue.",
+    },
+  },
+  {
+    id: "notice-modi-workshop",
+    isPinned: false,
+    title: {
+      mr: "मोडी लिपी व ऐतिहासिक दस्तऐवज वाचन कार्यशाळा",
+      hi: "मोडी लिपि एवं ऐतिहासिक दस्तावेज वाचन कार्यशाला",
+      en: "Modi Script & Archival Manuscript Reading Workshop",
+    },
+    date: {
+      mr: "आगामी उपक्रम",
+      hi: "आगामी आयोजन",
+      en: "Upcoming Event",
+    },
+    category: {
+      mr: "कार्यशाळा",
+      hi: "कार्यशाला",
+      en: "Workshop",
+    },
+    content: {
+      mr: "इतिहास संशोधक आणि पदव्युत्तर विद्यार्थ्यांसाठी ग्रंथालयाच्या दुर्मीळ हस्तलिखित दालनात १० दिवसीय मोडी लिपी वाचन कार्यशाळा आयोजित करण्यात येत आहे. प्रवेश विनामूल्य असून ग्रंथालय कार्यालयात नाव नोंदणी करावी.",
+      hi: "इतिहास शोधकर्ताओं एवं छात्रों हेतु ग्रन्थालय के दुर्लभ पाण्डुलिपि कक्ष में १० दिवसीय मोडी लिपि वाचन कार्यशाला आयोजित की जा रही है। प्रवेश निःशुल्क है।",
+      en: "A 10-day hands-on Modi Script reading and archival preservation workshop is being organized for research scholars and students. Admission is complimentary upon registration at the front desk.",
+    },
+  },
+];
+
 export default function NewsPage() {
   const { language } = useLanguage();
-  const [newsItems, setNewsItems] = useState<NewsItem[]>([]);
+  const [newsItems, setNewsItems] = useState<NewsItem[]>(DEFAULT_NEWS_ITEMS);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -65,10 +140,10 @@ export default function NewsPage() {
           });
         }
 
-        setNewsItems(mapped);
+        setNewsItems(mapped.length > 0 ? mapped : DEFAULT_NEWS_ITEMS);
       } catch (err) {
         console.error("Failed to load dynamic news/notices:", err);
-        setNewsItems([]);
+        setNewsItems(DEFAULT_NEWS_ITEMS);
       } finally {
         setIsLoading(false);
       }
