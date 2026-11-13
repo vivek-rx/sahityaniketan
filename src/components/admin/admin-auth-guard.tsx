@@ -2,38 +2,58 @@
 
 import { useEffect, useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
-import { createClient } from "@/lib/supabase/client";
 
 import { Loader2 } from "lucide-react";
 
 export function AdminAuthGuard({ children }: { children: React.ReactNode }) {
   const router = useRouter();
   const pathname = usePathname();
-  const [checking, setChecking] = useState(true);
-  const [authorized, setAuthorized] = useState(false);
+  const isLoginRoute = pathname === "/admin/login";
+
+  // `/admin/login` is public. Every other admin route starts in the checking
+  // state, so nothing admin-only flashes on screen before the server answers.
+  const [checking, setChecking] = useState(!isLoginRoute);
+  const [authorized, setAuthorized] = useState(isLoginRoute);
 
   useEffect(() => {
-    if (pathname === "/admin/login") {
-      setAuthorized(true);
-      setChecking(false);
-      return;
-    }
+    if (isLoginRoute) return;
+
+    let cancelled = false;
 
     async function check() {
-      const supabase = createClient();
-      const { data: { user } } = await supabase.auth.getUser();
+      try {
+        // Server-side check: proves the account is an active admin, not merely
+        // that a session cookie exists. See /api/admin/session.
+        const res = await fetch("/api/admin/session", {
+          cache: "no-store",
+          credentials: "same-origin",
+        });
 
-      if (!user) {
-        router.replace("/login?role=admin");
-        return;
+        if (cancelled) return;
+
+        if (!res.ok) {
+          router.replace("/login?role=admin&reason=forbidden");
+          return;
+        }
+
+        setAuthorized(true);
+      } catch {
+        if (!cancelled) {
+          router.replace("/login?role=admin&reason=error");
+        }
+      } finally {
+        if (!cancelled) setChecking(false);
       }
-
-      setAuthorized(true);
-      setChecking(false);
     }
 
     check();
-  }, [router, pathname]);
+
+    return () => {
+      cancelled = true;
+    };
+    // `router` is stable; `isLoginRoute` is the only value that changes.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLoginRoute]);
 
   if (checking) {
     return (

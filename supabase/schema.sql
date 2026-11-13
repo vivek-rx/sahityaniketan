@@ -279,13 +279,38 @@ ALTER TABLE public.site_settings   ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.audit_log       ENABLE ROW LEVEL SECURITY;
 
 -- Helper function: is current user an active admin?
+-- SECURITY DEFINER is owned by the migration role (postgres), which bypasses
+-- RLS on admin_users. Without that, a policy that reads admin_users would
+-- re-enter itself and Postgres raises 42P17 "infinite recursion".
 CREATE OR REPLACE FUNCTION public.is_admin()
-RETURNS BOOLEAN AS $$
+RETURNS BOOLEAN
+LANGUAGE SQL
+STABLE
+SECURITY DEFINER
+SET search_path = public, pg_temp
+AS $$
   SELECT EXISTS (
     SELECT 1 FROM public.admin_users
-    WHERE email = auth.email() AND is_active = TRUE
+    WHERE lower(email) = lower(coalesce(auth.email(), ''))
+      AND is_active = TRUE
   );
-$$ LANGUAGE SQL SECURITY DEFINER STABLE;
+$$;
+
+-- Helper function: is current user a super admin?
+CREATE OR REPLACE FUNCTION public.is_super_admin()
+RETURNS BOOLEAN
+LANGUAGE SQL
+STABLE
+SECURITY DEFINER
+SET search_path = public, pg_temp
+AS $$
+  SELECT EXISTS (
+    SELECT 1 FROM public.admin_users
+    WHERE lower(email) = lower(coalesce(auth.email(), ''))
+      AND role = 'super_admin'
+      AND is_active = TRUE
+  );
+$$;
 
 -- BOOKS
 DROP POLICY IF EXISTS books_public_read  ON public.books;
@@ -339,12 +364,15 @@ DROP POLICY IF EXISTS members_admin_only ON public.members;
 CREATE POLICY members_admin_only ON public.members FOR ALL USING (public.is_admin());
 
 -- ADMIN USERS
+-- NOTE: never put a bare `SELECT ... FROM admin_users` inside a policy on
+-- admin_users. It re-enters the policy and causes 42P17 infinite recursion.
+-- Use the SECURITY DEFINER helpers instead.
 DROP POLICY IF EXISTS admin_read       ON public.admin_users;
 DROP POLICY IF EXISTS admin_superadmin ON public.admin_users;
 CREATE POLICY admin_read       ON public.admin_users FOR SELECT USING (public.is_admin());
-CREATE POLICY admin_superadmin ON public.admin_users FOR ALL USING (
-  EXISTS (SELECT 1 FROM public.admin_users WHERE email = auth.email() AND role = 'super_admin')
-);
+CREATE POLICY admin_superadmin ON public.admin_users FOR ALL
+  USING (public.is_super_admin())
+  WITH CHECK (public.is_super_admin());
 
 -- SITE SETTINGS
 DROP POLICY IF EXISTS settings_public_read ON public.site_settings;
