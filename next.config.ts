@@ -53,6 +53,14 @@ const nextConfig: NextConfig = {
     deviceSizes: [360, 420, 640, 750, 828, 1080, 1200, 1920],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     minimumCacheTTL: 86400,
+    // Generated catalogue covers are SVG (see src/lib/covers.ts). Serving them
+    // through next/image requires opting in; the CSP below neutralises the
+    // scripting risk that makes SVG "dangerous". The cover route additionally
+    // sets its own nosniff + CSP headers.
+    dangerouslyAllowSVG: true,
+    contentDispositionType: "inline",
+    contentSecurityPolicy:
+      "default-src 'none'; style-src 'unsafe-inline'; sandbox;",
     remotePatterns: [
       { protocol: "https", hostname: "covers.openlibrary.org" },
       { protocol: "https", hostname: "images-na.ssl-images-amazon.com" },

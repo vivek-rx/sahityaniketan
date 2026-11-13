@@ -627,6 +627,30 @@ export async function searchBooksOnline(query: string, limit = 15): Promise<Book
  * Retrieve single book details by ID from curated or OpenLibrary
  */
 export async function getBookById(id: string): Promise<BookVolume | null> {
+  // 1. Supabase catalogue first. The detail route passes a database UUID, not
+  //    an Open Library work ID; the old code prefixed it with "OL" and every
+  //    real book resolved to null.
+  if (typeof window !== "undefined") {
+    try {
+      const res = await fetch(`/api/books/${encodeURIComponent(id)}`, {
+        cache: "no-store",
+      });
+
+      if (res.ok) {
+        const payload = await res.json();
+        if (payload?.book) return payload.book as BookVolume;
+      }
+
+      // A definite 404 from the catalogue means this is not one of our UUIDs.
+      if (res.status === 404 && !id.startsWith("OL")) {
+        return null;
+      }
+    } catch {
+      // Fall through to the Open Library lookup below.
+    }
+  }
+
+  // 2. Legacy Open Library work IDs (e.g. "OL123W").
   try {
     const workKey = id.startsWith("OL") ? id : `OL${id}`;
     const res = await fetch(`https://openlibrary.org/works/${workKey}.json`, {

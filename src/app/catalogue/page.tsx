@@ -58,7 +58,9 @@ function CatalogueContent() {
       setIsLoading(true);
       try {
         const searchTerm = debouncedQuery.trim() || (selectedCategory !== "all" ? selectedCategory : "");
-        const res = await fetch(`/api/books?q=${encodeURIComponent(searchTerm)}&limit=24`);
+        // The whole catalogue is small enough to load in one request (the API
+        // caps at 100); client-side filters and pagination then see every book.
+        const res = await fetch(`/api/books?q=${encodeURIComponent(searchTerm)}&limit=100`);
         if (res.ok) {
           const data = await res.json();
           if (data.books && data.books.length > 0) {

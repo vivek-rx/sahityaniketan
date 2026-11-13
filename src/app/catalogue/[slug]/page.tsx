@@ -122,13 +122,15 @@ export default function BookDetailPage({ params }: { params: Promise<{ slug: str
                   <span className="rounded-md bg-[#800020]/10 dark:bg-[#800020]/25 border border-[#800020]/20 dark:border-[#800020]/40 px-3 py-1 text-xs font-bold text-[#800020] dark:text-[#E5B869]">
                     {book.categoryMarathi || book.category}
                   </span>
-                  <div className="flex items-center gap-1.5 bg-amber-50 dark:bg-amber-950/40 border border-amber-200/60 dark:border-amber-800/40 px-2 py-0.5 rounded-md text-xs font-bold text-amber-600 dark:text-[#E5B869]">
-                    <Star className="h-3.5 w-3.5 fill-amber-500 text-amber-500" />
-                    <span>{book.rating.toFixed(1)} / ५.०</span>
-                    <span className="text-[11px] text-stone-500 dark:text-[#B8A699] font-normal">
-                      ({book.ratingsCount.toLocaleString()} परीक्षणे)
-                    </span>
-                  </div>
+                  {book.ratingsCount > 0 && (
+                    <div className="flex items-center gap-1.5 bg-amber-50 dark:bg-amber-950/40 border border-amber-200/60 dark:border-amber-800/40 px-2 py-0.5 rounded-md text-xs font-bold text-amber-600 dark:text-[#E5B869]">
+                      <Star className="h-3.5 w-3.5 fill-amber-500 text-amber-500" />
+                      <span>{book.rating.toFixed(1)} / ५.०</span>
+                      <span className="text-[11px] text-stone-500 dark:text-[#B8A699] font-normal">
+                        ({book.ratingsCount.toLocaleString()} परीक्षणे)
+                      </span>
+                    </div>
+                  )}
                   {book.isRare && (
                     <span className="rounded-md bg-[#800020]/10 dark:bg-[#800020]/25 text-[#800020] dark:text-[#E5B869] border border-[#800020]/20 dark:border-[#800020]/40 px-2.5 py-1 text-xs font-bold">
                       दुर्मीळ अभिजात संग्रह

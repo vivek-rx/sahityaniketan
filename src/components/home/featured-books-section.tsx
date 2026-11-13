@@ -839,7 +839,7 @@ export function FeaturedBooksSection() {
                 author: b.author,
                 authorMarathi: b.author_marathi || b.authorMarathi || b.author,
                 authorHindi: b.author_hindi || b.authorHindi,
-                coverImage: b.cover_url || b.coverImage || "",
+                coverImage: b.coverImage || b.cover_url || "",
                 categoryKey: catKey,
                 languageLabel: b.language === "hi" ? "हिन्दी" : b.language === "sa" ? "संस्कृत" : "मराठी",
                 languageLabelEn: b.language === "hi" ? "Hindi" : b.language === "sa" ? "Sanskrit" : "Marathi",

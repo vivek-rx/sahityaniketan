@@ -85,10 +85,21 @@ export async function getBookById(id: string) {
 
 export async function createBook(input: Omit<Book, "id" | "created_at" | "updated_at">) {
   await requireAdmin();
+
+  // Automatic cover: if the librarian did not upload one, try the ISBN once.
+  // A miss is fine — /api/covers/{id}.svg generates a typographic cover, so
+  // no book is ever left with a blank image and nothing is stored in the 1 GB
+  // Supabase bucket.
+  const payload = { ...input };
+  if (!payload.cover_url && payload.isbn) {
+    const resolved = await fetchBookCoverByISBN(payload.isbn);
+    if (resolved) payload.cover_url = resolved;
+  }
+
   const supabase = createAdminClient() as any;
   const { data, error } = await supabase
     .from("books")
-    .insert(input)
+    .insert(payload)
     .select()
     .single();
   if (error) throw new Error(error.message);
