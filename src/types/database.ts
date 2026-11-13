@@ -158,8 +158,72 @@ export interface Member {
   books_borrowed: number;
   photo_url: string | null;
   notes: string | null;
+  id_type: string | null;
+  locale: string | null;
+  consent_given: boolean;
+  consent_version: string | null;
+  consent_at: string | null;
   created_at: string;
   updated_at: string;
+}
+
+export interface ContactSubmission {
+  id: string;
+  name: string;
+  email: string;
+  phone: string | null;
+  subject: string | null;
+  message: string;
+  status: "unread" | "read" | "replied" | "archived";
+  locale: string | null;
+  consent_given: boolean;
+  consent_version: string | null;
+  consent_at: string | null;
+  created_at: string;
+}
+
+export interface BookRequest {
+  id: string;
+  book_title: string;
+  author: string | null;
+  requested_by: string;
+  phone: string | null;
+  email: string | null;
+  status: "pending" | "approved" | "procured" | "rejected";
+  notes: string | null;
+  locale: string | null;
+  consent_given: boolean;
+  consent_version: string | null;
+  consent_at: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface NewsletterSubscriber {
+  id: string;
+  email: string;
+  status: "subscribed" | "unsubscribed";
+  source: string | null;
+  consent_given: boolean;
+  consent_version: string | null;
+  consent_at: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface EventRsvp {
+  id: string;
+  event_title: string;
+  event_date: string | null;
+  event_time: string | null;
+  venue: string | null;
+  name: string;
+  phone: string | null;
+  attendees: number;
+  consent_given: boolean;
+  consent_version: string | null;
+  consent_at: string | null;
+  created_at: string;
 }
 
 export interface SiteSetting {
@@ -189,61 +253,97 @@ export interface Database {
         Row: AdminUser;
         Insert: Partial<AdminUser>;
         Update: Partial<AdminUser>;
+        Relationships: [];
       };
       books: {
         Row: Book;
         Insert: Partial<Book>;
         Update: Partial<Book>;
+        Relationships: [];
       };
       book_ratings: {
         Row: BookRating;
         Insert: Partial<BookRating>;
         Update: Partial<BookRating>;
+        Relationships: [];
       };
       events: {
         Row: Event;
         Insert: Partial<Event>;
         Update: Partial<Event>;
+        Relationships: [];
       };
       carousel_slides: {
         Row: CarouselSlide;
         Insert: Partial<CarouselSlide>;
         Update: Partial<CarouselSlide>;
+        Relationships: [];
       };
       posts: {
         Row: Post;
         Insert: Partial<Post>;
         Update: Partial<Post>;
+        Relationships: [];
       };
       gallery_albums: {
         Row: GalleryAlbum;
         Insert: Partial<GalleryAlbum>;
         Update: Partial<GalleryAlbum>;
+        Relationships: [];
       };
       gallery_items: {
         Row: GalleryItem;
         Insert: Partial<GalleryItem>;
         Update: Partial<GalleryItem>;
+        Relationships: [];
       };
       notices: {
         Row: Notice;
         Insert: Partial<Notice>;
         Update: Partial<Notice>;
+        Relationships: [];
       };
       members: {
         Row: Member;
         Insert: Partial<Member>;
         Update: Partial<Member>;
+        Relationships: [];
+      };
+      contact_submissions: {
+        Row: ContactSubmission;
+        Insert: Partial<ContactSubmission>;
+        Update: Partial<ContactSubmission>;
+        Relationships: [];
+      };
+      book_requests: {
+        Row: BookRequest;
+        Insert: Partial<BookRequest>;
+        Update: Partial<BookRequest>;
+        Relationships: [];
+      };
+      newsletter_subscribers: {
+        Row: NewsletterSubscriber;
+        Insert: Partial<NewsletterSubscriber>;
+        Update: Partial<NewsletterSubscriber>;
+        Relationships: [];
+      };
+      event_rsvps: {
+        Row: EventRsvp;
+        Insert: Partial<EventRsvp>;
+        Update: Partial<EventRsvp>;
+        Relationships: [];
       };
       site_settings: {
         Row: SiteSetting;
         Insert: Partial<SiteSetting>;
         Update: Partial<SiteSetting>;
+        Relationships: [];
       };
       audit_log: {
         Row: AuditLog;
         Insert: Partial<AuditLog>;
         Update: Partial<AuditLog>;
+        Relationships: [];
       };
     };
     Views: Record<string, never>;

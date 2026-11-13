@@ -1,11 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Navbar, Footer, PageHeader } from "@/components/layout";
-import { Mail, Phone, MapPin, Clock, ShieldCheck, Send, CheckCircle2, ExternalLink, AlertCircle } from "lucide-react";
+import { Mail, Phone, MapPin, Clock, CheckCircle2, ExternalLink, AlertCircle } from "lucide-react";
 import { TurnstileWidget } from "@/components/security/turnstile-widget";
 import { useLanguage } from "@/context/language-context";
 import { MotionSubmitButton } from "@/components/ui/motion-submit-button";
+import Link from "next/link";
+import { submitContactForm } from "@/lib/actions/public-forms";
 import {
   SITE_EMAIL,
   SITE_OFFICE_PHONE_DISPLAY,
@@ -26,6 +28,36 @@ export default function ContactPage() {
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [touched, setTouched] = useState<Record<string, boolean>>({});
+  const [consent, setConsent] = useState(false);
+  const [consentError, setConsentError] = useState(false);
+  const [turnstileToken, setTurnstileToken] = useState<string | undefined>();
+  const [turnstileKey, setTurnstileKey] = useState(0);
+  const [honeypot, setHoneypot] = useState("");
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  const startedAt = useRef(0);
+
+  useEffect(() => {
+    startedAt.current = Date.now();
+  }, []);
+
+  const errorMessage = (code: string) => {
+    if (language === "hi") {
+      if (code === "rate_limit") return "बहुत अधिक प्रयास। कृपया १० मिनट बाद पुनः प्रयास करें।";
+      if (code === "captcha") return "मानव सत्यापन विफल रहा। कृपया पुनः प्रयास करें।";
+      if (code === "validation") return "कृपया सभी आवश्यक जानकारी जाँचें।";
+      return "संदेश सहेजा नहीं जा सका। कृपया फ़ोन या ईमेल से संपर्क करें।";
+    }
+    if (language === "en") {
+      if (code === "rate_limit") return "Too many attempts. Please try again in 10 minutes.";
+      if (code === "captcha") return "Human verification failed. Please try again.";
+      if (code === "validation") return "Please check the required fields.";
+      return "Your message could not be saved. Please contact us by phone or email.";
+    }
+    if (code === "rate_limit") return "खूप वेळा प्रयत्न झाले. कृपया १० मिनिटांनंतर पुन्हा प्रयत्न करा.";
+    if (code === "captcha") return "मानवी पडताळणी अयशस्वी झाली. कृपया पुन्हा प्रयत्न करा.";
+    if (code === "validation") return "कृपया सर्व आवश्यक माहिती तपासा.";
+    return "संदेश साठवता आला नाही. कृपया फोन किंवा ईमेलने संपर्क साधा.";
+  };
 
   const validate = (currentData = formData) => {
     const newErrors: Record<string, string> = {};
@@ -99,7 +131,7 @@ export default function ContactPage() {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const validationErrors = validate();
     setErrors(validationErrors);
@@ -115,17 +147,44 @@ export default function ContactPage() {
       return;
     }
 
+    if (!consent) {
+      setConsentError(true);
+      return;
+    }
+
+    setConsentError(false);
+    setSubmitError(null);
     setIsPending(true);
+
+    const result = await submitContactForm({
+      ...formData,
+      consent: true,
+      locale: language,
+      website: honeypot,
+      elapsedMs: Date.now() - startedAt.current,
+      turnstileToken,
+    });
+
+    setIsPending(false);
+
+    if (!result.ok) {
+      setSubmitError(errorMessage(result.code));
+      setTurnstileToken(undefined);
+      setTurnstileKey((key) => key + 1);
+      return;
+    }
+
+    setIsSubmitted(true);
     setTimeout(() => {
-      setIsPending(false);
-      setIsSubmitted(true);
-      setTimeout(() => {
-        setIsSubmitted(false);
-        setFormData({ name: "", email: "", phone: "", subject: "", message: "" });
-        setErrors({});
-        setTouched({});
-      }, 4000);
-    }, 1200);
+      setIsSubmitted(false);
+      setFormData({ name: "", email: "", phone: "", subject: "", message: "" });
+      setErrors({});
+      setTouched({});
+      setConsent(false);
+      startedAt.current = Date.now();
+      setTurnstileToken(undefined);
+      setTurnstileKey((key) => key + 1);
+    }, 6000);
   };
 
   return (
@@ -255,6 +314,19 @@ export default function ContactPage() {
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} noValidate className="space-y-4">
+                  {/* Honeypot — hidden from people, irresistible to naive bots. */}
+                  <div className="absolute left-[-9999px] top-auto h-px w-px overflow-hidden" aria-hidden="true">
+                    <label htmlFor="contact-website">Website</label>
+                    <input
+                      id="contact-website"
+                      name="website"
+                      type="text"
+                      tabIndex={-1}
+                      autoComplete="off"
+                      value={honeypot}
+                      onChange={(e) => setHoneypot(e.target.value)}
+                    />
+                  </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-xs font-bold text-stone-700 dark:text-[#FAF2E8] mb-1">
@@ -392,8 +464,78 @@ export default function ContactPage() {
                     )}
                   </div>
 
+                  {/* DPDP Act 2023: explicit, recorded consent. */}
+                  <div className="rounded-xl border border-[#E5DDD0] dark:border-[#332228] bg-[#FAF8F5] dark:bg-[#120B0D] p-3.5">
+                    <label className="flex items-start gap-2.5 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        checked={consent}
+                        onChange={(e) => {
+                          setConsent(e.target.checked);
+                          if (e.target.checked) setConsentError(false);
+                        }}
+                        required
+                        aria-invalid={consentError}
+                        aria-describedby={consentError ? "contact-consent-error" : undefined}
+                        className="mt-0.5 h-4 w-4 shrink-0 accent-[#800020]"
+                      />
+                      <span className="text-[11px] sm:text-xs leading-relaxed text-stone-600 dark:text-stone-300">
+                        {language === "mr" ? (
+                          <>
+                            मी{" "}
+                            <Link href="/privacy" className="font-bold underline text-[#800020] dark:text-[#E5B869]">
+                              गोपनीयता धोरण
+                            </Link>{" "}
+                            वाचले आहे आणि माझ्या संदेशास उत्तर देण्यासाठी माझी
+                            वैयक्तिक माहिती (नाव, ईमेल, मोबाईल) साठवण्यास व
+                            वापरण्यास संमती देतो/देते.
+                          </>
+                        ) : language === "hi" ? (
+                          <>
+                            मैंने{" "}
+                            <Link href="/privacy" className="font-bold underline text-[#800020] dark:text-[#E5B869]">
+                              गोपनीयता नीति
+                            </Link>{" "}
+                            पढ़ी है और अपने संदेश का उत्तर देने हेतु अपनी
+                            व्यक्तिगत जानकारी (नाम, ईमेल, मोबाइल) संग्रहीत
+                            करने की सहमति देता/देती हूँ।
+                          </>
+                        ) : (
+                          <>
+                            I have read the{" "}
+                            <Link href="/privacy" className="font-bold underline text-[#800020] dark:text-[#E5B869]">
+                              Privacy Policy
+                            </Link>{" "}
+                            and consent to my name, email and phone number
+                            being stored so the library can reply to this
+                            message.
+                          </>
+                        )}
+                      </span>
+                    </label>
+                    {consentError && (
+                      <p id="contact-consent-error" role="alert" className="mt-2 text-[11px] font-semibold text-red-600 dark:text-red-400">
+                        {language === "mr"
+                          ? "कृपया पुढे जाण्यासाठी संमती द्या."
+                          : language === "hi"
+                            ? "आगे बढ़ने के लिए कृपया सहमति दें।"
+                            : "Please give consent to continue."}
+                      </p>
+                    )}
+                  </div>
+
+                  {submitError && (
+                    <div role="alert" className="flex items-start gap-2 rounded-xl border border-rose-200 bg-rose-50 dark:border-rose-900 dark:bg-rose-950/40 p-3 text-xs text-rose-700 dark:text-rose-300">
+                      <AlertCircle className="h-4 w-4 shrink-0 mt-0.5" />
+                      <span>{submitError}</span>
+                    </div>
+                  )}
+
                   {/* Cloudflare Turnstile Protection */}
-                  <TurnstileWidget onVerify={(token) => console.log("Turnstile Token Verified:", token)} />
+                  <TurnstileWidget
+                    key={turnstileKey}
+                    onVerify={setTurnstileToken}
+                  />
 
                   <MotionSubmitButton
                     type="submit"

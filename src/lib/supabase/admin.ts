@@ -18,3 +18,25 @@ export function createAdminClient() {
     }
   );
 }
+
+/**
+ * Service-role client without the hand-written `Database` generic.
+ *
+ * supabase-js constrains every table Row/Insert to `Record<string, unknown>`.
+ * The project's row types are TypeScript interfaces, which do not satisfy that
+ * constraint, so a typed client collapses each table to `never`. Public form
+ * tables (contact, book requests, newsletter, RSVPs) are therefore written
+ * through this untyped client; their payloads are validated by zod first.
+ */
+export function createUntypedAdminClient() {
+  return createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!,
+    {
+      auth: {
+        autoRefreshToken: false,
+        persistSession: false,
+      },
+    }
+  );
+}

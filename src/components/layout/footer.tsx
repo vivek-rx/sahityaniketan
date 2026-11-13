@@ -4,6 +4,7 @@ import React from "react";
 import { Footer as BaseFooter } from "@/components/ui/footer";
 import { useLanguage } from "@/context/language-context";
 import { YEARS_OF_SERVICE_MR } from "@/lib/site";
+import { subscribeToNewsletter } from "@/lib/actions/public-forms";
 
 /**
  * Footer — Exact 21st.dev/shadcn responsive footer with newsletter subscription.
@@ -24,10 +25,18 @@ export function Footer() {
     { label: isEn ? "Contact Us" : isHi ? "संपर्क" : "थेट संपर्क व पत्ता", href: "/contact" },
   ];
 
-  const handleSubscribe = async (email: string): Promise<boolean> => {
-    // Simulate API newsletter signup
-    await new Promise((resolve) => setTimeout(resolve, 800));
-    return Boolean(email && email.includes("@"));
+  const handleSubscribe = async (
+    email: string,
+    consent: boolean
+  ): Promise<boolean> => {
+    const result = await subscribeToNewsletter({
+      email,
+      consent,
+      source: "footer",
+      website: "",
+      elapsedMs: 5000,
+    });
+    return result.ok;
   };
 
   return (

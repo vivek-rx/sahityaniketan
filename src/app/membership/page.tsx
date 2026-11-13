@@ -1,11 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { Navbar, Footer, PageHeader } from "@/components/layout";
-import { CheckCircle2, ShieldCheck, FileText, UserCheck } from "lucide-react";
+import { CheckCircle2, UserCheck, AlertCircle } from "lucide-react";
 import { useLanguage } from "@/context/language-context";
 import { MotionSubmitButton } from "@/components/ui/motion-submit-button";
+import { TurnstileWidget } from "@/components/security/turnstile-widget";
+import { submitMembershipApplication } from "@/lib/actions/public-forms";
 
 export default function MembershipPage() {
   const { language } = useLanguage();
@@ -13,6 +15,15 @@ export default function MembershipPage() {
   const [submitted, setSubmitted] = useState(false);
   const [consent, setConsent] = useState(false);
   const [consentError, setConsentError] = useState(false);
+  const [turnstileToken, setTurnstileToken] = useState<string | undefined>();
+  const [turnstileKey, setTurnstileKey] = useState(0);
+  const [honeypot, setHoneypot] = useState("");
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  const startedAt = useRef(0);
+
+  useEffect(() => {
+    startedAt.current = Date.now();
+  }, []);
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -21,7 +32,26 @@ export default function MembershipPage() {
     idType: "aadhaar",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const errorMessage = (code: string) => {
+    if (language === "hi") {
+      if (code === "rate_limit") return "बहुत अधिक प्रयास। कृपया १० मिनट बाद पुनः प्रयास करें।";
+      if (code === "captcha") return "मानव सत्यापन विफल रहा। कृपया पुनः प्रयास करें।";
+      if (code === "validation") return "कृपया सभी आवश्यक जानकारी जाँचें।";
+      return "आवेदन सहेजा नहीं जा सका। कृपया पुस्तकालय से संपर्क करें।";
+    }
+    if (language === "en") {
+      if (code === "rate_limit") return "Too many attempts. Please try again in 10 minutes.";
+      if (code === "captcha") return "Human verification failed. Please try again.";
+      if (code === "validation") return "Please check the required fields.";
+      return "Your application could not be saved. Please contact the library.";
+    }
+    if (code === "rate_limit") return "खूप वेळा प्रयत्न झाले. कृपया १० मिनिटांनंतर पुन्हा प्रयत्न करा.";
+    if (code === "captcha") return "मानवी पडताळणी अयशस्वी झाली. कृपया पुन्हा प्रयत्न करा.";
+    if (code === "validation") return "कृपया सर्व आवश्यक माहिती तपासा.";
+    return "अर्ज साठवता आला नाही. कृपया ग्रंथालयाशी संपर्क साधा.";
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     // DPDP Act 2023: no processing without an explicit, recorded consent.
@@ -31,13 +61,35 @@ export default function MembershipPage() {
     }
 
     setConsentError(false);
-    if (formData.fullName && formData.email) {
-      setIsPending(true);
-      setTimeout(() => {
-        setIsPending(false);
-        setSubmitted(true);
-      }, 1000);
+    setSubmitError(null);
+
+    if (!formData.fullName || !formData.email) return;
+
+    setIsPending(true);
+
+    const result = await submitMembershipApplication({
+      fullName: formData.fullName,
+      email: formData.email,
+      phone: formData.phone,
+      address: formData.address,
+      idType: formData.idType as "aadhaar" | "voter" | "passport" | "student",
+      consent: true,
+      locale: language,
+      website: honeypot,
+      elapsedMs: Date.now() - startedAt.current,
+      turnstileToken,
+    });
+
+    setIsPending(false);
+
+    if (!result.ok) {
+      setSubmitError(errorMessage(result.code));
+      setTurnstileToken(undefined);
+      setTurnstileKey((key) => key + 1);
+      return;
     }
+
+    setSubmitted(true);
   };
 
   return (
@@ -119,6 +171,19 @@ export default function MembershipPage() {
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4">
+                  {/* Honeypot — hidden from people, irresistible to naive bots. */}
+                  <div className="absolute left-[-9999px] top-auto h-px w-px overflow-hidden" aria-hidden="true">
+                    <label htmlFor="membership-website">Website</label>
+                    <input
+                      id="membership-website"
+                      name="website"
+                      type="text"
+                      tabIndex={-1}
+                      autoComplete="off"
+                      value={honeypot}
+                      onChange={(e) => setHoneypot(e.target.value)}
+                    />
+                  </div>
                   <h3 className="text-lg font-bold text-gray-900 dark:text-[#FAF2E8] border-b border-[#E5DDD0] dark:border-[#332228] pb-3 font-marathi-heading">
                     {language === "mr" ? "ऑनलाइन सभासद नोंदणी अर्ज" : language === "hi" ? "ऑनलाइन सदस्यता पंजीकरण" : "Online Membership Form"}
                   </h3>
@@ -262,6 +327,18 @@ export default function MembershipPage() {
                       </p>
                     )}
                   </div>
+
+                  {submitError && (
+                    <div role="alert" className="flex items-start gap-2 rounded-xl border border-rose-200 bg-rose-50 dark:border-rose-900 dark:bg-rose-950/40 p-3 text-xs text-rose-700 dark:text-rose-300">
+                      <AlertCircle className="h-4 w-4 shrink-0 mt-0.5" />
+                      <span>{submitError}</span>
+                    </div>
+                  )}
+
+                  <TurnstileWidget
+                    key={turnstileKey}
+                    onVerify={setTurnstileToken}
+                  />
 
                   <MotionSubmitButton
                     type="submit"

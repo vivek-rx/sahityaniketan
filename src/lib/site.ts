@@ -47,6 +47,13 @@ export const SITE_ADDRESS_EN =
 
 export const FOUNDED_YEAR = 1945;
 
+/**
+ * Version of the consent notice shown on public forms. Bump this whenever the
+ * privacy policy or the purposes of processing change; every stored
+ * submission records the version the person actually agreed to.
+ */
+export const CONSENT_VERSION = "2026-11-13";
+
 /** 2026 - 1945 = 81. Kept computed so the site never goes stale again. */
 export const YEARS_OF_SERVICE = Math.max(
   0,

@@ -189,8 +189,77 @@ CREATE TABLE IF NOT EXISTS public.members (
   books_borrowed   INT DEFAULT 0,
   photo_url        TEXT,
   notes            TEXT,
+  id_type          TEXT,
+  locale           TEXT,
+  consent_given    BOOLEAN NOT NULL DEFAULT FALSE,
+  consent_version  TEXT,
+  consent_at       TIMESTAMPTZ,
   created_at       TIMESTAMPTZ DEFAULT NOW(),
   updated_at       TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- =============================================
+-- 10b. PUBLIC FORM SUBMISSIONS
+-- Writes go through validated server actions using the service role;
+-- no anon INSERT policies on purpose.
+-- =============================================
+CREATE TABLE IF NOT EXISTS public.contact_submissions (
+  id              UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  name            TEXT NOT NULL,
+  email           TEXT NOT NULL,
+  phone           TEXT,
+  subject         TEXT,
+  message         TEXT NOT NULL,
+  status          TEXT DEFAULT 'unread' CHECK (status IN ('unread','read','replied','archived')),
+  locale          TEXT,
+  consent_given   BOOLEAN NOT NULL DEFAULT FALSE,
+  consent_version TEXT,
+  consent_at      TIMESTAMPTZ,
+  created_at      TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS public.book_requests (
+  id              UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  book_title      TEXT NOT NULL,
+  author          TEXT,
+  requested_by    TEXT NOT NULL,
+  phone           TEXT,
+  email           TEXT,
+  status          TEXT DEFAULT 'pending' CHECK (status IN ('pending','approved','procured','rejected')),
+  notes           TEXT,
+  locale          TEXT,
+  consent_given   BOOLEAN NOT NULL DEFAULT FALSE,
+  consent_version TEXT,
+  consent_at      TIMESTAMPTZ,
+  created_at      TIMESTAMPTZ DEFAULT NOW(),
+  updated_at      TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS public.newsletter_subscribers (
+  id              UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  email           TEXT NOT NULL UNIQUE,
+  status          TEXT NOT NULL DEFAULT 'subscribed' CHECK (status IN ('subscribed','unsubscribed')),
+  source          TEXT DEFAULT 'footer',
+  consent_given   BOOLEAN NOT NULL DEFAULT FALSE,
+  consent_version TEXT,
+  consent_at      TIMESTAMPTZ,
+  created_at      TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  updated_at      TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS public.event_rsvps (
+  id              UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  event_title     TEXT NOT NULL,
+  event_date      TEXT,
+  event_time      TEXT,
+  venue           TEXT,
+  name            TEXT NOT NULL,
+  phone           TEXT,
+  attendees       INT NOT NULL DEFAULT 1 CHECK (attendees BETWEEN 1 AND 10),
+  consent_given   BOOLEAN NOT NULL DEFAULT FALSE,
+  consent_version TEXT,
+  consent_at      TIMESTAMPTZ,
+  created_at      TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
 -- =============================================
@@ -240,6 +309,12 @@ CREATE INDEX IF NOT EXISTS idx_posts_slug          ON public.posts(slug);
 CREATE INDEX IF NOT EXISTS idx_members_status      ON public.members(status);
 CREATE INDEX IF NOT EXISTS idx_notices_active      ON public.notices(is_active) WHERE is_active = TRUE;
 CREATE INDEX IF NOT EXISTS idx_audit_created       ON public.audit_log(created_at DESC);
+CREATE INDEX IF NOT EXISTS idx_contact_created     ON public.contact_submissions(created_at DESC);
+CREATE INDEX IF NOT EXISTS idx_contact_status      ON public.contact_submissions(status);
+CREATE INDEX IF NOT EXISTS idx_book_requests_created ON public.book_requests(created_at DESC);
+CREATE INDEX IF NOT EXISTS idx_book_requests_status  ON public.book_requests(status);
+CREATE INDEX IF NOT EXISTS idx_newsletter_created  ON public.newsletter_subscribers(created_at DESC);
+CREATE INDEX IF NOT EXISTS idx_event_rsvps_created ON public.event_rsvps(created_at DESC);
 
 -- =============================================
 -- TRIGGERS
@@ -277,6 +352,10 @@ ALTER TABLE public.members         ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.admin_users     ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.site_settings   ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.audit_log       ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.contact_submissions    ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.book_requests           ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.newsletter_subscribers  ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.event_rsvps             ENABLE ROW LEVEL SECURITY;
 
 -- Helper function: is current user an active admin?
 -- SECURITY DEFINER is owned by the migration role (postgres), which bypasses
@@ -385,6 +464,15 @@ DROP POLICY IF EXISTS audit_admin_read ON public.audit_log;
 DROP POLICY IF EXISTS audit_any_insert ON public.audit_log;
 CREATE POLICY audit_admin_read ON public.audit_log FOR SELECT USING (public.is_admin());
 CREATE POLICY audit_any_insert ON public.audit_log FOR INSERT WITH CHECK (TRUE);
+
+-- PUBLIC FORM TABLES
+-- No anon/authenticated policies: RLS denies every browser read and write.
+-- Server actions use the service role after zod validation, honeypot, elapsed
+-- time, Turnstile (when configured) and per-IP rate limiting.
+GRANT SELECT, INSERT, UPDATE, DELETE ON public.contact_submissions   TO service_role;
+GRANT SELECT, INSERT, UPDATE, DELETE ON public.book_requests         TO service_role;
+GRANT SELECT, INSERT, UPDATE, DELETE ON public.newsletter_subscribers TO service_role;
+GRANT SELECT, INSERT, UPDATE, DELETE ON public.event_rsvps           TO service_role;
 
 -- =============================================
 -- SEED: ADMIN USER

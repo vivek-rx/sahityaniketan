@@ -23,7 +23,7 @@ export interface FooterProps extends React.HTMLAttributes<HTMLElement> {
   /** The title for the newsletter subscription section. */
   newsletterTitle?: string;
   /** Async function to handle email subscription. Should return `true` for success and `false` for failure. */
-  onSubscribe?: (email: string) => Promise<boolean>;
+  onSubscribe?: (email: string, consent: boolean) => Promise<boolean>;
 }
 
 /**
@@ -46,21 +46,23 @@ export const Footer: FC<FooterProps> = ({
   ...props
 }) => {
   const [email, setEmail] = useState('');
+  const [consent, setConsent] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [subscriptionStatus, setSubscriptionStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
   const handleSubscribe = async (event: React.FormEvent) => {
     event.preventDefault();
-    if (!email || !onSubscribe || isSubmitting) return;
+    if (!email || !onSubscribe || isSubmitting || !consent) return;
 
     setIsSubmitting(true);
-    const success = await onSubscribe(email);
+    const success = await onSubscribe(email, consent);
 
     setSubscriptionStatus(success ? 'success' : 'error');
     setIsSubmitting(false);
 
     if (success) {
       setEmail('');
+      setConsent(false);
     }
 
     // Reset the status message after 3 seconds
@@ -140,6 +142,22 @@ export const Footer: FC<FooterProps> = ({
                 {isSubmitting ? 'नोंदणी...' : 'सदस्य व्हा'}
               </Button>
             </div>
+            <label className="mt-2 flex items-start gap-2 text-[11px] leading-relaxed text-stone-600 dark:text-stone-400">
+              <input
+                type="checkbox"
+                checked={consent}
+                onChange={(e) => setConsent(e.target.checked)}
+                required
+                className="mt-0.5 h-3.5 w-3.5 shrink-0 accent-[#800020]"
+              />
+              <span>
+                मला ग्रंथालयाची वार्तापत्रे व कार्यक्रमांची माहिती ईमेलवर
+                मिळण्यास संमती आहे.{" "}
+                <Link href="/privacy" className="font-bold underline">
+                  गोपनीयता धोरण
+                </Link>
+              </span>
+            </label>
             {/* Advanced Animation Overlay */}
             {(subscriptionStatus === 'success' || subscriptionStatus === 'error') && (
               <div
