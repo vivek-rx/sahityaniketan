@@ -197,7 +197,7 @@ export const DAILY_HERITAGE_ITEMS: DailyHeritageItem[] = [
       "«अज्ञानाचा अंधकार दूर करण्यासाठी आणि मातृभाषेचा गौरव वाढवण्यासाठी आम्ही हे ग्रंथालय स्थापन करीत आहोत.»",
       "पहिल्या दिवशी ग्रंथालयाकडे अवघी २५ पुस्तके होती, आज त्याचा ३९,९५३+ ग्रंथांचा महासागर झाला आहे."
     ],
-    historicalNoteMarathi: "स्थापनेपासून सलग ८० वर्षे ग्रंथालयाने एकाही दिवशी वाचनसेवा खंडित होऊ दिलेली नाही.",
+    historicalNoteMarathi: "स्थापनेपासून सलग ८१ वर्षे ग्रंथालयाने एकाही दिवशी वाचनसेवा खंडित होऊ दिलेली नाही.",
     callToActionTextMarathi: "स्थापनेचा इतिहास वाचा",
     actionUrl: "/history#timeline",
     accentColor: "from-rose-900/20 to-amber-950/20 border-rose-300 dark:border-rose-700/60",

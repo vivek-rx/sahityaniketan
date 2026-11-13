@@ -76,7 +76,7 @@ export function AdminSidebar() {
     >
       {/* Logo / Brand */}
       <div className="flex items-center gap-3 px-4 py-4 border-b border-slate-800 min-h-[64px]">
-        <div className="h-8 w-8 rounded-lg bg-[#00657E] flex items-center justify-center shrink-0">
+        <div className="h-8 w-8 rounded-lg bg-[#800020] flex items-center justify-center shrink-0">
           <BookOpen className="h-4.5 w-4.5 text-white" />
         </div>
         {!collapsed && (
@@ -114,7 +114,7 @@ export function AdminSidebar() {
                     className={cn(
                       "group flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-bold transition-all",
                       isActive
-                        ? "bg-[#00657E] text-white shadow-sm"
+                        ? "bg-[#800020] text-white shadow-sm"
                         : "text-slate-400 hover:bg-slate-800 hover:text-white"
                     )}
                   >
@@ -123,7 +123,7 @@ export function AdminSidebar() {
                       <span className="truncate flex-1">{item.label}</span>
                     )}
                     {!collapsed && item.badge && item.badge > 0 && (
-                      <span className="rounded-full bg-[#ED6923] text-white text-[10px] font-extrabold px-1.5 py-0.5 min-w-[18px] text-center">
+                      <span className="rounded-full bg-[#B8860B] text-white text-[10px] font-extrabold px-1.5 py-0.5 min-w-[18px] text-center">
                         {item.badge}
                       </span>
                     )}

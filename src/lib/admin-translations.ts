@@ -315,7 +315,7 @@ export const ADMIN_TRANSLATIONS: Record<AdminLang, AdminTranslations> = {
     carouselModalNewTitle: "नवीन स्लाइड जोडा",
     carouselModalEditTitle: "स्लाइड संपादित करा",
     carouselHeadingLabel: "मुख्य मथळा (Heading) *",
-    carouselHeadingPlaceholder: "उदा. ८०+ वर्षांचा साहित्यिक वारसा",
+    carouselHeadingPlaceholder: "उदा. ८१+ वर्षांचा साहित्यिक वारसा",
     carouselSubtitleLabel: "उप-मथळा (Subtitle)",
     carouselSubtitlePlaceholder: "उदा. अंबाजोगाईच्या सांस्कृतिक जीवनाचे स्पंदन",
     carouselButtonTextLabel: "बटणाचा मजकूर (Button Text)",

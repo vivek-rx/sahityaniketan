@@ -3,6 +3,7 @@
 import React from "react";
 import { cn } from "@/lib/utils";
 import { useLanguage } from "@/context/language-context";
+import { WHATSAPP_URL } from "@/lib/constants";
 import classes from "./SocialButtons.module.css";
 
 // ── Types inspired by Mantine ──
@@ -270,7 +271,7 @@ export function SocialButtons({ className }: { className?: string }) {
 
       <WhatsAppButton
         component="a"
-        href="https://wa.me/919422241628?text=नमस्कार,%20साहित्य%20निकेतन%20ग्रंथालयाबद्दल%20माहिती%20हवी%20आहे."
+        href={WHATSAPP_URL}
         target="_blank"
         rel="noopener noreferrer"
         className="w-full justify-start text-xs sm:text-[13px]"

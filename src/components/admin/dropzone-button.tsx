@@ -438,7 +438,7 @@ export function DropzoneButton({
             <div style={{ pointerEvents: "none" }}>
               {isUploading ? (
                 <div className="flex flex-col items-center justify-center py-4 gap-2">
-                  <BobbingDots size="md" className="text-[#00657E]" />
+                  <BobbingDots size="md" className="text-[#800020]" />
                   <p className="text-sm font-bold text-slate-700 dark:text-slate-200">
                     Supabase क्लाउडवर अपलोड होत आहे...
                   </p>

@@ -574,7 +574,7 @@ export default function AdminDashboardPage() {
 
               <button
                 onClick={openNewNoticeModal}
-                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#800020] hover:bg-[#66001a] text-white text-xs sm:text-sm font-bold shadow-xs transition-all cursor-pointer"
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#800020] hover:bg-[#66001A] text-white text-xs sm:text-sm font-bold shadow-xs transition-all cursor-pointer"
               >
                 <Plus className="h-4 w-4" />
                 <span>{lang === "mr" ? "नवीन नोटीस" : "New Notice"}</span>
@@ -817,7 +817,7 @@ export default function AdminDashboardPage() {
                 <button
                   type="submit"
                   disabled={savingBanner || !bannerText.trim()}
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#800020] hover:bg-[#66001a] text-white text-xs sm:text-sm font-bold shadow-xs transition-all cursor-pointer disabled:opacity-50"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#800020] hover:bg-[#66001A] text-white text-xs sm:text-sm font-bold shadow-xs transition-all cursor-pointer disabled:opacity-50"
                 >
                   {savingBanner ? <BobbingDots size="sm" className="text-white" /> : <Save className="h-4 w-4" />}
                   <span>{savingBanner ? (lang === "mr" ? "सेव्ह होत आहे..." : "Saving...") : (lang === "mr" ? "बदल सेव्ह करा" : "Update Announcement")}</span>
@@ -1030,7 +1030,7 @@ export default function AdminDashboardPage() {
                       type="button"
                       onClick={handleUploadMedia}
                       disabled={uploadingMedia}
-                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#800020] hover:bg-[#66001a] text-white text-xs sm:text-sm font-bold shadow-xs transition-all cursor-pointer disabled:opacity-50 shrink-0"
+                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#800020] hover:bg-[#66001A] text-white text-xs sm:text-sm font-bold shadow-xs transition-all cursor-pointer disabled:opacity-50 shrink-0"
                     >
                       {uploadingMedia ? <BobbingDots size="sm" className="text-white" /> : <UploadCloud className="h-4 w-4" />}
                       <span>{uploadingMedia ? (lang === "mr" ? "अपलोड होत आहे..." : "Publishing...") : (lang === "mr" ? "संकेतस्थळावर प्रकाशित करा" : "Publish to Site")}</span>
@@ -1325,7 +1325,7 @@ export default function AdminDashboardPage() {
                     </p>
                     <button
                       onClick={() => setAlbumModalOpen(true)}
-                      className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-[#800020] text-white text-xs font-bold shadow-xs hover:bg-[#66001a] cursor-pointer"
+                      className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-[#800020] text-white text-xs font-bold shadow-xs hover:bg-[#66001A] cursor-pointer"
                     >
                       <Plus className="h-3.5 w-3.5" />
                       <span>{lang === "mr" ? "पहिला अल्बम तयार करा" : "Create First Album"}</span>
@@ -1482,7 +1482,7 @@ export default function AdminDashboardPage() {
               type="button"
               onClick={handleSaveNotice}
               disabled={savingNotice || !noticeTitle.trim()}
-              className="inline-flex items-center gap-2 px-5 py-2 rounded-xl bg-[#800020] hover:bg-[#66001a] text-white text-xs sm:text-sm font-bold shadow-xs transition-all cursor-pointer disabled:opacity-50"
+              className="inline-flex items-center gap-2 px-5 py-2 rounded-xl bg-[#800020] hover:bg-[#66001A] text-white text-xs sm:text-sm font-bold shadow-xs transition-all cursor-pointer disabled:opacity-50"
             >
               {savingNotice ? <BobbingDots size="sm" className="text-white" /> : <Save className="h-4 w-4" />}
               <span>{savingNotice ? (lang === "mr" ? "सेव्ह होत आहे..." : "Saving...") : (lang === "mr" ? "प्रकाशित करा" : "Publish Notice")}</span>
@@ -1568,7 +1568,7 @@ export default function AdminDashboardPage() {
               type="button"
               onClick={handleSaveAlbum}
               disabled={savingAlbum || !albumTitle.trim()}
-              className="inline-flex items-center gap-2 px-5 py-2 rounded-xl bg-[#800020] hover:bg-[#66001a] text-white text-xs sm:text-sm font-bold shadow-xs transition-all cursor-pointer disabled:opacity-50"
+              className="inline-flex items-center gap-2 px-5 py-2 rounded-xl bg-[#800020] hover:bg-[#66001A] text-white text-xs sm:text-sm font-bold shadow-xs transition-all cursor-pointer disabled:opacity-50"
             >
               {savingAlbum ? <BobbingDots size="sm" className="text-white" /> : <Save className="h-4 w-4" />}
               <span>{savingAlbum ? (lang === "mr" ? "तयार होत आहे..." : "Creating...") : (lang === "mr" ? "अल्बम तयार करा" : "Create Album")}</span>

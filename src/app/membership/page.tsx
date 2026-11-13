@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { Navbar, Footer, PageHeader } from "@/components/layout";
 import { CheckCircle2, ShieldCheck, FileText, UserCheck } from "lucide-react";
 import { useLanguage } from "@/context/language-context";
@@ -10,6 +11,8 @@ export default function MembershipPage() {
   const { language } = useLanguage();
   const [isPending, setIsPending] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [consent, setConsent] = useState(false);
+  const [consentError, setConsentError] = useState(false);
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -20,6 +23,14 @@ export default function MembershipPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    // DPDP Act 2023: no processing without an explicit, recorded consent.
+    if (!consent) {
+      setConsentError(true);
+      return;
+    }
+
+    setConsentError(false);
     if (formData.fullName && formData.email) {
       setIsPending(true);
       setTimeout(() => {
@@ -100,8 +111,10 @@ export default function MembershipPage() {
                   </h3>
                   <p className="text-xs text-stone-600 dark:text-stone-300 max-w-md mx-auto">
                     {language === "mr"
-                      ? "आपला सभासद नोंदणी क्रमांक SN-2026-8942 आहे. ग्रंथालय कार्यालयाकडून २४ तासांत छाननी केली जाईल."
-                      : "Your membership application has been received. Your registration ID is SN-2026-8942."}
+                      ? "ग्रंथालय कार्यालयाकडून २४ तासांत अर्जाची छाननी केली जाईल आणि पुढील प्रक्रियेसाठी संपर्क साधला जाईल."
+                      : language === "hi"
+                        ? "पुस्तकालय कार्यालय द्वारा २४ घंटों में आवेदन की जाँच की जाएगी और आगे की प्रक्रिया हेतु संपर्क किया जाएगा।"
+                        : "The library office will review your application within 24 hours and contact you with the next steps."}
                   </p>
                 </div>
               ) : (
@@ -167,6 +180,13 @@ export default function MembershipPage() {
                         <option value="passport">Passport (पासपोर्ट)</option>
                         <option value="student">Student ID (विद्यार्थी ओळखपत्र)</option>
                       </select>
+                      <p className="mt-1.5 text-[11px] leading-relaxed text-stone-500 dark:text-stone-400">
+                        {language === "mr"
+                          ? "ओळखपत्राचा प्रकार फक्त सभासदत्व पडताळणीसाठी विचारला जातो. ओळखपत्र क्रमांक संकेतस्थळावर साठवला जात नाही."
+                          : language === "hi"
+                            ? "पहचान पत्र का प्रकार केवल सदस्यता सत्यापन हेतु पूछा जाता है। पहचान पत्र संख्या वेबसाइट पर संग्रहीत नहीं की जाती।"
+                            : "ID type is collected only to verify membership eligibility. ID numbers are not stored on this website."}
+                      </p>
                     </div>
                   </div>
 
@@ -181,6 +201,66 @@ export default function MembershipPage() {
                       placeholder={language === "mr" ? "घर क्र., गल्ली, परिसर, शहर, पिन कोड..." : "Enter house no, street, area, city, pin code..."}
                       className="w-full rounded-xl border border-[#E5DDD0] dark:border-[#332228] bg-[#FAF8F5] dark:bg-[#120B0D] px-3.5 py-2.5 text-xs sm:text-sm text-stone-900 dark:text-[#FAF2E8] focus:border-[#800020] dark:focus:border-[#E5B869] focus:ring-1 focus:ring-[#800020] focus:outline-none resize-none transition-all"
                     />
+                  </div>
+
+                  <div className="rounded-xl border border-[#E5DDD0] dark:border-[#332228] bg-[#FAF8F5] dark:bg-[#120B0D] p-3.5">
+                    <label className="flex items-start gap-2.5 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        checked={consent}
+                        onChange={(e) => {
+                          setConsent(e.target.checked);
+                          if (e.target.checked) setConsentError(false);
+                        }}
+                        required
+                        aria-invalid={consentError}
+                        aria-describedby={consentError ? "consent-error" : undefined}
+                        className="mt-0.5 h-4 w-4 shrink-0 accent-[#800020]"
+                      />
+                      <span className="text-[11px] sm:text-xs leading-relaxed text-stone-600 dark:text-stone-300">
+                        {language === "mr" ? (
+                          <>
+                            मी{" "}
+                            <Link href="/privacy" className="font-bold underline text-[#800020] dark:text-[#E5B869]">
+                              गोपनीयता धोरण
+                            </Link>{" "}
+                            वाचले आहे आणि सभासदत्व प्रक्रियेसाठी माझी वैयक्तिक
+                            माहिती (नाव, संपर्क, ओळखपत्राचा प्रकार) वापरण्यास
+                            संमती देतो/देते. मी माझी संमती कधीही मागे घेऊ शकतो/शकते.
+                          </>
+                        ) : language === "hi" ? (
+                          <>
+                            मैंने{" "}
+                            <Link href="/privacy" className="font-bold underline text-[#800020] dark:text-[#E5B869]">
+                              गोपनीयता नीति
+                            </Link>{" "}
+                            पढ़ी है और सदस्यता प्रक्रिया हेतु अपनी व्यक्तिगत
+                            जानकारी के उपयोग पर सहमति देता/देती हूँ। मैं यह
+                            सहमति कभी भी वापस ले सकता/सकती हूँ।
+                          </>
+                        ) : (
+                          <>
+                            I have read the{" "}
+                            <Link href="/privacy" className="font-bold underline text-[#800020] dark:text-[#E5B869]">
+                              Privacy Policy
+                            </Link>{" "}
+                            and consent to my personal data (name, contact
+                            details, ID type) being used to process this
+                            membership application. I can withdraw consent at
+                            any time.
+                          </>
+                        )}
+                      </span>
+                    </label>
+                    {consentError && (
+                      <p id="consent-error" role="alert" className="mt-2 text-[11px] font-semibold text-red-600 dark:text-red-400">
+                        {language === "mr"
+                          ? "कृपया पुढे जाण्यासाठी संमती द्या."
+                          : language === "hi"
+                            ? "आगे बढ़ने के लिए कृपया सहमति दें।"
+                            : "Please give consent to continue."}
+                      </p>
+                    )}
                   </div>
 
                   <MotionSubmitButton

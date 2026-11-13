@@ -696,6 +696,29 @@ function CatalogueContent() {
                     ? "कृपया अन्य शब्द खोजें या फिल्टर बदलें।"
                     : "Try searching with a different author name or book title."}
               </p>
+              <div className="mt-5 flex flex-wrap items-center justify-center gap-3">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setSelectedLanguage("all");
+                    setSelectedCategory("all");
+                    setQuery("");
+                  }}
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#800020] text-white text-xs font-bold hover:bg-[#66001A] transition-all shadow-xs cursor-pointer"
+                >
+                  <span>
+                    {language === "mr" ? "गाळणी रीसेट करा" : language === "hi" ? "फिल्टर रीसेट करें" : "Reset filters"}
+                  </span>
+                </button>
+                <Link
+                  href="/membership"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-[#E5DDD0] dark:border-[#332228] hover:bg-[#F3ECE3] dark:hover:bg-[#180E11] text-stone-800 dark:text-stone-200 text-xs font-bold transition-all"
+                >
+                  <span>
+                    {language === "mr" ? "ग्रंथालय सभासद व्हा" : language === "hi" ? "ग्रन्थालय सदस्य बनें" : "Become a Member"}
+                  </span>
+                </Link>
+              </div>
             </div>
           )}
         </div>

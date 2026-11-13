@@ -475,7 +475,7 @@ export default function AdminGalleryPage() {
             {/* BULK UPLOAD BUTTON (PRIMARY EMPHASIZED) */}
             <button
               onClick={() => openBulkUpload()}
-              className="inline-flex items-center gap-2 rounded-xl bg-[#800020] hover:bg-[#66001a] text-white px-5 py-3 text-sm sm:text-base font-bold transition-all shadow-sm active:scale-95 cursor-pointer"
+              className="inline-flex items-center gap-2 rounded-xl bg-[#800020] hover:bg-[#66001A] text-white px-5 py-3 text-sm sm:text-base font-bold transition-all shadow-sm active:scale-95 cursor-pointer"
             >
               <UploadCloud className="h-5 w-5" />
               <span>{t.galleryBulkBtn}</span>
@@ -573,7 +573,7 @@ export default function AdminGalleryPage() {
                       <div className="absolute inset-0 bg-slate-950/70 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-2 p-4">
                         <button
                           onClick={() => openBulkUpload(album.id)}
-                          className="w-full py-2 px-3 rounded-xl bg-[#800020] hover:bg-[#66001a] text-white font-bold text-xs flex items-center justify-center gap-1.5 shadow-sm cursor-pointer"
+                          className="w-full py-2 px-3 rounded-xl bg-[#800020] hover:bg-[#66001A] text-white font-bold text-xs flex items-center justify-center gap-1.5 shadow-sm cursor-pointer"
                         >
                           <UploadCloud className="h-4 w-4" />
                           <span>{lang === "mr" ? "येथे बल्क फोटो जोडा" : "Upload Bulk Photos Here"}</span>
@@ -690,7 +690,7 @@ export default function AdminGalleryPage() {
                 type="button"
                 onClick={handleExecuteBulkUpload}
                 disabled={bulkUploading || (pendingFiles.length === 0 && !pastedUrls.trim())}
-                className="rounded-xl bg-[#800020] hover:bg-[#66001a] text-white px-6 py-2.5 text-sm sm:text-base font-bold cursor-pointer disabled:opacity-50 flex items-center gap-2 shadow-sm transition-all active:scale-95"
+                className="rounded-xl bg-[#800020] hover:bg-[#66001A] text-white px-6 py-2.5 text-sm sm:text-base font-bold cursor-pointer disabled:opacity-50 flex items-center gap-2 shadow-sm transition-all active:scale-95"
               >
                 {bulkUploading ? (
                   <>
@@ -964,7 +964,7 @@ export default function AdminGalleryPage() {
             <button
               onClick={handleSaveAlbum}
               disabled={saving}
-              className="rounded-xl bg-[#800020] hover:bg-[#66001a] text-white px-6 py-2.5 text-sm sm:text-base font-bold cursor-pointer disabled:opacity-50 flex items-center gap-2 shadow-sm"
+              className="rounded-xl bg-[#800020] hover:bg-[#66001A] text-white px-6 py-2.5 text-sm sm:text-base font-bold cursor-pointer disabled:opacity-50 flex items-center gap-2 shadow-sm"
             >
               {saving && <BobbingDots size="sm" className="text-white" />}
               <span>{editing ? t.albumSaveBtn : t.albumCreateBtn}</span>
@@ -1054,7 +1054,7 @@ export default function AdminGalleryPage() {
                 setShowMediaModal(false);
                 openBulkUpload(selectedAlbum?.id);
               }}
-              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#800020] hover:bg-[#66001a] text-white text-xs font-bold shadow-xs cursor-pointer"
+              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#800020] hover:bg-[#66001A] text-white text-xs font-bold shadow-xs cursor-pointer"
             >
               <UploadCloud className="h-4 w-4" />
               <span>{t.mediaQuickBulkBtn}</span>

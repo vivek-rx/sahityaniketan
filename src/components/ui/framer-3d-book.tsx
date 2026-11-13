@@ -144,13 +144,13 @@ export function Framer3DBook({
           <div className="absolute inset-y-0 left-2.5 sm:left-3 w-[1px] bg-red-300/50" />
           
           <div className="space-y-1.5 sm:space-y-2 max-w-[90%] z-10">
-            <span className="text-[7.5px] sm:text-[9.5px] font-extrabold tracking-widest text-[#00657E] uppercase block font-marathi-body">
+            <span className="text-[7.5px] sm:text-[9.5px] font-extrabold tracking-widest text-[#800020] uppercase block font-marathi-body">
               साहित्य निकेतन ग्रंथालय
             </span>
             <h4 className="text-xs sm:text-base font-bold text-gray-900 leading-snug line-clamp-2 sm:line-clamp-3 font-marathi-heading">
               {title}
             </h4>
-            <div className="h-0.5 w-6 sm:w-8 bg-[#ED6923] mx-auto rounded-full" />
+            <div className="h-0.5 w-6 sm:w-8 bg-[#B8860B] mx-auto rounded-full" />
             <p className="text-[9px] sm:text-xs text-gray-600 font-semibold line-clamp-1 sm:line-clamp-2 font-marathi-body">
               {author}
             </p>

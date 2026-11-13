@@ -184,7 +184,7 @@ export default function AdminNoticeboardPage() {
 
             <button
               onClick={openAdd}
-              className="inline-flex items-center gap-2 rounded-xl bg-[#800020] hover:bg-[#66001a] text-white px-5 py-2.5 text-sm sm:text-base font-bold transition-all shadow-sm active:scale-95 cursor-pointer"
+              className="inline-flex items-center gap-2 rounded-xl bg-[#800020] hover:bg-[#66001A] text-white px-5 py-2.5 text-sm sm:text-base font-bold transition-all shadow-sm active:scale-95 cursor-pointer"
             >
               <Plus className="h-5 w-5" />
               <span>{t.noticeAddBtn}</span>
@@ -327,7 +327,7 @@ export default function AdminNoticeboardPage() {
             <button
               onClick={handleSaveNotice}
               disabled={saving}
-              className="rounded-xl bg-[#800020] hover:bg-[#66001a] text-white px-6 py-2.5 text-sm sm:text-base font-bold cursor-pointer disabled:opacity-50 flex items-center gap-2 shadow-sm"
+              className="rounded-xl bg-[#800020] hover:bg-[#66001A] text-white px-6 py-2.5 text-sm sm:text-base font-bold cursor-pointer disabled:opacity-50 flex items-center gap-2 shadow-sm"
             >
               {saving && <BobbingDots size="sm" className="text-white" />}
               <span>{t.noticeSaveBtn}</span>

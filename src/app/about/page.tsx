@@ -143,16 +143,16 @@ export default function AboutPage() {
       <Navbar />
       <main
         id="main-content"
-        className="font-marathi-body bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 min-h-screen transition-colors pb-24"
+        className="font-marathi-body bg-[#FAF8F5] dark:bg-[#120B0D] text-stone-900 dark:text-[#FAF2E8] min-h-screen transition-colors pb-24"
       >
         <PageHeader
           title={isEn ? "About Sahitya Niketan" : isHi ? "साहित्य निकेतन परिचय व प्रशासन" : "साहित्य निकेतन परिचय व प्रशासन"}
           subtitle={
             isEn
-              ? "80 Years of literary legacy, public service, and institutional governance (Est. 1 August 1945)"
+              ? "81 Years of literary legacy, public service, and institutional governance (Est. 1 August 1945)"
               : isHi
-              ? "८० वर्षों की साहित्यिक धरोहर, ज्ञान सेवा एवं संस्थागत प्रशासन (स्थापना १ अगस्त १९४५)"
-              : "८० वर्षांची समृद्ध साहित्यिक परंपरा, ज्ञानतपस्या आणि संस्थात्मक प्रशासन (स्थापना १ ऑगस्ट १९४५)"
+              ? "८१ वर्षों की साहित्यिक धरोहर, ज्ञान सेवा एवं संस्थागत प्रशासन (स्थापना १ अगस्त १९४५)"
+              : "८१ वर्षांची समृद्ध साहित्यिक परंपरा, ज्ञानतपस्या आणि संस्थात्मक प्रशासन (स्थापना १ ऑगस्ट १९४५)"
           }
         />
 
@@ -172,10 +172,10 @@ export default function AboutPage() {
 
                 <h2 className="text-2xl sm:text-4xl font-extrabold text-zinc-900 dark:text-white font-marathi-heading leading-tight">
                   {isEn
-                    ? "80 Years of Inspiring Minds in Marathwada"
+                    ? "81 Years of Inspiring Minds in Marathwada"
                     : isHi
-                    ? "मराठवाड़ा में ८० वर्षों की अखंड ज्ञान साधना"
-                    : "मराठवाड्यातील ८० वर्षांची अखंड ज्ञानतपस्या व साहित्यिक वारसा"}
+                    ? "मराठवाड़ा में ८१ वर्षों की अखंड ज्ञान साधना"
+                    : "मराठवाड्यातील ८१ वर्षांची अखंड ज्ञानतपस्या व साहित्यिक वारसा"}
                 </h2>
 
                 <p className="text-sm sm:text-base text-zinc-600 dark:text-zinc-300 font-marathi-body leading-relaxed">

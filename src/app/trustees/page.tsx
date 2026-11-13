@@ -94,7 +94,7 @@ export default function TrusteesPage() {
       <Navbar />
       <main
         id="main-content"
-        className="font-marathi-body bg-[#FAF8F5] dark:bg-[#120B0D] text-stone-900 dark:text-stone-100 min-h-screen transition-colors pb-24"
+        className="font-marathi-body bg-[#FAF8F5] dark:bg-[#120B0D] text-stone-900 dark:text-[#FAF2E8] min-h-screen transition-colors pb-24"
       >
         <PageHeader
           title={isEn ? "Founding Trustees & Luminaries" : "पहिले विश्वस्त मंडळ व संस्थापक"}
@@ -166,7 +166,7 @@ export default function TrusteesPage() {
               <span className="text-xs font-bold text-[#800020] dark:text-[#E5B869] uppercase tracking-widest block mb-2 font-mono">
                 FOUNDING BOARD OF TRUSTEES · 1962
               </span>
-              <h2 className="text-3xl font-bold font-gajraj text-stone-900 dark:text-stone-100">
+              <h2 className="text-3xl font-bold font-gajraj text-stone-900 dark:text-[#FAF2E8]">
                 आद्य विश्वस्त — महनीय व्यक्तिमत्त्वे
               </h2>
               <p className="text-sm text-stone-600 dark:text-stone-400 mt-2 font-marathi-body">
@@ -209,7 +209,7 @@ export default function TrusteesPage() {
                   {/* Trustee Details */}
                   <div className="flex-1 flex flex-col justify-between">
                     <div>
-                      <h3 className="text-xl font-bold font-gajraj text-stone-900 dark:text-stone-100 group-hover:text-[#800020] dark:group-hover:text-[#E5B869] transition-colors">
+                      <h3 className="text-xl font-bold font-gajraj text-stone-900 dark:text-[#FAF2E8] group-hover:text-[#800020] dark:group-hover:text-[#E5B869] transition-colors">
                         {trustee.name}
                       </h3>
                       <div className="text-xs font-semibold text-[#800020] dark:text-[#E5B869] mt-0.5 font-marathi-heading">
@@ -249,7 +249,7 @@ export default function TrusteesPage() {
               <span className="text-xs font-bold text-amber-700 dark:text-amber-400 uppercase tracking-widest block mb-2 font-mono">
                 1 AUGUST 1945 · FOUNDING PIONEERS
               </span>
-              <h2 className="text-2xl sm:text-3xl font-bold font-gajraj text-stone-900 dark:text-stone-100">
+              <h2 className="text-2xl sm:text-3xl font-bold font-gajraj text-stone-900 dark:text-[#FAF2E8]">
                 संस्थापक ध्येयवादी तरुण मंडळ (१९४५)
               </h2>
               <p className="text-sm text-stone-600 dark:text-stone-400 mt-1.5 font-marathi-body">
@@ -267,7 +267,7 @@ export default function TrusteesPage() {
                     0{i + 1}
                   </div>
                   <div className="min-w-0">
-                    <h4 className="text-sm font-bold text-stone-900 dark:text-stone-100 font-marathi-heading truncate">
+                    <h4 className="text-sm font-bold text-stone-900 dark:text-[#FAF2E8] font-marathi-heading truncate">
                       {member.name}
                     </h4>
                     <p className="text-[11px] text-stone-500 dark:text-stone-400 font-marathi-body truncate">
@@ -287,7 +287,7 @@ export default function TrusteesPage() {
               <span className="text-xs font-bold text-amber-700 dark:text-amber-400 uppercase tracking-widest block mb-2 font-mono">
                 DEVOTED TEACHERS & EDUCATORS (1945–1955)
               </span>
-              <h2 className="text-2xl sm:text-3xl font-bold font-gajraj text-stone-900 dark:text-stone-100">
+              <h2 className="text-2xl sm:text-3xl font-bold font-gajraj text-stone-900 dark:text-[#FAF2E8]">
                 प्रारंभीचे समर्पित शिक्षक व ग्रंथसेवक
               </h2>
               <p className="text-sm text-stone-600 dark:text-stone-400 mt-1.5 font-marathi-body">
@@ -305,7 +305,7 @@ export default function TrusteesPage() {
                     <BookOpen className="h-5 w-5" />
                   </div>
                   <div className="min-w-0">
-                    <h4 className="text-sm font-bold text-stone-900 dark:text-stone-100 font-marathi-heading truncate">
+                    <h4 className="text-sm font-bold text-stone-900 dark:text-[#FAF2E8] font-marathi-heading truncate">
                       {teacher.name}
                     </h4>
                     <p className="text-[11px] text-stone-500 dark:text-stone-400 font-marathi-body truncate">
@@ -325,7 +325,7 @@ export default function TrusteesPage() {
               <span className="text-xs font-bold text-[#800020] dark:text-[#E5B869] uppercase tracking-widest block mb-2 font-mono">
                 CURRENT BOARD OF TRUSTEES
               </span>
-              <h2 className="text-2xl sm:text-3xl font-bold font-gajraj text-stone-900 dark:text-stone-100">
+              <h2 className="text-2xl sm:text-3xl font-bold font-gajraj text-stone-900 dark:text-[#FAF2E8]">
                 विद्यमान विश्वस्त मंडळ
               </h2>
               <p className="text-sm text-stone-600 dark:text-stone-400 mt-1.5 font-marathi-body">
@@ -342,7 +342,7 @@ export default function TrusteesPage() {
                   <div className="h-14 w-14 rounded-full bg-[#800020]/10 text-[#800020] dark:bg-amber-400/10 dark:text-amber-300 flex items-center justify-center font-bold text-base mb-3">
                     <Users className="h-7 w-7" />
                   </div>
-                  <h3 className="text-base font-bold font-gajraj text-stone-900 dark:text-stone-100">
+                  <h3 className="text-base font-bold font-gajraj text-stone-900 dark:text-[#FAF2E8]">
                     {member.name}
                   </h3>
                   <p className="text-xs text-stone-500 dark:text-stone-400 font-marathi-body mt-1">
@@ -359,7 +359,7 @@ export default function TrusteesPage() {
           <section className="mt-8 pt-8 border-t border-stone-200 dark:border-stone-800 text-center">
             <div className="p-8 rounded-2xl bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-950/20 dark:to-orange-950/20 border border-amber-200/80 dark:border-amber-800/40 max-w-3xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
               <div className="text-left space-y-1">
-                <h3 className="text-lg font-bold font-gajraj text-stone-900 dark:text-stone-100">
+                <h3 className="text-lg font-bold font-gajraj text-stone-900 dark:text-[#FAF2E8]">
                   विद्यमान कार्यकारिणी मंडळ (२०२३-२९)
                 </h3>
                 <p className="text-xs text-stone-600 dark:text-stone-400 font-marathi-body">

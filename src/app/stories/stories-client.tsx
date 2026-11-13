@@ -22,7 +22,7 @@ const DEFAULT_STORIES: any[] = [
   },
   {
     id: "default-2",
-    title: "वाचन संस्कृतीची ८० वर्षे: १ ऑगस्ट १९४५ पासूनचा गौरवशाली ग्रंथालय प्रवास",
+    title: "वाचन संस्कृतीची ८१ वर्षे: १ ऑगस्ट १९४५ पासूनचा गौरवशाली ग्रंथालय प्रवास",
     slug: "80-years-of-sahitya-niketan-ambajogai",
     category: "news",
     date: "स्थापना: १ ऑगस्ट १९४५",
@@ -69,8 +69,8 @@ export default function StoriesClient({ initialStories = [] }: { initialStories:
     language === "en"
       ? "Historical essays, archival notes, and 80-year literary tradition of Sahitya Niketan."
       : language === "hi"
-      ? "ऐतिहासिक शोध, दुर्लभ पाण्डुलिपियां एवं साहित्य निकेतन की ८० वर्षों की परंपरा।"
-      : "ऐतिहासिक शोध, दुर्मीळ हस्तलिखिते आणि साहित्य निकेतन ग्रंथालयाचा ८० वर्षांचा गौरवशाली वारसा.";
+      ? "ऐतिहासिक शोध, दुर्लभ पाण्डुलिपियां एवं साहित्य निकेतन की ८१ वर्षों की परंपरा।"
+      : "ऐतिहासिक शोध, दुर्मीळ हस्तलिखिते आणि साहित्य निकेतन ग्रंथालयाचा ८१ वर्षांचा गौरवशाली वारसा.";
 
   const searchPlaceholder =
     language === "en"

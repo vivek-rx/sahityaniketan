@@ -20,6 +20,7 @@ import { FacebookIcon } from "@/components/ui/icons";
 import { useLanguage } from "@/context/language-context";
 import { BLUR_PLACEHOLDER } from "@/lib/image-utils";
 import { getPostBySlug } from "@/lib/actions/posts";
+import { SITE_URL } from "@/lib/site";
 import type { Post } from "@/types/database";
 import { BobbingDots } from "@/components/ui/bobbing-dots";
 
@@ -35,7 +36,7 @@ const DEFAULT_MAP: Record<string, any> = {
 
 त्यानंतर संत दासोपंतांनी अखंड साहित्यसाधना करून सव्वा लाख पदांची रचना केली. त्यांची 'पासोडी' ही वस्त्रग्रंथ निर्मिती जगभरातील संशोधकांसाठी आजही अभ्यासाचा विषय आहे.
 
-याच महान परंपरेचे जतन आणि संवर्धन करण्याचे पवित्र कार्य साहित्य निकेतन ग्रंथालय गेल्या ८०+ वर्षांपासून अविरतपणे करत आहे. ग्रंथालयात उपलब्ध असलेले प्राचीन संदर्भग्रंथ, मोडी लिपीतील ऐतिहासिक कागदपत्रे आणि मराठी साहित्याचा खजिना नव्या पिढीला प्रेरणा देत आहे.
+याच महान परंपरेचे जतन आणि संवर्धन करण्याचे पवित्र कार्य साहित्य निकेतन ग्रंथालय गेल्या ८१+ वर्षांपासून अविरतपणे करत आहे. ग्रंथालयात उपलब्ध असलेले प्राचीन संदर्भग्रंथ, मोडी लिपीतील ऐतिहासिक कागदपत्रे आणि मराठी साहित्याचा खजिना नव्या पिढीला प्रेरणा देत आहे.
 
 वाचन संस्कृती ही समाजाची वैचारिक ताकद असते. साहित्य निकेतन ग्रंथालयाचे मुक्तद्वार दालन, स्पर्धा परीक्षा अभ्यासिका आणि बाल वाचन कट्टा या त्रिसूत्रीतून ही संस्कृती सातत्याने वृद्धिंगत होत आहे.`,
     published_at: "2026-09-17T12:51:12.436Z",
@@ -43,7 +44,7 @@ const DEFAULT_MAP: Record<string, any> = {
   },
   "80-years-of-sahitya-niketan-ambajogai": {
     id: "default-2",
-    title: "वाचन संस्कृतीची ८० वर्षे: १ ऑगस्ट १९४५ पासूनचा गौरवशाली ग्रंथालय प्रवास",
+    title: "वाचन संस्कृतीची ८१ वर्षे: १ ऑगस्ट १९४५ पासूनचा गौरवशाली ग्रंथालय प्रवास",
     slug: "80-years-of-sahitya-niketan-ambajogai",
     category: "news",
     thumbnail_url: "/images/real/library_inauguration_plaque.png",
@@ -60,7 +61,7 @@ const DEFAULT_MAP: Record<string, any> = {
   },
   "59-years-of-sahitya-niketan-ambajogai": {
     id: "default-2-alias",
-    title: "वाचन संस्कृतीची ८० वर्षे: १ ऑगस्ट १९४५ पासूनचा गौरवशाली ग्रंथालय प्रवास",
+    title: "वाचन संस्कृतीची ८१ वर्षे: १ ऑगस्ट १९४५ पासूनचा गौरवशाली ग्रंथालय प्रवास",
     slug: "80-years-of-sahitya-niketan-ambajogai",
     category: "news",
     thumbnail_url: "/images/real/library_inauguration_plaque.png",
@@ -117,7 +118,7 @@ export default function StoryDetailPage() {
     return (
       <>
         <Navbar />
-        <main className="min-h-[60vh] flex items-center justify-center font-marathi-body bg-[#FAF8F5] dark:bg-[#120B0D]">
+        <main id="main-content" className="min-h-[60vh] flex items-center justify-center font-marathi-body bg-[#FAF8F5] dark:bg-[#120B0D]">
           <div className="text-center space-y-4">
             <BobbingDots size="lg" className="text-[#800020] dark:text-[#E5B869] mx-auto" />
             <p className="text-xs text-stone-500 dark:text-stone-400">लेख उघडत आहे...</p>
@@ -132,7 +133,7 @@ export default function StoryDetailPage() {
     return (
       <>
         <Navbar />
-        <main className="min-h-[60vh] flex items-center justify-center font-marathi-body bg-[#FAF8F5] dark:bg-[#120B0D] p-4">
+        <main id="main-content" className="min-h-[60vh] flex items-center justify-center font-marathi-body bg-[#FAF8F5] dark:bg-[#120B0D] p-4">
           <div className="max-w-md w-full text-center bg-white dark:bg-[#1E1418] rounded-2xl border border-[#E5DDD0] dark:border-[#332228] p-8 space-y-4">
             <BookOpen className="h-10 w-10 text-stone-400 mx-auto" />
             <h2 className="text-lg font-bold text-stone-900 dark:text-white">लेख सापडला नाही</h2>
@@ -153,7 +154,7 @@ export default function StoryDetailPage() {
     );
   }
 
-  const currentUrl = typeof window !== "undefined" ? window.location.href : `https://sahityaniketan.org/stories/${slug}`;
+  const currentUrl = typeof window !== "undefined" ? window.location.href : `${SITE_URL}/stories/${slug}`;
   const dateStr = story.published_at
     ? new Date(story.published_at).toLocaleDateString("mr-IN", {
       year: "numeric",
@@ -187,7 +188,7 @@ export default function StoryDetailPage() {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen font-marathi-body bg-[#FAF8F5] dark:bg-[#120B0D] transition-colors py-8 sm:py-12">
+      <main id="main-content" className="min-h-screen font-marathi-body bg-[#FAF8F5] dark:bg-[#120B0D] transition-colors py-8 sm:py-12">
         <div className="section max-w-4xl mx-auto px-4">
           {/* Breadcrumbs */}
           <div className="mb-6 flex items-center justify-between gap-4 flex-wrap">

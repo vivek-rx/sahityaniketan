@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { Home, ChevronRight, MoreHorizontal } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useLanguage } from "@/context/language-context";
+import { SITE_URL } from "@/lib/site";
 
 export interface BreadcrumbItem {
   label: string;
@@ -124,15 +125,13 @@ export function Breadcrumbs({
         "@type": "ListItem",
         position: 1,
         name: homeLabel,
-        item: "https://sahityaniketan.org",
+        item: SITE_URL,
       },
       ...breadcrumbItems.map((crumb, idx) => ({
         "@type": "ListItem",
         position: idx + 2,
         name: crumb.label,
-        item: crumb.href
-          ? `https://sahityaniketan.org${crumb.href}`
-          : undefined,
+        item: crumb.href ? `${SITE_URL}${crumb.href}` : undefined,
       })),
     ],
   };

@@ -2,6 +2,15 @@
  * Application-wide constants for Sahitya Niketan Granthalaya
  */
 
+import {
+  SITE_ADDRESS_EN,
+  SITE_EMAIL,
+  SITE_PHONE_DISPLAY,
+  SITE_PHONE_E164,
+  SITE_URL,
+  SITE_WHATSAPP_NUMBER,
+} from "./site";
+
 export const SITE_CONFIG = {
   name: "Sahitya Niketan Granthalaya",
   nameHindi: "साहित्य निकेतन ग्रन्थालय",
@@ -9,10 +18,12 @@ export const SITE_CONFIG = {
   taglineHindi: "पीढ़ियों से ज्ञान का संरक्षण",
   description:
     "Sahitya Niketan Granthalaya is a premier cultural and educational heritage library dedicated to preserving Indian literature, history, and knowledge for future generations.",
-  url: "https://sahityaniketan.org",
-  email: "ta2601001@gmail.com",
-  phone: "+91 90966 42583",
+  url: SITE_URL,
+  email: SITE_EMAIL,
+  phone: SITE_PHONE_DISPLAY,
+  phoneE164: SITE_PHONE_E164,
   address: "सरकारी रुग्णालय समोर, मंडी बाजार, शुक्रवार पेठ, अंबाजोगाई - ४३१५१७",
+  addressEn: SITE_ADDRESS_EN,
   foundedYear: 1945,
   openingDate: "1 August 1945",
   openingDateMarathi: "१ ऑगस्ट १९४५",
@@ -20,6 +31,14 @@ export const SITE_CONFIG = {
   totalBooksFormatted: "39,953",
   totalBooksMarathi: "३९,९५३",
 } as const;
+
+/** Canonical mobile number (digits only, international format). */
+export const WHATSAPP_NUMBER = SITE_WHATSAPP_NUMBER;
+
+export const WHATSAPP_MESSAGE =
+  "नमस्कार, साहित्य निकेतन ग्रंथालयाबद्दल माहिती हवी आहे.";
+
+export const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
 
 export const NAV_LINKS = [
   { label: "Home", href: "/" },

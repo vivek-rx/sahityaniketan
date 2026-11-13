@@ -1,18 +1,31 @@
 /**
  * Schema.org Structured Data Component for Sahitya Niketan Granthalaya
- * Implements JSON-LD for Library, EducationalOrganization, and BreadcrumbList
+ * Implements JSON-LD for Library and BreadcrumbList.
+ *
+ * Rendered once in the root layout. Do not render <LibrarySchema /> again in a
+ * page, or search engines will see duplicate Library entities.
  */
+
+import {
+  SITE_EMAIL,
+  SITE_NAME_EN,
+  SITE_NAME_MR,
+  SITE_PHONE_E164,
+  SITE_URL,
+} from "@/lib/site";
 
 export function LibrarySchema() {
   const schemaData = {
     "@context": "https://schema.org",
     "@type": "Library",
-    "name": "Sahitya Niketan Public Library & Reading Room (साहित्य निकेतन ग्रंथालय)",
-    "alternateName": "Sahitya Niketan Granthalaya Ambajogai",
-    "url": "https://sahityaniketan.org",
-    "logo": "https://sahityaniketan.org/images/logo.png",
-    "image": "https://sahityaniketan.org/images/real/library_signboard.png",
-    "description": "Established on 1 August 1945, Sahitya Niketan Granthalaya is a Maharashtra Government recognized Grade 'A' public library in Ambajogai holding 39,953 registered printed volumes, rare Modi script manuscripts, and reference reading hall facilities.",
+    "@id": `${SITE_URL}/#library`,
+    "name": SITE_NAME_MR,
+    "alternateName": [SITE_NAME_EN, "Sahitya Niketan Granthalaya Ambajogai"],
+    "url": SITE_URL,
+    "logo": `${SITE_URL}/images/logo.png`,
+    "image": `${SITE_URL}/images/real/library_signboard.png`,
+    "description":
+      "Established on 1 August 1945, Sahitya Niketan Granthalaya is a Maharashtra Government recognized Grade 'A' public library in Ambajogai holding 39,953 registered printed volumes, rare Modi script manuscripts, and reference reading hall facilities.",
     "foundingDate": "1945-08-01",
     "address": {
       "@type": "PostalAddress",
@@ -20,27 +33,37 @@ export function LibrarySchema() {
       "addressLocality": "Ambajogai",
       "addressRegion": "Maharashtra",
       "postalCode": "431517",
-      "addressCountry": "IN"
+      "addressCountry": "IN",
     },
     "geo": {
       "@type": "GeoCoordinates",
       "latitude": 18.7303,
-      "longitude": 76.3831
+      "longitude": 76.3831,
     },
     "openingHoursSpecification": [
       {
         "@type": "OpeningHoursSpecification",
-        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+        ],
         "opens": "08:00",
-        "closes": "20:00"
-      }
+        "closes": "20:00",
+      },
     ],
-    "telephone": "+91-2446-242100",
+    "telephone": SITE_PHONE_E164,
+    "email": SITE_EMAIL,
     "priceRange": "Class 'A' Public Library",
+    "publicAccess": true,
+    "isAccessibleForFree": true,
     "sameAs": [
       "https://facebook.com/sahityaniketan.ambajogai",
-      "https://youtube.com/@sahityaniketan"
-    ]
+      "https://youtube.com/@sahityaniketan",
+    ],
   };
 
   return (
@@ -51,7 +74,11 @@ export function LibrarySchema() {
   );
 }
 
-export function BreadcrumbSchema({ items }: { items: { name: string; item: string }[] }) {
+export function BreadcrumbSchema({
+  items,
+}: {
+  items: { name: string; item: string }[];
+}) {
   const schemaData = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -59,8 +86,8 @@ export function BreadcrumbSchema({ items }: { items: { name: string; item: strin
       "@type": "ListItem",
       "position": idx + 1,
       "name": it.name,
-      "item": `https://sahityaniketan.org${it.item}`
-    }))
+      "item": `${SITE_URL}${it.item}`,
+    })),
   };
 
   return (

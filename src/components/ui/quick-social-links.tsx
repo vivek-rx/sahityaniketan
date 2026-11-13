@@ -3,6 +3,8 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { WHATSAPP_URL } from "@/lib/constants";
+import { SITE_EMAIL } from "@/lib/site";
 
 export interface SocialLinkItem {
   id: string;
@@ -134,7 +136,7 @@ export const DEFAULT_SOCIALS: SocialLinkItem[] = [
   {
     id: "whatsapp",
     label: "व्हॉट्सॲप (WhatsApp)",
-    url: "https://wa.me/919422241628?text=नमस्कार,%20साहित्य%20निकेतन%20ग्रंथालयाबद्दल%20माहिती%20हवी%20आहे.",
+    url: WHATSAPP_URL,
     color: "#25D366",
     iconBg: "rgba(37, 211, 102, 0.22)",
     svg: (
@@ -170,7 +172,7 @@ export const DEFAULT_SOCIALS: SocialLinkItem[] = [
   {
     id: "email",
     label: "ईमेल (Email)",
-    url: "mailto:contact@sahityaniketan.org",
+    url: `mailto:${SITE_EMAIL}`,
     color: "#D9531E",
     iconBg: "rgba(217, 83, 30, 0.22)",
     svg: (

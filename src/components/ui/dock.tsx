@@ -68,7 +68,7 @@ export default function Dock({ items, className, activeLabel }: DockProps) {
                         "rounded-xl sm:rounded-2xl relative h-10 w-10 sm:h-11 sm:w-11",
                         "transition-all duration-150 active:scale-90",
                         isHovered && "bg-zinc-100 dark:bg-zinc-800 shadow-sm",
-                        isActive && "bg-zinc-100 dark:bg-zinc-800/80 text-primary font-bold"
+                        isActive && "bg-zinc-100 dark:bg-zinc-800/80 text-primary font-bold dark:text-[#E5B869]"
                       )}
                       onClick={() => {
                         setActive(item.label)
@@ -78,7 +78,7 @@ export default function Dock({ items, className, activeLabel }: DockProps) {
                       <item.icon
                         className={cn(
                           "h-5 w-5 sm:h-6 sm:w-6 transition-colors",
-                          isActive ? "text-primary" : "text-foreground"
+                          isActive ? "text-primary dark:text-[#E5B869]" : "text-foreground"
                         )}
                       />
                     </Button>
@@ -86,7 +86,7 @@ export default function Dock({ items, className, activeLabel }: DockProps) {
                     {/* Active indicator dot */}
                     {isActive && (
                       <span
-                        className="w-1.5 h-1.5 rounded-full bg-primary mt-1 shadow-xs"
+                        className="w-1.5 h-1.5 rounded-full bg-primary dark:bg-[#E5B869] mt-1 shadow-xs"
                       />
                     )}
                   </motion.div>

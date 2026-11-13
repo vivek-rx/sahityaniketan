@@ -285,10 +285,10 @@ export function Navbar() {
           label: isEn ? "Introduction" : isHi ? "परिचय" : "परिचय", 
           href: "/about#intro", 
           icon: Info, 
-          description: isEn ? "80 years of literary tradition and heritage" : isHi ? "८० वर्षों की ज्ञान परंपरा व कार्य" : "८० वर्षांची अखंड ज्ञानपरंपरा व कार्य" 
+          description: isEn ? "81 years of literary tradition and heritage" : isHi ? "८१ वर्षों की ज्ञान परंपरा व कार्य" : "८१ वर्षांची अखंड ज्ञानपरंपरा व कार्य"
         },
         { 
-          label: isEn ? "History (80 Yrs)" : isHi ? "इतिहास (८० वर्ष)" : "इतिहास (८० वर्षे)", 
+          label: isEn ? "History (81 Yrs)" : isHi ? "इतिहास (८१ वर्ष)" : "इतिहास (८१ वर्षे)",
           href: "/history", 
           icon: History, 
           description: isEn ? "Aug 1, 1945 — Amrit Mahotsav heritage saga" : isHi ? "१ अगस्त १९४५ — अमृत महोत्सव गौरवगाथा" : "१ ऑगस्ट १९४५ — अमृत महोत्सवी गौरवगाथा" 
@@ -341,7 +341,7 @@ export function Navbar() {
         image: "/images/real/library_signboard.png",
         badge: isEn ? "Democratic Governance" : isHi ? "लोकतांत्रिक प्रबंधन" : "लोकशाही व्यवस्थापन",
         title: isEn ? "Sahitya Niketan Board & Trustees" : isHi ? "साहित्य निकेतन नियामक व विश्वस्त मंडल" : "साहित्य निकेतन नियामक व विश्वस्त मंडळ",
-        description: isEn ? "80 years of selfless knowledge service and transparent democratic administration." : isHi ? "८० वर्षों की निष्कलंक ज्ञानसेवा और पारदर्शी प्रशासन." : "८० वर्षांची निष्कलंक ज्ञानसेवा आणि लोकशाही मूल्यांवर आधारित पारदर्शी ग्रंथालय प्रशासन.",
+        description: isEn ? "81 years of selfless knowledge service and transparent democratic administration." : isHi ? "८१ वर्षों की निष्कलंक ज्ञानसेवा और पारदर्शी प्रशासन." : "८१ वर्षांची निष्कलंक ज्ञानसेवा आणि लोकशाही मूल्यांवर आधारित पारदर्शी ग्रंथालय प्रशासन.",
         href: "/about#team",
         ctaText: isEn ? "Meet the Committee" : isHi ? "कार्यकारिणी परिचय देखें" : "कार्यकारिणी परिचय पहा",
       },
@@ -780,7 +780,7 @@ export function Navbar() {
         3. Mobile Drawer Navigation (Matching Exact Taxonomy)
        --------------------------------------------------- */}
       {isMobileMenuOpen && (
-        <div className="fixed inset-0 z-50 lg:hidden font-marathi-body">
+        <div className="fixed inset-0 z-[60] lg:hidden font-marathi-body">
           {/* Backdrop */}
           <div
             className="fixed inset-0 bg-black/60 backdrop-blur-xs transition-opacity"

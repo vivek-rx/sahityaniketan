@@ -139,7 +139,7 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     statMembersLabel: "सक्रिय वाचक व सभासद",
     statManuscripts: "५००+",
     statManuscriptsLabel: "दुर्मीळ मोडी व संस्कृत हस्तलिखिते",
-    statYears: "८०+ वर्षे",
+    statYears: "८१+ वर्षे",
     statYearsLabel: "सार्वजनिक वाचन सेवा (स्था. १ ऑगस्ट १९४५)",
 
     ageGroupTitle: "वाचक वर्ग व दालन परिचय",
@@ -239,7 +239,7 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     statMembersLabel: "सक्रिय पाठक एवं सदस्य",
     statManuscripts: "५००+",
     statManuscriptsLabel: "दुर्लभ मोडी व संस्कृत पाण्डुलिपियां",
-    statYears: "८०+ वर्ष",
+    statYears: "८१+ वर्ष",
     statYearsLabel: "सार्वजनिक वाचन सेवा (स्था. १ अगस्त १९४५)",
 
     ageGroupTitle: "वाचक वर्ग एवं अनुभाग परिचय",

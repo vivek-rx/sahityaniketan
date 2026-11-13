@@ -14,6 +14,7 @@ import {
   ExternalLink
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { SITE_URL } from "@/lib/site";
 
 interface RareBookFeatureCardProps {
   className?: string;
@@ -39,7 +40,7 @@ export function RareBookFeatureCard({ className }: RareBookFeatureCardProps) {
     `✍️ रचनाकार: ${bookData.author}\n` +
     `⏳ कालखंड: ${bookData.year} (८००+ वर्षे जुने)\n` +
     `🏛️ नोंदणी क्र.: ${bookData.accessionNo}\n\n` +
-    `मराठीतील पहिला तत्त्वज्ञानाचा आद्यग्रंथ आता डिजिटल स्वरूपात पाहा व वाचा:\n${typeof window !== "undefined" ? window.location.href : "https://sahityaniketan.org/history"}`;
+    `मराठीतील पहिला तत्त्वज्ञानाचा आद्यग्रंथ आता डिजिटल स्वरूपात पाहा व वाचा:\n${typeof window !== "undefined" ? window.location.href : `${SITE_URL}/history`}`;
 
   const handleWhatsAppShare = () => {
     const url = `https://wa.me/?text=${encodeURIComponent(shareText)}`;
@@ -47,7 +48,7 @@ export function RareBookFeatureCard({ className }: RareBookFeatureCardProps) {
   };
 
   const handleFacebookShare = () => {
-    const url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(typeof window !== "undefined" ? window.location.href : "https://sahityaniketan.org/history")}`;
+    const url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(typeof window !== "undefined" ? window.location.href : `${SITE_URL}/history`)}`;
     window.open(url, "_blank");
   };
 

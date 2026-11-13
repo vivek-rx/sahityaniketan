@@ -24,8 +24,8 @@ export function HistoryTimelineSection() {
   const title = isEn
     ? "1945 to 2026: Institutional History and Eight Decades of Service"
     : isHi
-    ? "१९४५ से २०२६: ग्रन्थालय स्थापना, स्वतंत्रता संग्राम एवं वाचन आन्दोलन के ८० वर्ष"
-    : "१९४५ ते २०२६: ग्रंथालय स्थापना, स्वातंत्र्य लढा आणि वाचन चळवळीची ८० वर्षे";
+    ? "१९४५ से २०२६: ग्रन्थालय स्थापना, स्वतंत्रता संग्राम एवं वाचन आन्दोलन के ८१ वर्ष"
+    : "१९४५ ते २०२६: ग्रंथालय स्थापना, स्वातंत्र्य लढा आणि वाचन चळवळीची ८१ वर्षे";
 
   const subtitle = isEn
     ? "Founded on 1 August 1945 during the Hyderabad liberation movement — an archival record of eight decades of library development."

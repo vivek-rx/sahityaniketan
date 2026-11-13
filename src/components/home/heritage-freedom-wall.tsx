@@ -57,7 +57,7 @@ export function HeritageFreedomWall() {
                 href="/about"
                 className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#881337] hover:bg-[#72102E] text-white text-xs sm:text-sm font-bold shadow-md hover:shadow-lg transition-all"
               >
-                <span>{language === "en" ? "80 Years of History & Photos" : "८० वर्षांचा संपूर्ण इतिहास व छायाचित्रे"}</span>
+                <span>{language === "en" ? "81 Years of History & Photos" : "८१ वर्षांचा संपूर्ण इतिहास व छायाचित्रे"}</span>
                 <ChevronRight className="h-4 w-4" />
               </Link>
               <span className="text-xs font-semibold text-stone-600 dark:text-stone-400">

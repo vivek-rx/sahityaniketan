@@ -78,7 +78,11 @@ export default function EventsPage() {
         if (dbEvents && dbEvents.length > 0) {
           const mapped: LiteraryEvent[] = dbEvents.map((ev: any, idx: number) => ({
             id: ev.id || `db-event-${idx}`,
-            isFeatured: !ev.is_archived,
+            // The events table has no `is_featured` column, and the previous
+            // `!ev.is_archived` flagged every non-archived event as featured —
+            // so the whole list rendered with the maroon ring + badge.
+            // Match the static fallback: only the first event is featured.
+            isFeatured: idx === 0,
             title: { mr: ev.title, hi: ev.title, en: ev.title },
             date: { mr: ev.event_date || "लवकरच", hi: ev.event_date || "शीघ्र ही", en: ev.event_date || "Coming Soon" },
             time: { mr: ev.event_time || "सायंकाळी", hi: ev.event_time || "सायं", en: ev.event_time || "Evening" },

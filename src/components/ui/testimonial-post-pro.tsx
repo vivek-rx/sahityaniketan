@@ -69,7 +69,7 @@ export interface TestimonialPostProProps {
 
 const DEFAULT_NOTES: PostcardNote[] = [
   {
-    name: "प्रा. डॉ. सदानंद मोरे",
+    name: "ज्येष्ठ साहित्य संशोधक",
     role: "ज्येष्ठ साहित्यिक व संशोधक",
     company: "महाराष्ट्र राज्य साहित्य व संस्कृती मंडळ",
     quote:
@@ -81,7 +81,7 @@ const DEFAULT_NOTES: PostcardNote[] = [
     stampTint: "#800020",
   },
   {
-    name: "प्रतीक कुलकर्णी",
+    name: "स्पर्धा परीक्षा उत्तीर्ण वाचक",
     role: "तहसीलदार (महाराष्ट्र शासन महसूल)",
     company: "महाराष्ट्र शासन महसूल विभाग",
     quote:
@@ -93,7 +93,7 @@ const DEFAULT_NOTES: PostcardNote[] = [
     stampTint: "#1E4D38",
   },
   {
-    name: "डॉ. अलका जोशी",
+    name: "मराठी भाषा अभ्यासक",
     role: "मराठी भाषा अभ्यासक व लेखिका",
     company: "साहित्य निकेतन वाचक समिती",
     quote:
@@ -105,12 +105,12 @@ const DEFAULT_NOTES: PostcardNote[] = [
     stampTint: "#9C3A24",
   },
   {
-    name: "ॲड. सुधीर जोशी",
+    name: "आजीवन सभासद (४० वर्षे)",
     role: "ज्येष्ठ आजीवन सभासद (४० वर्षे वाचक)",
     company: "अंबाजोगाई विधी व सांस्कृतिक परिषद",
     quote:
       "मी गेल्या चाळीस वर्षांपासून या ग्रंथालयाचा नियमित वाचक आहे. १९४५ पासूनची ग्रंथालयाची परंपरा नव्या पिढीने डिजिटल स्वरूपात जतन केली हे पाहून अत्यंत अभिमान वाटतो.",
-    caption: "८० वर्षांची अखंड ज्ञानसेवा",
+    caption: "८१ वर्षांची अखंड ज्ञानसेवा",
     postmark: "01 AUG 2020",
     imageUrl: "/images/real/library_cupboards.png",
     cardColor: "#EDF4FA",

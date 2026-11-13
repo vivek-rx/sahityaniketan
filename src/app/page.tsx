@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { Navbar, Footer } from "@/components/layout";
 import {
   HeroCarousel,
@@ -7,18 +8,39 @@ import {
   TestimonialsSection,
   CTASection,
 } from "@/components/home";
+import { LibraryEventsCarousel } from "@/components/home/library-events-carousel";
+import { buildPageMetadata } from "@/lib/metadata";
+import { SITE_NAME_MR } from "@/lib/site";
 
 export const revalidate = 3600;
+
+export const metadata: Metadata = buildPageMetadata({
+  title: `${SITE_NAME_MR} — स्थापना १ ऑगस्ट १९४५`,
+  description:
+    "महाराष्ट्र शासन वर्ग 'अ' मान्यताप्राप्त साहित्य निकेतन सार्वजनिक ग्रंथालय, शुक्रवार पेठ, अंबाजोगाई. ३९,९५३ मुद्रित ग्रंथ, दुर्मीळ मोडी व संस्कृत हस्तलिखिते, संदर्भ कक्ष आणि अभ्यासिका दालन.",
+  path: "/",
+  absoluteTitle: true,
+  image: "/images/real/library_vintage_books.png",
+  imageAlt: "साहित्य निकेतन ग्रंथालय — दुर्मीळ ग्रंथ व हस्तलिखित दालन",
+});
 
 export default async function HomePage() {
   return (
     <>
       <Navbar />
-      <main id="main-content" className="relative z-10 min-h-screen bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 shadow-[0_25px_60px_rgba(0,0,0,0.18)] dark:shadow-[0_25px_60px_rgba(0,0,0,0.6)] transition-colors">
+      <main id="main-content" className="relative z-10 min-h-screen bg-[#FAF8F5] dark:bg-[#120B0D] text-stone-900 dark:text-[#FAF2E8] shadow-[0_25px_60px_rgba(0,0,0,0.18)] dark:shadow-[0_25px_60px_rgba(0,0,0,0.6)] transition-colors">
+        {/* Page-level H1: visually hidden so the hero art direction stays intact */}
+        <h1 className="sr-only">
+          साहित्य निकेतन सार्वजनिक ग्रंथालय, अंबाजोगाई — स्थापना १ ऑगस्ट १९४५
+        </h1>
+
         {/* 1. Dynamic Database-driven Hero Banner (Admin controlled) */}
         <HeroCarousel />
 
-        {/* 2. Monumental Typographic Moment: Founding Year १९४५ & Library Stats */}
+        {/* 2. Library Events & Heritage Carousel */}
+        <LibraryEventsCarousel />
+
+        {/* 3. Monumental Typographic Moment: Founding Year १९४५ & Library Stats */}
         <StatsSection />
 
         {/* 4. Rare Manuscripts & Featured Book Collections */}

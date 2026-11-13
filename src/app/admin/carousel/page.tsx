@@ -156,7 +156,7 @@ export default function AdminCarouselPage() {
 
             <button
               onClick={openAdd}
-              className="inline-flex items-center gap-2 rounded-xl bg-[#800020] hover:bg-[#66001a] text-white px-5 py-2.5 text-sm sm:text-base font-bold transition-all shadow-sm active:scale-95 cursor-pointer"
+              className="inline-flex items-center gap-2 rounded-xl bg-[#800020] hover:bg-[#66001A] text-white px-5 py-2.5 text-sm sm:text-base font-bold transition-all shadow-sm active:scale-95 cursor-pointer"
             >
               <Plus className="h-5 w-5" />
               <span>{t.carouselAddBtn}</span>
@@ -305,7 +305,7 @@ export default function AdminCarouselPage() {
             <button
               onClick={handleSave}
               disabled={saving}
-              className="rounded-xl bg-[#800020] hover:bg-[#66001a] text-white px-6 py-2.5 text-sm sm:text-base font-bold cursor-pointer disabled:opacity-50 flex items-center gap-2 shadow-sm"
+              className="rounded-xl bg-[#800020] hover:bg-[#66001A] text-white px-6 py-2.5 text-sm sm:text-base font-bold cursor-pointer disabled:opacity-50 flex items-center gap-2 shadow-sm"
             >
               {saving && <Loader2 className="h-4 w-4 animate-spin text-white" />}
               <span>{t.carouselSaveBtn}</span>

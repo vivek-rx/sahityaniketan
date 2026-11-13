@@ -6,6 +6,12 @@ import { Mail, Phone, MapPin, Clock, ShieldCheck, Send, CheckCircle2, ExternalLi
 import { TurnstileWidget } from "@/components/security/turnstile-widget";
 import { useLanguage } from "@/context/language-context";
 import { MotionSubmitButton } from "@/components/ui/motion-submit-button";
+import {
+  SITE_EMAIL,
+  SITE_OFFICE_PHONE_DISPLAY,
+  SITE_PHONE_DISPLAY,
+  SITE_PHONE_E164,
+} from "@/lib/site";
 
 export default function ContactPage() {
   const { language, t } = useLanguage();
@@ -176,11 +182,11 @@ export default function ContactPage() {
                 <div className="flex items-start gap-2.5">
                   <Phone className="h-4 w-4 text-[#800020] dark:text-[#E5B869] shrink-0 mt-0.5" />
                   <div>
-                    <a href="tel:+919096642583" className="font-bold block text-gray-900 dark:text-[#FAF2E8] hover:text-[#800020] dark:hover:text-[#E5B869]">
-                      +91 90966 42583
+                    <a href={`tel:${SITE_PHONE_E164}`} className="font-bold block text-gray-900 dark:text-[#FAF2E8] hover:text-[#800020] dark:hover:text-[#E5B869]">
+                      {SITE_PHONE_DISPLAY}
                     </a>
                     <span className="text-[11px] text-stone-500 dark:text-stone-400">
-                      {language === "en" ? "Office: +91 2446 247125" : language === "hi" ? "कार्यालय: +91 2446 247125" : "कार्यालय: +91 2446 247125"}
+                      {language === "en" ? `Office: ${SITE_OFFICE_PHONE_DISPLAY}` : language === "hi" ? `कार्यालय: ${SITE_OFFICE_PHONE_DISPLAY}` : `कार्यालय: ${SITE_OFFICE_PHONE_DISPLAY}`}
                     </span>
                   </div>
                 </div>
@@ -188,11 +194,11 @@ export default function ContactPage() {
                 <div className="flex items-start gap-2.5">
                   <Mail className="h-4 w-4 text-[#800020] dark:text-[#E5B869] shrink-0 mt-0.5" />
                   <div>
-                    <a href="mailto:ta2601001@gmail.com" className="font-bold block text-gray-900 dark:text-[#FAF2E8] hover:text-[#800020] dark:hover:text-[#E5B869]">
-                      ta2601001@gmail.com
+                    <a href={`mailto:${SITE_EMAIL}`} className="font-bold block text-gray-900 dark:text-[#FAF2E8] hover:text-[#800020] dark:hover:text-[#E5B869]">
+                      {SITE_EMAIL}
                     </a>
                     <span className="text-[11px] text-stone-500 dark:text-stone-400">
-                      {language === "en" ? "Alt: sahityaniketan.ambajogai@gmail.com" : language === "hi" ? "वैकल्पिक: sahityaniketan.ambajogai@gmail.com" : "पर्यायी: sahityaniketan.ambajogai@gmail.com"}
+                      {language === "en" ? "Official library inbox" : language === "hi" ? "पुस्तकालय का आधिकारिक ईमेल" : "ग्रंथालयाचा अधिकृत ईमेल"}
                     </span>
                   </div>
                 </div>

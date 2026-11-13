@@ -55,7 +55,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
           scaleX: { duration: 0.55, ease: [0.76, 0, 0.24, 1] },
           opacity: { duration: 0.3, delay: 0.4 },
         }}
-        className="fixed top-0 left-0 right-0 h-[2.5px] bg-gradient-to-r from-[#C5A059] via-[#FDE68A] to-[#800020] origin-left z-[99999] pointer-events-none"
+        className="fixed top-0 left-0 right-0 h-[2.5px] bg-gradient-to-r from-[#C5A059] via-[#FDE68A] to-[#800020] origin-left z-[60] pointer-events-none"
       />
 
       {/* Mask-wipe page entrance (clip-path left→right reveal) */}

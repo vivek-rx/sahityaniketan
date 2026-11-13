@@ -157,7 +157,7 @@ export const AMBAJOGAI_MEMORY_ITEMS: AmbajogaiMemoryItem[] = [
     summaryMarathi: "सागवानी लाकडी कपाटांच्या सावलीत कंदील आणि पहिल्या विजेच्या दिव्यांत अभ्यास करणारे मराठवाड्यातील विद्यार्थी.",
     summaryEnglish: "A generation of Marathwada scholars and civil servants studying amidst handcrafted teakwood cupboards.",
     historicalContextMarathi: "याच वाचन दालनातून अनेक नामवंत शिक्षक, प्राध्यापक, न्यायाधीश आणि स्वातंत्र्यसैनिक घडले.",
-    curatorNoteMarathi: "मूळ सागवानी कपाटे आज ८० वर्षांनंतरही अखंड कार्यरत स्थितीत ग्रंथालयात दिमाखाने उभी आहेत.",
+    curatorNoteMarathi: "मूळ सागवानी कपाटे आज ८१ वर्षांनंतरही अखंड कार्यरत स्थितीत ग्रंथालयात दिमाखाने उभी आहेत.",
     archiveReference: "ऐतिहासिक कपाट संच क्र. ०४",
     tags: ["वाचन दालन", "सागवानी कपाटे", "अभ्यासिका", "१९६०"],
   },

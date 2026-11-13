@@ -83,11 +83,11 @@ export function MotionSubmitButton({
   // Variant styling
   const variantStyles = {
     primary:
-      "bg-gradient-to-r from-[#881337] via-[#991B1B] to-[#7F1D1D] hover:from-[#78122F] hover:to-[#681010] text-white border border-[#B91C1C]/40 shadow-[0_4px_16px_rgba(153,27,27,0.35)]",
+      "bg-gradient-to-r from-[#800020] via-[#6B0F1A] to-[#4A050E] hover:from-[#66001A] hover:to-[#3B000F] text-white border border-[#B8860B]/35 shadow-[0_4px_16px_rgba(128,0,32,0.35)]",
     dark:
       "bg-[#181614] hover:bg-[#262320] text-white border border-white/10 shadow-[0_4px_16px_rgba(0,0,0,0.4)]",
     gold:
-      "bg-gradient-to-r from-[#D4A017] via-[#C89611] to-[#B38308] hover:from-[#C89611] hover:to-[#9E7204] text-[#1E0D0D] font-extrabold border border-[#E5B869]/50 shadow-[0_4px_16px_rgba(212,160,23,0.35)]",
+      "bg-gradient-to-r from-[#C5A059] via-[#B8860B] to-[#C5A059] hover:from-[#B8860B] hover:to-[#9E7204] text-[#1E0D0D] font-extrabold border border-[#E5B869]/50 shadow-[0_4px_16px_rgba(184,134,11,0.35)]",
   }[variant];
 
   return (

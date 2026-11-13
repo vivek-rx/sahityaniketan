@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, type FC, type ReactNode } from 'react';
+import Link from 'next/link';
 import { cn } from '@/lib/utils';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
@@ -19,8 +20,6 @@ export interface FooterProps extends React.HTMLAttributes<HTMLElement> {
   description?: string;
   /** An array of objects for generating useful links. */
   usefulLinks?: { label: string; href: string }[];
-  /** An array of objects for generating social media links. */
-  socialLinks?: { label: string; href: string; icon: ReactNode }[];
   /** The title for the newsletter subscription section. */
   newsletterTitle?: string;
   /** Async function to handle email subscription. Should return `true` for success and `false` for failure. */
@@ -33,18 +32,13 @@ export interface FooterProps extends React.HTMLAttributes<HTMLElement> {
  */
 export const Footer: FC<FooterProps> = ({
   logoSrc,
-  companyName = 'Datally Inc.',
-  description = 'Empowering businesses with intelligent financial solutions, designed for the future of finance.',
+  companyName = 'Sahitya Niketan Library',
+  description = 'Preserving knowledge across generations.',
   usefulLinks = [
-    { label: 'Products', href: '#' },
-    { label: 'Careers', href: '#' },
-    { label: 'Contact Us', href: '#' },
-    { label: 'Privacy Policy', href: '#' },
-  ],
-  socialLinks = [
-    { label: 'Facebook', href: '#', icon: <DummyIcon /> },
-    { label: 'Instagram', href: '#', icon: <DummyIcon /> },
-    { label: 'Twitter (X)', href: '#', icon: <DummyIcon /> },
+    { label: 'Home', href: '/' },
+    { label: 'Catalogue', href: '/catalogue' },
+    { label: 'Contact Us', href: '/contact' },
+    { label: 'Membership', href: '/membership' },
   ],
   newsletterTitle = 'Subscribe our newsletter',
   onSubscribe,
@@ -162,27 +156,41 @@ export const Footer: FC<FooterProps> = ({
           </form>
         </div>
       </div>
+
+      {/* Legal / compliance bar */}
+      <div className="relative z-10 border-t border-zinc-200 dark:border-zinc-800">
+        <div className="container mx-auto flex flex-col items-center justify-between gap-3 px-4 py-5 text-xs text-stone-600 dark:text-stone-400 sm:flex-row">
+          <p className="text-center sm:text-left">
+            © {new Date().getFullYear()} साहित्य निकेतन सार्वजनिक ग्रंथालय,
+            अंबाजोगाई. सर्व हक्क राखीव.
+          </p>
+          <nav
+            aria-label="Legal"
+            className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2"
+          >
+            <Link
+              href="/privacy"
+              className="font-medium transition-colors hover:text-[#800020] dark:hover:text-[#E5B869]"
+            >
+              गोपनीयता धोरण
+            </Link>
+            <Link
+              href="/terms"
+              className="font-medium transition-colors hover:text-[#800020] dark:hover:text-[#E5B869]"
+            >
+              वापरण्याच्या अटी
+            </Link>
+            <Link
+              href="/contact"
+              className="font-medium transition-colors hover:text-[#800020] dark:hover:text-[#E5B869]"
+            >
+              तक्रार संपर्क
+            </Link>
+          </nav>
+        </div>
+      </div>
     </footer>
   );
 };
-
-// Dummy Icon: Fallback icon
-const DummyIcon: FC = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="20"
-    height="20"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    className="h-5 w-5 text-muted-foreground"
-  >
-    <circle cx="12" cy="12" r="10" />
-    <circle cx="12" cy="12" r="4" />
-  </svg>
-);
 
 export default Footer;

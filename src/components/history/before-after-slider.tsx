@@ -21,7 +21,7 @@ export function BeforeAfterSlider({
   beforeLabel = "१९४५: मूळ ऐतिहासिक स्थापना शिलालेख (Founding Inscription)",
   afterLabel = "२०२६: आधुनिक ग्रंथालय दर्शनी फलक व वास्तू (Library Entrance)",
   beforeYear = "१ ऑगस्ट १९४५",
-  afterYear = "आज (८०+ वर्षे)",
+  afterYear = "आज (८१+ वर्षे)",
   className,
 }: BeforeAfterSliderProps) {
   const [sliderPosition, setSliderPosition] = useState(50);

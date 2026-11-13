@@ -33,9 +33,9 @@ export const LIBRARY_EVENTS: LibraryEvent[] = [
   {
     id: "event-1",
     slug: "foundation-and-heritage",
-    title: "साहित्य निकेतन ग्रंथालय स्थापना व ८० वर्षांची ज्ञानतपस्या",
-    titleEn: "Sahitya Niketan Library Foundation & 80 Years of Knowledge Service",
-    titleHi: "साहित्य निकेतन ग्रन्थालय स्थापना एवं ८० वर्षों की ज्ञान सेवा",
+    title: "साहित्य निकेतन ग्रंथालय स्थापना व ८१ वर्षांची ज्ञानतपस्या",
+    titleEn: "Sahitya Niketan Library Foundation & 81 Years of Knowledge Service",
+    titleHi: "साहित्य निकेतन ग्रन्थालय स्थापना एवं ८१ वर्षों की ज्ञान सेवा",
     date: "१ ऑगस्ट १९४५ पासून अविरत",
     dateEn: "Serving continuously since 1 August 1945",
     dateHi: "१ अगस्त १९४५ से निरंतर सेवारत",

@@ -22,6 +22,7 @@ import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/s
 import { cn } from "@/lib/utils";
 import { useAdminLanguage } from "@/context/admin-language-context";
 import { Breadcrumbs } from "@/components/layout/breadcrumbs";
+import { SITE_EMAIL } from "@/lib/site";
 
 interface AdminTopbarProps {
   title?: string;
@@ -31,7 +32,7 @@ interface AdminTopbarProps {
 export function AdminTopbar({ title, subtitle }: AdminTopbarProps) {
   const router = useRouter();
   const pathname = usePathname();
-  const [adminEmail, setAdminEmail] = useState("admin@sahityaniketan.org");
+  const [adminEmail, setAdminEmail] = useState(SITE_EMAIL);
   const [mobileOpen, setMobileOpen] = useState(false);
   const { lang, toggleLang, t } = useAdminLanguage();
 

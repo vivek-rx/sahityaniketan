@@ -88,7 +88,7 @@ export function MantineLogo({
   return (
     <div
       style={{ width: size, height: size }}
-      className="rounded-xl bg-gradient-to-br from-[#00657E] to-[#004758] dark:from-[#38bdf8] dark:to-[#0284c7] flex items-center justify-center shadow-sm text-white"
+      className="rounded-xl bg-gradient-to-br from-[#800020] to-[#4A050E] dark:from-[#E5B869] dark:to-[#B8860B] flex items-center justify-center shadow-sm text-white"
       title="साहित्य निकेतन ग्रंथालय"
     >
       <svg
@@ -301,7 +301,7 @@ export function DoubleNavbar() {
         >
           <span className="truncate">{item.label}</span>
           {item.badge && (
-            <span className="ml-2 px-1.5 py-0.5 text-[10px] font-extrabold rounded-md bg-[#00657E] text-white">
+            <span className="ml-2 px-1.5 py-0.5 text-[10px] font-extrabold rounded-md bg-[#800020] text-white">
               {item.badge}
             </span>
           )}
@@ -319,7 +319,7 @@ export function DoubleNavbar() {
       >
         <span className="truncate">{item.label}</span>
         {item.badge && (
-          <span className="ml-2 px-1.5 py-0.5 text-[10px] font-extrabold rounded-md bg-[#00657E] text-white">
+          <span className="ml-2 px-1.5 py-0.5 text-[10px] font-extrabold rounded-md bg-[#800020] text-white">
             {item.badge}
           </span>
         )}

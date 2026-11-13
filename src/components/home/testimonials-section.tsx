@@ -8,7 +8,7 @@ import { MessageSquareQuote } from "lucide-react";
 const FALLBACK_POSTCARDS: PostcardNote[] = [
   {
     id: "test-1",
-    name: "प्रा. डॉ. सदानंद मोरे",
+    name: "ज्येष्ठ साहित्य संशोधक",
     role: "ज्येष्ठ साहित्यिक व संशोधक",
     company: "महाराष्ट्र राज्य साहित्य व संस्कृती मंडळ",
     quote:
@@ -21,7 +21,7 @@ const FALLBACK_POSTCARDS: PostcardNote[] = [
   },
   {
     id: "test-2",
-    name: "प्रतीक कुलकर्णी",
+    name: "स्पर्धा परीक्षा उत्तीर्ण वाचक",
     role: "तहसीलदार (महाराष्ट्र शासन महसूल)",
     company: "महाराष्ट्र शासन महसूल विभाग",
     quote:
@@ -34,7 +34,7 @@ const FALLBACK_POSTCARDS: PostcardNote[] = [
   },
   {
     id: "test-3",
-    name: "डॉ. अलका जोशी",
+    name: "मराठी भाषा अभ्यासक",
     role: "मराठी भाषा अभ्यासक व लेखिका",
     company: "साहित्य निकेतन वाचक समिती",
     quote:
@@ -47,12 +47,12 @@ const FALLBACK_POSTCARDS: PostcardNote[] = [
   },
   {
     id: "test-4",
-    name: "ॲड. सुधीर जोशी",
+    name: "आजीवन सभासद (४० वर्षे)",
     role: "ज्येष्ठ आजीवन सभासद (४० वर्षे वाचक)",
     company: "अंबाजोगाई विधी व सांस्कृतिक परिषद",
     quote:
       "मी गेल्या चाळीस वर्षांपासून या ग्रंथालयाचा नियमित वाचक आहे. १९४५ पासूनची ग्रंथालयाची परंपरा नव्या पिढीने डिजिटल स्वरूपात जतन केली हे पाहून अत्यंत अभिमान वाटतो.",
-    caption: "८० वर्षांची अखंड ज्ञानसेवा",
+    caption: "८१ वर्षांची अखंड ज्ञानसेवा",
     postmark: "01 AUG 2020",
     imageUrl: "/images/real/library_cupboards.png",
     cardColor: "#EDF4FA",
@@ -63,7 +63,7 @@ const FALLBACK_POSTCARDS: PostcardNote[] = [
 const FALLBACK_POSTCARDS_EN: PostcardNote[] = [
   {
     id: "test-1",
-    name: "Prof. Dr. Sadanand More",
+    name: "Senior Literary Scholar",
     role: "Senior Scholar & Historian",
     company: "Maharashtra State Board for Literature & Culture",
     quote:
@@ -76,7 +76,7 @@ const FALLBACK_POSTCARDS_EN: PostcardNote[] = [
   },
   {
     id: "test-2",
-    name: "Pratik Kulkarni",
+    name: "Civil Services Aspirant",
     role: "Tehsildar (Govt. of Maharashtra)",
     company: "Maharashtra Revenue Service",
     quote:
@@ -89,7 +89,7 @@ const FALLBACK_POSTCARDS_EN: PostcardNote[] = [
   },
   {
     id: "test-3",
-    name: "Dr. Alka Joshi",
+    name: "Marathi Language Scholar",
     role: "Marathi Scholar & Author",
     company: "Sahitya Niketan Readers Committee",
     quote:
@@ -102,12 +102,12 @@ const FALLBACK_POSTCARDS_EN: PostcardNote[] = [
   },
   {
     id: "test-4",
-    name: "Adv. Sudhir Joshi",
+    name: "Life Member (40 Years)",
     role: "Senior Life Member (40 Years Reader)",
     company: "Ambajogai Bar & Cultural Association",
     quote:
       "I have been a regular reader at this library for forty years. Seeing the 1945 heritage preserved so respectfully in digital form by the new generation fills me with immense pride.",
-    caption: "80 Years of Continuous Service",
+    caption: "81 Years of Continuous Service",
     postmark: "01 AUG 2020",
     imageUrl: "/images/real/library_cupboards.png",
     cardColor: "#EDF4FA",
@@ -118,7 +118,7 @@ const FALLBACK_POSTCARDS_EN: PostcardNote[] = [
 const FALLBACK_POSTCARDS_HI: PostcardNote[] = [
   {
     id: "test-1",
-    name: "प्रो. डॉ. सदानंद मोरे",
+    name: "ज्येष्ठ साहित्य संशोधक",
     role: "वरिष्ठ साहित्यकार एवं शोधार्थी",
     company: "महाराष्ट्र राज्य साहित्य एवं संस्कृति मंडल",
     quote:
@@ -131,7 +131,7 @@ const FALLBACK_POSTCARDS_HI: PostcardNote[] = [
   },
   {
     id: "test-2",
-    name: "प्रतीक कुलकर्णी",
+    name: "स्पर्धा परीक्षा उत्तीर्ण वाचक",
     role: "तहसीलदार (महाराष्ट्र शासन राजस्व)",
     company: "महाराष्ट्र शासन राजस्व विभाग",
     quote:
@@ -144,7 +144,7 @@ const FALLBACK_POSTCARDS_HI: PostcardNote[] = [
   },
   {
     id: "test-3",
-    name: "डॉ. अलका जोशी",
+    name: "मराठी भाषा अभ्यासक",
     role: "भाषाविद् एवं लेखिका",
     company: "साहित्य निकेतन वाचक समिति",
     quote:
@@ -157,12 +157,12 @@ const FALLBACK_POSTCARDS_HI: PostcardNote[] = [
   },
   {
     id: "test-4",
-    name: "एड. सुधीर जोशी",
+    name: "आजीवन सभासद (४० वर्षे)",
     role: "वरिष्ठ आजीवन सदस्य (४० वर्ष वाचक)",
     company: "अंबाजोगाई विधि एवं सांस्कृतिक परिषद",
     quote:
       "मैं पिछले चालीस वर्षों से इस ग्रन्थालय का नियमित वाचक हूँ। १९४५ से चली आ रही इस महान परम्परा को युवा पीढ़ी द्वारा डिजिटल स्वरूप में संजोते देख अत्यंत गौरव की अनुभूति होती है।",
-    caption: "८० वर्षों की अविरत ज्ञान सेवा",
+    caption: "८१ वर्षों की अविरत ज्ञान सेवा",
     postmark: "01 AUG 2020",
     imageUrl: "/images/real/library_cupboards.png",
     cardColor: "#EDF4FA",
@@ -251,7 +251,7 @@ export function TestimonialsSection({
               ? "What scholars, competitive aspirants, and lifelong members say about their experience at Sahitya Niketan."
               : isHi
               ? "संशोधक, स्पर्धा परीक्षा अभ्यर्थी और आजीवन सदस्यों के अनुभव।"
-              : "संशोधक, स्पर्धा परीक्षा अभ्यासक आणि ८० वर्षांच्या परंपरेतील आजीवन सभासदांचे वाचन अनुभव."}
+              : "संशोधक, स्पर्धा परीक्षा अभ्यासक आणि ८१ वर्षांच्या परंपरेतील आजीवन सभासदांचे वाचन अनुभव."}
           </p>
         </div>
 

@@ -7,6 +7,7 @@ import { useLanguage } from "@/context/language-context";
 import { FramerStatsSection, type StatItemData } from "@/components/ui/framer-stats-section";
 import { useAnimeScroll } from "@/hooks/use-anime-scroll";
 import { Award, BookOpen, Clock, Landmark, ArrowRight, ShieldCheck } from "lucide-react";
+import { YEARS_OF_SERVICE } from "@/lib/site";
 
 /**
  * StatsSection — Authentic Archival Heritage Monument & Library Statistics.
@@ -27,10 +28,10 @@ export function StatsSection() {
     : "महाराष्ट्र शासन वर्ग 'अ' मान्यताप्राप्त • स्थापना: १ ऑगस्ट १९४५";
 
   const headline = isEn
-    ? "80 Years of Heritage: From Nizam Rule to the Digital Era"
+    ? "81 Years of Heritage: From Nizam Rule to the Digital Era"
     : isHi
-    ? "८० वर्षों का गौरवशाली इतिहास: मुक्ति संग्राम से डिजिटल युग तक"
-    : "८० वर्षांची ज्ञानतपस्या: हैदराबाद मुक्ती संग्रामापासून डिजिटल युगापर्यंत";
+    ? "८१ वर्षों का गौरवशाली इतिहास: मुक्ति संग्राम से डिजिटल युग तक"
+    : "८१ वर्षांची ज्ञानतपस्या: हैदराबाद मुक्ती संग्रामापासून डिजिटल युगापर्यंत";
 
   const narrative = isEn
     ? "Founded on 1 August 1945 during the oppressive Nizam regime by visionary patriots to safeguard the Marathi language, democratic dialogue, and historical literature. Today, Sahitya Niketan stands as an accredited Grade 'A' cultural beacon, preserving rare 12th-century manuscripts alongside state-of-the-art competitive exam facilities."
@@ -46,7 +47,7 @@ export function StatsSection() {
       sublabel: isEn ? "Marathi, Sanskrit, Hindi, English" : isHi ? "४ समृद्ध भाषांमध्ये" : "मराठी, संस्कृत, हिंदी व इंग्रजी",
     },
     {
-      value: 80,
+      value: YEARS_OF_SERVICE,
       suffix: "+",
       label: isEn ? "Years of Continuous Service" : isHi ? "वर्षों का अविरत इतिहास" : "वर्षे अखंड ज्ञानसेवा",
       sublabel: isEn ? "Founded 1 August 1945" : isHi ? "स्थापना: १ अगस्त १९४५" : "स्थापना: १ ऑगस्ट १९४५",
@@ -131,7 +132,7 @@ export function StatsSection() {
             <div className="lg:col-span-7 flex flex-col justify-center text-left">
               <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#800020] dark:text-amber-400 mb-2">
                 <Clock className="w-3.5 h-3.5" />
-                <span>{isEn ? "1945 — 2026: 80 Glorious Years" : isHi ? "१९४५ — २०२६ : गौरवशाली ८० वर्ष" : "१९४५ — २०२६ : गौरवशाली ८० वर्षे"}</span>
+                <span>{isEn ? "1945 — 2026: 81 Glorious Years" : isHi ? "१९४५ — २०२६ : गौरवशाली ८१ वर्ष" : "१९४५ — २०२६ : गौरवशाली ८१ वर्षे"}</span>
               </div>
 
               <h2 className="font-marathi-heading text-2xl sm:text-3xl lg:text-4xl font-extrabold text-stone-900 dark:text-stone-50 leading-tight mb-4">
@@ -164,7 +165,7 @@ export function StatsSection() {
                   href="/history"
                   className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#800020] hover:bg-[#6b0f1a] text-white text-xs sm:text-sm font-bold shadow-xs hover:shadow-md transition-all active:scale-95"
                 >
-                  <span>{isEn ? "Read the Complete 80-Year History" : isHi ? "८० वर्षों का सम्पूर्ण इतिहास व दस्तावेज पढ़ें" : "८० वर्षांचा संपूर्ण इतिहास व दस्तऐवज वाचा"}</span>
+                  <span>{isEn ? "Read the Complete 81-Year History" : isHi ? "८१ वर्षों का सम्पूर्ण इतिहास व दस्तावेज पढ़ें" : "८१ वर्षांचा संपूर्ण इतिहास व दस्तऐवज वाचा"}</span>
                   <ArrowRight className="w-4 h-4" />
                 </Link>
               </div>

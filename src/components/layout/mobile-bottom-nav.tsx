@@ -65,10 +65,10 @@ export function MobileBottomNav() {
   const currentActive = items.find((item) => item.isActive)?.label ?? items[0].label;
 
   return (
-    <div
-      role="navigation"
+    <nav
       aria-label="Mobile Dock Navigation"
-      className="fixed bottom-3 inset-x-0 z-50 lg:hidden pointer-events-none flex justify-center px-4"
+      // z-40 (not z-50) so the mobile menu drawer (z-[60]) always sits above the dock
+      className="fixed bottom-3 inset-x-0 z-40 lg:hidden pointer-events-none flex justify-center px-4"
       style={{
         paddingBottom: "max(env(safe-area-inset-bottom, 0px), 0px)",
       }}
@@ -76,7 +76,7 @@ export function MobileBottomNav() {
       <div className="pointer-events-auto">
         <Dock items={items} activeLabel={currentActive} className="py-0" />
       </div>
-    </div>
+    </nav>
   );
 }
 

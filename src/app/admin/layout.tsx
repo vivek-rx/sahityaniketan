@@ -1,29 +1,20 @@
-"use client";
+import type { ReactNode } from "react";
+import type { Metadata } from "next";
+import { AdminShell } from "./admin-shell";
 
-import { AdminAuthGuard } from "@/components/admin/admin-auth-guard";
-import { AdminLanguageProvider } from "@/context/admin-language-context";
-import { DoubleNavbar } from "@/components/admin/double-navbar";
-import { usePathname } from "next/navigation";
+export const metadata: Metadata = {
+  title: "प्रशासक नियंत्रण कक्ष",
+  robots: {
+    index: false,
+    follow: false,
+    nocache: true,
+  },
+};
 
-const NO_AUTH_ROUTES = ["/admin/login"];
-
-export default function AdminRootLayout({ children }: { children: React.ReactNode }) {
-  const pathname = usePathname();
-
-  if (NO_AUTH_ROUTES.includes(pathname)) {
-    return <>{children}</>;
-  }
-
-  return (
-    <AdminAuthGuard>
-      <AdminLanguageProvider>
-        <div className="min-h-screen bg-[#F8F9FA] dark:bg-slate-950 font-sans text-slate-900 dark:text-slate-100 flex">
-          <DoubleNavbar />
-          <div className="flex-1 min-w-0 flex flex-col">
-            {children}
-          </div>
-        </div>
-      </AdminLanguageProvider>
-    </AdminAuthGuard>
-  );
+export default function AdminRootLayout({
+  children,
+}: {
+  children: ReactNode;
+}) {
+  return <AdminShell>{children}</AdminShell>;
 }

@@ -75,6 +75,24 @@
   --font-gajraj: 'Gajraj One', 'Gajraj One Local', cursive, sans-serif;
   --font-ams: 'AMS Vasudeva', cursive, sans-serif;
 
+  /* ---------------------------------------------------------
+     Radius scale — pinned explicitly.
+     HeroUI's theme redefines Tailwind's radius utilities as
+     calc(var(--radius) * N), so `rounded-xl` silently resolved to
+     18px instead of Tailwind's 12px, and would change again if
+     HeroUI were upgraded. These literals reproduce the current
+     rendering exactly while removing the cross-library dependency.
+     Change them here to move the whole site at once.
+     --------------------------------------------------------- */
+  --radius-xs: 0.1875rem;  /* 3px  */
+  --radius-sm: 0.375rem;   /* 6px  */
+  --radius-md: 0.5625rem;  /* 9px  */
+  --radius-lg: 0.75rem;    /* 12px */
+  --radius-xl: 1.125rem;   /* 18px */
+  --radius-2xl: 1.5rem;    /* 24px */
+  --radius-3xl: 2.25rem;   /* 36px */
+  --radius-4xl: 3rem;      /* 48px */
+
   /* shadcn component tokens */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -110,6 +128,9 @@
   --color-ink-soft: #26211F;
   --color-ink-muted: #4A4440;
 
+  /* Interactive states — the one maroon hover used across the site */
+  --color-maroon-hover: #66001A;
+
   /* Legacy & compatibility aliases */
   --color-maroon: #6B0F1A;
   --color-maroon-dark: #4A050E;
@@ -140,46 +161,31 @@ body {
 
 :root {
   --background: #F8F6F1;
-  --foreground: #18181b;
-  --card: #ffffff;
-  --card-foreground: #18181b;
-  --popover: #ffffff;
-  --popover-foreground: #18181b;
+  --foreground: #1A1615;
+  --card: #FFFFFF;
+  --card-foreground: #1A1615;
+  --popover: #FFFFFF;
+  --popover-foreground: #1A1615;
   --primary: #800020;
-  --primary-foreground: #ffffff;
-  --secondary: #f4f4f5;
-  --secondary-foreground: #18181b;
-  --muted: #f4f4f5;
-  --muted-foreground: #71717a;
-  --accent: #f4f4f5;
-  --accent-foreground: #18181b;
-  --destructive: #ef4444;
-  --border: #e4e4e7;
-  --input: #e4e4e7;
+  --primary-foreground: #FFFFFF;
+  --secondary: #EDE4D3;
+  --secondary-foreground: #1A1615;
+  --muted: #EDE4D3;
+  --muted-foreground: #4A4440;
+  --accent: #F3ECE3;
+  --accent-foreground: #1A1615;
+  --destructive: #C0392B;
+  --border: #E5DDD0;
+  --input: #E5DDD0;
   --ring: #800020;
   --radius: 0.75rem;
 }
 
-.dark {
-  --background: #09090b;
-  --foreground: #fafafa;
-  --card: #18181b;
-  --card-foreground: #fafafa;
-  --popover: #18181b;
-  --popover-foreground: #fafafa;
-  --primary: #e5b869;
-  --primary-foreground: #18181b;
-  --secondary: #27272a;
-  --secondary-foreground: #fafafa;
-  --muted: #27272a;
-  --muted-foreground: #a1a1aa;
-  --accent: #27272a;
-  --accent-foreground: #fafafa;
-  --destructive: #7f1d1d;
-  --border: #27272a;
-  --input: #27272a;
-  --ring: #e5b869;
-}
+/* NOTE: dark tokens live exclusively in the `html.dark` block further down.
+   A second `.dark { ... }` block used to live here with a cold zinc palette
+   (gold `--primary`, #09090b background). `html.dark` won on <html>, but any
+   subtree toggling `.dark` got a different palette — deleted to remove the
+   contradiction. */
 
 /* ---------------------------------------------------------
    Base Styles & Devanagari Typography Tuning
@@ -343,6 +349,26 @@ body {
   .ndl-tab-active {
     background-color: #66001A;
     color: #FFFFFF;
+  }
+
+  /* Accent rules under section headings.
+     `.gold-line` / `.maroon-line` were referenced by
+     components/shared/section-header.tsx and quote-of-day.tsx but never
+     defined anywhere, so they rendered as zero-height divs. */
+  .gold-line,
+  .maroon-line {
+    width: 3rem;
+    height: 2px;
+    border-radius: 9999px;
+    margin-inline: auto;
+  }
+
+  .gold-line {
+    background: linear-gradient(90deg, var(--color-gold-muted), transparent);
+  }
+
+  .maroon-line {
+    background: linear-gradient(90deg, var(--color-maroon-royal), transparent);
   }
 
   /* Heritage Card */
@@ -515,6 +541,25 @@ html.dark {
   --color-border-subtle: #332228;
   --color-border-strong: #442B34;
 
+  /* Dark counterparts for the "Committed Real Heritage Palette" tokens.
+     Without these, `bg-paper-cream` / `text-ink-charcoal` / `bg-gold-leaf`
+     stayed light and saturated in dark mode while the legacy aliases above
+     were correctly inverted. */
+  --color-paper-cream: #1E1418;
+  --color-paper-parchment: #26161B;
+  --color-paper-warm: #1A1014;
+  --color-maroon-deep: #9B1B30;
+  --color-maroon-royal: #9B1B30;
+  --color-maroon-seal: #66001A;
+  --color-gold-muted: #E5B869;
+  --color-gold-antique: #B8860B;
+  --color-gold-leaf: #E5B869;
+  --color-ink-charcoal: #FAF2E8;
+  --color-ink-lampblack: #0E0709;
+  --color-ink-soft: #D5C2B4;
+  --color-ink-muted: #B8A699;
+  --color-maroon-hover: #9B1B30;
+
   color-scheme: dark;
 }
 
@@ -526,121 +571,133 @@ html.dark :lang(mr) body {
   color: #FAF2E8 !important;
 }
 
-html.dark h1,
-html.dark h2,
-html.dark h3,
-html.dark h4,
-html.dark h5,
-html.dark h6 {
-  color: #FAF2E8 !important;
+/* ---------------------------------------------------------
+   Dark-mode base rules.
+   These live in `@layer base` so that component utilities
+   (`text-[#800020]`, `dark:bg-[#120B0D]`, `dark:border-rose-500`, …)
+   can override them. Previously they sat outside any layer, and an
+   unlayered `!important` beat every utility class — so every <p> was
+   forced to the muted body colour, every heading to #FAF2E8, and every
+   form control to a single background regardless of its own classes.
+   --------------------------------------------------------- */
+@layer base {
+  html.dark h1,
+  html.dark h2,
+  html.dark h3,
+  html.dark h4,
+  html.dark h5,
+  html.dark h6 {
+    color: #FAF2E8 !important;
+  }
+
+  html.dark p {
+    color: #D5C2B4 !important;
+  }
+
+  html.dark input,
+  html.dark textarea,
+  html.dark select {
+    background-color: #240508 !important;
+    color: #FAF2E8 !important;
+    border-color: #5A141A !important;
+  }
+
+  html.dark label {
+    color: #FAF2E8 !important;
+  }
+
+  html.dark input::placeholder,
+  html.dark textarea::placeholder {
+    color: #9C887B !important;
+  }
 }
 
-html.dark p {
-  color: #D5C2B4 !important;
-}
-
-/* Card & Surface Containers in Dark Mode */
+/* Card & Surface Containers in Dark Mode.
+   Selectors are EXACT class matches, not `[class*="..."]`. The substring form
+   also matched variant utilities — `hover:bg-white/10`, `bg-white/95`,
+   `hover:bg-[#FAF2E6]` — and with `!important` flattened them to an opaque
+   block, killing hover feedback and translucency. */
 html.dark .card,
 html.dark .card--default,
 html.dark .heritage-card,
-html.dark .bg-white,
-html.dark [class*="bg-white"] {
+html.dark .bg-white {
   background-color: #1E1418 !important;
   color: #FAF2E8 !important;
   border-color: #332228 !important;
 }
 
+/* Paper-tone surfaces. Target is the page background (#120B0D) rather than
+   the old #1B0406, which left a visible seam between <main> and <body>. */
 html.dark .bg-\[\#FAF6F0\],
 html.dark .bg-\[\#FFFBF5\],
 html.dark .bg-\[\#FFF5EB\],
-html.dark .bg-\[\#F8FAFC\], 
-html.dark .bg-\[\#F4F6F9\], 
-html.dark .bg-\[\#FAF9F6\], 
-html.dark .bg-\[\#FAF8F5\], 
-html.dark .bg-\[\#FDFBF7\], 
+html.dark .bg-\[\#F8FAFC\],
+html.dark .bg-\[\#F4F6F9\],
+html.dark .bg-\[\#FAF9F6\],
+html.dark .bg-\[\#FAF8F5\],
+html.dark .bg-\[\#FDFBF7\],
 html.dark .bg-\[\#F4EFE6\],
 html.dark .bg-\[\#F5EFE4\],
-html.dark .bg-\[\#F5EFE4\]\/60,
-html.dark [class*="bg-[#FAF6F0]"],
-html.dark [class*="bg-[#FFFBF5]"],
-html.dark [class*="bg-[#FFF5EB]"],
-html.dark [class*="bg-[#F8FAFC]"],
-html.dark [class*="bg-[#F4F6F9]"],
-html.dark [class*="bg-[#FAF9F6]"],
-html.dark [class*="bg-[#FAF8F5]"],
-html.dark [class*="bg-[#FDFBF7]"],
-html.dark [class*="bg-[#F4EFE6]"],
-html.dark [class*="bg-[#F5EFE4]"] {
-  background-color: #1B0406 !important;
+html.dark .bg-\[\#F5EFE4\]\/60 {
+  background-color: #120B0D !important;
   color: #FAF2E8 !important;
   border-color: #4A1217 !important;
 }
 
 /* High-Contrast Primary Heading & Title Text */
-html.dark .text-gray-900, 
-html.dark .text-gray-800, 
+html.dark .text-gray-900,
+html.dark .text-gray-800,
 html.dark .text-gray-700,
+html.dark .text-stone-900,
+html.dark .text-stone-800,
 html.dark .text-\[\#2D1810\],
 html.dark .text-\[\#1F1A18\],
 html.dark .text-\[\#111827\],
 html.dark .text-\[\#000\],
-html.dark .text-black,
-html.dark [class*="text-[#2D1810]"],
-html.dark [class*="text-[#1F1A18]"],
-html.dark [class*="text-[#111827]"],
-html.dark [class*="text-[#2D1212]"],
-html.dark [class*="text-[#3D2518]"],
-html.dark [class*="text-[#382110]"],
-html.dark [class*="text-[#1B432A]"],
-html.dark [class*="text-[#00657E]"] {
+html.dark .text-black {
   color: #FAF2E8 !important;
 }
 
 /* High-Contrast Subtitle & Body Text */
-html.dark .text-gray-600, 
+html.dark .text-gray-600,
 html.dark .text-gray-500,
 html.dark .text-\[\#5D4E42\],
 html.dark .text-\[\#4A4440\],
 html.dark .text-\[\#736C65\],
 html.dark .text-\[\#8C827A\],
 html.dark .text-\[\#8B7D72\],
-html.dark .text-\[\#374151\],
-html.dark [class*="text-[#5D4E42]"],
-html.dark [class*="text-[#4A4440]"],
-html.dark [class*="text-[#736C65]"],
-html.dark [class*="text-[#8C827A]"],
-html.dark [class*="text-[#8B7D72]"],
-html.dark [class*="text-[#78716C]"],
-html.dark [class*="text-[#374151]"] {
+html.dark .text-\[\#9C887B\],
+html.dark .text-\[\#3D3531\],
+html.dark .text-\[\#374151\] {
   color: #D5C2B4 !important;
 }
 
 /* Accent & Secondary Labels */
 html.dark .text-\[\#A39890\],
-html.dark [class*="text-[#A39890]"],
-html.dark [class*="text-[#6B3A2A]"] {
+html.dark .text-\[\#6B3A2A\] {
   color: #D5C2B4 !important;
 }
 
 html.dark .text-\[\#8C3410\],
 html.dark .text-\[\#922B21\],
 html.dark .text-\[\#8B5E3C\],
-html.dark [class*="text-[#8C3410]"],
-html.dark [class*="text-[#922B21]"],
-html.dark [class*="text-[#8B5E3C]"],
-html.dark [class*="text-[#78350F]"] {
+html.dark .text-\[\#78350F\],
+html.dark .text-\[\#C5A059\],
+html.dark .text-\[\#E8B830\] {
   color: #E5B869 !important;
 }
 
-html.dark .text-\[\#BF4B1A\],
-html.dark [class*="text-[#BF4B1A]"],
-html.dark [class*="text-[#ED6923]"] {
+html.dark .text-\[\#BF4B1A\] {
   color: #F89B5C !important;
 }
 
+html.dark .text-\[\#B8860B\] {
+  color: #E5B869 !important;
+}
+
 /* Borders in Dark Mode */
-html.dark .border-gray-200, 
-html.dark .border-gray-300, 
+html.dark .border-gray-200,
+html.dark .border-gray-300,
 html.dark .border-gray-100,
 html.dark .border-\[\#E8E0D5\],
 html.dark .border-\[\#E8D5C4\],
@@ -648,25 +705,23 @@ html.dark .border-\[\#E0C9B5\],
 html.dark .border-\[\#E8E2D6\],
 html.dark .border-\[\#E2DAD0\],
 html.dark .border-\[\#DDD5C7\],
-html.dark .border-\[\#D5C9B8\],
-html.dark [class*="border-[#E8E0D5]"],
-html.dark [class*="border-[#E8D5C4]"],
-html.dark [class*="border-[#E0C9B5]"],
-html.dark [class*="border-[#E8E2D6]"],
-html.dark [class*="border-[#D5C9B8]"] {
+html.dark .border-\[\#D5C9B8\] {
   border-color: #4A1217 !important;
 }
-/* High-contrast text overrides for dark mode */
-html.dark [class*="text-[#C0392B]"],
-html.dark [class*="text-[#B03A2E]"],
-html.dark [class*="text-[#8B151B]"],
-html.dark [class*="text-[#922B21]"] {
+
+/* Brand reds — previously only matched via `[class*=...]`, so `text-[#991B1B]`
+   and `text-[#881337]` kept their light-mode value on a dark background. */
+html.dark .text-\[\#C0392B\],
+html.dark .text-\[\#B03A2E\],
+html.dark .text-\[\#991B1B\],
+html.dark .text-\[\#881337\],
+html.dark .text-\[\#8B151B\] {
   color: #E5B869 !important;
 }
 
-html.dark [class*="text-[#6B3A2A]"],
-html.dark [class*="text-[#7A2E1E]"],
-html.dark [class*="text-[#8D4004]"] {
+html.dark .text-\[\#6B3A2A\],
+html.dark .text-\[\#7A2E1E\],
+html.dark .text-\[\#8D4004\] {
   color: #D5C2B4 !important;
 }
 
@@ -675,11 +730,7 @@ html.dark .bg-\[\#FAF2E6\],
 html.dark .bg-\[\#FAF0E6\],
 html.dark .bg-\[\#FFF0E5\],
 html.dark .bg-\[\#F7EFEF\],
-html.dark [class*="bg-[#FAF2E6]"],
-html.dark [class*="bg-[#FAF0E6]"],
-html.dark [class*="bg-[#FFF0E5]"],
-html.dark [class*="bg-[#EDF5F0]"],
-html.dark [class*="bg-[#F7EFEF]"] {
+html.dark .bg-\[\#EDF5F0\] {
   background-color: #38070C !important;
   color: #FAF2E8 !important;
   border-color: #5A141A !important;
@@ -693,28 +744,13 @@ html.dark .chip--accent {
   border-color: #5A141A !important;
 }
 
-/* Inputs & Form Fields in Dark Mode */
-html.dark input,
-html.dark textarea,
-html.dark select {
-  background-color: #240508 !important;
-  color: #FAF2E8 !important;
-  border-color: #5A141A !important;
-}
+/* Inputs & Form Fields in Dark Mode — see the `@layer base` block above. */
 
-html.dark label {
-  color: #FAF2E8 !important;
-}
-
-html.dark input::placeholder,
-html.dark textarea::placeholder {
-  color: #9C887B !important;
-}
-
-/* Mobile Safe-Area Bottom Padding to prevent content occlusion by bottom navbar */
+/* Mobile Safe-Area Bottom Padding to prevent content occlusion by bottom navbar.
+   The dock is `bottom-3` + up to 68px tall, so 4.25rem clipped the last row. */
 @media (max-width: 1023px) {
   body {
-    padding-bottom: calc(4.25rem + env(safe-area-inset-bottom, 0px)) !important;
+    padding-bottom: calc(5rem + env(safe-area-inset-bottom, 0px)) !important;
   }
 }
 

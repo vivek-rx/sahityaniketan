@@ -21,7 +21,7 @@ const DEFAULT_ARTICLES: ReadingArticle[] = [
   },
   {
     id: "2",
-    title: "वाचन संस्कृतीची ८० वर्षे: १ ऑगस्ट १९४५ पासूनचा गौरवशाली ग्रंथालय प्रवास",
+    title: "वाचन संस्कृतीची ८१ वर्षे: १ ऑगस्ट १९४५ पासूनचा गौरवशाली ग्रंथालय प्रवास",
     date: "स्थापना १ ऑगस्ट १९४५",
     image: "/images/real/library_inauguration_plaque.png",
     slug: "80-years-of-sahitya-niketan-ambajogai",

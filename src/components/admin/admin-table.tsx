@@ -86,7 +86,7 @@ export function AdminTable({
             value={query}
             onChange={(e) => { setQuery(e.target.value); setPage(1); }}
             placeholder={searchPlaceholder}
-            className="w-full rounded-xl border border-gray-200 dark:border-slate-700 bg-gray-50 dark:bg-slate-900 pl-9 pr-4 py-2.5 text-sm text-gray-900 dark:text-slate-100 focus:border-[#00657E] focus:outline-none"
+            className="w-full rounded-xl border border-gray-200 dark:border-slate-700 bg-gray-50 dark:bg-slate-900 pl-9 pr-4 py-2.5 text-sm text-gray-900 dark:text-slate-100 focus:border-[#800020] focus:outline-none"
           />
         </div>
       )}
@@ -122,7 +122,7 @@ export function AdminTable({
               <tr>
                 <td colSpan={columns.length} className="py-12 text-center text-sm text-gray-400">
                   <div className="flex flex-col items-center justify-center gap-2">
-                    <BobbingDots size="md" className="text-[#00657E]" />
+                    <BobbingDots size="md" className="text-[#800020]" />
                     <span className="text-xs font-bold text-gray-500">Loading...</span>
                   </div>
                 </td>
@@ -172,7 +172,7 @@ export function AdminTable({
               className={cn(
                 "min-h-[44px] min-w-[44px] rounded-xl text-xs font-bold cursor-pointer touch-manipulation flex items-center justify-center transition-transform active:scale-95",
                 page === p
-                  ? "bg-[#00657E] text-white shadow-sm"
+                  ? "bg-[#800020] text-white shadow-sm"
                   : "hover:bg-gray-100 dark:hover:bg-slate-800 text-gray-600 dark:text-slate-400"
               )}
             >

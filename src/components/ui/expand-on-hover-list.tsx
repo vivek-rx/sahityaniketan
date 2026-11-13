@@ -164,7 +164,7 @@ export function ExpandOnHoverList({
                           <Link
                             href={item.link}
                             onClick={(e) => e.stopPropagation()}
-                            className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-xl bg-[#800020] hover:bg-[#66001a] text-white text-xs font-bold transition-all shadow-xs cursor-pointer active:scale-95"
+                            className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-xl bg-[#800020] hover:bg-[#66001A] text-white text-xs font-bold transition-all shadow-xs cursor-pointer active:scale-95"
                           >
                             <span>{item.linkText || "सविस्तर माहिती पहा"}</span>
                             <ArrowUpRight className="h-3.5 w-3.5" />

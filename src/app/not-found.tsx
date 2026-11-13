@@ -66,7 +66,7 @@ export default function NotFound() {
               --muted: #7a6c5a;
               --btn: #800020;
               --btn-ink: #f6f1e7;
-              --btn-hover: #66001a;
+              --btn-hover: #66001A;
               box-sizing: border-box;
               min-height: 100vh;
               width: 100%;

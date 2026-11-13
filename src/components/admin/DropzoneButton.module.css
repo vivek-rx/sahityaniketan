@@ -38,13 +38,13 @@
 
 /* Active Dragging States */
 .dropzone[data-accept="true"] {
-  border-color: #00657e;
+  border-color: #800020;
   background-color: rgba(0, 101, 126, 0.06);
   transform: scale(1.008);
 }
 
 :global(.dark) .dropzone[data-accept="true"] {
-  border-color: #38bdf8;
+  border-color: #E5B869;
   background-color: rgba(56, 189, 248, 0.08);
 }
 
@@ -76,11 +76,11 @@
 
 .dropzone:hover .icon {
   transform: translateY(-2px);
-  color: #00657e;
+  color: #800020;
 }
 
 :global(.dark) .dropzone:hover .icon {
-  color: #38bdf8;
+  color: #E5B869;
 }
 
 /* Overlapping Centered Button at Bottom */
@@ -91,7 +91,7 @@
   bottom: -18px;
   height: 40px;
   border-radius: 9999px;
-  background-color: #00657e;
+  background-color: #800020;
   color: #ffffff;
   font-weight: 700;
   font-size: 13px;
@@ -106,7 +106,7 @@
 }
 
 :global(.dark) .control {
-  background-color: #0284c7;
+  background-color: #B8860B;
   border-color: #0f172a;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }

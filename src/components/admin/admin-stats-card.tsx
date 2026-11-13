@@ -18,7 +18,7 @@ export function AdminStatsCard({
   value,
   icon: Icon,
   iconBg = "bg-teal-100",
-  iconColor = "text-[#00657E]",
+  iconColor = "text-[#800020]",
   trend,
   className,
 }: AdminStatsCardProps) {

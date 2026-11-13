@@ -11,6 +11,12 @@ import { WishlistProvider } from "@/context/wishlist-context";
 import { SmoothScrollProvider } from "@/components/providers/smooth-scroll-provider";
 import { LibrarySchema } from "@/components/seo/structured-data";
 import { MobileBottomNav } from "@/components/layout/mobile-bottom-nav";
+import {
+  DEFAULT_OG_IMAGE,
+  SITE_NAME_EN,
+  SITE_NAME_MR,
+  SITE_URL,
+} from "@/lib/site";
 import "./globals.css";
 
 const geist = Geist({
@@ -42,9 +48,10 @@ const notoSansDevanagari = Noto_Sans_Devanagari({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://sahityaniketan.org"),
+  metadataBase: new URL(SITE_URL),
+  applicationName: SITE_NAME_EN,
   title: {
-    default: "साहित्य निकेतन सार्वजनिक ग्रंथालय, अंबाजोगाई (स्था. १ ऑगस्ट १९४५)",
+    default: `${SITE_NAME_MR} (स्था. १ ऑगस्ट १९४५)`,
     template: "%s | साहित्य निकेतन ग्रंथालय, अंबाजोगाई",
   },
   description:
@@ -62,17 +69,15 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Sahitya Niketan Granthalaya Ambajogai" }],
   creator: "Sahitya Niketan Library Committee",
-  alternates: {
-    canonical: "/",
-  },
   openGraph: {
-    title: "साहित्य निकेतन सार्वजनिक ग्रंथालय, अंबाजोगाई (स्थापना: १ ऑगस्ट १९४५)",
-    description: "महाराष्ट्र शासन वर्ग 'अ' मान्यताप्राप्त सार्वजनिक ग्रंथालय. ३९,९५३ मुद्रित ग्रंथसंग्रह, संदर्भ कक्ष आणि दुर्मीळ हस्तलिखिते.",
-    url: "https://sahityaniketan.org",
-    siteName: "Sahitya Niketan Granthalaya Ambajogai",
+    title: `${SITE_NAME_MR} (स्थापना: १ ऑगस्ट १९४५)`,
+    description:
+      "महाराष्ट्र शासन वर्ग 'अ' मान्यताप्राप्त सार्वजनिक ग्रंथालय. ३९,९५३ मुद्रित ग्रंथसंग्रह, संदर्भ कक्ष आणि दुर्मीळ हस्तलिखिते.",
+    url: SITE_URL,
+    siteName: SITE_NAME_EN,
     images: [
       {
-        url: "/images/real/library_vintage_books.png",
+        url: DEFAULT_OG_IMAGE,
         width: 1200,
         height: 630,
         alt: "साहित्य निकेतन सार्वजनिक ग्रंथालय, अंबाजोगाई — दुर्मीळ ग्रंथ दालन",
@@ -83,9 +88,10 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "साहित्य निकेतन सार्वजनिक ग्रंथालय, अंबाजोगाई",
-    description: "महाराष्ट्र शासन वर्ग 'अ' मान्यताप्राप्त सार्वजनिक ग्रंथालय. ३९,९५३ मुद्रित ग्रंथसंग्रह आणि संदर्भ दालन.",
-    images: ["/images/real/library_vintage_books.png"],
+    title: SITE_NAME_MR,
+    description:
+      "महाराष्ट्र शासन वर्ग 'अ' मान्यताप्राप्त सार्वजनिक ग्रंथालय. ३९,९५३ मुद्रित ग्रंथसंग्रह आणि संदर्भ दालन.",
+    images: [DEFAULT_OG_IMAGE],
   },
   icons: {
     icon: "/images/logo.png",

@@ -108,7 +108,7 @@ export function OptimizedVideoPlayer({
           {/* Play Button Icon with Pulse Ring */}
           <div className="absolute inset-0 flex flex-col items-center justify-center p-4 text-center">
             <div className="relative flex items-center justify-center">
-              <div className="h-16 w-16 rounded-full bg-[#ED6923] text-white flex items-center justify-center shadow-xl group-hover:scale-110 transition-transform duration-300">
+              <div className="h-16 w-16 rounded-full bg-[#B8860B] text-white flex items-center justify-center shadow-xl group-hover:scale-110 transition-transform duration-300">
                 <Play className="h-8 w-8 fill-current ml-1" />
               </div>
               <span className="absolute -inset-2 rounded-full border-2 border-amber-300/60 animate-ping pointer-events-none" />

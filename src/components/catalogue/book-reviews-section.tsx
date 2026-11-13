@@ -160,7 +160,7 @@ export function BookReviewsSection({ bookId, bookTitle }: BookReviewsSectionProp
       {/* Review Submission Form */}
       <div className="bg-[#FAF9F6] dark:bg-[#180305] p-6 rounded-2xl border border-[#E8E2D6] dark:border-[#4A1217]">
         <h4 className="text-base font-bold text-gray-900 dark:text-[#FAF2E8] font-marathi-heading mb-4 flex items-center gap-2">
-          <Award className="h-5 w-5 text-[#ED6923] dark:text-[#F89B5C]" />
+          <Award className="h-5 w-5 text-[#B8860B] dark:text-[#F89B5C]" />
           <span>तुमचा अभिप्राय नोंदवा</span>
         </h4>
 

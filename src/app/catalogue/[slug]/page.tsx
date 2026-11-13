@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { notFound } from "next/navigation";
 import { Navbar, Footer, PageHeader } from "@/components/layout";
 import {
   BookOpen,
@@ -40,11 +41,16 @@ export default function BookDetailPage({ params }: { params: Promise<{ slug: str
     return (
       <>
         <Navbar />
-        <main className="section py-24 text-center font-marathi-body min-h-[50vh] flex flex-col items-center justify-center space-y-4">
-          <BobbingDots size="lg" className="text-[#800020] dark:text-[#E5B869] mx-auto" />
-          <p className="text-xs sm:text-sm font-semibold text-stone-600 dark:text-stone-300">
-            ग्रंथ तपशील लोड होत आहे...
-          </p>
+        <main
+          id="main-content"
+          className="font-marathi-body bg-[#FAF8F5] dark:bg-[#120B0D] min-h-screen transition-colors"
+        >
+          <section className="section py-24 text-center min-h-[50vh] flex flex-col items-center justify-center space-y-4">
+            <BobbingDots size="lg" className="text-[#800020] dark:text-[#E5B869] mx-auto" />
+            <p className="text-xs sm:text-sm font-semibold text-stone-600 dark:text-stone-300">
+              ग्रंथ तपशील लोड होत आहे...
+            </p>
+          </section>
         </main>
         <Footer />
       </>
@@ -52,18 +58,9 @@ export default function BookDetailPage({ params }: { params: Promise<{ slug: str
   }
 
   if (!book) {
-    return (
-      <>
-        <Navbar />
-        <main className="section py-20 text-center font-marathi-body">
-          <h1 className="text-xl font-bold text-stone-800">Book Not Found</h1>
-          <Link href="/catalogue" className="text-sm font-bold text-[#991B1B] hover:underline mt-4 inline-block">
-            Return to Catalogue
-          </Link>
-        </main>
-        <Footer />
-      </>
-    );
+    // Missing catalogue records must return a real HTTP 404, not a 200
+    // "Book Not Found" page that Google can index as soft-404 junk.
+    notFound();
   }
 
   return (
@@ -125,7 +122,7 @@ export default function BookDetailPage({ params }: { params: Promise<{ slug: str
                   <span className="rounded-md bg-[#800020]/10 dark:bg-[#800020]/25 border border-[#800020]/20 dark:border-[#800020]/40 px-3 py-1 text-xs font-bold text-[#800020] dark:text-[#E5B869]">
                     {book.categoryMarathi || book.category}
                   </span>
-                  <div className="flex items-center gap-1.5 bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800/40 px-3 py-1 rounded-md text-xs font-bold text-amber-700 dark:text-amber-300">
+                  <div className="flex items-center gap-1.5 bg-amber-50 dark:bg-amber-950/40 border border-amber-200/60 dark:border-amber-800/40 px-2 py-0.5 rounded-md text-xs font-bold text-amber-600 dark:text-[#E5B869]">
                     <Star className="h-3.5 w-3.5 fill-amber-500 text-amber-500" />
                     <span>{book.rating.toFixed(1)} / ५.०</span>
                     <span className="text-[11px] text-stone-500 dark:text-[#B8A699] font-normal">
@@ -140,9 +137,11 @@ export default function BookDetailPage({ params }: { params: Promise<{ slug: str
                 </div>
 
                 <div>
-                  <h1 className="text-2xl sm:text-3xl font-extrabold text-stone-900 dark:text-[#FAF2E8] leading-tight font-marathi-heading">
+                  {/* The page H1 lives in <PageHeader> above — this is the
+                      book title within the detail card, so it is an h2. */}
+                  <h2 className="text-2xl sm:text-3xl font-extrabold text-stone-900 dark:text-[#FAF2E8] leading-tight font-marathi-heading">
                     {book.titleMarathi || book.title}
-                  </h1>
+                  </h2>
                   {book.titleMarathi && book.title !== book.titleMarathi && (
                     <p className="text-sm font-medium text-stone-500 dark:text-[#D5C2B4] mt-0.5">{book.title}</p>
                   )}
