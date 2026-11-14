@@ -493,6 +493,6 @@ INSERT INTO public.site_settings (key, value, description) VALUES
   ('library_hours',         '"सोम-शनि: सकाळी ८:०० ते रात्री ८:३० (वर्तमानपत्र कक्ष सकाळी ७:०० पासून)"', 'Opening hours'),
   ('established_year',      '"1945"',                               'Year established'),
   ('total_books_display',   '"39,953"',                             'Printed volumes in the physical collection'),
-  ('total_members_display', '"2,500+"',                             'Members count for homepage'),
+  ('total_members_display', '"सक्रिय वाचक व सभासद"',                  'Qualitative member label; no unverified count'),
   ('hero_tagline',          '"ज्ञान, संस्कृती आणि साहित्याचे केंद्र"', 'Hero tagline')
 ON CONFLICT (key) DO NOTHING;

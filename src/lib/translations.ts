@@ -35,8 +35,6 @@ export interface Translations {
   quickFiltersLabel: string;
   statBooks: string;
   statBooksLabel: string;
-  statMembers: string;
-  statMembersLabel: string;
   statManuscripts: string;
   statManuscriptsLabel: string;
   statYears: string;
@@ -134,9 +132,7 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     heroSearchBtn: "ग्रंथ शोधा",
     quickFiltersLabel: "दालने:",
     statBooks: "३९,९५३",
-    statBooksLabel: "नोंदणीकृत ग्रंथसंग्रह",
-    statMembers: "५,२००+",
-    statMembersLabel: "सक्रिय वाचक व सभासद",
+    statBooksLabel: "मुद्रित ग्रंथसंग्रह",
     statManuscripts: "५००+",
     statManuscriptsLabel: "दुर्मीळ मोडी व संस्कृत हस्तलिखिते",
     statYears: "८१+ वर्षे",
@@ -234,9 +230,7 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     heroSearchBtn: "ग्रन्थ खोजें",
     quickFiltersLabel: "प्रमुख दीर्घाएं:",
     statBooks: "३९,९५३",
-    statBooksLabel: "पंजीकृत ग्रन्थ संग्रह",
-    statMembers: "५,२००+",
-    statMembersLabel: "सक्रिय पाठक एवं सदस्य",
+    statBooksLabel: "मुद्रित ग्रन्थ संग्रह",
     statManuscripts: "५००+",
     statManuscriptsLabel: "दुर्लभ मोडी व संस्कृत पाण्डुलिपियां",
     statYears: "८१+ वर्ष",
@@ -334,9 +328,7 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     heroSearchBtn: "Search Catalogue",
     quickFiltersLabel: "Popular Stacks:",
     statBooks: "39,953",
-    statBooksLabel: "Registered Volumes",
-    statMembers: "5,200+",
-    statMembersLabel: "Active Readers & Members",
+    statBooksLabel: "Printed Volumes",
     statManuscripts: "500+",
     statManuscriptsLabel: "Rare Modi & Sanskrit Manuscripts",
     statYears: "80+ Years",

@@ -53,10 +53,10 @@ export function StatsSection() {
       sublabel: isEn ? "Founded 1 August 1945" : isHi ? "स्थापना: १ अगस्त १९४५" : "स्थापना: १ ऑगस्ट १९४५",
     },
     {
-      value: 1200,
-      suffix: "+",
-      label: isEn ? "Active Members & Scholars" : isHi ? "नियमित वाचक व अभ्यासक" : "सक्रिय सभासद व वाचक",
-      sublabel: isEn ? "Daily Study Hall Users" : isHi ? "प्रतियोगी परीक्षा अभ्यर्थी" : "अभ्यासिका व संदर्भ वाचक",
+      value: 4,
+      suffix: "",
+      label: isEn ? "Languages in the Collection" : isHi ? "संग्रह की भाषाएँ" : "संग्रहातील भाषा",
+      sublabel: isEn ? "Marathi, Sanskrit, Hindi, English" : isHi ? "मराठी, संस्कृत, हिन्दी, अंग्रेज़ी" : "मराठी, संस्कृत, हिंदी, इंग्रजी",
     },
     {
       value: 1188,
