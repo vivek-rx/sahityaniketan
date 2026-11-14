@@ -51,9 +51,9 @@ const SECTIONS: LegalSection[] = [
     heading: ["१. आम्ही कोण आहोत", "१. हम कौन हैं", "1. Who We Are"],
     paragraphs: [
       [
-        "साहित्य निकेतन सार्वजनिक ग्रंथालय, शुक्रवार पेठ, अंबाजोगाई — ४३१५१७, जि. बीड, महाराष्ट्र. हे धोरण आमच्या संकेतस्थळावर (sahityaniketan.org) लागू आहे. वैयक्तिक माहितीच्या बाबतीत ग्रंथालय हे “Data Fiduciary” आहे.",
-        "साहित्य निकेतन सार्वजनिक पुस्तकालय, शुक्रवार पेठ, अंबाजोगाई — ४३१५१७, जि. बीड, महाराष्ट्र। यह नीति हमारी वेबसाइट (sahityaniketan.org) पर लागू होती है। व्यक्तिगत जानकारी के विषय में पुस्तकालय “Data Fiduciary” (आंकड़ा-संरक्षक) है।",
-        "Sahitya Niketan Public Library, Shukrawar Peth, Ambajogai — 431517, Dist. Beed, Maharashtra. This policy applies to our website (sahityaniketan.org). With regard to personal information, the Library is a “Data Fiduciary”.",
+        "साहित्य निकेतन सार्वजनिक ग्रंथालय, मंडई बाजार रोड, प्रशांत नगर, गावलीपुरा, अंबाजोगाई — ४३१५१७, जि. बीड, महाराष्ट्र. हे धोरण आमच्या संकेतस्थळावर (sahityaniketan.org) लागू आहे. वैयक्तिक माहितीच्या बाबतीत ग्रंथालय हे “Data Fiduciary” आहे.",
+        "साहित्य निकेतन सार्वजनिक पुस्तकालय, मंडई बाजार रोड, प्रशांत नगर, गौलीपुरा, अंबाजोगाई — ४३१५१७, जि. बीड, महाराष्ट्र। यह नीति हमारी वेबसाइट (sahityaniketan.org) पर लागू होती है। व्यक्तिगत जानकारी के विषय में पुस्तकालय “Data Fiduciary” (आंकड़ा-संरक्षक) है।",
+        "Sahitya Niketan Public Library, Mandai Bazar Road, Prashant Nagar, Gawli Pura, Ambajogai — 431517, Dist. Beed, Maharashtra. This policy applies to our website (sahityaniketan.org). With regard to personal information, the Library is a “Data Fiduciary”.",
       ],
     ],
   },

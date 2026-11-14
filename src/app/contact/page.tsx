@@ -231,10 +231,10 @@ export default function ContactPage() {
                   <MapPin className="h-4 w-4 text-[#800020] dark:text-[#E5B869] shrink-0 mt-1" />
                   <span>
                     {language === "en"
-                      ? "Sahitya Niketan Public Library, Shukrawar Peth, Ambajogai - 431517, Dist. Beed, Maharashtra."
+                      ? "Sahitya Niketan Public Library, Mandai Bazar Road, Prashant Nagar, Gawli Pura, Ambajogai - 431517, Dist. Beed, Maharashtra."
                       : language === "hi"
-                        ? "साहित्य निकेतन सार्वजनिक पुस्तकालय, शुक्रवार पेठ, अंबाजोगाई - ४३१५१७, जि. बीड, महाराष्ट्र।"
-                        : "साहित्य निकेतन सार्वजनिक ग्रंथालय, शुक्रवार पेठ, अंबाजोगाई - ४३१५१७, जि. बीड, महाराष्ट्र."}
+                        ? "साहित्य निकेतन सार्वजनिक पुस्तकालय, मंडई बाजार रोड, प्रशांत नगर, गौलीपुरा, अंबाजोगाई - ४३१५१७, जि. बीड, महाराष्ट्र।"
+                        : "साहित्य निकेतन सार्वजनिक ग्रंथालय, मंडई बाजार रोड, प्रशांत नगर, गावलीपुरा, अंबाजोगाई - ४३१५१७, जि. बीड, महाराष्ट्र."}
                   </span>
                 </div>
 

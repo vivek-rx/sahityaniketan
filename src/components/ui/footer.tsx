@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { cn } from '@/lib/utils';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { CrowdCanvas } from '@/components/ui/skiper-ui/skiper39';
 import { SocialButtons } from '@/components/ui/social-buttons';
 
 /**
@@ -108,20 +107,7 @@ export const Footer: FC<FooterProps> = ({
   };
 
   return (
-    <footer className={cn('relative overflow-hidden bg-zinc-50/90 dark:bg-[#120B0D]/95 text-foreground border-t border-zinc-200 dark:border-zinc-800/80 font-marathi-body transition-colors select-none', className)} {...props}>
-      {/* ── Aesthetic Animated Crowd Canvas Background ── */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
-        <CrowdCanvas
-          src="/images/peeps/all-peeps.png"
-          rows={15}
-          cols={7}
-          className="absolute bottom-0 h-full w-full opacity-[0.22] dark:opacity-[0.14] grayscale contrast-125 dark:invert"
-        />
-        {/* Soft architectural gradient vignette so readers blend naturally into the library floor */}
-        <div className="absolute inset-0 bg-gradient-to-t from-transparent via-zinc-50/50 to-zinc-50 dark:via-[#120B0D]/60 dark:to-[#120B0D]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,transparent_35%,rgba(128,0,32,0.03)_100%)] dark:bg-[radial-gradient(ellipse_at_top,transparent_35%,rgba(0,0,0,0.5)_100%)]" />
-      </div>
-
+    <footer className={cn('relative text-foreground border-t border-zinc-200 dark:border-zinc-800/80 font-marathi-body transition-colors select-none', className)} {...props}>
       <div className="container relative z-10 mx-auto grid grid-cols-1 gap-8 px-4 py-16 md:grid-cols-2 lg:grid-cols-4 lg:gap-12">
         {/* Company Info */}
         <div className="flex flex-col items-start gap-4">

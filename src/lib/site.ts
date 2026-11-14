@@ -41,9 +41,9 @@ export const SITE_OFFICE_PHONE_DISPLAY = "+91 2446 247125";
 export const SITE_WHATSAPP_NUMBER = "919096642583";
 
 export const SITE_ADDRESS_MR =
-  "साहित्य निकेतन सार्वजनिक ग्रंथालय, शुक्रवार पेठ, अंबाजोगाई - ४३१५१७, जि. बीड, महाराष्ट्र";
+  "साहित्य निकेतन सार्वजनिक ग्रंथालय, मंडई बाजार रोड, प्रशांत नगर, गावलीपुरा, अंबाजोगाई - ४३१५१७, जि. बीड, महाराष्ट्र";
 export const SITE_ADDRESS_EN =
-  "Sahitya Niketan Public Library, Shukrawar Peth, Ambajogai - 431517, Dist. Beed, Maharashtra";
+  "Sahitya Niketan Public Library, Mandai Bazar Road, Prashant Nagar, Gawli Pura, Ambajogai - 431517, Dist. Beed, Maharashtra";
 
 export const FOUNDED_YEAR = 1945;
 

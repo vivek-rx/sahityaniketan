@@ -49,7 +49,7 @@ export function InspiringJourneySection() {
   const EN_HIGHLIGHTS: Record<string, string[]> = {
     foundation: [
       "Founded 1 August 1945 (pre-Independence era)",
-      "Motto: 'Anek Hriday Ho Bharat Janani'",
+      "Motto: 'Ek Hriday Ho Bharat Janani'",
       "Born of the freedom struggle and civic awakening",
       "Led by idealistic local youth",
     ],
@@ -94,7 +94,7 @@ export function InspiringJourneySection() {
   const HI_HIGHLIGHTS: Record<string, string[]> = {
     foundation: [
       "स्थापना १ अगस्त १९४५ (स्वाधीनता-पूर्व काल)",
-      "ध्येय वाक्य: 'अनेक हृदय हो भारत जननी'",
+      "ध्येय वाक्य: 'एक हृदय हो भारत जननी'",
       "स्वाधीनता आंदोलन एवं लोकजागृति की प्रेरणा से जन्म",
       "ध्येयवादी स्थानीय युवाओं का नेतृत्व",
     ],

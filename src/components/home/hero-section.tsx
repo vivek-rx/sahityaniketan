@@ -36,7 +36,7 @@ export function HeroSection() {
       alt: "साहित्य निकेतन ग्रंथालय — ऐतिहासिक सागवानी कपाटे व वाचन दालने",
       tag: language === "en" ? "Heritage Reference Stacks" : "ऐतिहासिक सागवानी ग्रंथकपाटे",
       title: language === "en" ? "Central Institutional Holdings" : "स्वातंत्र्यपूर्व काळातील मुद्रित दालने",
-      desc: language === "en" ? "Teakwood cabinets housing over 39,953 classical books and documents" : "शुक्रवार पेठेतील मध्यवर्ती वास्तूत कार्यरत सार्वजनिक ग्रंथालय संग्रह",
+      desc: language === "en" ? "Teakwood cabinets housing over 39,953 classical books and documents" : "मंडई बाजार रोडस्थित मध्यवर्ती वास्तूत कार्यरत सार्वजनिक ग्रंथालय संग्रह",
     },
     {
       image: "/images/real/library_inauguration_plaque.png",
@@ -88,7 +88,7 @@ export function HeroSection() {
                 </span>
               </h1>
               <p className="text-xs sm:text-sm text-stone-600 dark:text-stone-300 font-medium mt-1.5 leading-relaxed">
-                महाराष्ट्र शासन मान्यताप्राप्त वर्ग &apos;अ&apos; सार्वजनिक ग्रंथालय (स्थापना: १ ऑगस्ट १९४५). शुक्रवार पेठ, अंबाजोगाई, जिल्हा बीड.
+                महाराष्ट्र शासन मान्यताप्राप्त वर्ग &apos;अ&apos; सार्वजनिक ग्रंथालय (स्थापना: १ ऑगस्ट १९४५). मंडई बाजार रोड, अंबाजोगाई, जिल्हा बीड.
               </p>
             </div>
 

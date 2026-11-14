@@ -343,8 +343,8 @@ export function VintageBorrowerCard() {
                 </h4>
                 <p className="text-[11px] text-white/80">
                   {language === "en"
-                    ? "Shukrawar Peth, Ambajogai (Est. 1 Aug 1945)"
-                    : "शुक्रवार पेठ, अंबाजोगाई (स्थापना: १ ऑगस्ट १९४५)"}
+                    ? "Mandai Bazar Road, Ambajogai (Est. 1 Aug 1945)"
+                    : "मंडई बाजार रोड, अंबाजोगाई (स्थापना: १ ऑगस्ट १९४५)"}
                 </p>
               </div>
 

@@ -4,8 +4,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { Navbar, Footer, PageHeader } from "@/components/layout";
 import { Users, Landmark, ArrowRight, BookOpen, ShieldCheck, History, Award, Sparkles, Building2, CheckCircle2 } from "lucide-react";
-import { MotionSkeleton } from "@/components/ui/loader-skeleton";
-import { TiltCard } from "@/components/ui/tilt-card";
 import { useLanguage } from "@/context/language-context";
 
 const TRUSTEES_DATA = [
@@ -399,35 +397,19 @@ export default function AboutPage() {
               <p className="text-center text-sm text-zinc-500 dark:text-zinc-400 mb-10 font-marathi-body">
                 {isEn ? "(Term 2023–24 to 2028–29)" : isHi ? "(सत्र २०२३-२४ से २०२८-२९)" : "(सन २०२३-२४ ते २०२८-२९)"}
               </p>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 sm:gap-16 justify-items-center">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
                 {EXECUTIVE_COMMITTEE.map((member) => (
                   <div
                     key={member.name}
-                    className="flex flex-col items-center text-center group"
+                    className="flex flex-col items-center text-center group w-full max-w-xs p-6 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 shadow-xs hover:shadow-md transition-shadow"
                   >
-                    {/* Archival Photo Frame with Motion 3D Tilt Card & metallic shimmer */}
-                    <TiltCard
-                      maxTilt={16}
-                      scale={1.04}
-                      glare={true}
-                      glareOpacity={0.25}
-                      className="w-52 h-64 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 flex items-center justify-center text-zinc-400 dark:text-zinc-500 shadow-md group-hover:shadow-xl transition-shadow cursor-pointer"
-                    >
-                      <MotionSkeleton className="absolute inset-0 opacity-40 pointer-events-none rounded-2xl" />
-                      <div
-                        style={{ transform: "translateZ(30px)" }}
-                        className="relative z-10 flex flex-col items-center justify-center pointer-events-none"
-                      >
-                        <Users className="h-16 w-16 text-zinc-400 dark:text-zinc-500 group-hover:scale-110 group-hover:text-zinc-700 dark:group-hover:text-zinc-200 transition-all duration-300" />
-                        <span className="text-[10px] text-zinc-500 dark:text-zinc-400 mt-2 font-medium tracking-wide">
-                          {isEn ? "Official Portrait" : isHi ? "आधिकारिक चित्र" : "अधिकृत छायाचित्र"}
-                        </span>
-                      </div>
-                    </TiltCard>
-                    <h3 className="text-lg font-medium text-zinc-800 dark:text-zinc-200 mt-3 font-marathi-heading">
+                    <div className="h-16 w-16 rounded-full bg-[#800020]/10 text-[#800020] dark:bg-amber-400/10 dark:text-amber-300 flex items-center justify-center font-bold text-lg mb-3">
+                      <Users className="h-8 w-8" />
+                    </div>
+                    <h4 className="text-base font-bold text-zinc-800 dark:text-zinc-200 font-marathi-heading">
                       {isEn ? member.nameEn : member.name}
-                    </h3>
-                    <p className="text-sm text-zinc-600 dark:text-zinc-400 font-marathi-body">
+                    </h4>
+                    <p className="text-xs text-zinc-500 dark:text-zinc-400 font-marathi-body mt-1">
                       {isEn ? member.roleEn : isHi ? member.roleHi : member.role}
                     </p>
                   </div>

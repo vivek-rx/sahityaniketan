@@ -110,7 +110,7 @@ export function HeritageFreedomWall() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent flex items-end p-3">
                   <p className="text-white text-[11px] font-bold">
-                    साहित्य निकेतन ऐतिहासिक वास्तू शिलालेख — शुक्रवार पेठ, अंबाजोगाई
+                    साहित्य निकेतन ऐतिहासिक वास्तू शिलालेख — मंडई बाजार रोड, अंबाजोगाई
                   </p>
                 </div>
               </div>

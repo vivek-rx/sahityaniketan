@@ -487,14 +487,14 @@ export function Navbar() {
           label: isEn ? "Location" : isHi ? "स्थान" : "स्थान", 
           href: "/contact#location", 
           icon: MapPin, 
-          description: isEn ? "Shukrawar Peth, Ambajogai" : isHi ? "शुक्रवार पेठ, अंबाजोगाई (जि. बीड)" : "शुक्रवार पेठ, अंबाजोगाई (जि. बीड)" 
+          description: isEn ? "Mandai Bazar Road, Ambajogai" : isHi ? "मंडई बाजार रोड, अंबाजोगाई (जि. बीड)" : "मंडई बाजार रोड, अंबाजोगाई (जि. बीड)" 
         },
       ],
       showcase: {
         image: "/images/real/library_cupboards.png",
         badge: isEn ? "Direct Visit" : isHi ? "सीधे भेंट" : "थेट भेट",
         title: isEn ? "Sahitya Niketan Central Reading Complex" : isHi ? "साहित्य निकेतन मुख्य वाचन संकुल" : "साहित्य निकेतन मुख्य वाचन संकुल",
-        description: isEn ? "Central library premises in Shukrawar Peth. Reading room open daily 8:00 AM to 8:30 PM." : isHi ? "शुक्रवार पेठ स्थित मुख्य वाचनालय। अध्ययन कक्ष प्रतिदिन प्रातः ८.०० से रात्रि ८.३० तक खुला।" : "शुक्रवार पेठेतील मुख्य वास्तू. वाचन कक्ष दररोज सकाळी ८.०० ते रात्री ८.३० या वेळेत खुला.",
+        description: isEn ? "Central library premises on Mandai Bazar Road. Reading room open daily 8:00 AM to 8:30 PM." : isHi ? "मंडई बाजार रोड स्थित मुख्य वाचनालय। अध्ययन कक्ष प्रतिदिन प्रातः ८.०० से रात्रि ८.३० तक खुला।" : "मंडई बाजार रोडस्थित मुख्य वास्तू. वाचन कक्ष दररोज सकाळी ८.०० ते रात्री ८.३० या वेळेत खुला.",
         href: "/contact#location",
         ctaText: isEn ? "Map & Directions" : isHi ? "मानचित्र व दिशा-निर्देश" : "नकाशा व दिशादर्शन",
       },
@@ -793,7 +793,7 @@ export function Navbar() {
                     {language === "en" ? "Sahitya Niketan Library" : language === "hi" ? "साहित्य निकेतन ग्रन्थालय" : "साहित्य निकेतन ग्रंथालय"}
                   </h3>
                   <p className="text-[11px] text-[#E5B869] mt-0.5">
-                    {language === "en" ? "Shukrawar Peth, Ambajogai (Est. 1945)" : language === "hi" ? "शुक्रवार पेठ, अंबाजोगाई (स्था. १९४५)" : "शुक्रवार पेठ, अंबाजोगाई (स्था. १९४५)"}
+                    {language === "en" ? "Mandai Bazar Road, Ambajogai (Est. 1945)" : language === "hi" ? "मंडई बाजार रोड, अंबाजोगाई (स्था. १९४५)" : "मंडई बाजार रोड, अंबाजोगाई (स्था. १९४५)"}
                   </p>
                 </div>
               </div>
@@ -944,7 +944,7 @@ export function Navbar() {
 
             {/* Drawer Footer */}
             <div className="p-3 border-t border-[#E5DDD0] dark:border-[#332228] bg-[#F3ECE3]/80 dark:bg-[#120B0D] flex items-center justify-between text-xs text-stone-500">
-              <span>{language === "en" ? "Shukrawar Peth, Ambajogai (Dist. Beed)" : language === "hi" ? "शुक्रवार पेठ, अंबाजोगाई (जि. बीड)" : "शुक्रवार पेठ, अंबाजोगाई (जि. बीड)"}</span>
+              <span>{language === "en" ? "Mandai Bazar Road, Ambajogai (Dist. Beed)" : language === "hi" ? "मंडई बाजार रोड, अंबाजोगाई (जि. बीड)" : "मंडई बाजार रोड, अंबाजोगाई (जि. बीड)"}</span>
               <Link href="/membership" onClick={() => setIsMobileMenuOpen(false)} className="text-[#800020] dark:text-[#E5B869] font-bold text-sm">
                 {language === "en" ? "Join Library" : language === "hi" ? "सदस्य बनें" : "सभासद व्हा"}
               </Link>

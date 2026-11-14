@@ -22,7 +22,7 @@ export const SITE_CONFIG = {
   email: SITE_EMAIL,
   phone: SITE_PHONE_DISPLAY,
   phoneE164: SITE_PHONE_E164,
-  address: "सरकारी रुग्णालय समोर, मंडी बाजार, शुक्रवार पेठ, अंबाजोगाई - ४३१५१७",
+  address: "मंडई बाजार रोड, प्रशांत नगर, गावलीपुरा, अंबाजोगाई - ४३१५१७",
   addressEn: SITE_ADDRESS_EN,
   foundedYear: 1945,
   openingDate: "1 August 1945",

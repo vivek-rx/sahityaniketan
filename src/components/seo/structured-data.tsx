@@ -29,7 +29,7 @@ export function LibrarySchema() {
     "foundingDate": "1945-08-01",
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "Shukrawar Peth",
+      "streetAddress": "Mandai Bazar Road, Prashant Nagar, Gawli Pura",
       "addressLocality": "Ambajogai",
       "addressRegion": "Maharashtra",
       "postalCode": "431517",

@@ -33,9 +33,9 @@ export function CTASection() {
       en: "Hours: 8:00 AM – 8:30 PM",
     },
     location: {
-      mr: "पत्ता: शुक्रवार पेठ, अंबाजोगाई (जि. बीड)",
-      hi: "पता: शुक्रवार पेठ, अंबाजोगाई (जि. बीड)",
-      en: "Address: Shukrawar Peth, Ambajogai (Dist. Beed)",
+      mr: "पत्ता: मंडई बाजार रोड, प्रशांत नगर, गावलीपुरा, अंबाजोगाई (जि. बीड)",
+      hi: "पता: मंडई बाजार रोड, प्रशांत नगर, गौलीपुरा, अंबाजोगाई (जि. बीड)",
+      en: "Address: Mandai Bazar Road, Prashant Nagar, Gawli Pura, Ambajogai (Dist. Beed)",
     },
     btnMember: {
       mr: "सभासद वर्गणी व नियम",

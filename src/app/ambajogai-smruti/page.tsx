@@ -133,7 +133,7 @@ export default function RememberingAmbajogaiPage() {
               </span>
               <span>•</span>
               <span>
-                {isEn ? "Shukrawar Peth, Ambajogai" : isHi ? "शुक्रवार पेठ, अंबाजोगाई" : "शुक्रवार पेठ, अंबाजोगाई"}
+                {isEn ? "Mandai Bazar Road, Ambajogai" : isHi ? "मंडई बाजार रोड, अंबाजोगाई" : "मंडई बाजार रोड, अंबाजोगाई"}
               </span>
             </div>
           </div>

@@ -108,7 +108,7 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     govPartner: "अंबाजोगाई, जिल्हा बीड (महाराष्ट्र)",
     libraryTitle: "साहित्य निकेतन ग्रंथालय",
     librarySub: "महाराष्ट्र शासन मान्यताप्राप्त वर्ग 'अ' सार्वजनिक ग्रंथालय",
-    locationTag: "शुक्रवार पेठ, अंबाजोगाई - ४३१५१७ (स्थापना: १ ऑगस्ट १९४५)",
+    locationTag: "मंडई बाजार रोड, अंबाजोगाई - ४३१५१७ (स्थापना: १ ऑगस्ट १९४५)",
     searchPlaceholder: "पुस्तकाचे नाव, लेखक, ग्रंथालय क्रमांक किंवा विषय शोधा...",
     mobileApp: "वाचक साहाय्य",
     androidIos: "ऑनलाइन ग्रंथसूची व शोध",
@@ -172,7 +172,7 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     aboutTitle: "साहित्य निकेतन ग्रंथालय — अंबाजोगाई",
     aboutSubtitle: "मराठवाड्याच्या सांस्कृतिक भूमीतील सार्वजनिक ग्रंथालय",
     aboutStory:
-      "१ ऑगस्ट १९४५ रोजी अंबाजोगाईच्या मध्यवस्तीत शुक्रवार पेठेत सुरू झालेले साहित्य निकेतन ग्रंथालय आज परिसरातील साहित्यिक, संशोधक, विद्यार्थी आणि वाचक वर्गाचे हक्काचे केंद्र बनले आहे. आद्य मराठी ग्रंथ 'विवेकसिंधू'ची रचना ज्या पावन भूमीत झाली, त्या अंबाजोगाईतील वाचन संस्कृतीचे आणि मुद्रित ग्रंथ ठेव्याचे जतन करणे हे संस्थेचे मुख्य उद्दिष्ट आहे.",
+      "१ ऑगस्ट १९४५ रोजी अंबाजोगाईच्या मध्यवस्तीत सुरू झालेले साहित्य निकेतन ग्रंथालय आज परिसरातील साहित्यिक, संशोधक, विद्यार्थी आणि वाचक वर्गाचे हक्काचे केंद्र बनले आहे. आद्य मराठी ग्रंथ 'विवेकसिंधू'ची रचना ज्या पावन भूमीत झाली, त्या अंबाजोगाईतील वाचन संस्कृतीचे आणि मुद्रित ग्रंथ ठेव्याचे जतन करणे हे संस्थेचे मुख्य उद्दिष्ट आहे.",
     aboutPillars: {
       vision: "आमची दृष्टी (Vision)",
       visionDesc:
@@ -189,7 +189,7 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     footerAboutText:
       "अंबाजोगाई येथील मान्यताप्राप्त सार्वजनिक ग्रंथालय, संदर्भ केंद्र व वाचनालय. महाराष्ट्र शासन ग्रंथालय संचालनालय वर्ग 'अ' दर्जा.",
     footerAddress: "ग्रंथालय पत्ता",
-    footerAddressText: "साहित्य निकेतन सार्वजनिक ग्रंथालय, शुक्रवार पेठ, अंबाजोगाई - ४३१५१७, जि. बीड, महाराष्ट्र.",
+    footerAddressText: "साहित्य निकेतन सार्वजनिक ग्रंथालय, मंडई बाजार रोड, प्रशांत नगर, गावलीपुरा, अंबाजोगाई - ४३१५१७, जि. बीड, महाराष्ट्र.",
     footerPhone: "फोन / व्हॉट्सॲप",
     footerEmail: "ईमेल",
     footerHours: "वाचनालय वेळ",
@@ -206,7 +206,7 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     govPartner: "अंबाजोगाई, जिला बीड (महाराष्ट्र)",
     libraryTitle: "साहित्य निकेतन ग्रन्थालय",
     librarySub: "महाराष्ट्र शासन वर्ग 'अ' मान्यताप्राप्त सार्वजनिक पुस्तकालय",
-    locationTag: "शुक्रवार पेठ, अंबाजोगाई - ४३१५१७ (स्थापना: १ अगस्त १९४५)",
+    locationTag: "मंडई बाजार रोड, अंबाजोगाई - ४३१५१७ (स्थापना: १ अगस्त १९४५)",
     searchPlaceholder: "पुस्तक का नाम, लेखक, ग्रन्थालय क्रमांक या विषय खोजें...",
     mobileApp: "पाठक सहायता",
     androidIos: "ऑनलाइन ग्रन्थसूची व शोध",
@@ -270,7 +270,7 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     aboutTitle: "साहित्य निकेतन ग्रन्थालय — अंबाजोगाई",
     aboutSubtitle: "महाराष्ट्र शासन वर्ग 'अ' मान्यताप्राप्त सार्वजनिक पुस्तकालय",
     aboutStory:
-      "१ अगस्त १९४५ को अंबाजोगाई के मध्य शुक्रवार पेठ में स्थापित साहित्य निकेतन ग्रन्थालय आज क्षेत्र के साहित्यकारों, शोधार्थियों, विद्यार्थियों और पाठकों का प्रमुख केंद्र है। आद्य मराठी ग्रन्थ 'विवेकसिंधु' की रचना भूमि अंबाजोगाई की वाचन संस्कृति और मुद्रित साहित्य धरोहर का संरक्षण हमारा मुख्य ध्येय है।",
+      "१ अगस्त १९४५ को अंबाजोगाई में स्थापित साहित्य निकेतन ग्रन्थालय आज क्षेत्र के साहित्यकारों, शोधार्थियों, विद्यार्थियों और पाठकों का प्रमुख केंद्र है। आद्य मराठी ग्रन्थ 'विवेकसिंधु' की रचना भूमि अंबाजोगाई की वाचन संस्कृति और मुद्रित साहित्य धरोहर का संरक्षण हमारा मुख्य ध्येय है।",
     aboutPillars: {
       vision: "हमारी दृष्टि (Vision)",
       visionDesc:
@@ -287,7 +287,7 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     footerAboutText:
       "अंबाजोगाई स्थित सार्वजनिक वाचनालय व संदर्भ केंद्र। महाराष्ट्र शासन ग्रंथालय संचालनालय मान्यताप्राप्त 'अ' वर्ग दर्जा।",
     footerAddress: "ग्रन्थालय पता",
-    footerAddressText: "साहित्य निकेतन सार्वजनिक ग्रन्थालय, शुक्रवार पेठ, अंबाजोगाई - ४३१५१७, जि. बीड, महाराष्ट्र।",
+    footerAddressText: "साहित्य निकेतन सार्वजनिक ग्रन्थालय, मंडई बाजार रोड, प्रशांत नगर, गौलीपुरा, अंबाजोगाई - ४३१५१७, जि. बीड, महाराष्ट्र।",
     footerPhone: "फोन / वॉट्सऐप",
     footerEmail: "ईमेल",
     footerHours: "वाचनालय समय",
@@ -304,7 +304,7 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     govPartner: "Ambajogai, Dist. Beed (Maharashtra)",
     libraryTitle: "Sahitya Niketan Granthalaya",
     librarySub: "Govt. of Maharashtra Recognized Class 'A' Public Library",
-    locationTag: "Shukrawar Peth, Ambajogai - 431517 (Est. 1 August 1945)",
+    locationTag: "Mandai Bazar Road, Ambajogai - 431517 (Est. 1 August 1945)",
     searchPlaceholder: "Search book title, author, accession number, subject...",
     mobileApp: "Reader Assistance",
     androidIos: "Online OPAC & Catalogue Search",
@@ -368,7 +368,7 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     aboutTitle: "Sahitya Niketan Granthalaya — Ambajogai",
     aboutSubtitle: "Govt. Recognized Class 'A' Public Library",
     aboutStory:
-      "Established on 1 August 1945 in Shukrawar Peth, Ambajogai, Sahitya Niketan Granthalaya has served generations of writers, scholars, students, and citizens. Situated in the historic town where Marathi's earliest literary work 'Vivekasindhu' was composed, our founding mission remains the preservation and development of reading culture and printed literature.",
+      "Established on 1 August 1945 in Ambajogai, Sahitya Niketan Granthalaya has served generations of writers, scholars, students, and citizens. Situated in the historic town where Marathi's earliest literary work 'Vivekasindhu' was composed, our founding mission remains the preservation and development of reading culture and printed literature.",
     aboutPillars: {
       vision: "Our Vision",
       visionDesc:
@@ -386,7 +386,7 @@ export const TRANSLATIONS: Record<Language, Translations> = {
       "Public heritage library, reference center, and archives in Ambajogai. Recognized as Class 'A' Public Library by the Directorate of Libraries, Government of Maharashtra.",
     footerAddress: "Library Address",
     footerAddressText:
-      "Sahitya Niketan Granthalaya, Shukrawar Peth, Ambajogai - 431517, Dist. Beed, Maharashtra.",
+      "Sahitya Niketan Granthalaya, Mandai Bazar Road, Prashant Nagar, Gawli Pura, Ambajogai - 431517, Dist. Beed, Maharashtra.",
     footerPhone: "Phone / WhatsApp",
     footerEmail: "Email",
     footerHours: "Reading Room Hours",

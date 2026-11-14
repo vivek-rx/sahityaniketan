@@ -66,8 +66,8 @@ export function PhysicalNoticeBoard() {
                   </h3>
                   <p className="text-xs text-stone-500 dark:text-stone-400 mt-0.5">
                     {language === "en"
-                      ? "Shukrawar Peth, Ambajogai (Dist. Beed) — Reading Session 2026"
-                      : "शुक्रवार पेठ, अंबाजोगाई (जि. बीड) — वाचन सत्र २०२६"}
+                      ? "Mandai Bazar Road, Ambajogai (Dist. Beed) — Reading Session 2026"
+                      : "मंडई बाजार रोड, अंबाजोगाई (जि. बीड) — वाचन सत्र २०२६"}
                   </p>
                 </div>
 
@@ -146,8 +146,8 @@ export function PhysicalNoticeBoard() {
                 <MapPin className="h-3.5 w-3.5 text-[#800020] dark:text-[#E5B869]" />
                 <span>
                   {language === "en"
-                    ? "Central Reading Hall, Shukrawar Peth, Ambajogai"
-                    : "मध्यवर्ती वाचन दालन, शुक्रवार पेठ, अंबाजोगाई"}
+                    ? "Central Reading Hall, Mandai Bazar Road, Ambajogai"
+                    : "मध्यवर्ती वाचन दालन, मंडई बाजार रोड, अंबाजोगाई"}
                 </span>
               </div>
               <div className="font-semibold text-stone-700 dark:text-stone-300">

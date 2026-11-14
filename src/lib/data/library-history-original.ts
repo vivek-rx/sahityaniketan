@@ -45,8 +45,8 @@ export const OFFICIAL_LIBRARY_HISTORY = {
     ],
   },
   motto: {
-    mr: "अनेक हृदय हो भारत जननी",
-    en: "Anek Hriday Ho Bharat Janani",
+    mr: "एक हृदय हो भारत जननी",
+    en: "Ek Hriday Ho Bharat Janani",
   },
   foundingDate: "१ ऑगस्ट १९४५",
   foundingDateEn: "1 August 1945",
@@ -73,12 +73,12 @@ export const OFFICIAL_LIBRARY_HISTORY = {
       titleEn: "Foundation: The Birth of a Noble Vision",
       yearRange: "१९४५",
       content:
-        "“अनेक हृदय हो भारत जननी” या उदात्त ब्रीदवाक्याने प्रेरित होऊन, १ ऑगस्ट १९४५ रोजी अंबाजोगाई येथे 'साहित्य निकेतन' या संस्थेची मुहूर्तमेढ रोवली गेली. देशाच्या स्वातंत्र्यलढ्याच्या काळात, साहित्याच्या माध्यमातून लोकजागृती करणे, सामाजिक सुधारणा घडवून आणणे आणि राष्ट्रीय एकात्मता व परस्परांतील बंधुभाव दृढ करणे या उद्देशाने काही ध्येयवादी तरुणांनी एकत्र येऊन हे पाऊल उचलले. या उत्साही तरुणांमध्ये प्रामुख्याने श्री. गोविंदलाल जाजू, विश्वराव जाधव, रामचंद्रजी क्षीरसागर, विपत वहमवार, चंद्रगुप्त आर्य, के. बी. पाटील, आणि प्र. गो. रामदासी यांचा मोलाचा सहभाग होता.",
+        "“एक हृदय हो भारत जननी” या उदात्त ब्रीदवाक्याने प्रेरित होऊन, १ ऑगस्ट १९४५ रोजी अंबाजोगाई येथे 'साहित्य निकेतन' या संस्थेची मुहूर्तमेढ रोवली गेली. देशाच्या स्वातंत्र्यलढ्याच्या काळात, साहित्याच्या माध्यमातून लोकजागृती करणे, सामाजिक सुधारणा घडवून आणणे आणि राष्ट्रीय एकात्मता व परस्परांतील बंधुभाव दृढ करणे या उद्देशाने काही ध्येयवादी तरुणांनी एकत्र येऊन हे पाऊल उचलले. या उत्साही तरुणांमध्ये प्रामुख्याने श्री. गोविंदलाल जाजू, विश्वराव जाधव, रामचंद्रजी क्षीरसागर, विपत वहमवार, चंद्रगुप्त आर्य, के. बी. पाटील, आणि प्र. गो. रामदासी यांचा मोलाचा सहभाग होता.",
       contentEn:
-        "Inspired by the noble motto 'Anek Hriday Ho Bharat Janani', the foundation stone of 'Sahitya Niketan' was laid on 1 August 1945 in Ambajogai. During the historic era of India's freedom struggle and the Hyderabad liberation movement, visionary youth came together to awaken the public conscience through literature, foster social reform, and strengthen national integration and mutual brotherhood. Prominent among these zealous young founders were Shri Govindlal Jaju, Vishwarao Jadhav, Ramchandraji Kshirsagar, Vipat Wahamwar, Chandragupta Arya, K. B. Patil, and P. G. Ramdasi.",
+        "Inspired by the noble motto 'Ek Hriday Ho Bharat Janani', the foundation stone of 'Sahitya Niketan' was laid on 1 August 1945 in Ambajogai. During the historic era of India's freedom struggle and the Hyderabad liberation movement, visionary youth came together to awaken the public conscience through literature, foster social reform, and strengthen national integration and mutual brotherhood. Prominent among these zealous young founders were Shri Govindlal Jaju, Vishwarao Jadhav, Ramchandraji Kshirsagar, Vipat Wahamwar, Chandragupta Arya, K. B. Patil, and P. G. Ramdasi.",
       keyHighlights: [
         "स्थापना १ ऑगस्ट १९४५ (स्वातंत्र्यपूर्व काळ)",
-        "ब्रीदवाक्य: 'अनेक हृदय हो भारत जननी'",
+        "ब्रीदवाक्य: 'एक हृदय हो भारत जननी'",
         "स्वातंत्र्यलढा व लोकजागृतीच्या प्रेरणेतून जन्म",
         "ध्येयवादी स्थानिक तरुणांचा पुढाकार"
       ],

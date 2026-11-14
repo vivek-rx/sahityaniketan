@@ -24,7 +24,7 @@ const UPCOMING_EVENTS: CulturalEvent[] = [
     category: "साहित्य सोहळा",
     dateMarathi: "२७ फेब्रुवारी २०२६",
     timeMarathi: "सकाळी ९:०० वा.",
-    locationMarathi: "मुख्य प्रांगण ते शुक्रवार पेठ",
+    locationMarathi: "मुख्य प्रांगण ते मंडई बाजार रोड",
     descriptionMarathi: "अंबाजोगाई शहरात पालखीतून निघणारी ऐतिहासिक ग्रंथांची मिरवणूक, ग्रंथपूजन व ज्येष्ठ साहित्यिकांचे प्रबोधनपर विचार.",
     badgeColor: "bg-[#800020]/10 text-[#800020] dark:bg-[#E5B869]/15 dark:text-[#E5B869]",
   },

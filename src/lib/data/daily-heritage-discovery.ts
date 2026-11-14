@@ -39,7 +39,7 @@ export const DAILY_HERITAGE_ITEMS: DailyHeritageItem[] = [
     year: "१२ ऑगस्ट १९४८",
     subtitleMarathi: "रझाकार दंगलींच्या काळात ग्रंथालयातील दुर्मीळ हस्तलिखितांचे रक्षण करण्यासाठी पाठवलेला गुप्त संदेश",
     excerptMarathi: "«...ग्रंथालयातील मुकुंदराजांचे हस्तलिखित आणि जुनी मराठी दप्तर सुरक्षित स्थानी हलवण्यात आले आहे. वाचनालय जरी बंद दिसत असले, तरी ज्ञानाचा दिवा अखंड तेवत राहील याची दक्षता घ्यावी...»",
-    authorOrOriginMarathi: "स्वातंत्र्यसेनानी गुप्त समिती, शुक्रवार पेठ शाखा",
+    authorOrOriginMarathi: "स्वातंत्र्यसेनानी गुप्त समिती, अंबाजोगाई",
     shelfReference: "अभिलेख कक्ष, कपाट ४, दस्तऐवज क्र. ४८-अ",
     image: "/images/real/library_vintage_books.png",
     fullDocumentTextMarathi: [
@@ -189,7 +189,7 @@ export const DAILY_HERITAGE_ITEMS: DailyHeritageItem[] = [
     year: "१ ऑगस्ट १९४५",
     subtitleMarathi: "लोकमान्य टिळक पुण्यतिथीच्या दिवशी स्वातंत्र्यसैनिकांनी रोवलेले ज्ञानरोपटं",
     excerptMarathi: "«स्वातंत्र्यलढ्याची धामधूम असताना अंबाजोगाईच्या तरुणांनी वाचनसंस्कृतीच्या माध्यमातून जनजागृती करण्यासाठी १ ऑगस्ट १९४५ रोजी ग्रंथालयाची स्थापना केली.»",
-    authorOrOriginMarathi: "संस्थापक सदस्य (शुक्रवार पेठ, अंबाजोगाई)",
+    authorOrOriginMarathi: "संस्थापक सदस्य (अंबाजोगाई)",
     shelfReference: "संस्थापक नोंदवही, पान क्र. १",
     image: "/images/real/library_inauguration_plaque.png",
     fullDocumentTextMarathi: [
