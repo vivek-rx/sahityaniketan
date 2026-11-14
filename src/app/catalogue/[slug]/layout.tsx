@@ -33,14 +33,9 @@ export async function generateMetadata({
   const book = await getBook(slug);
 
   if (!book) {
-    return buildPageMetadata({
-      title: "ग्रंथ तपशील",
-      description:
-        "साहित्य निकेतन ग्रंथालयाच्या ग्रंथसूचीमधील ग्रंथाचा तपशील — लेखक, प्रकाशक, क्रमांक, दालन आणि उपलब्धता.",
-      path: `/catalogue/${slug}`,
-      image: DEFAULT_OG_IMAGE,
-      imageAlt: "साहित्य निकेतन ग्रंथालयातील मराठी ग्रंथ",
-    });
+    // Resolve the miss before the response body starts streaming so the
+    // request returns a real 404 instead of a 200 shell.
+    notFound();
   }
 
   return buildPageMetadata({
