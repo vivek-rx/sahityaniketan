@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Navbar, Footer } from "@/components/layout";
 import {
+  HeroCarousel,
   StatsSection,
   FeaturedBooksSection,
   HistoryTimelineSection,
@@ -32,19 +33,22 @@ export default async function HomePage() {
           साहित्य निकेतन सार्वजनिक ग्रंथालय, अंबाजोगाई — स्थापना १ ऑगस्ट १९४५
         </h1>
 
-        {/* 1. Monumental Typographic Moment: Founding Year १९४५ & Library Stats */}
+        {/* 1. Dynamic Database-driven Hero Banner (Admin controlled) */}
+        <HeroCarousel />
+
+        {/* 2. Monumental Typographic Moment: Founding Year १९४५ & Library Stats */}
         <StatsSection />
 
-        {/* 2. Rare Manuscripts & Featured Book Collections */}
+        {/* 3. Rare Manuscripts & Featured Book Collections */}
         <FeaturedBooksSection />
 
-        {/* 3. The One Deliberate Animation Moment: The History Scroll-Timeline */}
+        {/* 4. The One Deliberate Animation Moment: The History Scroll-Timeline */}
         <HistoryTimelineSection />
 
-        {/* 4. Voices of Our Community (@motion/card-stack) */}
+        {/* 5. Voices of Our Community (@motion/card-stack) */}
         <TestimonialsSection />
 
-        {/* 5. Membership Invitation & Reader Welcome CTA */}
+        {/* 6. Membership Invitation & Reader Welcome CTA */}
         <CTASection />
       </main>
       <Footer />
