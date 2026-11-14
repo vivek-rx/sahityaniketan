@@ -38,10 +38,30 @@ function CatalogueContent() {
   const [selectedLanguage, setSelectedLanguage] = useState<string>("all");
   const [selectedCategory, setSelectedCategory] = useState<string>(initialCategory);
   const [books, setBooks] = useState<BookVolume[]>([]);
+  const [totalOnlineRecords, setTotalOnlineRecords] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [viewMode, setViewMode] = useState<"list" | "grid">("list");
   const [currentPage, setCurrentPage] = useState<number>(1);
   const ITEMS_PER_PAGE = 12;
+
+  // Live count of records actually in the online catalogue. Kept separate from
+  // the filtered result set so the label never shrinks when a search is typed.
+  useEffect(() => {
+    let cancelled = false;
+    fetch("/api/books?limit=1")
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data) => {
+        if (!cancelled && data) {
+          setTotalOnlineRecords(
+            typeof data.total === "number" ? data.total : data.count ?? 0
+          );
+        }
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   // Book Request Modal State
   const [isRequestModalOpen, setIsRequestModalOpen] = useState(false);
@@ -312,12 +332,15 @@ function CatalogueContent() {
               <div className="flex flex-wrap items-center justify-between gap-3 text-xs text-stone-500 dark:text-stone-400 font-devanagari">
                 <div className="flex items-center gap-3">
                   <span>
-                    {language === "mr" ? "एकूण संग्रह:" : "Total Stacks:"}{" "}
+                    {language === "mr" ? "मुद्रित संग्रह:" : language === "hi" ? "मुद्रित संग्रह:" : "Printed Collection:"}{" "}
                     <span className="font-extrabold text-[#800020] dark:text-[#E5B869] text-sm">३९,९५३</span>{" "}
                     <span className="text-stone-300 dark:text-[#332228]">|</span>{" "}
-                    {language === "mr" ? "निवडक सूची:" : "Showing:"}{" "}
+                    {language === "mr" ? "ऑनलाइन नोंदी:" : language === "hi" ? "ऑनलाइन प्रविष्टियाँ:" : "Online Records:"}{" "}
+                    <span className="font-extrabold text-[#800020] dark:text-[#E5B869] text-sm">{totalOnlineRecords}</span>{" "}
+                    <span className="text-stone-300 dark:text-[#332228]">|</span>{" "}
+                    {language === "mr" ? "दाखवत आहे:" : language === "hi" ? "दिखा रहे हैं:" : "Showing:"}{" "}
                     <span className="font-bold text-[#800020] dark:text-[#E5B869] text-sm">{filteredItems.length}</span>{" "}
-                    {language === "mr" ? "ग्रंथ" : "books"}
+                    {language === "mr" ? "ग्रंथ" : language === "hi" ? "ग्रंथ" : "books"}
                   </span>
 
                   <button
@@ -752,10 +775,10 @@ export default function CataloguePage() {
           }
           subtitle={
             language === "mr"
-              ? "साहित्य निकेतन ग्रंथालयातील ३९,९५३ मुद्रित ग्रंथ, संदर्भ संग्रह व दुर्मीळ हस्तलिखितांची अधिकृत नोंदणीकृत सूची."
+              ? "साहित्य निकेतन ग्रंथालयातील ३९,९५३ मुद्रित ग्रंथांचा प्रत्यक्ष संग्रह. ऑनलाइन ग्रंथसूचीत नोंदी टप्प्याटप्प्याने समाविष्ट होत आहेत; उपलब्ध नोंदी लेखक, विषय व भाषेनुसार शोधा."
               : language === "hi"
-                ? "साहित्य निकेतन ग्रन्थालय में संरक्षित ३९,९५३ मुद्रित ग्रन्थ, सन्दर्भ साहित्य एवं दुर्लभ पाण्डुलिपियों की पंजीकृत सूची।"
-                : "Official registered holdings of 39,953 printed books, reference volumes, and archival manuscripts."
+                ? "साहित्य निकेतन पुस्तकालय का ३९,९५३ मुद्रित ग्रंथों का प्रत्यक्ष संग्रह। ऑनलाइन ग्रंथ सूची में प्रविष्टियाँ चरणबद्ध रूप से जोड़ी जा रही हैं; उपलब्ध प्रविष्टियाँ लेखक, विषय एवं भाषा के अनुसार खोजें।"
+                : "The library's physical collection of 39,953 printed books, reference volumes and archival manuscripts. Online catalogue records are added in phases; search the records currently available by author, subject and language."
           }
         />
 

@@ -365,7 +365,7 @@ export function GlobalSearchModal({ isOpen, onClose }: GlobalSearchModalProps) {
                     &apos;{query}&apos; साठी थेट संदर्भ सापडला नाही
                   </p>
                   <p className="text-xs text-zinc-500">
-                    संपूर्ण ३९,९५३+ ग्रंथांच्या OPAC कॅटलॉगमध्ये शोधण्यासाठी Enter दाबा.
+                    ऑनलाइन ग्रंथसूचीत शोधण्यासाठी Enter दाबा.
                   </p>
                   <button
                     type="button"

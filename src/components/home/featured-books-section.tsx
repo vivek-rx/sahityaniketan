@@ -1408,7 +1408,7 @@ export function FeaturedBooksSection() {
                     <div className="space-y-2">
                       <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-xs font-semibold text-zinc-200">
                         <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
-                        <span>{language === "mr" ? "३९,९५३+ ग्रंथ संग्रह" : language === "hi" ? "३९,९५३+ ग्रन्थ संग्रह" : "39,953+ Total Volumes"}</span>
+                        <span>{language === "mr" ? "३९,९५३+ मुद्रित ग्रंथ" : language === "hi" ? "३९,९५३+ मुद्रित ग्रन्थ" : "39,953+ Printed Volumes"}</span>
                       </div>
 
                       <h3 className="font-marathi-heading text-xl font-bold text-white leading-tight group-hover:text-amber-200 transition-colors">
@@ -1417,10 +1417,10 @@ export function FeaturedBooksSection() {
 
                       <p className="text-xs text-zinc-300 font-normal leading-relaxed max-w-[26ch] mx-auto font-marathi-body">
                         {language === "mr"
-                          ? "मुख्य ग्रंथसूची दालनात संपूर्ण पृष्ठवार (Pagination) मांडणी, विषय वर्गीकरण व कप्पा शोध उपलब्ध आहे."
+                          ? "ऑनलाइन ग्रंथसूचीत उपलब्ध नोंदी पृष्ठवार पाहा, विषयवार शोधा व ग्रंथ मागणी करा."
                           : language === "hi"
-                          ? "मुख्य ग्रन्थ सूची में संपूर्ण पृष्ठवार सूची (Pagination), विषय वर्गीकरण व कप्पा खोज उपलब्ध है।"
-                          : "Access all 39,953+ catalogued volumes with clean server-safe pagination and Dewey Decimal indexes."}
+                          ? "ऑनलाइन ग्रंथ सूची की उपलब्ध प्रविष्टियाँ पृष्ठवार देखें, विषय के अनुसार खोजें और पुस्तक अनुरोध करें।"
+                          : "Browse the online catalogue, search the records currently available, and request printed volumes held in the library."}
                       </p>
                     </div>
                   </div>
@@ -1453,7 +1453,7 @@ export function FeaturedBooksSection() {
                   {language === "mr" ? "ग्रंथालयातील मुद्रित व संदर्भ ग्रंथसंग्रह" : language === "hi" ? "ग्रंथालय का मुद्रित एवं संदर्भ संग्रह" : "Institutional Printed & Reference Catalogue"}
                 </h4>
                 <span className="text-[11px] font-bold px-2 py-0.5 rounded-full bg-[#800020] text-white dark:bg-[#E5B869] dark:text-[#18080A]">
-                  {language === "en" ? "39,953 Books" : language === "hi" ? "३९,९५३ ग्रन्थ" : "३९,९५३ ग्रंथ"}
+                  {language === "en" ? "39,953 Printed Books" : language === "hi" ? "३९,९५३ मुद्रित ग्रन्थ" : "३९,९५३ मुद्रित ग्रंथ"}
                 </span>
               </div>
               <p className="text-xs text-stone-600 dark:text-stone-300 font-marathi-body mt-0.5 font-medium">

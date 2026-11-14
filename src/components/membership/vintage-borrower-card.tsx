@@ -64,7 +64,7 @@ const MEMBERSHIP_PLANS: MembershipPlan[] = [
       period: "Lifetime (One-Time)",
       tagline: "Lifetime book borrowing privileges under library charter",
       features: [
-        "Access to all 39,953 catalogued printed volumes",
+        "Access to the full 39,953-volume printed collection",
         "Borrow 4 books & 2 periodicals concurrently",
         "Voting & participation rights in General Body Meetings",
         "Invitations to annual memorial lectures & cultural symposia",

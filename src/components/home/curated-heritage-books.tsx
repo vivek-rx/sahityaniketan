@@ -156,7 +156,7 @@ export function CuratedHeritageBooks() {
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
           <div>
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#800020]/10 dark:bg-[#E5B869]/15 border border-[#800020]/15 dark:border-[#E5B869]/30 text-xs font-bold uppercase tracking-wider text-[#800020] dark:text-[#E5B869] mb-2">
-              <span>३९,९५३+ प्रत्यक्ष ग्रंथ दालने</span>
+              <span>३९,९५३+ मुद्रित ग्रंथ दालने</span>
             </div>
             <h2 className="font-marathi-heading text-2xl sm:text-3xl lg:text-4xl font-black text-stone-900 dark:text-[#FAF2E8]">
               साहित्य निकेतन ग्रंथसंग्रह वर्गीकरण
@@ -170,7 +170,7 @@ export function CuratedHeritageBooks() {
             href="/catalogue"
             className="shrink-0 inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-[#E5DDD0] dark:border-[#332228] bg-white dark:bg-[#1E1418] hover:bg-stone-50 dark:hover:bg-[#281A20] text-stone-800 dark:text-stone-200 text-xs font-bold transition-all shadow-2xs"
           >
-            <span>सर्व ३९,९५३+ ग्रंथ सूची शोधा</span>
+            <span>ऑनलाइन ग्रंथसूची शोधा</span>
             <ChevronRight className="h-4 w-4 text-[#800020] dark:text-[#E5B869]" />
           </Link>
         </div>

@@ -48,9 +48,9 @@ const DEFAULT_NEWS_ITEMS: NewsItem[] = [
     id: "notice-catalogue-update",
     isPinned: false,
     title: {
-      mr: "३९,९५३+ ग्रंथसंपदा ऑनलाइन शोध व संगणकीकरण पूर्तता",
-      hi: "३९,९५३+ ग्रन्थ संग्रह ऑनलाइन खोज एवं कम्प्यूटरीकरण पूर्ण",
-      en: "39,953+ Volumes Complete Digitization & Online Catalogue Live",
+      mr: "ऑनलाइन ग्रंथसूची सुरू: नोंदी टप्प्याटप्प्याने समाविष्ट",
+      hi: "ऑनलाइन ग्रंथ सूची शुरू: प्रविष्टियाँ चरणबद्ध रूप से जोड़ी जा रही हैं",
+      en: "Online Catalogue Live: Records Being Added in Phases",
     },
     date: {
       mr: "अद्ययावत नोंदणी",
@@ -63,9 +63,9 @@ const DEFAULT_NEWS_ITEMS: NewsItem[] = [
       en: "Catalogue",
     },
     content: {
-      mr: "साहित्य निकेतन ग्रंथालयातील सर्व ३९,९५३ मुद्रित ग्रंथांचे वर्गीकरण संगणकीय डेटाबेसमध्ये समाविष्ट करण्यात आले आहे. वाचक आता लेखक, शीर्षक आणि विषयवार ऑनलाइन कॅटलॉग शोधू शकतात.",
-      hi: "साहित्य निकेतन पुस्तकालय के समस्त ३९,९५३ मुद्रित ग्रन्थों का वर्गीकरण डिजिटल डेटाबेस में सुरक्षित कर दिया गया है। पाठक अब ऑनलाइन कैटलॉग से अपनी पसंदीदा पुस्तकें खोज सकते हैं।",
-      en: "The entire inventory of 39,953 printed books at Sahitya Niketan is now digitized and searchable. Patrons and researchers can explore records by title, author, and subject in the public catalogue.",
+      mr: "साहित्य निकेतनची ऑनलाइन ग्रंथसूची सुरू झाली आहे. ग्रंथालयातील ३९,९५३ मुद्रित ग्रंथांची नोंदणी टप्प्याटप्प्याने या डिजिटल कॅटलॉगमध्ये समाविष्ट होत आहे. वाचक सध्या उपलब्ध नोंदी लेखक, शीर्षक व विषयानुसार ऑनलाइन शोधू शकतात; संपूर्ण मुद्रित संग्रह अजूनही ग्रंथालयाच्या वाचन कक्षात प्रत्यक्ष उपलब्ध आहे.",
+      hi: "साहित्य निकेतन का ऑनलाइन ग्रंथ सूची शुरू हो गया है। पुस्तकालय के ३९,९५३ मुद्रित ग्रंथों की प्रविष्टियाँ चरणबद्ध रूप से इस डिजिटल कैटलॉग में जोड़ी जा रही हैं। पाठक अभी उपलब्ध प्रविष्टियाँ लेखक, शीर्षक एवं विषय के अनुसार ऑनलाइन खोज सकते हैं; सम्पूर्ण मुद्रित संग्रह अभी भी पुस्तकालय के वाचन कक्ष में उपलब्ध है।",
+      en: "Sahitya Niketan's online catalogue is now live. Records for the library's 39,953 printed volumes are being added in phases. Patrons can search the records currently available by author, title and subject; the complete printed collection remains available for on-site reading at the library.",
     },
   },
   {

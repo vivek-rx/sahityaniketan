@@ -276,13 +276,13 @@ export function PhoneTabView({
           </p>
           <h2 className="text-xl font-black mt-1">Home Screen</h2>
           <p className="text-xs text-white/80 mt-1">
-            Welcome to the library portal. 39,953+ rare books and historical manuscripts.
+            Welcome to the library portal. 39,953+ printed books and historical manuscripts.
           </p>
         </div>
 
         <div className="grid grid-cols-2 gap-3">
           <div className="p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-2xs">
-            <span className="text-xs font-bold text-slate-400">Total Books</span>
+            <span className="text-xs font-bold text-slate-400">Printed Books</span>
             <p className="text-2xl font-black text-slate-900 dark:text-slate-100 mt-1">39,953</p>
           </div>
           <div className="p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-2xs">
@@ -360,7 +360,7 @@ export function PhoneTabView({
       <div className="p-4 space-y-4">
         <div>
           <h2 className="text-lg font-black text-slate-900 dark:text-slate-100">Library Catalogue</h2>
-          <p className="text-xs text-slate-500">Search over 39,953 printed books & rare manuscripts</p>
+          <p className="text-xs text-slate-500">Search the online catalogue of printed books & rare manuscripts</p>
         </div>
 
         <div className="relative">

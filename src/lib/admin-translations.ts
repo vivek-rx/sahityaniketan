@@ -369,7 +369,7 @@ export const ADMIN_TRANSLATIONS: Record<AdminLang, AdminTranslations> = {
     navCarousel: "Hero Carousel",
     navCarouselSub: "Homepage Banners",
     navCatalogue: "Book Catalogue",
-    navCatalogueSub: "39,953+ Volumes",
+    navCatalogueSub: "39,953+ Printed Volumes",
     switchLang: "मराठी मध्ये बदला",
 
     // Dashboard
@@ -407,7 +407,7 @@ export const ADMIN_TRANSLATIONS: Record<AdminLang, AdminTranslations> = {
     galleryBtn: "Manage Albums & Photos",
     galleryCountLabel: "albums",
     catalogueTitle: "Book Catalogue & Holdings",
-    catalogueDesc: "Browse and search through 39,953+ registered printed books, novels, and rare manuscripts.",
+    catalogueDesc: "Manage the online catalogue. The physical collection holds 39,953+ printed books, novels, and rare manuscripts.",
     catalogueBtn: "Open Catalogue (New Tab)",
     catalogueCountLabel: "books",
 

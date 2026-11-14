@@ -36,14 +36,14 @@ export function StatsSection() {
   const narrative = isEn
     ? "Founded on 1 August 1945 during the oppressive Nizam regime by visionary patriots to safeguard the Marathi language, democratic dialogue, and historical literature. Today, Sahitya Niketan stands as an accredited Grade 'A' cultural beacon, preserving rare 12th-century manuscripts alongside state-of-the-art competitive exam facilities."
     : isHi
-    ? "हैदराबाद रियासत के दमनकारी दौर में १ अगस्त १९४५ को देशभक्त विचारकों द्वारा मराठी भाषा, संस्कृति और स्वतंत्रता के विचारों के संरक्षण हेतु स्थापित। आज साहित्य निकेतन ३९,९५३ पंजीकृत ग्रंथों, १२वीं सदी की प्राचीन पाण्डुलिपियों और आधुनिक अध्ययनशालाओं के साथ कार्यरत है।"
+    ? "हैदराबाद रियासत के दमनकारी दौर में १ अगस्त १९४५ को देशभक्त विचारकों द्वारा मराठी भाषा, संस्कृति और स्वतंत्रता के विचारों के संरक्षण हेतु स्थापित। आज साहित्य निकेतन ३९,९५३ मुद्रित ग्रंथों, १२वीं सदी की प्राचीन पाण्डुलिपियों और आधुनिक अध्ययनशालाओं के साथ कार्यरत है।"
     : "हैदराबाद संस्थानातील पारतंत्र्यात मराठी भाषा, संस्कृती आणि साहित्याचे रक्षण करण्यासाठी देशभक्त विचारवंतांनी १ ऑगस्ट १९४५ रोजी ग्रंथालयाची स्थापना केली. आज ३९,९५३ मुद्रित ग्रंथ, १२ व्या शतकातील आद्यकवी मुकुंदराजकालीन दुर्मीळ हस्तलिखिते, मोडी लिपी सनदा आणि वातानुकूलित अभ्यासिका दालनांसह ग्रंथालय निरंतर सेवारत आहे.";
 
   const libraryStats: StatItemData[] = [
     {
       value: 39953,
       suffix: "+",
-      label: isEn ? "Catalogued Volumes" : isHi ? "पंजीकृत मुद्रित पुस्तकें" : "नोंदणीकृत ग्रंथसंपदा",
+      label: isEn ? "Printed Volumes in Collection" : isHi ? "प्रत्यक्ष मुद्रित पुस्तकें" : "प्रत्यक्ष मुद्रित ग्रंथसंग्रह",
       sublabel: isEn ? "Marathi, Sanskrit, Hindi, English" : isHi ? "४ समृद्ध भाषांमध्ये" : "मराठी, संस्कृत, हिंदी व इंग्रजी",
     },
     {
@@ -148,7 +148,7 @@ export function StatsSection() {
                 <div className="flex items-center gap-2.5 p-3 rounded-xl bg-stone-50 dark:bg-zinc-800/80 border border-stone-200 dark:border-zinc-700/80">
                   <BookOpen className="w-4 h-4 text-[#800020] dark:text-amber-400 shrink-0" />
                   <span className="text-xs sm:text-sm font-semibold text-stone-800 dark:text-stone-200">
-                    {isEn ? "39,953+ Registered Volumes" : isHi ? "३९,९५३+ पंजीकृत ग्रन्थ संग्रह" : "३९,९५३+ नोंदणीकृत ग्रंथसंग्रह"}
+                    {isEn ? "39,953+ Printed Volumes" : isHi ? "३९,९५३+ मुद्रित ग्रन्थ संग्रह" : "३९,९५३+ मुद्रित ग्रंथसंग्रह"}
                   </span>
                 </div>
                 <div className="flex items-center gap-2.5 p-3 rounded-xl bg-stone-50 dark:bg-zinc-800/80 border border-stone-200 dark:border-zinc-700/80">

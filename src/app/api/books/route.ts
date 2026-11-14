@@ -10,7 +10,7 @@ export async function GET(request: NextRequest) {
   const limit = parseInt(searchParams.get("limit") || "15", 10);
 
   try {
-    const { books: dbBooks } = await getBooks({ search: query, pageSize: limit });
+    const { books: dbBooks, total } = await getBooks({ search: query, pageSize: limit });
     const mappedDbBooks = (dbBooks || []).map((b: Book, idx: number) =>
       mapDbBookToVolume(b, idx)
     );
@@ -19,6 +19,7 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({
         success: true,
         count: mappedDbBooks.length,
+        total,
         query,
         books: mappedDbBooks,
       });
@@ -28,6 +29,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({
       success: true,
       count: books.length,
+      total: books.length,
       query,
       books,
     });

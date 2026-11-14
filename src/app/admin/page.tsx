@@ -620,10 +620,10 @@ export default function AdminDashboardPage() {
               39,953+
             </div>
             <div className="text-xs font-bold text-slate-700 dark:text-slate-200 mt-1">
-              {lang === "mr" ? "ग्रंथालय ग्रंथसूची" : "Library Books Catalog"}
+              {lang === "mr" ? "प्रत्यक्ष मुद्रित ग्रंथसंग्रह" : "Printed Collection"}
             </div>
             <div className="text-[11px] text-slate-400 dark:text-slate-500 mt-0.5">
-              {lang === "mr" ? "मराठी, हिंदी व इंग्रजी दुर्मीळ साहित्य" : "Catalogued collection"}
+              {lang === "mr" ? "ऑनलाइन नोंदी स्वतंत्रपणे वाढतात" : "Online records are managed separately"}
             </div>
           </Link>
 
