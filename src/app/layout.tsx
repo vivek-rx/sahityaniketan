@@ -11,6 +11,7 @@ import { WishlistProvider } from "@/context/wishlist-context";
 import { SmoothScrollProvider } from "@/components/providers/smooth-scroll-provider";
 import { LibrarySchema } from "@/components/seo/structured-data";
 import { MobileBottomNav } from "@/components/layout/mobile-bottom-nav";
+import { Analytics } from "@vercel/analytics/next";
 import {
   DEFAULT_OG_IMAGE,
   SITE_NAME_EN,
@@ -142,6 +143,7 @@ export default function RootLayout({
             </WishlistProvider>
           </LanguageProvider>
         </SmoothScrollProvider>
+        <Analytics />
       </body>
     </html>
   );
