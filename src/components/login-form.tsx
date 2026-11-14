@@ -32,6 +32,8 @@ export function LoginForm({
   const initialRole = searchParams.get("role") === "admin" ? "admin" : "member";
   const { language, setLanguage } = useLanguage();
   const isMr = language === "mr";
+  const isHi = language === "hi";
+  const isEn = language === "en";
 
   const [role, setRole] = useState<"member" | "admin">(initialRole);
   const [identifier, setIdentifier] = useState("");
@@ -62,9 +64,11 @@ export function LoginForm({
 
         if (authError || !data.user) {
           setError(
-            isMr
-              ? "अवैध प्रशासक ईमेल किंवा संकेतशब्द. कृपया पुन्हा प्रयत्न करा."
-              : "Invalid administrator email or password. Please try again."
+            isEn
+              ? "Invalid administrator email or password. Please try again."
+              : isHi
+                ? "अवैध प्रशासक ईमेल या पासवर्ड। कृपया पुनः प्रयास करें।"
+                : "अवैध प्रशासक ईमेल किंवा संकेतशब्द. कृपया पुन्हा प्रयत्न करा."
           );
           setLoading(false);
           return;
@@ -96,9 +100,11 @@ export function LoginForm({
 
         if (dbError || !member) {
           setError(
-            isMr
-              ? "अवैध सभासद क्रमांक किंवा ईमेल पत्ता. कृपया कार्यालयात संपर्क साधा."
-              : "Invalid membership number or email address. Please contact the library office."
+            isEn
+              ? "Invalid membership number or email address. Please contact the library office."
+              : isHi
+                ? "अवैध सदस्य क्रमांक या ईमेल पता। कृपया कार्यालय से संपर्क करें।"
+                : "अवैध सभासद क्रमांक किंवा ईमेल पत्ता. कृपया कार्यालयात संपर्क साधा."
           );
           setLoading(false);
           return;
@@ -110,9 +116,11 @@ export function LoginForm({
     } catch (err) {
       console.error("Login error:", err);
       setError(
-        isMr
-          ? "प्रवेश करताना त्रुटी आली. कृपया पुन्हा प्रयत्न करा."
-          : "An error occurred during sign in. Please try again."
+        isEn
+          ? "An error occurred during sign in. Please try again."
+          : isHi
+            ? "साइन इन करते समय त्रुटि हुई। कृपया पुनः प्रयास करें।"
+            : "प्रवेश करताना त्रुटी आली. कृपया पुन्हा प्रयत्न करा."
       );
     } finally {
       setLoading(false);
@@ -139,7 +147,7 @@ export function LoginForm({
             )}
           >
             <UserCheck className="h-4 w-4" />
-            <span>{isMr ? "वाचक / सभासद" : "Member"}</span>
+            <span>{isEn ? "Reader / Member" : isHi ? "पाठक / सदस्य" : "वाचक / सभासद"}</span>
           </button>
 
           <button
@@ -156,7 +164,7 @@ export function LoginForm({
             )}
           >
             <ShieldCheck className="h-4 w-4" />
-            <span>{isMr ? "प्रशासक" : "Admin"}</span>
+            <span>{isEn ? "Admin" : isHi ? "प्रशासक" : "प्रशासक"}</span>
           </button>
         </div>
 
@@ -165,7 +173,7 @@ export function LoginForm({
           type="button"
           onClick={() => setLanguage(isMr ? "en" : "mr")}
           className="px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-xs font-bold text-slate-800 dark:text-slate-200 hover:bg-slate-50 cursor-pointer shadow-2xs flex items-center gap-1.5"
-          title="भाषा बदला (Switch Language)"
+          title={isEn ? "Switch Language" : isHi ? "भाषा बदलें" : "भाषा बदला"}
         >
           <Languages className="h-3.5 w-3.5 text-[#800020]" />
           <span>{isMr ? "EN" : "मराठी"}</span>
@@ -183,13 +191,13 @@ export function LoginForm({
           </div>
           <CardTitle className="text-xl sm:text-2xl font-black text-slate-900 dark:text-slate-100">
             {role === "admin"
-              ? (isMr ? "प्रशासक प्रवेश द्वार" : "Administrator Sign In")
-              : (isMr ? "सभासद प्रवेश" : "Member Sign In")}
+              ? (isEn ? "Administrator Sign In" : isHi ? "प्रशासक प्रवेश" : "प्रशासक प्रवेश द्वार")
+              : (isEn ? "Member Sign In" : isHi ? "सदस्य प्रवेश" : "सभासद प्रवेश")}
           </CardTitle>
           <CardDescription className="text-sm font-medium text-slate-600 dark:text-slate-400 mt-1">
             {role === "admin"
-              ? (isMr ? "साहित्य निकेतन ग्रंथालय CMS व्यवस्थापन" : "Sahitya Niketan Library CMS Management")
-              : (isMr ? "ग्रंथालय सेवा, ई-पुस्तके आणि डिजिटल पास" : "Access library catalogue, services & digital pass")}
+              ? (isEn ? "Sahitya Niketan Library CMS Management" : isHi ? "साहित्य निकेतन पुस्तकालय CMS प्रबंधन" : "साहित्य निकेतन ग्रंथालय CMS व्यवस्थापन")
+              : (isEn ? "Access library catalogue, services & digital pass" : isHi ? "पुस्तकालय सेवाएँ, ई-पुस्तकें एवं डिजिटल पास" : "ग्रंथालय सेवा, ई-पुस्तके आणि डिजिटल पास")}
           </CardDescription>
         </CardHeader>
 
@@ -206,8 +214,8 @@ export function LoginForm({
               <Field>
                 <FieldLabel htmlFor="identifier" className="text-sm font-bold text-slate-800 dark:text-slate-200">
                   {role === "admin"
-                    ? (isMr ? "प्रशासक ईमेल (Email)" : "Administrator Email")
-                    : (isMr ? "सभासद क्रमांक किंवा ईमेल" : "Membership ID or Email")}
+                    ? (isEn ? "Administrator Email" : isHi ? "प्रशासक ईमेल" : "प्रशासक ईमेल")
+                    : (isEn ? "Membership ID or Email" : isHi ? "सदस्य क्रमांक या ईमेल" : "सभासद क्रमांक किंवा ईमेल")}
                 </FieldLabel>
                 <Input
                   id="identifier"
@@ -215,7 +223,7 @@ export function LoginForm({
                   required
                   value={identifier}
                   onChange={(e) => setIdentifier(e.target.value)}
-                  placeholder={role === "admin" ? "admin@sahityaniketan.org" : (isMr ? "उदा. SN-MBR-100201 किंवा email" : "e.g. SN-MBR-100201 or email")}
+                  placeholder={role === "admin" ? "admin@sahityaniketan.org" : (isEn ? "e.g. SN-MBR-100201 or email" : "उदा. SN-MBR-100201 किंवा email")}
                   className="rounded-xl p-3 text-base"
                 />
               </Field>
@@ -223,17 +231,17 @@ export function LoginForm({
               <Field>
                 <div className="flex items-center justify-between mb-1">
                   <FieldLabel htmlFor="password" className="text-sm font-bold text-slate-800 dark:text-slate-200">
-                    {isMr ? "संकेतशब्द (Password)" : "Password"}
+                    {isEn ? "Password" : isHi ? "पासवर्ड" : "संकेतशब्द"}
                   </FieldLabel>
                   <a
                     href="#"
                     onClick={(e) => {
                       e.preventDefault();
-                      alert(isMr ? "कृपया ग्रंथालय प्रशासकाशी कार्यालयात संपर्क साधा." : "Please contact the library administration office.");
+                      alert(isEn ? "Please contact the library administration office." : isHi ? "कृपया पुस्तकालय प्रशासन कार्यालय से संपर्क करें।" : "कृपया ग्रंथालय प्रशासकाशी कार्यालयात संपर्क साधा.");
                     }}
                     className="text-xs text-[#800020] dark:text-rose-400 hover:underline font-bold"
                   >
-                    {isMr ? "संकेतशब्द विसरलात?" : "Forgot password?"}
+                    {isEn ? "Forgot password?" : isHi ? "पासवर्ड भूल गए?" : "संकेतशब्द विसरलात?"}
                   </a>
                 </div>
                 <div className="relative">
@@ -264,36 +272,36 @@ export function LoginForm({
                   isPending={loading}
                   label={
                     role === "admin"
-                      ? (isMr ? "प्रशासक प्रवेश (Sign In)" : "Sign In as Administrator")
-                      : (isMr ? "सभासद प्रवेश (Sign In)" : "Sign In as Member")
+                      ? (isEn ? "Sign In as Administrator" : isHi ? "प्रशासक के रूप में साइन इन करें" : "प्रशासक प्रवेश")
+                      : (isEn ? "Sign In as Member" : isHi ? "सदस्य के रूप में साइन इन करें" : "सभासद प्रवेश")
                   }
-                  pendingLabel={isMr ? "प्रवेश होत आहे..." : "Signing in..."}
-                  successLabel={isMr ? "प्रवेश यशस्वी!" : "Success!"}
+                  pendingLabel={isEn ? "Signing in..." : isHi ? "साइन इन हो रहा है..." : "प्रवेश होत आहे..."}
+                  successLabel={isEn ? "Success!" : isHi ? "सफल!" : "प्रवेश यशस्वी!"}
                   variant={role === "admin" ? "gold" : "primary"}
                 />
               </Field>
 
               <FieldSeparator className="text-xs text-slate-400 pt-1">
-                {isMr ? "साहित्य निकेतन ग्रंथालय, अंबाजोगाई" : "Sahitya Niketan Library, Ambajogai"}
+                {isEn ? "Sahitya Niketan Library, Ambajogai" : isHi ? "साहित्य निकेतन पुस्तकालय, अंबाजोगाई" : "साहित्य निकेतन ग्रंथालय, अंबाजोगाई"}
               </FieldSeparator>
 
               <FieldDescription className="text-center text-xs pt-1 text-slate-500">
                 {role === "admin" ? (
                   <span>
-                    {isMr ? "वाचक / सभासद लॉगिन करायचे आहे? " : "Looking for Reader / Member login? "}
+                    {isEn ? "Looking for Reader / Member login? " : isHi ? "पाठक / सदस्य लॉगिन चाहिए? " : "वाचक / सभासद लॉगिन करायचे आहे? "}
                     <button
                       type="button"
                       onClick={() => setRole("member")}
                       className="text-[#800020] dark:text-rose-400 font-bold hover:underline cursor-pointer"
                     >
-                      {isMr ? "येथे क्लिक करा" : "Click here"}
+                      {isEn ? "Click here" : isHi ? "यहाँ क्लिक करें" : "येथे क्लिक करा"}
                     </button>
                   </span>
                 ) : (
                   <span>
-                    {isMr ? "नवीन सभासद नोंदणीसाठी? " : "New member registration? "}
+                    {isEn ? "New member registration? " : isHi ? "नए सदस्य पंजीकरण के लिए? " : "नवीन सभासद नोंदणीसाठी? "}
                     <a href="/membership" className="text-[#800020] dark:text-rose-400 font-bold hover:underline">
-                      {isMr ? "ऑनलाइन अर्ज करा" : "Apply online"}
+                      {isEn ? "Apply online" : isHi ? "ऑनलाइन आवेदन करें" : "ऑनलाइन अर्ज करा"}
                     </a>
                   </span>
                 )}

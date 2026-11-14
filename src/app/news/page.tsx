@@ -106,6 +106,17 @@ export default function NewsPage() {
         const [dbPosts, dbNotices] = await Promise.all([getPosts(), getNotices()]);
         const mapped: NewsItem[] = [];
 
+        // Raw DB category codes ("blog", "news", ...) must never leak into the UI.
+        const mapCategory = (raw: string, fallback: { mr: string; hi: string; en: string }) => {
+          const c = (raw || "").toLowerCase();
+          if (c === "blog") return { mr: "विशेष लेख", hi: "विशेष लेख", en: "Special Article" };
+          if (c === "news") return { mr: "बातमी", hi: "समाचार", en: "News" };
+          if (c === "event") return { mr: "कार्यक्रम", hi: "कार्यक्रम", en: "Event" };
+          if (c === "notice") return { mr: "सूचना", hi: "सूचना", en: "Notice" };
+          if (c === "story") return { mr: "वाचन कट्टा", hi: "वाचन कट्टा", en: "Reading Journal" };
+          return fallback;
+        };
+
         if (dbNotices && dbNotices.length > 0) {
           dbNotices.forEach((n: any, idx: number) => {
             mapped.push({
@@ -117,7 +128,7 @@ export default function NewsPage() {
                 hi: n.created_at ? new Date(n.created_at).toLocaleDateString("hi-IN") : "ताजी सूचना",
                 en: n.created_at ? new Date(n.created_at).toLocaleDateString("en-IN") : "Recent Notice",
               },
-              category: { mr: n.category || "सूचना", hi: n.category || "सूचना", en: n.category || "Notice" },
+              category: mapCategory(n.category, { mr: "सूचना", hi: "सूचना", en: "Notice" }),
               content: { mr: n.content, hi: n.content, en: n.content },
             });
           });
@@ -134,7 +145,7 @@ export default function NewsPage() {
                 hi: p.published_at ? new Date(p.published_at).toLocaleDateString("hi-IN") : "अद्यतन",
                 en: p.published_at ? new Date(p.published_at).toLocaleDateString("en-IN") : "Update",
               },
-              category: { mr: p.category || "बातमी", hi: p.category || "समाचार", en: p.category || "News" },
+              category: mapCategory(p.category, { mr: "बातमी", hi: "समाचार", en: "News" }),
               content: { mr: p.content || p.excerpt || p.title, hi: p.content || p.excerpt || p.title, en: p.content || p.excerpt || p.title },
             });
           });

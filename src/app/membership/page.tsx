@@ -240,10 +240,10 @@ export default function MembershipPage() {
                         onChange={(e) => setFormData({ ...formData, idType: e.target.value })}
                         className="w-full rounded-xl border border-[#E5DDD0] dark:border-[#332228] bg-[#FAF8F5] dark:bg-[#120B0D] px-3.5 py-2.5 text-xs sm:text-sm text-stone-900 dark:text-[#FAF2E8] focus:border-[#800020] dark:focus:border-[#E5B869] focus:ring-1 focus:ring-[#800020] focus:outline-none transition-all"
                       >
-                        <option value="aadhaar">Aadhaar Card (आधार कार्ड)</option>
-                        <option value="voter">Voter ID (मतदान ओळखपत्र)</option>
-                        <option value="passport">Passport (पासपोर्ट)</option>
-                        <option value="student">Student ID (विद्यार्थी ओळखपत्र)</option>
+                        <option value="aadhaar">{language === "en" ? "Aadhaar Card" : language === "hi" ? "आधार कार्ड" : "आधार कार्ड (आधारपत्र)"}</option>
+                        <option value="voter">{language === "en" ? "Voter ID" : language === "hi" ? "मतदान पहचान पत्र" : "मतदान ओळखपत्र"}</option>
+                        <option value="passport">{language === "en" ? "Passport" : language === "hi" ? "पासपोर्ट" : "पासपोर्ट (निशाणपत्र)"}</option>
+                        <option value="student">{language === "en" ? "Student ID" : language === "hi" ? "छात्र पहचान पत्र" : "विद्यार्थी ओळखपत्र"}</option>
                       </select>
                       <p className="mt-1.5 text-[11px] leading-relaxed text-stone-500 dark:text-stone-400">
                         {language === "mr"

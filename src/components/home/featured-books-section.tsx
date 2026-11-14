@@ -988,10 +988,10 @@ export function FeaturedBooksSection() {
                   ? "bg-zinc-900 text-white dark:bg-white dark:text-zinc-900 shadow-xs"
                   : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100"
               )}
-              title={language === "en" ? "3D Book Showcase" : "३D उघडणारे पुस्तक दालन"}
+              title={language === "en" ? "3D Book Showcase" : language === "hi" ? "३डी पुस्तक प्रदर्शनी" : "३डी उघडणारे पुस्तक दालन"}
             >
               <LayoutGrid className="h-3.5 w-3.5" />
-              <span>{language === "en" ? "3D Showcase" : language === "hi" ? "३D दीर्घा" : "३D दालन"}</span>
+              <span>{language === "en" ? "3D Showcase" : language === "hi" ? "३डी दीर्घा" : "३डी दालन"}</span>
             </button>
             <button
               type="button"

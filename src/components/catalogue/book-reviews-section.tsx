@@ -42,6 +42,8 @@ const SAMPLE_REVIEWS: ReviewItem[] = [
 
 export function BookReviewsSection({ bookId, bookTitle }: BookReviewsSectionProps) {
   const { language } = useLanguage();
+  const isEn = language === "en";
+  const isHi = language === "hi";
   const [reviews, setReviews] = useState<ReviewItem[]>(SAMPLE_REVIEWS);
   const [name, setName] = useState("");
   const [title, setTitle] = useState("");
@@ -62,7 +64,7 @@ export function BookReviewsSection({ bookId, bookTitle }: BookReviewsSectionProp
             rating: r.rating || 5,
             title: r.title || "वाचक अभिप्राय",
             comment: r.comment || "",
-            created_at: r.created_at ? new Date(r.created_at).toLocaleDateString("mr-IN") : "ताजा अभिप्राय",
+            created_at: r.created_at ? new Date(r.created_at).toLocaleDateString(language === "en" ? "en-IN" : language === "hi" ? "hi-IN" : "mr-IN") : (isEn ? "Fresh review" : isHi ? "नई समीक्षा" : "ताजा अभिप्राय"),
           }));
           setReviews([...mapped, ...SAMPLE_REVIEWS]);
         }
@@ -71,7 +73,7 @@ export function BookReviewsSection({ bookId, bookTitle }: BookReviewsSectionProp
       }
     }
     loadReviews();
-  }, [bookId]);
+  }, [bookId, language]);
 
   const handleSubmitReview = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -95,7 +97,7 @@ export function BookReviewsSection({ bookId, bookTitle }: BookReviewsSectionProp
         rating: userRating,
         title: title.trim() || "वाचक अभिप्राय",
         comment: comment.trim(),
-        created_at: new Date().toLocaleDateString("mr-IN"),
+        created_at: new Date().toLocaleDateString(language === "en" ? "en-IN" : language === "hi" ? "hi-IN" : "mr-IN"),
       };
 
       setReviews((prev) => [addedItem, ...prev]);
@@ -121,10 +123,10 @@ export function BookReviewsSection({ bookId, bookTitle }: BookReviewsSectionProp
         <div>
           <div className="inline-flex items-center gap-2 text-xs font-bold text-[#991B1B] dark:text-[#E5B869] uppercase tracking-wider mb-1">
             <MessageSquare className="h-4 w-4 text-[#C0392B] dark:text-[#F89B5C]" />
-            <span>वाचक अभिप्राय व पुनरावलोकन</span>
+            <span>{isEn ? "Reader Reviews & Ratings" : isHi ? "पाठक राय एवं समीक्षा" : "वाचक अभिप्राय व पुनरावलोकन"}</span>
           </div>
           <h3 className="text-xl sm:text-2xl font-extrabold text-gray-900 dark:text-[#FAF2E8] font-marathi-heading">
-            {bookTitle} — वाचक रेटिंग व प्रतिक्रिया
+            {bookTitle} — {isEn ? "Reader Ratings & Reactions" : isHi ? "पाठक रेटिंग एवं प्रतिक्रिया" : "वाचक रेटिंग व प्रतिक्रिया"}
           </h3>
         </div>
 
@@ -134,7 +136,7 @@ export function BookReviewsSection({ bookId, bookTitle }: BookReviewsSectionProp
             <span className="text-3xl sm:text-4xl font-extrabold text-gray-900 dark:text-[#FAF2E8] font-mono">
               {avgRating}
             </span>
-            <span className="text-xs text-gray-500 dark:text-[#B8A699] block">/ ५.० रेटिंग</span>
+            <span className="text-xs text-gray-500 dark:text-[#B8A699] block">/ {isEn ? "5.0 rating" : "५.० रेटिंग"}</span>
           </div>
 
           <div className="space-y-1">
@@ -151,7 +153,7 @@ export function BookReviewsSection({ bookId, bookTitle }: BookReviewsSectionProp
               ))}
             </div>
             <p className="text-xs text-gray-600 dark:text-[#D5C2B4] font-medium">
-              {reviews.length} नोंदणीकृत वाचकांची मते
+              {reviews.length} {isEn ? "verified reader reviews" : isHi ? "पंजीकृत पाठकों की राय" : "नोंदणीकृत वाचकांची मते"}
             </p>
           </div>
         </div>
@@ -161,7 +163,7 @@ export function BookReviewsSection({ bookId, bookTitle }: BookReviewsSectionProp
       <div className="bg-[#FAF9F6] dark:bg-[#180305] p-6 rounded-2xl border border-[#E8E2D6] dark:border-[#4A1217]">
         <h4 className="text-base font-bold text-gray-900 dark:text-[#FAF2E8] font-marathi-heading mb-4 flex items-center gap-2">
           <Award className="h-5 w-5 text-[#B8860B] dark:text-[#F89B5C]" />
-          <span>तुमचा अभिप्राय नोंदवा</span>
+          <span>{isEn ? "Write Your Review" : isHi ? "अपनी राय दर्ज करें" : "तुमचा अभिप्राय नोंदवा"}</span>
         </h4>
 
         {submitted ? (
@@ -171,14 +173,14 @@ export function BookReviewsSection({ bookId, bookTitle }: BookReviewsSectionProp
             className="p-4 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 text-emerald-800 dark:text-emerald-300 flex items-center gap-3 text-xs font-bold"
           >
             <CheckCircle2 className="h-5 w-5 shrink-0 text-emerald-600" />
-            <span>तुमचा अभिप्राय यशस्वीरित्या प्रकाशित झाला आहे. धन्यवाद!</span>
+            <span>{isEn ? "Your review has been published successfully. Thank you!" : isHi ? "आपकी राय सफलतापूर्वक प्रकाशित हुई है। धन्यवाद!" : "तुमचा अभिप्राय यशस्वीरित्या प्रकाशित झाला आहे. धन्यवाद!"}</span>
           </motion.div>
         ) : (
           <form onSubmit={handleSubmitReview} className="space-y-4">
             {/* Interactive Star Rating Selector */}
             <div>
               <label className="block text-xs font-extrabold text-gray-700 dark:text-[#FAF2E8] mb-1.5">
-                स्टार रेटिंग निवडा (Your Rating) *
+                {isEn ? "Choose Star Rating *" : isHi ? "स्टार रेटिंग चुनें *" : "स्टार रेटिंग निवडा *"}
               </label>
               <div className="flex items-center gap-1.5">
                 {[1, 2, 3, 4, 5].map((star) => (
@@ -200,7 +202,7 @@ export function BookReviewsSection({ bookId, bookTitle }: BookReviewsSectionProp
                   </button>
                 ))}
                 <span className="text-xs font-bold text-amber-600 dark:text-amber-400 ml-2">
-                  {userRating} / 5 स्टार
+                  {userRating} / 5 {isEn ? "stars" : "स्टार"}
                 </span>
               </div>
             </div>
@@ -208,27 +210,27 @@ export function BookReviewsSection({ bookId, bookTitle }: BookReviewsSectionProp
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="block text-xs font-extrabold text-gray-700 dark:text-[#FAF2E8] mb-1">
-                  तुमचे नाव (Your Name) *
+                  {isEn ? "Your Name *" : isHi ? "आपका नाम *" : "तुमचे नाव *"}
                 </label>
                 <input
                   type="text"
                   required
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  placeholder="उदा. राहुल जोशी"
+                  placeholder={isEn ? "e.g. Rahul Joshi" : "उदा. राहुल जोशी"}
                   className="w-full rounded-xl border border-stone-300 dark:border-[#5A141A] bg-white dark:bg-[#220508] px-3.5 py-2.5 text-xs text-gray-900 dark:text-[#FAF2E8] placeholder:text-gray-400 dark:placeholder:text-[#9C887B] focus:border-[#991B1B] dark:focus:border-[#E5B869] focus:outline-none"
                 />
               </div>
 
               <div>
                 <label className="block text-xs font-extrabold text-gray-700 dark:text-[#FAF2E8] mb-1">
-                  अभिप्रायाचे शीर्षक (Review Title)
+                  {isEn ? "Review Title" : isHi ? "समीक्षा शीर्षक" : "अभिप्रायाचे शीर्षक"}
                 </label>
                 <input
                   type="text"
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
-                  placeholder="उदा. उत्कृष्ट मराठी अभिजात ग्रंथ"
+                  placeholder={isEn ? "e.g. An outstanding Marathi classic" : "उदा. उत्कृष्ट मराठी अभिजात ग्रंथ"}
                   className="w-full rounded-xl border border-stone-300 dark:border-[#5A141A] bg-white dark:bg-[#220508] px-3.5 py-2.5 text-xs text-gray-900 dark:text-[#FAF2E8] placeholder:text-gray-400 dark:placeholder:text-[#9C887B] focus:border-[#991B1B] dark:focus:border-[#E5B869] focus:outline-none"
                 />
               </div>
@@ -236,14 +238,14 @@ export function BookReviewsSection({ bookId, bookTitle }: BookReviewsSectionProp
 
             <div>
               <label className="block text-xs font-extrabold text-gray-700 dark:text-[#FAF2E8] mb-1">
-                तुमचे मत / पुनरावलोकन (Detailed Comments) *
+                {isEn ? "Your Detailed Review *" : isHi ? "आपकी विस्तृत राय *" : "तुमचे मत / पुनरावलोकन *"}
               </label>
               <textarea
                 required
                 rows={3}
                 value={comment}
                 onChange={(e) => setComment(e.target.value)}
-                placeholder="या पुस्तकाबद्दल तुमचे मत टाइप करा..."
+                placeholder={isEn ? "Type your thoughts about this book..." : "या पुस्तकाबद्दल तुमचे मत लिहा..."}
                 className="w-full rounded-xl border border-stone-300 dark:border-[#5A141A] bg-white dark:bg-[#220508] p-3 text-xs text-gray-900 dark:text-[#FAF2E8] placeholder:text-gray-400 dark:placeholder:text-[#9C887B] focus:border-[#991B1B] dark:focus:border-[#E5B869] focus:outline-none resize-none"
               />
             </div>
@@ -254,9 +256,9 @@ export function BookReviewsSection({ bookId, bookTitle }: BookReviewsSectionProp
                 disabled={submitting}
                 isPending={submitting}
                 isSuccess={submitted}
-                label="अभिप्राय सबमिट करा (Submit Review)"
-                pendingLabel="नोंदवत आहे... (Submitting...)"
-                successLabel="अभिप्राय नोंदवला! धन्यवाद."
+                label={isEn ? "Submit Review" : isHi ? "समीक्षा सबमिट करें" : "अभिप्राय सबमिट करा"}
+                pendingLabel={isEn ? "Submitting..." : isHi ? "जमा कर रहे हैं..." : "नोंदवत आहे..."}
+                successLabel={isEn ? "Review recorded. Thank you!" : isHi ? "राय दर्ज हुई! धन्यवाद।" : "अभिप्राय नोंदवला! धन्यवाद."}
                 variant="primary"
               />
             </div>
@@ -267,7 +269,7 @@ export function BookReviewsSection({ bookId, bookTitle }: BookReviewsSectionProp
       {/* Reviews List */}
       <div className="space-y-4">
         <h4 className="text-base font-bold text-gray-900 dark:text-[#FAF2E8] font-marathi-heading">
-          वाचक प्रतिक्रिया ({reviews.length})
+          {isEn ? `Reader Reactions (${reviews.length})` : isHi ? `पाठक प्रतिक्रिया (${reviews.length})` : `वाचक प्रतिक्रिया (${reviews.length})`}
         </h4>
 
         <div className="space-y-3">

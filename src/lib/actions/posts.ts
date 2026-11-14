@@ -29,13 +29,16 @@ export async function getPublishedPosts(limit = 20) {
 
 export async function getPostBySlug(slug: string) {
   const supabase = (await createClient()) as any;
+  // maybeSingle() — a missing/unpublished slug is a normal 404, not a server
+  // error; .single() would throw PGRST116 and render a 500 for the visitor.
   const { data, error } = await supabase
     .from("posts")
     .select("*")
     .eq("slug", slug)
     .eq("status", "published")
-    .single();
+    .maybeSingle();
   if (error) throw new Error(error.message);
+  if (!data) return null;
   const postData = data as any;
   // Increment view count
   await (createAdminClient() as any).from("posts").update({ views: (postData?.views ?? 0) + 1 }).eq("id", postData.id);

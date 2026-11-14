@@ -39,6 +39,31 @@ const ROUTE_LABELS_MR: Record<string, string> = {
   carousel: "मुखपृष्ठ बॅनर",
   login: "प्रशासक लॉगिन",
   phone: "मोबाईल आवृत्ती",
+  privacy: "गोपनीयता धोरण",
+  terms: "वापरण्याच्या अटी",
+  trustees: "विश्वस्त मंडळ",
+};
+
+const ROUTE_LABELS_HI: Record<string, string> = {
+  about: "हमारे बारे में",
+  stories: "वाचन एवं लेख",
+  catalogue: "ग्रंथ सूची",
+  events: "कार्यक्रम एवं पहल",
+  gallery: "चित्र दीर्घा",
+  contact: "संपर्क",
+  membership: "सदस्यता एवं अध्ययन कक्ष",
+  history: "इतिहास एवं विरासत",
+  news: "समाचार एवं सूचनाएँ",
+  library: "पुस्तकालय विभाग",
+  "ambajogai-smruti": "अंबाजोगाई की स्मृति",
+  admin: "प्रशासक नियंत्रण कक्ष",
+  noticeboard: "सूचना बोर्ड",
+  carousel: "मुखपृष्ठ बैनर",
+  login: "प्रशासक लॉगिन",
+  phone: "मोबाइल संस्करण",
+  privacy: "गोपनीयता नीति",
+  terms: "उपयोग की शर्तें",
+  trustees: "न्यासी मंडल",
 };
 
 const ROUTE_LABELS_EN: Record<string, string> = {
@@ -58,6 +83,9 @@ const ROUTE_LABELS_EN: Record<string, string> = {
   carousel: "Hero Slides",
   login: "Login",
   phone: "Mobile View",
+  privacy: "Privacy Policy",
+  terms: "Terms of Use",
+  trustees: "Board of Trustees",
 };
 
 /**
@@ -90,7 +118,8 @@ export function Breadcrumbs({
     const result: BreadcrumbItem[] = [];
     let currentHref = "";
 
-    const labels = language === "en" ? ROUTE_LABELS_EN : ROUTE_LABELS_MR;
+    const labels =
+      language === "en" ? ROUTE_LABELS_EN : language === "hi" ? ROUTE_LABELS_HI : ROUTE_LABELS_MR;
 
     segments.forEach((seg, idx) => {
       currentHref += `/${seg}`;
@@ -108,7 +137,7 @@ export function Breadcrumbs({
   // Don't render breadcrumbs on homepage if no custom trail provided
   if (breadcrumbItems.length === 0) return null;
 
-  const homeLabel = language === "en" ? "Home" : "मुख्यपृष्ठ";
+  const homeLabel = language === "en" ? "Home" : language === "hi" ? "मुख्यपृष्ठ" : "मुखपृष्ठ";
 
   // Middle-crumb collapse logic (e.g. Home > ... > Current Page)
   const shouldCollapse = !isExpanded && breadcrumbItems.length > maxItems;

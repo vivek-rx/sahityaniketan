@@ -20,6 +20,122 @@ export function InspiringJourneySection() {
   const isEn = language === "en";
   const isHi = language === "hi";
 
+  // Hindi display strings for chapter chrome not carried in the archival data file.
+  const HI_TITLES: Record<string, string> = {
+    foundation: "स्थापना: एक उदात्त विचार का जन्म",
+    objective: "हमारा उद्देश्य: साहित्य से समाज परिवर्तन",
+    "early-works": "प्रारंभिक कार्य: नींव के वर्ष",
+    "struggle-for-space": "स्थान का संघर्ष और पुस्तकालय का विकास",
+    "modern-building": "नवीन भवन और वर्तमान स्थिति",
+    "trustees-governance": "संस्था और न्यासी मंडल",
+    "accreditation-recognition": "शासकीय मान्यता और सम्मान",
+  };
+
+  const EN_YEARS: Record<string, string> = {
+    foundation: "1945",
+    objective: "Mission & Objectives",
+    "early-works": "1945 – 1955",
+    "struggle-for-space": "1958 – 1992",
+    "modern-building": "1995 – Present",
+    "trustees-governance": "Registered 1962 – Present",
+    "accreditation-recognition": "1963 – Present",
+  };
+
+  const HI_YEARS: Record<string, string> = {
+    objective: "ध्येय एवं उद्देश्य",
+    "trustees-governance": "पंजीकरण १९६२ – वर्तमान",
+  };
+
+  const EN_HIGHLIGHTS: Record<string, string[]> = {
+    foundation: [
+      "Founded 1 August 1945 (pre-Independence era)",
+      "Motto: 'Anek Hriday Ho Bharat Janani'",
+      "Born of the freedom struggle and civic awakening",
+      "Led by idealistic local youth",
+    ],
+    objective: [
+      "Comprehensive advancement of Indian literature & culture",
+      "Conservation of ancient, oriental & modern books",
+      "Reference access for scholars & researchers",
+      "Regular honours for distinguished readers",
+    ],
+    "early-works": [
+      "Launch of the public reading hall & library",
+      "Classes under Hindi Prachar Sabha, Hyderabad",
+      "Selfless contribution of devoted teachers",
+      "Built on nominal honorary honorariums",
+    ],
+    "struggle-for-space": [
+      "1958: Municipal Council allots Plot No. 127 in Bhaji Mandai",
+      "Funds raised through the concert of legendary vocalist Manik Varma",
+      "1986: Relocation to the permanent Bhaji Mandai premises",
+      "1992: Amicable settlement & grand central hall",
+    ],
+    "modern-building": [
+      "1995-96: Two-storey building via Minister Jaysingrao Gaikwad's grant",
+      "Wings split: Children's & Women's halls and the main reference stacks",
+      "2017-18: Fully equipped modern auditorium on the second floor",
+      "39,953+ printed volumes & rare manuscripts preserved",
+    ],
+    "trustees-governance": [
+      "Reg. No.: BHR/3/1962 (Societies Registration Act, 1860)",
+      "First trustees: E. M. Kulkarni, B. S. Lohia, C. B. Gupta",
+      "Current trustees: Dr. Sharad Habakar, Ramchandra Sanbar, Bhaskarrao Dharmapale",
+      "Democratic & transparent institutional governance",
+    ],
+    "accreditation-recognition": [
+      "1963-64: Official Taluka Library government recognition",
+      "1968: Founding of the District Library Association in Ambajogai",
+      "Government of Maharashtra Grade 'A' public library status",
+      "81+ years of unbroken knowledge service",
+    ],
+  };
+
+  const HI_HIGHLIGHTS: Record<string, string[]> = {
+    foundation: [
+      "स्थापना १ अगस्त १९४५ (स्वाधीनता-पूर्व काल)",
+      "ध्येय वाक्य: 'अनेक हृदय हो भारत जननी'",
+      "स्वाधीनता आंदोलन एवं लोकजागृति की प्रेरणा से जन्म",
+      "ध्येयवादी स्थानीय युवाओं का नेतृत्व",
+    ],
+    objective: [
+      "भारतीय साहित्य एवं संस्कृति का सर्वांगीण उत्थान",
+      "प्राचीन, पौर्वात्य एवं अर्वाचीन ग्रंथों का संरक्षण",
+      "विद्वानों एवं शोधकर्ताओं के लिए संदर्भ उपलब्धता",
+      "उत्कृष्ट पाठकों का नियमित सम्मान",
+    ],
+    "early-works": [
+      "सार्वजनिक वाचनालय एवं ग्रंथालय की शुरुआत",
+      "हिन्दी प्रचार सभा, हैदराबाद के अंतर्गत कक्षाएं",
+      "समर्पित शिक्षकों का निःस्वार्थ योगदान",
+      "अल्प मानदेय में पुस्तकालय का निर्माण",
+    ],
+    "struggle-for-space": [
+      "१९५८: नगर परिषद द्वारा सब्जी मंडी का प्लॉट क्र. १२७ आवंटन",
+      "प्रख्यात गायिका माणिक वर्मा के कार्यक्रम से निधि संकलन",
+      "१९८६: स्थायी परिसर में पुस्तकालय का स्थानांतरण",
+      "१९९२: समझौता एवं केंद्रीय सभागृह निर्माण",
+    ],
+    "modern-building": [
+      "१९९५-९६: सहकार मंत्री जयसिंगराव गायकवाड के निधि से दो मंजिला भवन",
+      "विभाजन: बाल एवं महिला विभाग तथा मुख्य संदर्भ दीर्घा",
+      "२०१७-१८: द्वितीय तल पर सुसज्जित आधुनिक सभागृह",
+      "३९,९५३+ मुद्रित ग्रंथों एवं दुर्लभ हस्तलिखितों का संरक्षण",
+    ],
+    "trustees-governance": [
+      "पंजीकरण सं.: BHR/3/1962 (सोसायटीज रजिस्ट्रेशन एक्ट, १८६०)",
+      "प्रथम न्यासी: ई. एम. कुलकर्णी, बी. एस. लोहिया, सी. बी. गुप्त",
+      "वर्तमान न्यासी: डॉ. शरद हबाकर, रामचंद्र संबर, भास्करराव धर्मपाळे",
+      "लोकतांत्रिक एवं पारदर्शी संस्थागत प्रबंधन",
+    ],
+    "accreditation-recognition": [
+      "१९६३-६४: आधिकारिक तालुका पुस्तकालय शासकीय मान्यता",
+      "१९६८: अंबाजोगाई में जिला पुस्तकालय संघ की स्थापना",
+      "महाराष्ट्र शासन वर्ग 'अ' सार्वजनिक पुस्तकालय दर्जा",
+      "८१+ वर्षों की अविरत ज्ञान सेवा",
+    ],
+  };
+
   const { chapters, registration, motto, foundingMembers, earlyTeachers } = OFFICIAL_LIBRARY_HISTORY;
 
   return (
@@ -78,10 +194,14 @@ export function InspiringJourneySection() {
                   </span>
                   <div>
                     <span className="text-[11px] font-bold text-amber-600 dark:text-amber-400 uppercase tracking-wider block">
-                      {chapter.yearRange}
+                      {isEn
+                        ? EN_YEARS[chapter.id] ?? chapter.yearRange
+                        : isHi
+                          ? HI_YEARS[chapter.id] ?? chapter.yearRange
+                          : chapter.yearRange}
                     </span>
                     <h3 className="text-xl sm:text-2xl font-bold font-marathi-heading text-stone-900 dark:text-white">
-                      {isEn ? chapter.titleEn : chapter.title}
+                      {isEn ? chapter.titleEn : isHi ? HI_TITLES[chapter.id] ?? chapter.title : chapter.title}
                     </h3>
                   </div>
                 </div>
@@ -106,7 +226,12 @@ export function InspiringJourneySection() {
                           : "महत्त्वाचे ऐतिहासिक संदर्भ:"}
                     </h4>
                     <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-stone-600 dark:text-stone-300">
-                      {chapter.keyHighlights.map((hl, i) => (
+                      {(isEn
+                        ? EN_HIGHLIGHTS[chapter.id] ?? chapter.keyHighlights
+                        : isHi
+                          ? HI_HIGHLIGHTS[chapter.id] ?? chapter.keyHighlights
+                          : chapter.keyHighlights
+                      ).map((hl, i) => (
                         <li key={i} className="flex items-start gap-2 bg-stone-50 dark:bg-[#231A1E] p-2.5 rounded-xl border border-stone-100 dark:border-stone-800/80">
                           <span className="w-1.5 h-1.5 rounded-full bg-[#800020] dark:bg-amber-400 shrink-0 mt-1.5" />
                           <span>{hl}</span>
@@ -121,7 +246,7 @@ export function InspiringJourneySection() {
                   <div className="lg:col-span-5 relative group overflow-hidden rounded-2xl border border-stone-200 dark:border-stone-800 shadow-sm aspect-4/3 w-full bg-stone-100 dark:bg-stone-900">
                     <Image
                       src={chapter.image}
-                      alt={chapter.title}
+                      alt={isEn ? chapter.titleEn : isHi ? HI_TITLES[chapter.id] ?? chapter.title : chapter.title}
                       fill
                       sizes="(max-width: 1024px) 100vw, 400px"
                       className="object-cover object-center group-hover:scale-102 transition-transform duration-500"
@@ -129,7 +254,7 @@ export function InspiringJourneySection() {
                     <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent opacity-80" />
                     <div className="absolute bottom-3 inset-x-3 text-white text-xs font-semibold drop-shadow-sm flex items-center gap-1.5">
                       <span className="w-2 h-2 rounded-full bg-amber-400" />
-                      <span>{chapter.title}</span>
+                      <span>{isEn ? chapter.titleEn : isHi ? HI_TITLES[chapter.id] ?? chapter.title : chapter.title}</span>
                     </div>
                   </div>
                 )}

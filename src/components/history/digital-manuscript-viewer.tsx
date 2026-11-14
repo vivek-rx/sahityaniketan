@@ -17,6 +17,7 @@ import {
   Download
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useLanguage } from "@/context/language-context";
 
 interface ManuscriptPage {
   id: string;
@@ -94,6 +95,9 @@ const MANUSCRIPTS: Manuscript[] = [
 ];
 
 export function DigitalManuscriptViewer() {
+  const { language } = useLanguage();
+  const idx = language === "en" ? 2 : language === "hi" ? 1 : 0;
+  const pick = (t: [string, string, string]) => t[idx];
   const [selectedManuscriptIndex, setSelectedManuscriptIndex] = useState(0);
   const [currentPageIndex, setCurrentPageIndex] = useState(0);
   const [isZoomed, setIsZoomed] = useState(false);
@@ -115,7 +119,11 @@ export function DigitalManuscriptViewer() {
   };
 
   const handleShare = () => {
-    const text = `साहित्य निकेतन ग्रंथालयातील १२ व्या शतकातील दुर्मीळ हस्तलिखित '${currentManuscript.title}' ऑनलाइन उघडून पहा: ${window.location.href}`;
+    const text = pick([
+      `साहित्य निकेतन ग्रंथालयातील १२ व्या शतकातील दुर्मीळ हस्तलिखित '${currentManuscript.title}' ऑनलाइन उघडून पहा: ${window.location.href}`,
+      `साहित्य निकेतन पुस्तकालय में संरक्षित १२ वीं शताब्दी का दुर्लभ हस्तलिखित '${currentManuscript.title}' ऑनलाइन देखें: ${window.location.href}`,
+      `Explore the rare 12th-century manuscript '${currentManuscript.title}' preserved at Sahitya Niketan Public Library, online: ${window.location.href}`,
+    ]);
     navigator.clipboard.writeText(text);
     setCopiedShare(true);
     setTimeout(() => setCopiedShare(false), 3000);
@@ -128,7 +136,11 @@ export function DigitalManuscriptViewer() {
         <div>
           <div className="flex items-center gap-2 text-xs font-bold text-[#E5B869] tracking-wider uppercase mb-1">
             <BookOpen className="w-4 h-4" />
-            <span>डिजिटल हस्तलिखित वाचक</span>
+            <span>{pick([
+              "डिजिटल हस्तलिखित वाचक",
+              "डिजिटल पाण्डुलिपि वाचक",
+              "Digital Manuscript Reader",
+            ])}</span>
           </div>
           <h3 className="text-xl sm:text-2xl font-extrabold text-white font-marathi-heading">
             {currentManuscript.title}
@@ -202,7 +214,9 @@ export function DigitalManuscriptViewer() {
               <button
                 onClick={() => setIsZoomed(!isZoomed)}
                 className="p-2 rounded-xl bg-black/70 hover:bg-black text-white/90 border border-white/10 backdrop-blur-md transition-colors cursor-pointer"
-                title={isZoomed ? "Zoom Out" : "Zoom In"}
+                title={isZoomed
+                  ? pick(["लहान करा", "छोटा करें", "Zoom Out"])
+                  : pick(["मोठे करा", "बड़ा करें", "Zoom In"])}
               >
                 {isZoomed ? <ZoomOut className="w-4 h-4" /> : <ZoomIn className="w-4 h-4" />}
               </button>
@@ -215,7 +229,7 @@ export function DigitalManuscriptViewer() {
                   onClick={handlePrevPage}
                   disabled={currentPageIndex === 0}
                   className="absolute left-3 top-1/2 -translate-y-1/2 p-2.5 rounded-full bg-black/75 hover:bg-[#800020] text-white border border-white/20 backdrop-blur-md transition-all disabled:opacity-30 disabled:pointer-events-none cursor-pointer z-20"
-                  aria-label="Previous Page"
+                  aria-label={pick(["मागील पान", "पिछला पृष्ठ", "Previous Page"])}
                 >
                   <ChevronLeft className="w-5 h-5" />
                 </button>
@@ -223,7 +237,7 @@ export function DigitalManuscriptViewer() {
                   onClick={handleNextPage}
                   disabled={currentPageIndex === currentManuscript.pages.length - 1}
                   className="absolute right-3 top-1/2 -translate-y-1/2 p-2.5 rounded-full bg-black/75 hover:bg-[#800020] text-white border border-white/20 backdrop-blur-md transition-all disabled:opacity-30 disabled:pointer-events-none cursor-pointer z-20"
-                  aria-label="Next Page"
+                  aria-label={pick(["पुढील पान", "अगला पृष्ठ", "Next Page"])}
                 >
                   <ChevronRight className="w-5 h-5" />
                 </button>
@@ -234,10 +248,14 @@ export function DigitalManuscriptViewer() {
           {/* Page Counter & Slider Pagination */}
           <div className="flex items-center justify-between w-full mt-3 px-1 text-xs text-stone-400">
             <span className="font-bold text-[#E5B869]">
-              पान {currentPage.pageNumber} / {currentManuscript.pages.length}
+              {pick(["पान", "पृष्ठ", "Page"])} {currentPage.pageNumber} / {currentManuscript.pages.length}
             </span>
             <span className="text-[11px] text-stone-400">
-              हस्तलिखित झूम करण्यासाठी चित्रावर क्लिक करा
+              {pick([
+                "हस्तलिखित झूम करण्यासाठी चित्रावर क्लिक करा",
+                "ज़ूम के लिए चित्र पर क्लिक करें",
+                "Click the image to zoom the manuscript",
+              ])}
             </span>
           </div>
         </div>
@@ -246,7 +264,11 @@ export function DigitalManuscriptViewer() {
         <div className="lg:col-span-5 space-y-4 bg-[#1A1014] p-5 sm:p-6 rounded-2xl border border-[#332228]">
           <div>
             <span className="text-[11px] font-bold text-[#E5B869] block mb-1">
-              मूळ हस्तलिखित मजकूर (Ancient Script Transliteration):
+              {pick([
+                "मूळ हस्तलिखित मजकूर (प्राचीन लिपी):",
+                "मूल हस्तलिखित पाठ (प्राचीन लिपि):",
+                "Original Manuscript Text (Ancient Script Transliteration):",
+              ])}
             </span>
             <div className="p-3.5 rounded-xl bg-black/40 border border-white/5 font-mono text-xs sm:text-sm text-[#FDE68A] leading-relaxed select-all">
               {currentPage.transcription}
@@ -255,7 +277,11 @@ export function DigitalManuscriptViewer() {
 
           <div>
             <span className="text-[11px] font-bold text-stone-300 block mb-1 font-marathi-body">
-              मराठी भावार्थ व ऐतिहासिक महत्त्व:
+              {pick([
+                "मराठी भावार्थ व ऐतिहासिक महत्त्व:",
+                "भावार्थ एवं ऐतिहासिक महत्त्व (मूल मराठी):",
+                "Meaning & Historical Significance (in original Marathi):",
+              ])}
             </span>
             <p className="text-xs sm:text-sm text-stone-200 leading-relaxed font-marathi-body">
               {currentPage.meaning}
@@ -265,11 +291,11 @@ export function DigitalManuscriptViewer() {
           {/* Archival Metadata Pills */}
           <div className="grid grid-cols-2 gap-2 pt-2 border-t border-white/10 text-[11px]">
             <div>
-              <span className="text-stone-400 block">कालखंड:</span>
+              <span className="text-stone-400 block">{pick(["कालखंड:", "कालावधि:", "Period:"])}</span>
               <span className="font-bold text-white">{currentPage.date}</span>
             </div>
             <div>
-              <span className="text-stone-400 block">माध्यम / साहित्य:</span>
+              <span className="text-stone-400 block">{pick(["माध्यम / साहित्य:", "माध्यम / सामग्री:", "Medium / Material:"])}</span>
               <span className="font-bold text-white">{currentPage.medium}</span>
             </div>
           </div>
@@ -283,18 +309,18 @@ export function DigitalManuscriptViewer() {
               {copiedShare ? (
                 <>
                   <Check className="w-3.5 h-3.5 text-emerald-400" />
-                  <span>लिंक कॉपी झाली!</span>
+                  <span>{pick(["लिंक कॉपी झाली!", "लिंक कॉपी हो गई!", "Link copied!"])}</span>
                 </>
               ) : (
                 <>
                   <Share2 className="w-3.5 h-3.5 text-[#E5B869]" />
-                  <span>हस्तलिखित शेअर करा</span>
+                  <span>{pick(["हस्तलिखित शेअर करा", "हस्तलिखित साझा करें", "Share the Manuscript"])}</span>
                 </>
               )}
             </button>
 
             <span className="text-[10px] text-stone-400 text-right">
-              साहित्य निकेतन अभिलेखागार
+              {pick(["साहित्य निकेतन अभिलेखागार", "साहित्य निकेतन अभिलेखागार", "Sahitya Niketan Archives"])}
             </span>
           </div>
         </div>

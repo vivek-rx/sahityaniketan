@@ -112,10 +112,18 @@ export default function HistoryPage() {
         <section id="manuscript-viewer" className="py-14 sm:py-20 px-4 sm:px-6 max-w-5xl mx-auto">
           <div className="text-center max-w-2xl mx-auto mb-10 space-y-2">
             <h2 className="text-2xl sm:text-4xl font-extrabold font-marathi-heading text-stone-900 dark:text-white">
-              ऐतिहासिक व दुर्मीळ हस्तलिखित संग्रह
+              {language === "en"
+                ? "Historical & Rare Manuscript Collection"
+                : language === "hi"
+                  ? "ऐतिहासिक एवं दुर्लभ हस्तलिखित संग्रह"
+                  : "ऐतिहासिक व दुर्मीळ हस्तलिखित संग्रह"}
             </h2>
             <p className="text-xs sm:text-sm text-stone-600 dark:text-stone-300">
-              आद्यकवी मुकुंदराज रचित 'विवेकसिंधू' आणि संत दासोपंत यांची 'पासोडी' या मूळ हस्तलिखित प्रतींचे शास्त्रोक्त डिजिटल स्वरूप.
+              {language === "en"
+                ? "Scholarly digital presentations of the original manuscript folios of Aadyakavi Mukundraj's Vivekasindhu and Sant Dasopant's Pasodi."
+                : language === "hi"
+                  ? "आद्यकवि मुकुंदराज रचित 'विवेकसिंधु' और संत दासोपंत की 'पासोडी' — इन मूल हस्तलिखित प्रतियों का शास्त्रानुसार डिजिटल रूप."
+                  : "आद्यकवी मुकुंदराज रचित 'विवेकसिंधू' आणि संत दासोपंत यांची 'पासोडी' या मूळ हस्तलिखित प्रतींचे शास्त्रोक्त डिजिटल स्वरूप."}
             </p>
           </div>
 
@@ -129,10 +137,18 @@ export default function HistoryPage() {
           <div className="max-w-5xl mx-auto space-y-8">
             <div className="text-center max-w-2xl mx-auto space-y-2">
               <h2 className="text-2xl sm:text-4xl font-extrabold font-marathi-heading text-stone-900 dark:text-white">
-                १९४५ ची मूळ वास्तू आणि आजची ग्रंथालय इमारत
+                {language === "en"
+                  ? "The Original 1945 Building & Today's Library"
+                  : language === "hi"
+                    ? "१९४५ की मूल वास्तू और आज की ग्रंथालय इमारत"
+                    : "१९४५ ची मूळ वास्तू आणि आजची ग्रंथालय इमारत"}
               </h2>
               <p className="text-xs sm:text-sm text-stone-600 dark:text-stone-300">
-                शुक्रवार पेठेतील ऐतिहासिक दगडी वास्तूत स्थापन झालेल्या ग्रंथालयाचा आजचा आधुनिक विस्तार.
+                {language === "en"
+                  ? "The library's modern expansion from its historic stone premises in Shukrawar Peth."
+                  : language === "hi"
+                    ? "शुक्रवार पेठ की ऐतिहासिक पत्थर की वास्तू में स्थापित पुस्तकालय का आज का आधुनिक विस्तार."
+                    : "शुक्रवार पेठेतील ऐतिहासिक दगडी वास्तूत स्थापन झालेल्या ग्रंथालयाचा आजचा आधुनिक विस्तार."}
               </p>
             </div>
 
@@ -146,10 +162,18 @@ export default function HistoryPage() {
         <section id="voice-of-elders" className="py-14 sm:py-20 px-4 sm:px-6 max-w-5xl mx-auto">
           <div className="text-center max-w-2xl mx-auto mb-10 space-y-2">
             <h2 className="text-2xl sm:text-4xl font-extrabold font-marathi-heading text-stone-900 dark:text-white">
-              संस्थापक व ज्येष्ठ मार्गदर्शकांचे ध्वनीमुद्रित विचार
+              {language === "en"
+                ? "Recorded Reflections of the Founders & Senior Guides"
+                : language === "hi"
+                  ? "संस्थापक एवं ज्येष्ठ मार्गदर्शकों के ध्वनिमुद्रित विचार"
+                  : "संस्थापक व ज्येष्ठ मार्गदर्शकांचे ध्वनीमुद्रित विचार"}
             </h2>
             <p className="text-xs sm:text-sm text-stone-600 dark:text-stone-300">
-              हैदराबाद मुक्ती लढा, वाचन चळवळ आणि ग्रंथालयाच्या स्थापनेची माहिती ज्येष्ठ पदाधिकाऱ्यांच्या मुखातून.
+              {language === "en"
+                ? "The Hyderabad liberation struggle, the reading movement, and the library's founding — in the words of senior office-bearers."
+                : language === "hi"
+                  ? "हैदराबाद मुक्ति संग्राम, वाचन आंदोलन और पुस्तकालय की स्थापना की जानकारी ज्येष्ठ पदाधिकारियों के मुख से."
+                  : "हैदराबाद मुक्ती लढा, वाचन चळवळ आणि ग्रंथालयाच्या स्थापनेची माहिती ज्येष्ठ पदाधिकाऱ्यांच्या मुखातून."}
             </p>
           </div>
 
@@ -163,10 +187,18 @@ export default function HistoryPage() {
           <div className="max-w-5xl mx-auto space-y-10">
             <div className="text-center max-w-2xl mx-auto space-y-2">
               <h2 className="text-2xl sm:text-4xl font-extrabold font-marathi-heading text-stone-900 dark:text-white">
-                १९४५ ते आज: ग्रंथालय कालक्रम
+                {language === "en"
+                  ? "1945 to Today: Library Chronicle"
+                  : language === "hi"
+                    ? "१९४५ से आज तक: ग्रंथालय कालक्रम"
+                    : "१९४५ ते आज: ग्रंथालय कालक्रम"}
               </h2>
               <p className="text-xs sm:text-sm text-stone-600 dark:text-stone-300">
-                प्रत्येक दशकातील ऐतिहासिक टप्पे, शासकीय वर्ग 'अ' मान्यता आणि ग्रंथालयाचा विस्तार.
+                {language === "en"
+                  ? "Historical milestones of each decade, Government Grade 'A' recognition, and the library's growth."
+                  : language === "hi"
+                    ? "प्रत्येक दशक के ऐतिहासिक पड़ाव, शासकीय वर्ग 'अ' मान्यता और ग्रंथालय का विस्तार."
+                    : "प्रत्येक दशकातील ऐतिहासिक टप्पे, शासकीय वर्ग 'अ' मान्यता आणि ग्रंथालयाचा विस्तार."}
               </p>
             </div>
 
@@ -180,10 +212,18 @@ export default function HistoryPage() {
         <section className="py-14 sm:py-20 px-4 sm:px-6 max-w-5xl mx-auto">
           <div className="text-center max-w-2xl mx-auto mb-10 space-y-2">
             <h2 className="text-2xl sm:text-4xl font-extrabold font-marathi-heading text-stone-900 dark:text-white">
-              ग्रंथालयातील वैशिष्ट्यपूर्ण दुर्मीळ ग्रंथ
+              {language === "en"
+                ? "Rare & Notable Books of the Library"
+                : language === "hi"
+                  ? "ग्रंथालय के विशिष्ट दुर्लभ ग्रंथ"
+                  : "ग्रंथालयातील वैशिष्ट्यपूर्ण दुर्मीळ ग्रंथ"}
             </h2>
             <p className="text-xs sm:text-sm text-stone-600 dark:text-stone-300">
-              साहित्य निकेतनच्या अभिलेखागारातील ऐतिहासिक व दुर्मीळ ग्रंथांचा परिचय व संदर्भ.
+              {language === "en"
+                ? "An introduction and reference guide to the historical and rare books preserved in the Sahitya Niketan archives."
+                : language === "hi"
+                  ? "साहित्य निकेतन के अभिलेखागार में संरक्षित ऐतिहासिक एवं दुर्लभ ग्रंथों का परिचय और संदर्भ."
+                  : "साहित्य निकेतनच्या अभिलेखागारातील ऐतिहासिक व दुर्मीळ ग्रंथांचा परिचय व संदर्भ."}
             </p>
           </div>
 

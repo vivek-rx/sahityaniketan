@@ -316,7 +316,7 @@ export default function ContactPage() {
                 <form onSubmit={handleSubmit} noValidate className="space-y-4">
                   {/* Honeypot — hidden from people, irresistible to naive bots. */}
                   <div className="absolute left-[-9999px] top-auto h-px w-px overflow-hidden" aria-hidden="true">
-                    <label htmlFor="contact-website">Website</label>
+                    <label htmlFor="contact-website" aria-hidden="true"></label>
                     <input
                       id="contact-website"
                       name="website"
@@ -543,9 +543,9 @@ export default function ContactPage() {
                     isSuccess={isSubmitted}
                     label={
                       language === "mr"
-                        ? "संदेश पाठवा (Send Message)"
+                        ? "संदेश पाठवा"
                         : language === "hi"
-                          ? "संदेश भेजें (Send Message)"
+                          ? "संदेश भेजें"
                           : "Send Message"
                     }
                     pendingLabel={

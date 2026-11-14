@@ -5,6 +5,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { Clock, ArrowRight, BookOpen, Sparkles, User } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useLanguage } from "@/context/language-context";
 
 export interface BlogStory {
   id: string;
@@ -34,18 +35,29 @@ export const BlogCardOrange: React.FC<BlogCardOrangeProps> = ({
   className,
   readMoreLabel = "संपूर्ण लेख वाचा",
 }) => {
+  const { language } = useLanguage();
+  const isEn = language === "en";
+  const isHi = language === "hi";
   const postSlug = story.slug || story.id;
   const imgUrl = story.thumbnail_url || "/images/real/library_vintage_books.png";
   const dateText = story.published_at
-    ? new Date(story.published_at).toLocaleDateString("mr-IN", {
+    ? new Date(story.published_at).toLocaleDateString(isEn ? "en-IN" : isHi ? "hi-IN" : "mr-IN", {
         year: "numeric",
         month: "short",
         day: "numeric",
       })
     : story.date || "साहित्य संचित";
 
-  const categoryLabel = story.category === "news" ? "वृत्त व घडामोडी" : "विशेष शोधनिबंध";
-  const readTimeText = story.readTime || "४ मिनिटे वाचन";
+  const categoryLabel =
+    story.category === "news"
+      ? isEn ? "News & Updates" : isHi ? "समाचार एवं गतिविधियाँ" : "वृत्त व घडामोडी"
+      : isEn ? "Special Research Essay" : isHi ? "विशेष शोध निबंध" : "विशेष शोधनिबंध";
+  const readTimeText = (() => {
+    const rt = story.readTime || "";
+    const m = rt.match(/^(\S+)\s+मिनिटे वाचन$/);
+    if (m) return isEn ? `${m[1]} min read` : isHi ? `${m[1]} मिनट पठन` : rt;
+    return rt || (isEn ? "4 min read" : isHi ? "४ मिनट पठन" : "४ मिनिटे वाचन");
+  })();
 
   return (
     <motion.article

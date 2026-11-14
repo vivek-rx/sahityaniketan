@@ -34,6 +34,19 @@ import {
 } from "@/lib/data/remembering-ambajogai";
 import { useLanguage } from "@/context/language-context";
 
+/** In-page Hindi titles for data-layer category names (filter-pill chrome labels) */
+const CATEGORY_TITLE_HI: Record<string, string> = {
+  photographs: "पुरानी तस्वीरें",
+  buildings: "पुरानी इमारतें एवं वास्तु",
+  writers: "साहित्यकार एवं विचारक",
+  newspapers: "पुराने समाचार पत्र एवं दस्तावेज़",
+  education: "शिक्षा एवं ज्ञान परंपरा",
+  movements: "सांस्कृतिक आंदोलन एवं मुक्ति संग्राम",
+  artists: "कलाकार एवं नाट्य संगीत",
+  social_workers: "समाज सुधारक",
+  festivals: "उत्सव एवं लोक संस्कृति",
+};
+
 export default function RememberingAmbajogaiPage() {
   const { language } = useLanguage();
   const isEn = language === "en";
@@ -154,7 +167,11 @@ export default function RememberingAmbajogaiPage() {
                       : "bg-white dark:bg-[#1E1418] text-stone-700 dark:text-stone-300 border border-[#E5DDD0] dark:border-[#332228] hover:border-[#800020]"
                   }`}
                 >
-                  {isEn ? cat.titleEnglish : cat.titleMarathi}
+                  {isEn
+                    ? cat.titleEnglish
+                    : isHi
+                    ? (CATEGORY_TITLE_HI[cat.id] ?? cat.titleMarathi)
+                    : cat.titleMarathi}
                 </button>
               ))}
             </div>
@@ -316,7 +333,11 @@ export default function RememberingAmbajogaiPage() {
                       <span className="w-2 h-2 rounded-full bg-[#B8860B] mt-1.5 shrink-0" />
                       <div>
                         <h4 className="text-xs font-bold text-stone-900 dark:text-stone-100">
-                          {isEn ? c.titleEnglish : c.titleMarathi}
+                          {isEn
+                            ? c.titleEnglish
+                            : isHi
+                            ? (CATEGORY_TITLE_HI[c.id] ?? c.titleMarathi)
+                            : c.titleMarathi}
                         </h4>
                         <p className="text-[11px] text-stone-500 dark:text-stone-400 mt-0.5 leading-tight">
                           {c.descriptionMarathi}
@@ -380,7 +401,7 @@ export default function RememberingAmbajogaiPage() {
                 <button
                   onClick={() => setActiveItem(null)}
                   className="absolute top-5 right-5 p-2 rounded-full bg-stone-100 hover:bg-stone-200 dark:bg-stone-800 dark:hover:bg-stone-700 text-stone-700 dark:text-stone-200 cursor-pointer"
-                  aria-label={isEn ? "Close dialog" : "बंद करा"}
+                  aria-label={isEn ? "Close dialog" : isHi ? "संवाद बंद करें" : "बंद करा"}
                 >
                   <X className="w-4 h-4" />
                 </button>
@@ -438,7 +459,11 @@ export default function RememberingAmbajogaiPage() {
                 {/* Footer Actions */}
                 <div className="mt-6 pt-4 border-t border-[#E5DDD0] dark:border-[#332228] flex items-center justify-between">
                   <span className="text-[11px] font-mono text-stone-400">
-                    {isEn ? "Sahitya Niketan Public Library, Ambajogai" : "साहित्य निकेतन ग्रंथालय, अंबाजोगाई"}
+                    {isEn
+                      ? "Sahitya Niketan Public Library, Ambajogai"
+                      : isHi
+                      ? "साहित्य निकेतन पुस्तकालय, अंबाजोगाई"
+                      : "साहित्य निकेतन ग्रंथालय, अंबाजोगाई"}
                   </span>
                   <button
                     onClick={() => setActiveItem(null)}

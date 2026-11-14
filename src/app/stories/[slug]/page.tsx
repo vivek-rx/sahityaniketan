@@ -136,16 +136,22 @@ export default function StoryDetailPage() {
         <main id="main-content" className="min-h-[60vh] flex items-center justify-center font-marathi-body bg-[#FAF8F5] dark:bg-[#120B0D] p-4">
           <div className="max-w-md w-full text-center bg-white dark:bg-[#1E1418] rounded-2xl border border-[#E5DDD0] dark:border-[#332228] p-8 space-y-4">
             <BookOpen className="h-10 w-10 text-stone-400 mx-auto" />
-            <h2 className="text-lg font-bold text-stone-900 dark:text-white">लेख सापडला नाही</h2>
+            <h2 className="text-lg font-bold text-stone-900 dark:text-white">
+              {language === "en" ? "Article Not Found" : language === "hi" ? "लेख नहीं मिला" : "लेख सापडला नाही"}
+            </h2>
             <p className="text-xs text-stone-500 dark:text-stone-400">
-              हा लेख अप्रकाशित असू शकतो किंवा त्याचा पत्ता बदलला गेला आहे.
+              {language === "en"
+                ? "This article may be unpublished or its address may have changed."
+                : language === "hi"
+                  ? "यह लेख अप्रकाशित हो सकता है या उसका पता बदल गया होगा।"
+                  : "हा लेख अप्रकाशित असू शकतो किंवा त्याचा पत्ता बदलला गेला आहे."}
             </p>
             <Link
               href="/stories"
               className="inline-flex items-center gap-2 rounded-lg bg-[#800020] text-white px-4 py-2 text-xs font-bold hover:bg-[#66001A] transition-colors"
             >
               <ArrowLeft className="h-4 w-4" />
-              <span>सर्व लेखांकडे परत जा</span>
+              <span>{language === "en" ? "Back to All Articles" : language === "hi" ? "सभी लेखों पर वापस" : "सर्व लेखांकडे परत जा"}</span>
             </Link>
           </div>
         </main>

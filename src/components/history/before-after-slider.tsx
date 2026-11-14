@@ -4,6 +4,7 @@ import React, { useState, useRef, useCallback } from "react";
 import Image from "next/image";
 import { Sparkles, MoveHorizontal, Calendar, History } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useLanguage } from "@/context/language-context";
 
 interface BeforeAfterSliderProps {
   beforeImage?: string;
@@ -18,12 +19,36 @@ interface BeforeAfterSliderProps {
 export function BeforeAfterSlider({
   beforeImage = "/images/real/library_inauguration_plaque.png",
   afterImage = "/images/real/library_signboard.png",
-  beforeLabel = "१९४५: मूळ ऐतिहासिक स्थापना शिलालेख (Founding Inscription)",
-  afterLabel = "२०२६: आधुनिक ग्रंथालय दर्शनी फलक व वास्तू (Library Entrance)",
-  beforeYear = "१ ऑगस्ट १९४५",
-  afterYear = "आज (८१+ वर्षे)",
+  beforeLabel,
+  afterLabel,
+  beforeYear,
+  afterYear,
   className,
 }: BeforeAfterSliderProps) {
+  const { language } = useLanguage();
+  const idx = language === "en" ? 2 : language === "hi" ? 1 : 0;
+  const pick = (t: [string, string, string]) => t[idx];
+
+  const beforeLabelText = beforeLabel ?? pick([
+    "१९४५: मूळ ऐतिहासिक स्थापना शिलालेख",
+    "१९४५: मूल ऐतिहासिक स्थापना शिलालेख",
+    "1945: Original Founding Inscription Plaque",
+  ]);
+  const afterLabelText = afterLabel ?? pick([
+    "२०२६: आधुनिक ग्रंथालय दर्शनी फलक व वास्तू",
+    "२०२६: आधुनिक ग्रंथालय दर्शनी फलक एवं वास्तू",
+    "2026: Modern Library Entrance & Building",
+  ]);
+  const beforeYearText = beforeYear ?? pick([
+    "१ ऑगस्ट १९४५",
+    "१ अगस्त १९४५",
+    "1 August 1945",
+  ]);
+  const afterYearText = afterYear ?? pick([
+    "आज (८१+ वर्षे)",
+    "आज (८१+ वर्ष)",
+    "Today (81+ Years)",
+  ]);
   const [sliderPosition, setSliderPosition] = useState(50);
   const [isDragging, setIsDragging] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -71,7 +96,7 @@ export function BeforeAfterSlider({
         <div className="absolute inset-0">
           <Image
             src={afterImage}
-            alt={afterLabel}
+            alt={afterLabelText}
             fill
             sizes="(max-width: 1200px) 100vw, 1200px"
             className="object-cover pointer-events-none"
@@ -80,7 +105,7 @@ export function BeforeAfterSlider({
           {/* After Tag */}
           <div className="absolute bottom-5 right-5 z-10 px-3.5 py-1.5 rounded-full bg-black/75 backdrop-blur-md border border-white/20 text-white text-xs font-bold font-marathi-body shadow-lg flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-            <span>{afterLabel}</span>
+            <span>{afterLabelText}</span>
           </div>
         </div>
 
@@ -92,7 +117,7 @@ export function BeforeAfterSlider({
           <div className="relative w-full h-full" style={{ width: containerRef.current?.offsetWidth || "100%" }}>
             <Image
               src={beforeImage}
-              alt={beforeLabel}
+              alt={beforeLabelText}
               fill
               sizes="(max-width: 1200px) 100vw, 1200px"
               className="object-cover pointer-events-none filter sepia-[0.25]"
@@ -101,7 +126,7 @@ export function BeforeAfterSlider({
             {/* Before Tag */}
             <div className="absolute bottom-5 left-5 z-10 px-3.5 py-1.5 rounded-full bg-[#120B0D]/85 backdrop-blur-md border border-[#E5B869]/30 text-[#E5B869] text-xs font-bold font-marathi-body shadow-lg flex items-center gap-2">
               <History className="w-3.5 h-3.5 text-[#E5B869]" />
-              <span>{beforeLabel}</span>
+              <span>{beforeLabelText}</span>
             </div>
           </div>
         </div>
@@ -119,7 +144,11 @@ export function BeforeAfterSlider({
         {/* Instruction badge */}
         <div className="absolute top-4 left-1/2 -translate-x-1/2 z-10 px-3 py-1 rounded-xl bg-black/60 backdrop-blur-md border border-white/10 text-white/90 text-[11px] font-semibold flex items-center gap-1.5 pointer-events-none opacity-85 group-hover:opacity-100 transition-opacity">
           <MoveHorizontal className="w-3.5 h-3.5 text-[#E5B869]" />
-          <span>तुलनेसाठी डावीकडे-उजवीकडे सरकवा</span>
+          <span>{pick([
+            "तुलनेसाठी डावीकडे-उजवीकडे सरकवा",
+            "तुलना के लिए बाएँ-दाएँ सरकाएँ",
+            "Drag left–right to compare",
+          ])}</span>
         </div>
       </div>
 
@@ -128,12 +157,20 @@ export function BeforeAfterSlider({
         <div className="flex items-center gap-2">
           <Calendar className="w-4 h-4 text-[#C0392B]" />
           <span className="font-bold text-stone-800 dark:text-stone-100">
-            {beforeYear} — {afterYear}
+            {beforeYearText} — {afterYearText}
           </span>
-          <span>— एकाच परिसरातील वास्तुस्थितीचे ऐतिहासिक स्थित्यंतर</span>
+          <span>{pick([
+            "— एकाच परिसरातील वास्तुस्थितीचे ऐतिहासिक स्थित्यंतर",
+            "— इसी परिसर की वास्तु-अवस्था का ऐतिहासिक परिवर्तन",
+            "— the historic transformation of the same premises",
+          ])}</span>
         </div>
         <div className="text-[11px] text-stone-500">
-          छायाचित्र संदर्भ: साहित्य निकेतन ग्रंथालय अभिलेखागार
+          {pick([
+            "छायाचित्र संदर्भ: साहित्य निकेतन ग्रंथालय अभिलेखागार",
+            "छायाचित्र संदर्भ: साहित्य निकेतन पुस्तकालय अभिलेखागार",
+            "Photo credit: Sahitya Niketan Public Library Archives",
+          ])}
         </div>
       </div>
     </div>

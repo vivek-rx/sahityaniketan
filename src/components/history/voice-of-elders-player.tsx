@@ -18,12 +18,16 @@ import {
   Quote
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useLanguage } from "@/context/language-context";
 
 interface VoiceOfEldersPlayerProps {
   className?: string;
 }
 
 export function VoiceOfEldersPlayer({ className }: VoiceOfEldersPlayerProps) {
+  const { language } = useLanguage();
+  const idx = language === "en" ? 2 : language === "hi" ? 1 : 0;
+  const pick = (t: [string, string, string]) => t[idx];
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [isMuted, setIsMuted] = useState(false);
@@ -76,16 +80,24 @@ export function VoiceOfEldersPlayer({ className }: VoiceOfEldersPlayerProps) {
             </div>
             <div>
               <span className="text-[11px] font-bold text-[#E5B869] tracking-wider uppercase block">
-                ज्येष्ठांचे बोल — मौखिक इतिहास (Oral History of Sahitya Niketan)
+                {pick([
+                  "ज्येष्ठांचे बोल — मौखिक इतिहास",
+                  "ज्येष्ठों के बोल — साहित्य निकेतन का मौखिक इतिहास",
+                  "Voices of the Elders — Oral History of Sahitya Niketan",
+                ])}
               </span>
               <h3 className="text-lg sm:text-xl font-extrabold text-white font-marathi-heading">
-                “साहित्य निकेतनची स्थापना आणि ८१ वर्षांची अखंड ज्ञानसाधना”
+                {pick([
+                  "“साहित्य निकेतनची स्थापना आणि ८१ वर्षांची अखंड ज्ञानसाधना”",
+                  "“साहित्य निकेतन की स्थापना और ८१ वर्षों की अखंड ज्ञानसाधना”",
+                  "“The Founding of Sahitya Niketan & 81 Years of Unbroken Devotion to Knowledge”",
+                ])}
               </h3>
             </div>
           </div>
 
           <div className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[11px] text-stone-300 shrink-0 self-start sm:self-auto">
-            मराठी ध्वनीमुद्रण ({formatTime(duration)})
+            {pick(["मराठी ध्वनीमुद्रण", "मराठी ध्वनिमुद्रण", "Marathi Recording"])} ({formatTime(duration)})
           </div>
         </div>
 
@@ -96,7 +108,7 @@ export function VoiceOfEldersPlayer({ className }: VoiceOfEldersPlayerProps) {
             <div className="relative w-14 h-14 rounded-2xl overflow-hidden shrink-0 border border-[#E5B869]/50 shadow-md bg-stone-800">
               <Image
                 src="/images/real/library_savarkar_portrait.png"
-                alt="ज्येष्ठ विश्वस्त"
+                alt={pick(["ज्येष्ठ विश्वस्त", "वरिष्ठ न्यासी", "Senior trustee"])}
                 fill
                 className="object-cover"
               />
@@ -106,10 +118,18 @@ export function VoiceOfEldersPlayer({ className }: VoiceOfEldersPlayerProps) {
                 श्री. बापूराव कुलकर्णी
               </h4>
               <p className="text-[11px] text-[#E5B869] truncate">
-                ज्येष्ठ वाचक व विश्वस्त (वय ८८ वर्षे)
+                {pick([
+                  "ज्येष्ठ वाचक व विश्वस्त (वय ८८ वर्षे)",
+                  "वरिष्ठ पाठक एवं न्यासी (आयु ८८ वर्ष)",
+                  "Senior Reader & Trustee (Age 88)",
+                ])}
               </p>
               <p className="text-[10px] text-stone-400 mt-0.5">
-                १९५२ सालापासूनचे निरंतर सभासद
+                {pick([
+                  "१९५२ सालापासूनचे निरंतर सभासद",
+                  "१९५२ से निरंतर सदस्य",
+                  "Continuous member since 1952",
+                ])}
               </p>
             </div>
           </div>
@@ -168,7 +188,7 @@ export function VoiceOfEldersPlayer({ className }: VoiceOfEldersPlayerProps) {
                 <button
                   onClick={() => handleSkip(-10)}
                   className="p-2 rounded-full hover:bg-white/10 text-stone-300 transition-colors cursor-pointer"
-                  title="१० सेकंद मागे"
+                  title={pick(["१० सेकंद मागे", "१० सेकंड पीछे", "Back 10 seconds"])}
                 >
                   <RotateCcw className="w-4 h-4" />
                 </button>
@@ -176,7 +196,9 @@ export function VoiceOfEldersPlayer({ className }: VoiceOfEldersPlayerProps) {
                 <button
                   onClick={() => setIsPlaying(!isPlaying)}
                   className="w-11 h-11 rounded-full bg-[#800020] hover:bg-[#66001A] text-white flex items-center justify-center shadow-lg transition-transform hover:scale-105 active:scale-95 cursor-pointer border border-[#E5B869]/40"
-                  aria-label={isPlaying ? "Pause" : "Play"}
+                  aria-label={pick(
+                    isPlaying ? ["थांबवा", "रोकें", "Pause"] : ["चालू करा", "चलाएँ", "Play"]
+                  )}
                 >
                   {isPlaying ? (
                     <Pause className="w-5 h-5 fill-current" />
@@ -188,7 +210,7 @@ export function VoiceOfEldersPlayer({ className }: VoiceOfEldersPlayerProps) {
                 <button
                   onClick={() => handleSkip(10)}
                   className="p-2 rounded-full hover:bg-white/10 text-stone-300 transition-colors cursor-pointer"
-                  title="१० सेकंद पुढे"
+                  title={pick(["१० सेकंद पुढे", "१० सेकंड आगे", "Forward 10 seconds"])}
                 >
                   <RotateCw className="w-4 h-4" />
                 </button>
@@ -207,7 +229,7 @@ export function VoiceOfEldersPlayer({ className }: VoiceOfEldersPlayerProps) {
                   className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-xs text-[#E5B869] font-bold transition-colors cursor-pointer"
                 >
                   <FileText className="w-3.5 h-3.5" />
-                  <span>शब्दरूप</span>
+                  <span>{pick(["शब्दरूप", "प्रतिलेखन", "Transcript"])}</span>
                   {showTranscript ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
                 </button>
               </div>
@@ -228,7 +250,11 @@ export function VoiceOfEldersPlayer({ className }: VoiceOfEldersPlayerProps) {
               <div className="p-5 rounded-2xl bg-black/45 border border-white/10 text-xs sm:text-sm text-stone-200 space-y-3 leading-relaxed">
                 <div className="flex items-center gap-2 text-[#E5B869] font-bold text-xs">
                   <Quote className="w-4 h-4 rotate-180" />
-                  <span>ध्वनीमुद्रणातील मूळ शब्दांकन:</span>
+                  <span>{pick([
+                    "ध्वनीमुद्रणातील मूळ शब्दांकन:",
+                    "ध्वनिमुद्रण का मूल शब्दांकन (मूल मराठी):",
+                    "Verbatim transcript of the recording (in original Marathi):",
+                  ])}</span>
                 </div>
                 <p>
                   “१९४५ चा तो काळ आठवला की आजही अंगावर रोमांच उभे राहतात. हैदराबाद संस्थानातील निजाम राजवटीचा तो अत्यंत कठीण कालखंड होता. अंबाजोगाईत मराठी भाषेत वाचायला पुस्तक मिळणे म्हणजे स्वातंत्र्यलढ्यासारखेच होते. त्या काळात आमच्या ज्येष्ठांनी—वकील, शिक्षक आणि राष्ट्रभक्तांनी एकत्र येऊन ‘साहित्य निकेतन’ची मुहूर्तमेढ रोवली.”

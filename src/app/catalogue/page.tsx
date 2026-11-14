@@ -32,6 +32,16 @@ function CatalogueContent() {
   const initialQuery = searchParams.get("query") || searchParams.get("q") || "";
   const initialCategory = searchParams.get("category") || "all";
   const { language } = useLanguage();
+  const langIdx = language === "en" ? 2 : language === "hi" ? 1 : 0;
+
+  // Raw language codes from the DB ("mr" | "hi" | "sa" | "en") must never
+  // leak into the UI as-is — always render through this label map.
+  const LANGUAGE_BADGE: Record<string, [string, string, string]> = {
+    mr: ["मराठी", "मराठी", "Marathi"],
+    hi: ["हिन्दी", "हिन्दी", "Hindi"],
+    sa: ["संस्कृत", "संस्कृत", "Sanskrit"],
+    en: ["इंग्रजी", "अंग्रेजी", "English"],
+  };
 
   const [query, setQuery] = useState(initialQuery);
   const [debouncedQuery, setDebouncedQuery] = useState(initialQuery);
@@ -152,10 +162,14 @@ function CatalogueContent() {
           <div className="bg-[#F3ECE3] dark:bg-[#180E11] p-3.5 rounded-xl border border-[#E5DDD0] dark:border-[#332228] space-y-2 text-xs">
             <div className="flex items-center gap-1.5 font-bold text-[#800020] dark:text-[#E5B869]">
               <BookOpen className="h-4 w-4 text-[#800020] dark:text-[#E5B869]" />
-              <span>ग्रंथ देवघेव व वाचन कक्ष नियम</span>
+              <span>{language === "mr" ? "ग्रंथ देवघेव व वाचन कक्ष नियम" : language === "hi" ? "पुस्तक परिचालन एवं वाचन कक्ष नियम" : "Circulation & Reading-Room Rules"}</span>
             </div>
             <p className="text-[11px] text-stone-600 dark:text-stone-300 leading-relaxed font-devanagari">
-              नोंदणीकृत सभासदांना १४ दिवसांच्या मुदतीसाठी दोन पुस्तके घरी नेण्यास मिळतील. संदर्भ ग्रंथ, नियतकालिके व दुर्मीळ हस्तलिखिते केवळ वाचन कक्षात उपलब्ध राहतील.
+              {language === "mr"
+                ? "नोंदणीकृत सभासदांना १४ दिवसांच्या मुदतीसाठी दोन पुस्तके घरी नेण्यास मिळतील. संदर्भ ग्रंथ, नियतकालिके व दुर्मीळ हस्तलिखिते केवळ वाचन कक्षात उपलब्ध राहतील."
+                : language === "hi"
+                  ? "पंजीकृत सदस्यों को १४ दिनों की अवधि के लिए दो पुस्तक घर ले जाने मिलेंगे। संदर्भ ग्रंथ, पत्रिकाएँ और दुर्लभ हस्तलिखित केवल वाचन कक्ष में उपलब्ध रहेंगे।"
+                  : "Registered members may borrow two books for a 14-day period. Reference books, periodicals and rare manuscripts remain available in the reading room only."}
             </p>
           </div>
 
@@ -349,7 +363,7 @@ function CatalogueContent() {
                     className="px-3.5 py-1.5 rounded-full bg-[#800020] hover:bg-[#66001A] text-white font-bold text-xs flex items-center gap-1.5 transition-colors shadow-2xs cursor-pointer font-marathi-body"
                   >
                     <BookPlus className="h-3.5 w-3.5" />
-                    <span>+ ग्रंथ मागणी</span>
+                    <span>{language === "mr" ? "+ ग्रंथ मागणी" : language === "hi" ? "+ पुस्तक मांग" : "+ Request a Book"}</span>
                   </button>
                 </div>
 
@@ -490,7 +504,7 @@ function CatalogueContent() {
                             {book.category}
                           </span>
                           <span className="px-2 py-0.5 rounded-md bg-stone-100 dark:bg-[#332228] text-stone-700 dark:text-stone-300 font-medium">
-                            {book.language}
+                            {LANGUAGE_BADGE[book.language]?.[langIdx] ?? book.language}
                           </span>
                           {book.rating > 0 && (
                             <div className="flex items-center gap-1 text-amber-600 dark:text-[#E5B869] font-bold bg-amber-50 dark:bg-amber-950/40 px-1.5 py-0.5 rounded border border-amber-200/60 dark:border-amber-800/40">
@@ -519,11 +533,17 @@ function CatalogueContent() {
 
                         <div className="flex flex-wrap items-center gap-3 pt-1 text-[11px] text-stone-500 dark:text-stone-400 font-mono">
                           <span>
-                            <strong className="text-stone-700 dark:text-[#FAF2E8] font-devanagari">वर्गीकरण:</strong> {book.isbn || book.callNumber}
+                            <strong className="text-stone-700 dark:text-[#FAF2E8] font-devanagari">
+                              {language === "mr" ? "वर्गीकरण:" : language === "hi" ? "वर्गीकरण:" : "Classification:"}
+                            </strong>{" "}
+                            {book.isbn || book.callNumber}
                           </span>
                           <span>•</span>
                           <span>
-                            <strong className="text-stone-700 dark:text-[#FAF2E8] font-devanagari">कप्पा:</strong> {book.shelf || "मुख्य वाचन कक्ष"}
+                            <strong className="text-stone-700 dark:text-[#FAF2E8] font-devanagari">
+                              {language === "mr" ? "कप्पा:" : language === "hi" ? "शैल्फ:" : "Shelf:"}
+                            </strong>{" "}
+                            {book.shelf || (language === "mr" ? "मुख्य वाचन कक्ष" : language === "hi" ? "मुख्य पठन कक्ष" : "Main Reading Hall")}
                           </span>
                         </div>
                       </div>
@@ -544,11 +564,10 @@ function CatalogueContent() {
                         target="_blank"
                         rel="noopener noreferrer"
                         className="w-full rounded-lg border border-[#E5DDD0] dark:border-[#332228] bg-[#FAF8F5] dark:bg-[#180E11] hover:bg-[#F3ECE3] dark:hover:bg-[#25151C] text-stone-800 dark:text-[#FAF2E8] py-2 px-3 text-center text-xs font-semibold transition-colors flex items-center justify-center gap-1.5"
-                        title="View on Goodreads"
+                        title={language === "mr" ? "गुडरीड्सवर पहा" : language === "hi" ? "Goodreads पर देखें" : "View on Goodreads"}
                       >
-                        <span className="font-serif italic font-bold">g</span>
-                        <span>Goodreads</span>
-                        <ExternalLink className="h-2.5 w-2.5 opacity-70" />
+                        <ExternalLink className="h-3 w-3 opacity-70" />
+                        <span>{language === "mr" ? "पुस्तक समीक्षा" : language === "hi" ? "पुस्तक समीक्षा" : "Book Reviews"}</span>
                       </a>
                     </div>
                   </div>
@@ -617,11 +636,10 @@ function CatalogueContent() {
                         target="_blank"
                         rel="noopener noreferrer"
                         className="w-full rounded-lg border border-[#E5DDD0] dark:border-[#332228] bg-[#FAF8F5] dark:bg-[#180E11] hover:bg-[#F3ECE3] dark:hover:bg-[#25151C] text-stone-800 dark:text-[#FAF2E8] py-1.5 text-center text-xs font-semibold transition-colors flex items-center justify-center gap-1.5"
-                        title="View on Goodreads"
+                        title={language === "mr" ? "गुडरीड्सवर पहा" : language === "hi" ? "Goodreads पर देखें" : "View on Goodreads"}
                       >
-                        <span className="font-serif italic font-bold">g</span>
-                        <span>Goodreads</span>
-                        <ExternalLink className="h-2.5 w-2.5 opacity-70" />
+                        <ExternalLink className="h-3 w-3 opacity-70" />
+                        <span>{language === "mr" ? "पुस्तक समीक्षा" : language === "hi" ? "पुस्तक समीक्षा" : "Book Reviews"}</span>
                       </a>
                     </div>
                   </div>

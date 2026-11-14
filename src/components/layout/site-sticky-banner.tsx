@@ -87,11 +87,13 @@ export function SiteStickyBanner({ initialData }: SiteStickyBannerProps) {
 
   const currentLinkText =
     language === "en"
-      ? data.linkText === "सभासद नोंदणी करा"
+      ? data.linkText === "सभासद नोंदणी करा" || data.linkText === "सभासद व्हा" || data.linkText === "सदस्य व्हा"
         ? "Join Library"
-        : data.linkText || "Read More"
+        : /[\u0900-\u097F]/.test(data.linkText || "")
+          ? "Read More"
+          : data.linkText || "Read More"
       : language === "hi"
-      ? data.linkText === "सभासद नोंदणी करा"
+      ? data.linkText === "सभासद नोंदणी करा" || data.linkText === "सभासद व्हा" || data.linkText === "सदस्य व्हा"
         ? "सदस्यता लें"
         : data.linkText || "अधिक पढ़ें"
       : data.linkText || "अधिक वाचा";

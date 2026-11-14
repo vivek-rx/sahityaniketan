@@ -6,8 +6,8 @@ const cspHeader = `
   style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
   img-src 'self' blob: data: https:;
   font-src 'self' https://fonts.gstatic.com data:;
-  connect-src 'self' https://*.supabase.co wss://*.supabase.co https://openlibrary.org https://*.openlibrary.org;
-  frame-src 'self' https://www.youtube.com https://youtube.com https://player.vimeo.com https://vimeo.com https://www.facebook.com https://facebook.com https://web.facebook.com;
+  connect-src 'self' https://*.supabase.co wss://*.supabase.co https://openlibrary.org https://*.openlibrary.org https://challenges.cloudflare.com;
+  frame-src 'self' https://www.youtube.com https://youtube.com https://player.vimeo.com https://vimeo.com https://www.facebook.com https://facebook.com https://web.facebook.com https://challenges.cloudflare.com;
   media-src 'self' blob: https://*.supabase.co;
   object-src 'none';
   base-uri 'self';
