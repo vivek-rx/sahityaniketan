@@ -22,7 +22,7 @@ const resolvedUrl =
     ? configuredUrl
     : vercelProductionHost
       ? `https://${vercelProductionHost}`
-      : "https://sahiyaniketan.vercel.app";
+      : "https://sahityaniketan.vercel.app";
 
 export const SITE_URL = resolvedUrl.replace(/\/+$/, "");
 
