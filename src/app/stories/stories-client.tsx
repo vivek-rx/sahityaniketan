@@ -5,6 +5,8 @@ import Link from "next/link";
 import { Navbar, Footer, PageHeader } from "@/components/layout";
 import { BookOpen, Search } from "lucide-react";
 import { useLanguage } from "@/context/language-context";
+import { PhoneticInput } from "@/components/ui/phonetic-input";
+import { devaNormalize } from "@/lib/transliterate";
 import { BlogGridOrange } from "@/components/ui/skiper-ui/skiper94";
 import type { Post } from "@/types/database";
 
@@ -51,11 +53,13 @@ export default function StoriesClient({ initialStories = [] }: { initialStories:
   const [searchQuery, setSearchQuery] = useState("");
 
   const filteredStories = stories.filter((story) => {
-    return (
-      !searchQuery.trim() ||
-      story.title?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      (story.excerpt && story.excerpt.toLowerCase().includes(searchQuery.toLowerCase()))
-    );
+    // Fuzzy match: normalize Devanagari on both sides so a phonetic-typed
+    // query ("swami" → स्वमि) still finds "स्वामी"-spelled titles.
+    const raw = searchQuery.trim();
+    if (!raw) return true;
+    const q = devaNormalize(raw);
+    const haystacks = [story.title, story.excerpt].filter(Boolean).map(devaNormalize);
+    return haystacks.some((h) => h.includes(q));
   });
 
   const pageTitle =
@@ -96,11 +100,10 @@ export default function StoriesClient({ initialStories = [] }: { initialStories:
           <div className="flex items-center justify-between gap-4 mb-8 bg-white dark:bg-[#181210] p-4 rounded-2xl border border-orange-200/70 dark:border-orange-950/60 shadow-xs">
             <div className="relative w-full max-w-md">
               <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-orange-500/80" />
-              <input
-                type="text"
-                placeholder={searchPlaceholder}
+              <PhoneticInput
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                onValueChange={setSearchQuery}
+                placeholder={searchPlaceholder}
                 className="w-full pl-10 pr-3.5 py-2 rounded-xl border border-orange-200 dark:border-stone-800 bg-orange-50/40 dark:bg-stone-900/60 text-xs sm:text-sm text-stone-900 dark:text-stone-100 placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-orange-500/40"
               />
             </div>

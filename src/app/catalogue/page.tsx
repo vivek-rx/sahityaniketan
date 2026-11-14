@@ -26,6 +26,8 @@ import { BookVolume } from "@/lib/book-api";
 import { BookRequestModal } from "@/components/catalogue/book-request-modal";
 import { Framer3DBook } from "@/components/ui/framer-3d-book";
 import { BobbingDots } from "@/components/ui/bobbing-dots";
+import { PhoneticInput } from "@/components/ui/phonetic-input";
+import { devaNormalize } from "@/lib/transliterate";
 
 function CatalogueContent() {
   const searchParams = useSearchParams();
@@ -48,6 +50,7 @@ function CatalogueContent() {
   const [selectedLanguage, setSelectedLanguage] = useState<string>("all");
   const [selectedCategory, setSelectedCategory] = useState<string>(initialCategory);
   const [books, setBooks] = useState<BookVolume[]>([]);
+  const [clientTextFilter, setClientTextFilter] = useState("");
   const [totalOnlineRecords, setTotalOnlineRecords] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [viewMode, setViewMode] = useState<"list" | "grid">("list");
@@ -87,18 +90,36 @@ function CatalogueContent() {
     async function fetchBooks() {
       setIsLoading(true);
       try {
-        const searchTerm = debouncedQuery.trim() || (selectedCategory !== "all" ? selectedCategory : "");
+        const rawQ = debouncedQuery.trim();
+        // Phonetic-typed queries can end in a trailing matra/virama that the
+        // exact title doesn't contain — strip it for the server-side ilike.
+        const searchTerm = rawQ
+          ? rawQ.replace(/[\u093E-\u094C\u0962\u0963\u094D]+$/, "")
+          : selectedCategory !== "all"
+            ? selectedCategory
+            : "";
         // The whole catalogue is small enough to load in one request (the API
         // caps at 100); client-side filters and pagination then see every book.
         const res = await fetch(`/api/books?q=${encodeURIComponent(searchTerm)}&limit=100`);
+        let list: BookVolume[] = [];
         if (res.ok) {
           const data = await res.json();
-          if (data.books && data.books.length > 0) {
-            setBooks(data.books);
-          } else {
-            setBooks([]);
-          }
+          list = data.books || [];
         }
+        // Fuzzy fallback: phonetic typing may spell the title differently
+        // (स्वमि vs स्वामी). If the server found nothing, load everything and
+        // let the normalized client-side filter do the matching.
+        if (list.length === 0 && rawQ) {
+          const res2 = await fetch("/api/books?limit=100");
+          if (res2.ok) {
+            const data2 = await res2.json();
+            list = data2.books || [];
+          }
+          setClientTextFilter(rawQ);
+        } else {
+          setClientTextFilter("");
+        }
+        setBooks(list);
       } catch (err) {
         console.error("Failed to fetch books:", err);
         setBooks([]);
@@ -120,9 +141,28 @@ function CatalogueContent() {
         item.category === selectedCategory ||
         item.category.includes(selectedCategory);
 
-      return matchesLang && matchesCat;
+      // Client-side fuzzy text match (used by the phonetic-typing fallback):
+      // normalize Devanagari on both sides so "स्वमि" finds "स्वामी".
+      const matchesText =
+        !clientTextFilter ||
+        [
+          item.title,
+          item.titleMarathi,
+          item.author,
+          item.authorMarathi,
+          item.description,
+          item.descriptionMarathi,
+          item.category,
+          item.callNumber,
+          item.isbn,
+        ]
+          .filter(Boolean)
+          .map((f) => devaNormalize(String(f)))
+          .some((h) => h.includes(devaNormalize(clientTextFilter)));
+
+      return matchesLang && matchesCat && matchesText;
     });
-  }, [books, selectedLanguage, selectedCategory]);
+  }, [books, selectedLanguage, selectedCategory, clientTextFilter]);
 
   useEffect(() => {
     setCurrentPage(1);
@@ -321,10 +361,9 @@ function CatalogueContent() {
           <div className="bg-white dark:bg-[#1E1418] p-4 rounded-2xl border border-[#E5DDD0] dark:border-[#332228] shadow-2xs space-y-3 transition-colors">
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
               <div className="relative w-full sm:w-96">
-                <input
-                  type="text"
+                <PhoneticInput
                   value={query}
-                  onChange={(e) => setQuery(e.target.value)}
+                  onValueChange={setQuery}
                   placeholder={
                     language === "mr"
                       ? "पुस्तकाचे नाव, लेखक किंवा विषय शोधा..."

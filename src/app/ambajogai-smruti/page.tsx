@@ -33,6 +33,8 @@ import {
   AmbajogaiMemoryItem 
 } from "@/lib/data/remembering-ambajogai";
 import { useLanguage } from "@/context/language-context";
+import { PhoneticInput } from "@/components/ui/phonetic-input";
+import { devaNormalize } from "@/lib/transliterate";
 
 /** In-page Hindi titles for data-layer category names (filter-pill chrome labels) */
 const CATEGORY_TITLE_HI: Record<string, string> = {
@@ -62,18 +64,21 @@ export default function RememberingAmbajogaiPage() {
   // Filter items
   const filteredItems = AMBAJOGAI_MEMORY_ITEMS.filter((item) => {
     const matchesCategory = selectedCategory === "all" || item.categoryId === selectedCategory;
-    const query = searchQuery.toLowerCase().trim();
-    if (!query) return matchesCategory;
+    // Fuzzy match: normalize Devanagari on both sides so a phonetic-typed
+    // query ("swami" → स्वमि) still finds "स्वामी"-spelled titles.
+    const raw = searchQuery.trim();
+    if (!raw) return matchesCategory;
+    const query = devaNormalize(raw);
 
     const matchesSearch =
-      item.titleMarathi.toLowerCase().includes(query) ||
-      (item.titleEnglish && item.titleEnglish.toLowerCase().includes(query)) ||
-      item.summaryMarathi.toLowerCase().includes(query) ||
-      (item.summaryEnglish && item.summaryEnglish.toLowerCase().includes(query)) ||
-      item.locationMarathi.toLowerCase().includes(query) ||
-      (item.locationEnglish && item.locationEnglish.toLowerCase().includes(query)) ||
-      item.era.toLowerCase().includes(query) ||
-      item.tags.some((t) => t.toLowerCase().includes(query));
+      devaNormalize(item.titleMarathi).includes(query) ||
+      (item.titleEnglish && devaNormalize(item.titleEnglish).includes(query)) ||
+      devaNormalize(item.summaryMarathi).includes(query) ||
+      (item.summaryEnglish && devaNormalize(item.summaryEnglish).includes(query)) ||
+      devaNormalize(item.locationMarathi).includes(query) ||
+      (item.locationEnglish && devaNormalize(item.locationEnglish).includes(query)) ||
+      devaNormalize(item.era).includes(query) ||
+      item.tags.some((t) => devaNormalize(t).includes(query));
 
     return matchesCategory && matchesSearch;
   });
@@ -179,10 +184,9 @@ export default function RememberingAmbajogaiPage() {
             {/* Quick Search */}
             <div className="relative min-w-[220px]">
               <Search className="w-3.5 h-3.5 text-stone-400 absolute left-3 top-1/2 -translate-y-1/2" />
-              <input
-                type="text"
+              <PhoneticInput
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                onValueChange={setSearchQuery}
                 placeholder={
                   isEn
                     ? "Search memories, places, era..."

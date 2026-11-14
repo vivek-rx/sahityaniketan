@@ -16,6 +16,8 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useLanguage } from "@/context/language-context";
+import { PhoneticInput } from "@/components/ui/phonetic-input";
+import { devaNormalize } from "@/lib/transliterate";
 
 interface GlobalSearchModalProps {
   isOpen: boolean;
@@ -315,11 +317,12 @@ export function GlobalSearchModal({ isOpen, onClose }: GlobalSearchModalProps) {
     }
   }, [isOpen]);
 
-  // Filter items in real time. Matches against ALL three language variants of
-  // each entry, so typing "swami" or "स्वामी" finds the same record in any UI
-  // language.
+  // Filter items in real time. Fuzzy-matches against all three language
+  // variants of every entry (matras/anusvar normalized on the Devanagari
+  // side), so typing "swami", "स्वमि" or "स्वामी" finds the same record.
   const filteredResults = useMemo(() => {
-    const q = query.trim().toLowerCase();
+    const raw = query.trim();
+    const q = devaNormalize(raw);
     return SEARCH_DATABASE.filter((item) => {
       const matchesFilter = selectedFilter === "all" || item.category === selectedFilter;
       if (!matchesFilter) return false;
@@ -327,7 +330,11 @@ export function GlobalSearchModal({ isOpen, onClose }: GlobalSearchModalProps) {
       const haystacks = [...item.title, ...item.subtitle, item.badge.join(" ")];
       if (item.shelf) haystacks.push(item.shelf.join(" "));
       if (item.year) haystacks.push(item.year.join(" "));
-      return haystacks.some((h) => h.toLowerCase().includes(q));
+      const norm = haystacks.map(devaNormalize);
+      return (
+        norm.some((h) => h.includes(q)) ||
+        haystacks.some((h) => h.toLowerCase().includes(raw.toLowerCase()))
+      );
     });
   }, [query, selectedFilter]);
 
@@ -398,12 +405,11 @@ export function GlobalSearchModal({ isOpen, onClose }: GlobalSearchModalProps) {
             {/* Top Omnibar Input */}
             <div className="flex items-center gap-3 border-b border-white/10 px-4 py-3.5 bg-transparent">
               <Search className="h-5 w-5 text-zinc-400 shrink-0" />
-              <input
-                ref={inputRef}
-                type="text"
+              <PhoneticInput
+                inputRef={inputRef}
                 value={query}
-                onChange={(e) => {
-                  setQuery(e.target.value);
+                onValueChange={(v) => {
+                  setQuery(v);
                   setSelectedIndex(0);
                 }}
                 placeholder={
