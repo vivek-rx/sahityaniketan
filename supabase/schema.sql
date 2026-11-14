@@ -488,11 +488,11 @@ INSERT INTO public.site_settings (key, value, description) VALUES
   ('library_name',          '"साहित्य निकेतन ग्रंथालय"',          'Library name (Marathi)'),
   ('library_name_en',       '"Sahitya Niketan Library"',            'Library name (English)'),
   ('library_city',          '"अंबाजोगाई, बीड, महाराष्ट्र"',       'City and district'),
-  ('library_phone',         '"+91 00000 00000"',                    'Contact phone'),
-  ('library_email',         '"sahityaniketanabajogai@gmail.com"',   'Contact email'),
-  ('library_hours',         '"सोम-शनि: सकाळी ९ ते सायं ७"',       'Opening hours'),
-  ('established_year',      '"1985"',                               'Year established'),
-  ('total_books_display',   '"20,000+"',                            'Books count for homepage'),
+  ('library_phone',         '"+91 90966 42583"',                    'Contact phone'),
+  ('library_email',         '"sahityaniketan.ambajogai@gmail.com"', 'Contact email'),
+  ('library_hours',         '"सोम-शनि: सकाळी ८:०० ते रात्री ८:३० (वर्तमानपत्र कक्ष सकाळी ७:०० पासून)"', 'Opening hours'),
+  ('established_year',      '"1945"',                               'Year established'),
+  ('total_books_display',   '"39,953"',                             'Printed volumes in the physical collection'),
   ('total_members_display', '"2,500+"',                             'Members count for homepage'),
   ('hero_tagline',          '"ज्ञान, संस्कृती आणि साहित्याचे केंद्र"', 'Hero tagline')
 ON CONFLICT (key) DO NOTHING;
