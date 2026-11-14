@@ -10,7 +10,7 @@ const MARATHI_MILESTONES: ContourTimelineItem[] = [
     label: "स्थापना पर्व",
     title: "स्थापना: एका उदात्त विचाराचा जन्म",
     description:
-      "“अनेक हृदय हो भारत जननी” या उदात्त प्रेरणेने १ ऑगस्ट १९४५ रोजी अंबाजोगाईत साहित्य निकेतनची स्थापना झाली. श्री. गोविंदलाल जानू, विश्वराव जाधव, रामचंद्रजी क्षीरसागर, विपत वहमवार, चंद्रगुप्त आर्य, के. बी. पाटील, प्र. गो. रामदासी या ध्येयवादी तरुणांनी स्वातंत्र्यलढ्यात लोकजागृतीसाठी ग्रंथालय सुरू केले.",
+      "“अनेक हृदय हो भारत जननी” या उदात्त प्रेरणेने १ ऑगस्ट १९४५ रोजी अंबाजोगाईत साहित्य निकेतनची स्थापना झाली. श्री. गोविंदलाल जाजू, विश्वराव जाधव, रामचंद्रजी क्षीरसागर, विपत वहमवार, चंद्रगुप्त आर्य, के. बी. पाटील, प्र. गो. रामदासी या ध्येयवादी तरुणांनी स्वातंत्र्यलढ्यात लोकजागृतीसाठी ग्रंथालय सुरू केले.",
     image: {
       src: "/images/real/library_inauguration_plaque.webp",
       alt: "स्थापना शिलालेख फलक १९४५",
@@ -118,7 +118,7 @@ const ENGLISH_MILESTONES: ContourTimelineItem[] = [
     label: "Foundation",
     title: "Foundation: The Birth of a Noble Vision",
     description:
-      "Inspired by 'Anek Hriday Ho Bharat Janani', Sahitya Niketan was founded on 1 August 1945 by zealous youth including Govindlal Janu, Vishwarao Jadhav, Ramchandraji Kshirsagar, Vipat Wahamwar, Chandragupta Arya, K. B. Patil, and P. G. Ramdasi to awaken civic consciousness during the freedom struggle.",
+      "Inspired by 'Anek Hriday Ho Bharat Janani', Sahitya Niketan was founded on 1 August 1945 by zealous youth including Govindlal Jaju, Vishwarao Jadhav, Ramchandraji Kshirsagar, Vipat Wahamwar, Chandragupta Arya, K. B. Patil, and P. G. Ramdasi to awaken civic consciousness during the freedom struggle.",
     image: {
       src: "/images/real/library_inauguration_plaque.webp",
       alt: "Founding Inscription 1945",

@@ -83,7 +83,7 @@ const FIRST_TRUSTEES_1962: TrusteeCard[] = [
 
 // 2. संस्थापक ध्येयवादी युवक मंडळ (१ ऑगस्ट १९४५ — स्थापना)
 const FOUNDING_MEMBERS_1945: { name: string; nameEn: string; role: L3 }[] = [
-  { name: "श्री. गोविंदलाल जानू", nameEn: "Shri Govindlal Janu", role: ["संस्थापक अग्रणी (१९४५)", "संस्थापक अग्रणी (१९४५)", "Founding Pioneer (1945)"] },
+  { name: "श्री. गोविंदलाल जाजू", nameEn: "Shri Govindlal Jaju", role: ["संस्थापक अग्रणी (१९४५)", "संस्थापक अग्रणी (१९४५)", "Founding Pioneer (1945)"] },
   { name: "श्री. विश्वराव जाधव", nameEn: "Shri Vishwarao Jadhav", role: ["संस्थापक सदस्य (१९४५)", "संस्थापक सदस्य (१९४५)", "Founding Member (1945)"] },
   { name: "श्री. रामचंद्रजी क्षीरसागर", nameEn: "Shri Ramchandraji Kshirsagar", role: ["संस्थापक सदस्य (१९४५)", "संस्थापक सदस्य (१९४५)", "Founding Member (1945)"] },
   { name: "श्री. विपत वहमवार", nameEn: "Shri Vipat Wahamwar", role: ["संस्थापक सदस्य (१९४५)", "संस्थापक सदस्य (१९४५)", "Founding Member (1945)"] },
