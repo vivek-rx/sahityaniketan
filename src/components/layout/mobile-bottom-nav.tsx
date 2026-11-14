@@ -5,19 +5,21 @@ import { usePathname, useRouter } from "next/navigation";
 import {
   Home,
   BookOpen,
-  Bell,
-  Search,
-  User,
+  Newspaper,
+  History,
+  UserCheck,
 } from "lucide-react";
 import { useLanguage } from "@/context/language-context";
-import Dock from "@/components/ui/dock";
+import { cn } from "@/lib/utils";
 
 /**
- * MobileBottomNav — Mobile Dock Navigation
- * - Floating arc-illusion dock with 3D perspective tilt
- * - Spring scale and rotation on touch/hover
- * - Glowing active ring and indicator dot
- * - Padded for iPhone home indicator with safe-area-inset-bottom
+ * MobileBottomNav — flat, brand-consistent bottom navigation.
+ *
+ * The old floating white "dock" pill clashed with the heritage palette,
+ * used the wrong icons (a search icon for History), hid labels behind
+ * tooltips that don't work on touch, and ran framer-motion springs plus a
+ * backdrop-blur layer permanently composited over scrolling content.
+ * This is a plain flat bar: no animation loop, no blur, real labels.
  */
 export function MobileBottomNav() {
   const pathname = usePathname();
@@ -32,49 +34,71 @@ export function MobileBottomNav() {
   const items = [
     {
       icon: Home,
-      label: language === "mr" ? "मुख्य" : language === "hi" ? "होम" : "Home",
-      onClick: () => router.push("/"),
+      label: language === "en" ? "Home" : language === "hi" ? "होम" : "मुखपृष्ठ",
+      href: "/",
       isActive: pathname === "/",
     },
     {
       icon: BookOpen,
-      label: language === "mr" ? "ग्रंथसूची" : language === "hi" ? "ग्रंथसूची" : "Catalogue",
-      onClick: () => router.push("/catalogue"),
+      label: language === "en" ? "Catalogue" : language === "hi" ? "ग्रन्थसूची" : "ग्रंथसूची",
+      href: "/catalogue",
       isActive: pathname.startsWith("/catalogue"),
     },
     {
-      icon: Bell,
-      label: language === "mr" ? "सूचना" : language === "hi" ? "सूचनाएं" : "Notices",
-      onClick: () => router.push("/news"),
+      icon: Newspaper,
+      label: language === "en" ? "News" : language === "hi" ? "समाचार" : "बातम्या",
+      href: "/news",
       isActive: pathname.startsWith("/news") || pathname.startsWith("/notices"),
     },
     {
-      icon: Search,
-      label: language === "mr" ? "इतिहास" : language === "hi" ? "इतिहास" : "History",
-      onClick: () => router.push("/history"),
+      icon: History,
+      label: language === "en" ? "History" : language === "hi" ? "इतिहास" : "इतिहास",
+      href: "/history",
       isActive: pathname.startsWith("/history"),
     },
     {
-      icon: User,
-      label: language === "mr" ? "सदस्यत्व" : language === "hi" ? "सदस्यता" : "Membership",
-      onClick: () => router.push("/membership"),
+      icon: UserCheck,
+      label: language === "en" ? "Join" : language === "hi" ? "सदस्यता" : "सभासद व्हा",
+      href: "/membership",
       isActive: pathname.startsWith("/membership"),
     },
   ];
 
-  const currentActive = items.find((item) => item.isActive)?.label ?? items[0].label;
-
   return (
     <nav
-      aria-label="Mobile Dock Navigation"
-      // z-40 (not z-50) so the mobile menu drawer (z-[60]) always sits above the dock
-      className="fixed bottom-3 inset-x-0 z-40 lg:hidden pointer-events-none flex justify-center px-4"
-      style={{
-        paddingBottom: "max(env(safe-area-inset-bottom, 0px), 0px)",
-      }}
+      aria-label="Mobile Bottom Navigation"
+      className="fixed bottom-0 inset-x-0 z-40 lg:hidden border-t border-[#E5B869]/25 bg-[#6B0F1A] dark:bg-[#160E11]"
+      style={{ paddingBottom: "env(safe-area-inset-bottom, 0px)" }}
     >
-      <div className="pointer-events-auto">
-        <Dock items={items} activeLabel={currentActive} className="py-0" />
+      <div className="grid grid-cols-5 max-w-xl mx-auto">
+        {items.map((item) => {
+          const Icon = item.icon;
+          return (
+            <button
+              key={item.href}
+              type="button"
+              onClick={() => router.push(item.href)}
+              aria-current={item.isActive ? "page" : undefined}
+              className={cn(
+                "relative flex flex-col items-center justify-center gap-0.5 h-14 cursor-pointer select-none transition-colors",
+                item.isActive
+                  ? "text-[#E5B869]"
+                  : "text-white/80 hover:text-white active:text-[#E5B869]"
+              )}
+            >
+              {item.isActive && (
+                <span
+                  aria-hidden="true"
+                  className="absolute top-0 left-1/2 -translate-x-1/2 h-0.5 w-8 rounded-full bg-[#E5B869]"
+                />
+              )}
+              <Icon className="h-5 w-5" />
+              <span className="text-[10px] font-semibold font-marathi-heading leading-none">
+                {item.label}
+              </span>
+            </button>
+          );
+        })}
       </div>
     </nav>
   );

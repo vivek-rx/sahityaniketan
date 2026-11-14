@@ -251,10 +251,10 @@ export function HeroCarousel() {
           <div className="flex items-center gap-2.5">
             <h2 className="text-base sm:text-lg font-bold text-gray-900 dark:text-[#FAF2E8] font-marathi-heading">
               {language === "mr"
-                ? "साहित्य निकेतन वार्ता व उपक्रम"
+                ? "साहित्य निकेतनची झलक"
                 : language === "hi"
-                  ? "साहित्य निकेतन समाचार व उपक्रम"
-                  : "Library News & Cultural Initiatives"}
+                  ? "साहित्य निकेतन की झलक"
+                  : "Inside Sahitya Niketan"}
             </h2>
           </div>
 
@@ -262,7 +262,7 @@ export function HeroCarousel() {
           <div className="flex items-center gap-2 self-end sm:self-auto">
             <Link
               href="/events"
-              className="text-xs font-bold text-[#C0392B] dark:text-[#E8B830] hover:underline flex items-center gap-1 mr-2 transition-colors font-marathi-body"
+              className="text-xs font-bold text-[#C0392B] dark:text-[#E8B830] hover:underline flex items-center gap-1 transition-colors font-marathi-body"
             >
               <span>
                 {language === "mr"
@@ -272,24 +272,6 @@ export function HeroCarousel() {
                     : "View All"}
               </span>
             </Link>
-
-            <div className="flex items-center gap-1.5">
-              <button
-                onClick={scrollPrev}
-                className="h-8 w-8 sm:h-9 sm:w-9 rounded-full border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-800 text-zinc-700 dark:text-zinc-200 shadow-2xs hover:bg-zinc-50 dark:hover:bg-zinc-700 flex items-center justify-center transition-all cursor-pointer"
-                aria-label="Previous Slide"
-              >
-                <ChevronLeft className="h-4 w-4" />
-              </button>
-
-              <button
-                onClick={scrollNext}
-                className="h-8 w-8 sm:h-9 sm:w-9 rounded-full border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-800 text-zinc-700 dark:text-zinc-200 shadow-2xs hover:bg-zinc-50 dark:hover:bg-zinc-700 flex items-center justify-center transition-all cursor-pointer"
-                aria-label="Next Slide"
-              >
-                <ChevronRight className="h-4 w-4" />
-              </button>
-            </div>
           </div>
         </div>
 
@@ -321,8 +303,8 @@ export function HeroCarousel() {
                       className="object-cover object-center transform-gpu will-change-transform transition-transform duration-700"
                     />
 
-                    {/* Clean Gradient Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/45 to-transparent" />
+                    {/* Stronger legibility gradient (text sits over busy archival photos) */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/55 to-black/10" />
 
                     {/* Slide Content Box */}
                     <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-8 md:p-10 flex flex-col sm:flex-row sm:items-end justify-between gap-4 text-white z-10">
@@ -407,22 +389,40 @@ export function HeroCarousel() {
             </div>
           </div>
 
-          {/* Untitled UI Progress Indicators (Centered at bottom) */}
-          <div className="absolute bottom-3 sm:bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-1.5 z-20 bg-black/40 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/10">
-            {scrollSnaps.map((_, idx) => (
-              <button
-                key={idx}
-                onClick={() => scrollTo(idx)}
-                className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${selectedIndex === idx
-                    ? "w-6 bg-white"
-                    : "w-1.5 bg-white/40 hover:bg-white/70"
-                  }`}
-                aria-label={`Go to slide ${idx + 1}`}
-              />
-            ))}
-            <span className="text-[10px] font-mono text-white/80 ml-1.5 pl-1.5 border-l border-white/20">
-              0{selectedIndex + 1} / 0{scrollSnaps.length || 4}
-            </span>
+          {/* Slide progress row (below the card — never overlaps slide content) */}
+          <div className="flex items-center justify-between gap-3 pt-3">
+            <button
+              onClick={scrollPrev}
+              className="h-9 w-9 sm:h-10 sm:w-10 rounded-full border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-800 text-zinc-700 dark:text-zinc-200 shadow-2xs hover:bg-zinc-50 dark:hover:bg-zinc-700 flex items-center justify-center transition-all cursor-pointer shrink-0"
+              aria-label="Previous Slide"
+            >
+              <ChevronLeft className="h-4 w-4" />
+            </button>
+
+            <div className="flex flex-1 items-center justify-center gap-1.5 min-w-0">
+              {scrollSnaps.map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => scrollTo(idx)}
+                  className={`h-2 rounded-full transition-all duration-300 cursor-pointer shrink-0 ${selectedIndex === idx
+                      ? "w-8 sm:w-10 bg-[#800020] dark:bg-[#E5B869]"
+                      : "w-3 sm:w-4 bg-[#800020]/25 dark:bg-[#E5B869]/30 hover:bg-[#800020]/50 dark:hover:bg-[#E5B869]/60"
+                    }`}
+                  aria-label={`Go to slide ${idx + 1}`}
+                />
+              ))}
+              <span className="text-[11px] font-mono text-zinc-500 dark:text-zinc-400 ml-2 pl-2 border-l border-zinc-200 dark:border-zinc-700 shrink-0">
+                0{selectedIndex + 1} / 0{scrollSnaps.length || 4}
+              </span>
+            </div>
+
+            <button
+              onClick={scrollNext}
+              className="h-9 w-9 sm:h-10 sm:w-10 rounded-full border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-800 text-zinc-700 dark:text-zinc-200 shadow-2xs hover:bg-zinc-50 dark:hover:bg-zinc-700 flex items-center justify-center transition-all cursor-pointer shrink-0"
+              aria-label="Next Slide"
+            >
+              <ChevronRight className="h-4 w-4" />
+            </button>
           </div>
         </div>
       </div>

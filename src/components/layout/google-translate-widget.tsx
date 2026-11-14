@@ -137,10 +137,10 @@ export function GoogleTranslateWidget({
           type="button"
           onClick={() => setOpen((o) => !o)}
           className={cn(
-            "rounded-xl px-2 py-1.5 text-xs font-bold transition-all cursor-pointer flex items-center gap-1 shadow-inner select-none shrink-0",
+            "h-9 rounded-full px-3 text-xs font-bold transition-all cursor-pointer flex items-center gap-1 shadow-inner select-none shrink-0",
             open
               ? "bg-black/40 text-amber-300 border border-amber-400"
-              : "bg-black/25 hover:bg-black/40 text-white border border-white/20 active:scale-95"
+              : "bg-black/25 hover:bg-black/40 text-white border border-white/15 active:scale-95"
           )}
           aria-expanded={open}
           aria-label="भाषा निवडा"

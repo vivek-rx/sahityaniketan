@@ -8,7 +8,6 @@ import {
   TestimonialsSection,
   CTASection,
 } from "@/components/home";
-import { LibraryEventsCarousel } from "@/components/home/library-events-carousel";
 import { buildPageMetadata } from "@/lib/metadata";
 import { SITE_NAME_MR } from "@/lib/site";
 
@@ -37,22 +36,19 @@ export default async function HomePage() {
         {/* 1. Dynamic Database-driven Hero Banner (Admin controlled) */}
         <HeroCarousel />
 
-        {/* 2. Library Events & Heritage Carousel */}
-        <LibraryEventsCarousel />
-
-        {/* 3. Monumental Typographic Moment: Founding Year १९४५ & Library Stats */}
+        {/* 2. Monumental Typographic Moment: Founding Year १९४५ & Library Stats */}
         <StatsSection />
 
-        {/* 4. Rare Manuscripts & Featured Book Collections */}
+        {/* 3. Rare Manuscripts & Featured Book Collections */}
         <FeaturedBooksSection />
 
-        {/* 5. The One Deliberate Animation Moment: The History Scroll-Timeline */}
+        {/* 4. The One Deliberate Animation Moment: The History Scroll-Timeline */}
         <HistoryTimelineSection />
 
-        {/* 6. Voices of Our Community (@motion/card-stack) */}
+        {/* 5. Voices of Our Community (@motion/card-stack) */}
         <TestimonialsSection />
 
-        {/* 7. Membership Invitation & Reader Welcome CTA */}
+        {/* 6. Membership Invitation & Reader Welcome CTA */}
         <CTASection />
       </main>
       <Footer />

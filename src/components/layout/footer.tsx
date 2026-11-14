@@ -59,10 +59,47 @@ export function Footer() {
       usefulLinks={usefulLinks}
       newsletterTitle={
         isEn
-          ? "Subscribe our newsletter"
+          ? "Newsletter Subscription"
           : isHi
           ? "वार्तापत्र सदस्यता"
           : "वार्तापत्र सदस्यता"
+      }
+      strings={
+        isEn
+          ? {
+              linksTitle: "Useful Links",
+              socialTitle: "Social Media",
+              emailPlaceholder: "Enter your email address...",
+              subscribeCta: "Join",
+              submittingCta: "Subscribing...",
+              consentPrefix:
+                "I consent to receive the library's newsletter and event updates by email.",
+              privacyLink: "Privacy Policy",
+              successMsg: "Subscribed successfully! 🎉",
+              errorMsg: "Please try again.",
+              copyright:
+                "Sahitya Niketan Public Library, Ambajogai. All rights reserved.",
+              termsLink: "Terms of Use",
+              grievanceLink: "Grievance Contact",
+            }
+          : isHi
+            ? {
+                linksTitle: "उपयोगी लिंक",
+                socialTitle: "सोशल मीडिया",
+                emailPlaceholder: "ईमेल पता दर्ज करें...",
+                subscribeCta: "सदस्य बनें",
+                submittingCta: "पंजीकरण...",
+                consentPrefix:
+                  "मुझे ग्रंथालय की न्यूज़लेटर व कार्यक्रमों की जानकारी ईमेल पर प्राप्त करने की सहमति है।",
+                privacyLink: "गोपनीयता नीति",
+                successMsg: "सदस्यता सफल रही! 🎉",
+                errorMsg: "कृपया पुनः प्रयास करें।",
+                copyright:
+                  "साहित्य निकेतन सार्वजनिक ग्रंथालय, अंबाजोगाई। सर्वाधिकार सुरक्षित।",
+                termsLink: "उपयोग की शर्तें",
+                grievanceLink: "शिकायत संपर्क",
+              }
+            : undefined
       }
       onSubscribe={handleSubscribe}
       className="border-t border-border"

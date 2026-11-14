@@ -11,6 +11,22 @@ import { SocialButtons } from '@/components/ui/social-buttons';
 /**
  * Props for the Footer component.
  */
+export interface FooterStrings {
+  linksTitle: string;
+  socialTitle: string;
+  emailPlaceholder: string;
+  subscribeCta: string;
+  submittingCta: string;
+  /** Text before the privacy-policy link inside the consent checkbox. */
+  consentPrefix: string;
+  privacyLink: string;
+  successMsg: string;
+  errorMsg: string;
+  copyright: string;
+  termsLink: string;
+  grievanceLink: string;
+}
+
 export interface FooterProps extends React.HTMLAttributes<HTMLElement> {
   /** The source URL for the company logo. */
   logoSrc: string;
@@ -24,7 +40,25 @@ export interface FooterProps extends React.HTMLAttributes<HTMLElement> {
   newsletterTitle?: string;
   /** Async function to handle email subscription. Should return `true` for success and `false` for failure. */
   onSubscribe?: (email: string, consent: boolean) => Promise<boolean>;
+  /** Localized strings for every fixed label in the footer. */
+  strings?: FooterStrings;
 }
+
+/** Marathi defaults (the library's primary language). */
+const DEFAULT_STRINGS: FooterStrings = {
+  linksTitle: "उपयुक्त दुवे",
+  socialTitle: "सोशल माध्यमे",
+  emailPlaceholder: "ईमेल पत्ता प्रविष्ट करा...",
+  subscribeCta: "सदस्य व्हा",
+  submittingCta: "नोंदणी...",
+  consentPrefix: "मला ग्रंथालयाची वार्तापत्रे व कार्यक्रमांची माहिती ईमेलवर मिळण्यास संमती आहे.",
+  privacyLink: "गोपनीयता धोरण",
+  successMsg: "सदस्यता यशस्वी झाली! 🎉",
+  errorMsg: "कृपया पुन्हा प्रयत्न करा.",
+  copyright: "साहित्य निकेतन सार्वजनिक ग्रंथालय, अंबाजोगाई. सर्व हक्क राखीव.",
+  termsLink: "वापरण्याच्या अटी",
+  grievanceLink: "तक्रार संपर्क",
+};
 
 /**
  * A responsive and theme-adaptive footer component with a newsletter subscription form.
@@ -42,9 +76,11 @@ export const Footer: FC<FooterProps> = ({
   ],
   newsletterTitle = 'Subscribe our newsletter',
   onSubscribe,
+  strings,
   className,
   ...props
 }) => {
+  const t = { ...DEFAULT_STRINGS, ...strings };
   const [email, setEmail] = useState('');
   const [consent, setConsent] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -98,7 +134,7 @@ export const Footer: FC<FooterProps> = ({
 
         {/* Useful Links */}
         <div className="md:justify-self-center">
-          <h3 className="mb-4 text-base font-bold font-marathi-heading text-[#800020] dark:text-[#E5B869]">उपयुक्त दुवे / Navigation</h3>
+          <h3 className="mb-4 text-base font-bold font-marathi-heading text-[#800020] dark:text-[#E5B869]">{t.linksTitle}</h3>
           <ul className="space-y-2">
             {usefulLinks.map((link) => (
               <li key={link.label}>
@@ -115,7 +151,7 @@ export const Footer: FC<FooterProps> = ({
 
         {/* Follow Us / Social Buttons */}
         <div className="md:justify-self-center w-full max-w-[280px]">
-          <h3 className="mb-4 text-base font-bold font-marathi-heading text-[#800020] dark:text-[#E5B869]">सोशल मीडिया / Social</h3>
+          <h3 className="mb-4 text-base font-bold font-marathi-heading text-[#800020] dark:text-[#E5B869]">{t.socialTitle}</h3>
           <SocialButtons />
         </div>
 
@@ -126,7 +162,7 @@ export const Footer: FC<FooterProps> = ({
             <div className="relative">
               <Input
                 type="email"
-                placeholder="ईमेल पत्ता प्रविष्ट करा..."
+                placeholder={t.emailPlaceholder}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 disabled={isSubmitting || subscriptionStatus !== 'idle'}
@@ -139,7 +175,7 @@ export const Footer: FC<FooterProps> = ({
                 disabled={isSubmitting || subscriptionStatus !== 'idle'}
                 className="absolute right-0 top-0 h-full rounded-l-none px-4 bg-[#800020] hover:bg-[#66001A] text-white font-bold cursor-pointer"
               >
-                {isSubmitting ? 'नोंदणी...' : 'सदस्य व्हा'}
+                {isSubmitting ? t.submittingCta : t.subscribeCta}
               </Button>
             </div>
             <label className="mt-2 flex items-start gap-2 text-[11px] leading-relaxed text-stone-600 dark:text-stone-400">
@@ -151,10 +187,9 @@ export const Footer: FC<FooterProps> = ({
                 className="mt-0.5 h-3.5 w-3.5 shrink-0 accent-[#800020]"
               />
               <span>
-                मला ग्रंथालयाची वार्तापत्रे व कार्यक्रमांची माहिती ईमेलवर
-                मिळण्यास संमती आहे.{" "}
+                {t.consentPrefix}{" "}
                 <Link href="/privacy" className="font-bold underline">
-                  गोपनीयता धोरण
+                  {t.privacyLink}
                 </Link>
               </span>
             </label>
@@ -165,9 +200,9 @@ export const Footer: FC<FooterProps> = ({
                 className="animate-in fade-in absolute inset-0 flex items-center justify-center rounded-lg bg-background/90 text-center backdrop-blur-sm"
               >
                 {subscriptionStatus === 'success' ? (
-                  <span className="font-semibold text-emerald-600 dark:text-emerald-400">सदस्यता यशस्वी झाली! 🎉</span>
+                  <span className="font-semibold text-emerald-600 dark:text-emerald-400">{t.successMsg}</span>
                 ) : (
-                  <span className="font-semibold text-destructive">कृपया पुन्हा प्रयत्न करा.</span>
+                  <span className="font-semibold text-destructive">{t.errorMsg}</span>
                 )}
               </div>
             )}
@@ -179,8 +214,7 @@ export const Footer: FC<FooterProps> = ({
       <div className="relative z-10 border-t border-zinc-200 dark:border-zinc-800">
         <div className="container mx-auto flex flex-col items-center justify-between gap-3 px-4 py-5 text-xs text-stone-600 dark:text-stone-400 sm:flex-row">
           <p className="text-center sm:text-left">
-            © {new Date().getFullYear()} साहित्य निकेतन सार्वजनिक ग्रंथालय,
-            अंबाजोगाई. सर्व हक्क राखीव.
+            © {new Date().getFullYear()} {t.copyright}
           </p>
           <nav
             aria-label="Legal"
@@ -190,19 +224,19 @@ export const Footer: FC<FooterProps> = ({
               href="/privacy"
               className="font-medium transition-colors hover:text-[#800020] dark:hover:text-[#E5B869]"
             >
-              गोपनीयता धोरण
+              {t.privacyLink}
             </Link>
             <Link
               href="/terms"
               className="font-medium transition-colors hover:text-[#800020] dark:hover:text-[#E5B869]"
             >
-              वापरण्याच्या अटी
+              {t.termsLink}
             </Link>
             <Link
               href="/contact"
               className="font-medium transition-colors hover:text-[#800020] dark:hover:text-[#E5B869]"
             >
-              तक्रार संपर्क
+              {t.grievanceLink}
             </Link>
           </nav>
         </div>

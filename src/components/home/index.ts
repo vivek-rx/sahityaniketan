@@ -1,6 +1,5 @@
 export { HeroSection } from "./hero-section";
 export { HeroCarousel } from "./hero-carousel";
-export { LibraryEventsCarousel } from "./library-events-carousel";
 export { StatsSection } from "./stats-section";
 export { FeaturedBooksSection } from "./featured-books-section";
 export { CuratorDispatch } from "./curator-dispatch";

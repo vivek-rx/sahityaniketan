@@ -8,7 +8,6 @@ import gsap from "gsap";
 import { LogoBrand } from "@/components/layout/logo-brand";
 import { GoogleTranslateWidget } from "@/components/layout/google-translate-widget";
 import { GlobalSearchModal } from "@/components/layout/global-search-modal";
-import { NoiseBackground } from "@/components/ui/ambient-noise-background";
 import { SiteStickyBanner } from "@/components/layout/site-sticky-banner";
 import { ThemeToggleButton4 } from "@/components/ui/skiper-ui/skiper4";
 import {
@@ -555,25 +554,14 @@ export function Navbar() {
 
               {/* Right: Clean Membership CTA (Single source of language switcher is in the nav bar below) */}
               <div className="hidden sm:flex items-center justify-end gap-2.5 w-40 xl:w-44 shrink-0">
-                <NoiseBackground
-                  containerClassName="w-fit p-[1.5px] rounded-full mx-auto"
-                  gradientColors={[
-                    "rgb(128, 0, 32)",
-                    "rgb(205, 155, 75)",
-                    "rgb(90, 12, 22)",
-                  ]}
-                  noiseIntensity={0.06}
-                  speed={0.03}
+                <Link
+                  href="/membership"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#800020] hover:bg-[#66001A] text-white text-[13.5px] font-bold shadow-md ring-1 ring-[#E5B869]/50 hover:shadow-lg transition-all whitespace-nowrap active:scale-95 cursor-pointer"
+                  title="सभासद व्हा / नोंदणी"
                 >
-                  <Link
-                    href="/membership"
-                    className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#800020] hover:bg-[#66001A] text-white text-[13.5px] font-bold shadow-xs hover:shadow-md transition-all whitespace-nowrap border border-[#E5B869]/40 active:scale-95 cursor-pointer"
-                    title="सभासद व्हा / नोंदणी"
-                  >
-                    <UserCheck className="h-4 w-4 text-[#E5B869]" />
-                    <span>{language === "en" ? "Join Library" : language === "hi" ? "सदस्यता लें" : "सभासद व्हा"}</span>
-                  </Link>
-                </NoiseBackground>
+                  <UserCheck className="h-4 w-4 text-[#E5B869]" />
+                  <span>{language === "en" ? "Join Library" : language === "hi" ? "सदस्यता लें" : "सभासद व्हा"}</span>
+                </Link>
 
                 <button
                   type="button"
@@ -616,12 +604,12 @@ export function Navbar() {
           <div className="section">
             
             {/* -------------------------------------------------
-                A. MOBILE VIEW (Rock-solid, zero layout shift)
+                A. MOBILE VIEW (uniform 36px pill controls)
                ------------------------------------------------- */}
-            <div className="flex lg:hidden items-center justify-between gap-2 w-full py-2.5">
+            <div className="flex lg:hidden items-center justify-between gap-2 w-full py-2">
               <Link
                 href="/"
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-black/20 hover:bg-black/30 text-white border border-white/10 active:scale-95 transition-all select-none shrink-0"
+                className="flex items-center gap-1.5 h-9 px-3.5 rounded-full bg-black/20 hover:bg-black/30 text-white border border-white/15 active:scale-95 transition-all select-none shrink-0"
                 aria-label="मुखपृष्ठ"
               >
                 <Home className="h-4 w-4 text-[#E5B869]" />
@@ -640,13 +628,13 @@ export function Navbar() {
                 <ThemeToggleButton4
                   isDark={isDarkMode}
                   onToggle={() => setIsDarkMode(!isDarkMode)}
-                  className="size-8 p-1.5 rounded-lg bg-black/20 hover:bg-black/30 text-[#E5B869] border border-white/10"
+                  className="h-9 w-9 p-2 rounded-full bg-black/20 hover:bg-black/30 text-[#E5B869] border border-white/15"
                 />
 
                 <button
                   type="button"
                   onClick={() => setIsSearchOpen(true)}
-                  className="p-2 rounded-lg bg-black/20 hover:bg-black/30 text-[#E5B869] border border-white/10 active:scale-95 transition-all cursor-pointer"
+                  className="h-9 w-9 rounded-full bg-black/20 hover:bg-black/30 text-[#E5B869] border border-white/15 active:scale-95 transition-all cursor-pointer flex items-center justify-center"
                   aria-label={language === "en" ? "Search" : language === "hi" ? "खोजें" : "शोध उघडा"}
                   title="ग्रंथ शोध"
                 >
@@ -656,7 +644,7 @@ export function Navbar() {
                 <button
                   type="button"
                   onClick={() => setIsMobileMenuOpen(true)}
-                  className="p-2 rounded-lg bg-black/20 hover:bg-black/30 text-white border border-white/10 active:scale-95 transition-all cursor-pointer"
+                  className="h-9 w-9 rounded-full bg-black/20 hover:bg-black/30 text-white border border-white/15 active:scale-95 transition-all cursor-pointer flex items-center justify-center"
                   aria-label="मेनू उघडा"
                 >
                   <Menu className="h-4 w-4" />
@@ -830,7 +818,13 @@ export function Navbar() {
               >
                 <div className="flex items-center gap-2">
                   <Search className="h-4 w-4 text-[#800020] dark:text-[#E5B869]" />
-                  <span>ग्रंथ व लेखक शोधा...</span>
+                  <span>
+                    {language === "en"
+                      ? "Search books & authors..."
+                      : language === "hi"
+                        ? "ग्रन्थ व लेखक खोजें..."
+                        : "ग्रंथ व लेखक शोधा..."}
+                  </span>
                 </div>
                 <span className="text-xs font-mono text-stone-400">⌘K</span>
               </button>
@@ -839,7 +833,11 @@ export function Navbar() {
             {/* Language & Theme Selection inside Drawer */}
             <div className="px-3.5 py-2.5 border-b border-[#E5DDD0] dark:border-[#332228] bg-white dark:bg-[#1E1418] flex items-center justify-between">
               <span className="text-xs font-bold text-stone-700 dark:text-stone-300 font-marathi-heading">
-                भाषा व देखावा / Language
+                {language === "en"
+                  ? "Language & Appearance"
+                  : language === "hi"
+                    ? "भाषा एवं देखावा"
+                    : "भाषा व देखावा"}
               </span>
               <GoogleTranslateWidget
                 variant="light"
@@ -851,38 +849,46 @@ export function Navbar() {
 
             {/* Quick Action Shortcuts inside Drawer */}
             <div className="grid grid-cols-4 gap-1.5 px-3 py-2.5 border-b border-[#E5DDD0] dark:border-[#332228] bg-[#FAF8F5] dark:bg-[#160E11] text-center">
-              <Link
-                href="/"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="p-2 rounded-xl bg-white dark:bg-[#1E1418] border border-[#E5DDD0] dark:border-[#332228] flex flex-col items-center gap-1 font-bold text-stone-800 dark:text-stone-200 hover:border-[#800020] transition-colors"
-              >
-                <Home className="h-4 w-4 text-[#800020] dark:text-[#E5B869]" />
-                <span className="text-[11px] font-marathi-heading">होम</span>
-              </Link>
-              <Link
-                href="/catalogue"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="p-2 rounded-xl bg-white dark:bg-[#1E1418] border border-[#E5DDD0] dark:border-[#332228] flex flex-col items-center gap-1 font-bold text-stone-800 dark:text-stone-200 hover:border-[#800020] transition-colors"
-              >
-                <BookOpen className="h-4 w-4 text-[#800020] dark:text-[#E5B869]" />
-                <span className="text-[11px] font-marathi-heading">ग्रंथसूची</span>
-              </Link>
-              <Link
-                href="/gallery"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="p-2 rounded-xl bg-white dark:bg-[#1E1418] border border-[#E5DDD0] dark:border-[#332228] flex flex-col items-center gap-1 font-bold text-stone-800 dark:text-stone-200 hover:border-[#800020] transition-colors"
-              >
-                <Camera className="h-4 w-4 text-[#800020] dark:text-[#E5B869]" />
-                <span className="text-[11px] font-marathi-heading">चित्रे</span>
-              </Link>
-              <Link
-                href="/membership"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="p-2 rounded-xl bg-[#800020] text-white flex flex-col items-center gap-1 font-bold shadow-xs hover:bg-[#66001A] transition-colors"
-              >
-                <UserCheck className="h-4 w-4 text-[#E5B869]" />
-                <span className="text-[11px] font-marathi-heading">सभासद</span>
-              </Link>
+              {[
+                {
+                  href: "/",
+                  icon: Home,
+                  label: language === "en" ? "Home" : language === "hi" ? "होम" : "होम",
+                  active: false,
+                },
+                {
+                  href: "/catalogue",
+                  icon: BookOpen,
+                  label: language === "en" ? "Catalogue" : language === "hi" ? "ग्रन्थसूची" : "ग्रंथसूची",
+                  active: false,
+                },
+                {
+                  href: "/gallery",
+                  icon: Camera,
+                  label: language === "en" ? "Photos" : language === "hi" ? "चित्र" : "छायाचित्रे",
+                  active: false,
+                },
+                {
+                  href: "/membership",
+                  icon: UserCheck,
+                  label: language === "en" ? "Join" : language === "hi" ? "सदस्य" : "सभासद",
+                  active: true,
+                },
+              ].map((q) => (
+                <Link
+                  key={q.href}
+                  href={q.href}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className={`p-2 rounded-xl flex flex-col items-center gap-1 font-bold border transition-colors ${
+                    q.active
+                      ? "bg-[#800020] text-white shadow-xs hover:bg-[#66001A] border-[#800020]"
+                      : "bg-white dark:bg-[#1E1418] text-stone-800 dark:text-stone-200 hover:border-[#800020] border-[#E5DDD0] dark:border-[#332228]"
+                  }`}
+                >
+                  <q.icon className={`h-4 w-4 ${q.active ? "text-[#E5B869]" : "text-[#800020] dark:text-[#E5B869]"}`} />
+                  <span className="text-[11px] font-marathi-heading">{q.label}</span>
+                </Link>
+              ))}
             </div>
 
             {/* Accordion Menu List */}
@@ -894,7 +900,7 @@ export function Navbar() {
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="flex items-center gap-2.5 px-3.5 py-2.5 rounded-lg text-stone-800 dark:text-stone-200 hover:bg-[#F3ECE3] dark:hover:bg-[#26161B] font-bold text-base font-marathi-heading"
               >
-                <span>मुखपृष्ठ</span>
+                <span>{language === "en" ? "Home" : language === "hi" ? "मुख्यपृष्ठ" : "मुखपृष्ठ"}</span>
               </Link>
 
               {/* 5 Categories Accordion */}
@@ -938,9 +944,9 @@ export function Navbar() {
 
             {/* Drawer Footer */}
             <div className="p-3 border-t border-[#E5DDD0] dark:border-[#332228] bg-[#F3ECE3]/80 dark:bg-[#120B0D] flex items-center justify-between text-xs text-stone-500">
-              <span>शुक्रवार पेठ, अंबाजोगाई (जि. बीड)</span>
+              <span>{language === "en" ? "Shukrawar Peth, Ambajogai (Dist. Beed)" : language === "hi" ? "शुक्रवार पेठ, अंबाजोगाई (जि. बीड)" : "शुक्रवार पेठ, अंबाजोगाई (जि. बीड)"}</span>
               <Link href="/membership" onClick={() => setIsMobileMenuOpen(false)} className="text-[#800020] dark:text-[#E5B869] font-bold text-sm">
-                सभासद व्हा
+                {language === "en" ? "Join Library" : language === "hi" ? "सदस्य बनें" : "सभासद व्हा"}
               </Link>
             </div>
 

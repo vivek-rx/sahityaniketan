@@ -191,6 +191,13 @@ body {
    Base Styles & Devanagari Typography Tuning
    --------------------------------------------------------- */
 @layer base {
+  /* Reserve room for the fixed mobile bottom navigation bar (<lg only) */
+  @media (max-width: 1023px) {
+    body {
+      padding-bottom: calc(3.5rem + env(safe-area-inset-bottom, 0px));
+    }
+  }
+
   * {
     border-color: var(--border);
   }
