@@ -23,6 +23,7 @@ import { AdminTopbar } from "@/components/admin/admin-topbar";
 import { BobbingDots } from "@/components/ui/bobbing-dots";
 import { AdminModal } from "@/components/admin/admin-modal";
 import { DropzoneButton } from "@/components/admin/dropzone-button";
+import { ImageDropCard } from "@/components/admin/image-drop-card";
 import { useAdminLanguage } from "@/context/admin-language-context";
 import {
   getAlbums,
@@ -756,7 +757,7 @@ export default function AdminGalleryPage() {
             </div>
           )}
 
-          {/* Drag & Drop Multiple Files Area */}
+          {/* Drag & Drop Multiple Files Area (Uiverse-style drop card) */}
           <div>
             <label className="block text-sm font-bold text-slate-800 dark:text-slate-200 mb-1.5">
               {t.bulkSelectFilesLabel}
@@ -771,25 +772,18 @@ export default function AdminGalleryPage() {
               onChange={(e) => handleFilesSelected(e.target.files)}
             />
 
-            <div
-              onClick={() => fileInputRef.current?.click()}
-              onDragOver={(e) => e.preventDefault()}
-              onDrop={(e) => {
-                e.preventDefault();
-                handleFilesSelected(e.dataTransfer.files);
-              }}
-              className="border-2 border-dashed border-slate-300 dark:border-slate-700 hover:border-[#800020] dark:hover:border-rose-400 bg-slate-50 dark:bg-slate-800/40 hover:bg-slate-100/70 rounded-2xl p-6 sm:p-8 text-center cursor-pointer transition-all space-y-2"
-            >
-              <div className="h-12 w-12 rounded-full bg-[#800020]/10 text-[#800020] dark:bg-rose-950/40 dark:text-rose-300 mx-auto flex items-center justify-center">
-                <UploadCloud className="h-6 w-6" />
-              </div>
-              <p className="text-base font-bold text-slate-800 dark:text-slate-200">
-                {t.bulkDragDropText}
-              </p>
-              <p className="text-xs text-slate-500 dark:text-slate-400">
-                {t.bulkDragDropHint}
-              </p>
-            </div>
+            <ImageDropCard
+              hint={t.bulkDragDropText}
+              subhint={t.bulkDragDropHint}
+              label={
+                lang === "mr"
+                  ? "फोटो निवडा किंवा येथे ड्रॅग करा"
+                  : "Select photos or drop them here"
+              }
+              onFiles={handleFilesSelected}
+              multiple
+              disabled={bulkUploading}
+            />
           </div>
 
           {/* Selected Files Preview Grid */}
