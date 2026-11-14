@@ -11,6 +11,7 @@ import { WishlistProvider } from "@/context/wishlist-context";
 import { SmoothScrollProvider } from "@/components/providers/smooth-scroll-provider";
 import { LibrarySchema } from "@/components/seo/structured-data";
 import { MobileBottomNav } from "@/components/layout/mobile-bottom-nav";
+import { CookieConsent } from "@/components/layout/cookie-consent";
 import { Analytics } from "@vercel/analytics/next";
 import {
   DEFAULT_OG_IMAGE,
@@ -139,6 +140,7 @@ export default function RootLayout({
               <TooltipProvider>
                 {children}
                 <MobileBottomNav />
+                <CookieConsent />
               </TooltipProvider>
             </WishlistProvider>
           </LanguageProvider>
