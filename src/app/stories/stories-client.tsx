@@ -24,7 +24,7 @@ export default function StoriesClient({ initialStories = [] }: { initialStories:
   // titles/excerpts while the original stays the graceful fallback.
   const translatedStories = useTranslatedFields(
     stories,
-    ["title", "excerpt"] as any,
+    ["title", "excerpt", "author"] as any,
     language as SiteLang,
     (story) => (story.language as SiteLang) || "mr"
   );
