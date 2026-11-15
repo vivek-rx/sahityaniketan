@@ -21,7 +21,6 @@ import { useLanguage } from "@/context/language-context";
 import { BLUR_PLACEHOLDER } from "@/lib/image-utils";
 import { getPostBySlug } from "@/lib/actions/posts";
 import { SITE_URL } from "@/lib/site";
-import { translateContent, translateText, type SiteLang } from "@/lib/translate";
 import type { Post } from "@/types/database";
 import { BobbingDots } from "@/components/ui/bobbing-dots";
 
@@ -36,45 +35,6 @@ export default function StoryDetailPage() {
 const [story, setStory] = useState<Post | null>(null);
   const [loading, setLoading] = useState(true);
   const [copied, setCopied] = useState(false);
-
-  // Real-time translation of the CMS-authored story when the reader's
-  // language differs from the story's language. Originals stay as fallback.
-  const [localized, setLocalized] = useState<{
-    title: string;
-    excerpt: string | null;
-    content: string | null;
-  } | null>(null);
-
-  useEffect(() => {
-    if (!story) return;
-    let cancelled = false;
-    const from = ((story.language as SiteLang) || "mr") as SiteLang;
-    const to = language as SiteLang;
-    if (from === to) {
-      setLocalized(null);
-      return;
-    }
-    setLocalized(null); // show originals while translating
-    (async () => {
-      try {
-        const [title, excerpt, content] = await Promise.all([
-          translateText(story.title || "", from, to),
-          story.excerpt ? translateText(story.excerpt, from, to) : Promise.resolve(null),
-          story.content ? translateContent(story.content, from, to) : Promise.resolve(null),
-        ]);
-        if (!cancelled) setLocalized({ title, excerpt, content });
-      } catch {
-        if (!cancelled) setLocalized(null);
-      }
-    })();
-    return () => {
-      cancelled = true;
-    };
-  }, [story, language]);
-
-  const shownTitle = localized?.title || story?.title || "";
-  const shownExcerpt = localized?.excerpt ?? story?.excerpt ?? null;
-  const shownContent = localized?.content ?? story?.content ?? null;
 
   useEffect(() => {
     async function loadStory() {
@@ -139,30 +99,16 @@ const [story, setStory] = useState<Post | null>(null);
 
   const currentUrl = typeof window !== "undefined" ? window.location.href : `${SITE_URL}/stories/${slug}`;
   const dateStr = story.published_at
-    ? new Date(story.published_at).toLocaleDateString(
-        language === "en" ? "en-IN" : language === "hi" ? "hi-IN" : "mr-IN",
-        {
-          year: "numeric",
-          month: "long",
-          day: "numeric",
-        }
-      )
-    : language === "en"
-      ? "Updated"
-      : language === "hi"
-        ? "अद्यतन"
-        : "अद्ययावत";
+    ? new Date(story.published_at).toLocaleDateString("mr-IN", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    })
+    : "अद्ययावत";
 
-  // 3-line teaser formulation for sharing — language-aware so EN readers
-  // share an English caption (uses the machine-translated title/excerpt).
-  const teaserText = shownExcerpt || (shownContent ? shownContent.slice(0, 180) : "");
-  const readMoreLine =
-    language === "en"
-      ? "📖 Click the link below to read the full article:"
-      : language === "hi"
-        ? "📖 पूरा लेख पढ़ने के लिए नीचे दिए लिंक पर क्लिक करें:"
-        : "📖 खालील लिंकवर क्लिक करून संपूर्ण लेख वाचा:";
-  const fbShareCaption = `${shownTitle}\n\n${teaserText}\n\n${readMoreLine}\n${currentUrl}`;
+  // 3-line teaser formulation for Facebook sharing
+  const teaserText = story.excerpt || (story.content ? story.content.slice(0, 180) : "");
+  const fbShareCaption = `${story.title}\n\n${teaserText}\n\n📖 खालील लिंकवर क्लिक करून संपूर्ण लेख वाचा:\n${currentUrl}`;
 
   const copyToClipboard = () => {
     if (typeof navigator !== "undefined") {
@@ -192,7 +138,7 @@ const [story, setStory] = useState<Post | null>(null);
             <Breadcrumbs
               items={[
                 { label: "वाचन व लेख", href: "/stories" },
-                { label: shownTitle },
+                { label: story.title },
               ]}
             />
             <Link
@@ -210,7 +156,7 @@ const [story, setStory] = useState<Post | null>(null);
             <div className="relative aspect-[21/9] sm:aspect-[2.4/1] w-full bg-stone-100 dark:bg-stone-800">
               <Image
                 src={story.thumbnail_url || "/images/real/library_vintage_books.png"}
-                alt={shownTitle}
+                alt={story.title}
                 fill
                 priority
                 unoptimized
@@ -224,7 +170,7 @@ const [story, setStory] = useState<Post | null>(null);
                   {story.category === "blog" ? "साहित्य विचार" : "ग्रंथालय रोजनिशी"}
                 </span>
                 <h1 className="text-2xl sm:text-4xl font-black text-white leading-tight font-marathi-heading drop-shadow-md">
-                  {shownTitle}
+                  {story.title}
                 </h1>
               </div>
             </div>
@@ -276,14 +222,14 @@ const [story, setStory] = useState<Post | null>(null);
 
             {/* Article Body */}
             <div className="p-6 sm:p-10 space-y-6 text-stone-800 dark:text-stone-200 leading-relaxed text-sm sm:text-base font-marathi-body">
-              {shownExcerpt && (
+              {story.excerpt && (
                 <div className="p-4 sm:p-5 rounded-2xl bg-[#800020]/5 dark:bg-[#800020]/20 border-l-4 border-[#800020] text-stone-800 dark:text-[#FAF2E8] text-sm sm:text-base font-medium italic">
-                  {shownExcerpt}
+                  {story.excerpt}
                 </div>
               )}
 
               <div className="whitespace-pre-line space-y-4">
-                {shownContent || "लेखाचा तपशील लवकरच अद्ययावत केला जाईल."}
+                {story.content || "लेखाचा तपशील लवकरच अद्ययावत केला जाईल."}
               </div>
             </div>
 

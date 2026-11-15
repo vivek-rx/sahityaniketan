@@ -19,7 +19,6 @@ import {
 import Link from "next/link";
 import Image from "next/image";
 import { getBookById, BookVolume } from "@/lib/book-api";
-import { translatePool } from "@/lib/translate";
 import { BookReviewsSection } from "@/components/catalogue/book-reviews-section";
 import { Framer3DBook } from "@/components/ui/framer-3d-book";
 import { BobbingDots } from "@/components/ui/bobbing-dots";
@@ -31,55 +30,6 @@ export default function BookDetailPage({ params }: { params: Promise<{ slug: str
   const { language } = useLanguage();
   const isEn = language === "en";
   const isHi = language === "hi";
-
-  // Real-time machine translation for CMS-authored (Devanagari) fields when
-  // the reader browses in English — works for ANY book the librarian adds,
-  // not just the ones with official romanized names in book-titles.ts.
-  // Official map names (titleEn/authorEn/categoryEn) always win.
-  const [mt, setMt] = useState<Record<string, string>>({});
-
-  useEffect(() => {
-    if (!book) return;
-    let cancelled = false;
-    if (!isEn) {
-      setMt({});
-      return;
-    }
-    (async () => {
-      const fields: Array<[string, string | undefined]> = [
-        ["title", book.title],
-        ["author", book.author],
-        ["description", book.description],
-        ["publisher", book.publisher],
-        ["shelf", book.shelf],
-        ["callNumber", book.callNumber],
-        ["category", book.category],
-      ];
-      const deva = fields.filter(([, v]) => v && /[\u0900-\u097F]/.test(v));
-      if (deva.length === 0) return;
-      const translated = await translatePool(
-        deva.map(([, v]) => v as string),
-        "mr",
-        "en"
-      );
-      if (cancelled) return;
-      const map: Record<string, string> = {};
-      deva.forEach(([k], i) => (map[k] = translated[i]));
-      setMt(map);
-    })();
-    return () => {
-      cancelled = true;
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [book, isEn]);
-
-  const enTitle = book?.titleEn || mt.title || book?.title || "";
-  const enAuthor = book?.authorEn || mt.author || book?.author || "";
-  const enCategory = book?.categoryEn || mt.category || book?.category || "";
-  const enDescription = mt.description || book?.descriptionMarathi || book?.description || "";
-  const enPublisher = mt.publisher || book?.publisher || "";
-  const enShelf = mt.shelf || book?.shelf || "";
-  const enCallNumber = mt.callNumber || book?.callNumber || "";
 
   useEffect(() => {
     async function loadBook() {
@@ -122,12 +72,12 @@ export default function BookDetailPage({ params }: { params: Promise<{ slug: str
       <Navbar />
       <main id="main-content" className="font-marathi-body bg-[#FAF8F5] dark:bg-[#120B0D] min-h-screen transition-colors">
         <PageHeader
-          title={isEn ? enTitle : book.titleMarathi || book.title}
-          titleHindi={isEn ? enAuthor : book.authorMarathi || book.author}
-          subtitle={`${isEn ? "Call Number" : isHi ? "वर्गीकरण क्रमांक" : "वर्गीकरण क्रमांक"}: ${isEn ? enCallNumber : book.callNumber} • ${isEn ? "Shelf" : isHi ? "शैल्फ" : "कप्पा"}: ${isEn ? enShelf : book.shelf}`}
+          title={isEn ? book.titleEn || book.titleMarathi || book.title : book.titleMarathi || book.title}
+          titleHindi={isEn ? book.authorEn || book.authorMarathi || book.author : book.authorMarathi || book.author}
+          subtitle={`${isEn ? "Call Number" : isHi ? "वर्गीकरण क्रमांक" : "वर्गीकरण क्रमांक"}: ${book.callNumber} • ${isEn ? "Shelf" : isHi ? "शैल्फ" : "कप्पा"}: ${book.shelf}`}
           breadcrumbs={[
             { label: isEn ? "Catalogue" : isHi ? "ग्रंथसूची" : "ग्रंथसूची", href: "/catalogue" },
-            { label: isEn ? enTitle : book.titleMarathi || book.title },
+            { label: book.titleMarathi || book.title },
           ]}
         />
 
@@ -146,8 +96,8 @@ export default function BookDetailPage({ params }: { params: Promise<{ slug: str
               <div className="w-full md:w-72 shrink-0 space-y-4">
                 <div className="flex justify-center w-full py-2">
                   <Framer3DBook
-                    title={isEn ? enTitle : book.titleMarathi || book.title}
-                    author={isEn ? enAuthor : book.authorMarathi || book.author}
+                    title={isEn ? book.titleEn || book.titleMarathi || book.title : book.titleMarathi || book.title}
+                    author={isEn ? book.authorEn || book.authorMarathi || book.author : book.authorMarathi || book.author}
                     coverImage={book.coverImage}
                     isbn={book.isbn || book.callNumber}
                     width={220}
@@ -179,7 +129,7 @@ export default function BookDetailPage({ params }: { params: Promise<{ slug: str
                   {book.ratingsCount > 0 && (
                     <div className="flex items-center gap-1.5 bg-amber-50 dark:bg-amber-950/40 border border-amber-200/60 dark:border-amber-800/40 px-2 py-0.5 rounded-md text-xs font-bold text-amber-600 dark:text-[#E5B869]">
                       <Star className="h-3.5 w-3.5 fill-amber-500 text-amber-500" />
-                      <span>{book.rating.toFixed(1)} / {isEn ? "5.0" : "५.०"}</span>
+                      <span>{book.rating.toFixed(1)} / ५.०</span>
                       <span className="text-[11px] text-stone-500 dark:text-[#B8A699] font-normal">
                         ({book.ratingsCount.toLocaleString()} {isEn ? "ratings" : isHi ? "रेटिंग" : "परीक्षणे"})
                       </span>
@@ -213,9 +163,9 @@ export default function BookDetailPage({ params }: { params: Promise<{ slug: str
                     {isEn ? "About the Book & Summary" : isHi ? "पुस्तक परिचय एवं सारांश" : "ग्रंथ परिचय व सारांश"}
                   </h2>
                   <p className="text-sm text-stone-700 dark:text-[#D5C2B4] leading-relaxed font-devanagari">
-                    {isEn ? enDescription : book.descriptionMarathi || book.description}
+                    {book.descriptionMarathi || book.description}
                   </p>
-                  {!isEn && book.description && (
+                  {book.descriptionMarathi && (
                     <p className="text-xs text-stone-500 dark:text-[#A8988B] leading-relaxed pt-1">
                       {book.description}
                     </p>
@@ -226,7 +176,7 @@ export default function BookDetailPage({ params }: { params: Promise<{ slug: str
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 text-xs bg-[#FAF8F5] dark:bg-[#25181C] p-4 rounded-xl border border-[#E5DDD0] dark:border-[#332228] font-devanagari">
                   <div>
                     <span className="text-stone-400 dark:text-[#B8A699] block font-medium">{isEn ? "Publisher" : isHi ? "प्रकाशक" : "प्रकाशक"}</span>
-                    <span className="font-semibold text-stone-800 dark:text-[#FAF2E8]">{isEn ? enPublisher : book.publisher}</span>
+                    <span className="font-semibold text-stone-800 dark:text-[#FAF2E8]">{book.publisher}</span>
                   </div>
                   <div>
                     <span className="text-stone-400 dark:text-[#B8A699] block font-medium">{isEn ? "Year of Publication" : isHi ? "प्रकाशन वर्ष" : "प्रकाशन वर्ष"}</span>
@@ -238,11 +188,11 @@ export default function BookDetailPage({ params }: { params: Promise<{ slug: str
                   </div>
                   <div>
                     <span className="text-stone-400 dark:text-[#B8A699] block font-medium">{isEn ? "Classification No." : isHi ? "वर्गीकरण क्रमांक" : "वर्गीकरण क्रमांक"}</span>
-                    <span className="font-mono font-bold text-[#800020] dark:text-[#E5B869]">{isEn ? enCallNumber : book.callNumber}</span>
+                    <span className="font-mono font-bold text-[#800020] dark:text-[#E5B869]">{book.callNumber}</span>
                   </div>
                   <div>
                     <span className="text-stone-400 dark:text-[#B8A699] block font-medium">{isEn ? "Shelf No." : isHi ? "शैल्फ क्रमांक" : "कप्पा क्रमांक"}</span>
-                    <span className="font-semibold text-stone-800 dark:text-[#FAF2E8]">{isEn ? enShelf : book.shelf}</span>
+                    <span className="font-semibold text-stone-800 dark:text-[#FAF2E8]">{book.shelf}</span>
                   </div>
                   <div>
                     <span className="text-stone-400 dark:text-[#B8A699] block font-medium">{isEn ? "Availability" : isHi ? "उपलब्धता" : "उपलब्धता"}</span>
@@ -277,7 +227,7 @@ export default function BookDetailPage({ params }: { params: Promise<{ slug: str
             <div className="mt-12">
               <BookReviewsSection
                 bookId={book.id}
-                bookTitle={isEn ? enTitle : book.titleMarathi || book.title}
+                bookTitle={isEn ? book.titleEn || book.titleMarathi || book.title : book.titleMarathi || book.title}
               />
             </div>
           </div>

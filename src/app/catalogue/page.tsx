@@ -27,7 +27,6 @@ import { BookRequestModal } from "@/components/catalogue/book-request-modal";
 import { Framer3DBook } from "@/components/ui/framer-3d-book";
 import { BobbingDots } from "@/components/ui/bobbing-dots";
 import { PhoneticInput } from "@/components/ui/phonetic-input";
-import { translatePool } from "@/lib/translate";
 import { devaNormalize } from "@/lib/transliterate";
 
 function CatalogueContent() {
@@ -176,46 +175,6 @@ function CatalogueContent() {
     const start = (currentPage - 1) * ITEMS_PER_PAGE;
     return filteredItems.slice(start, start + ITEMS_PER_PAGE);
   }, [filteredItems, currentPage]);
-
-  // Real-time EN translation for books the librarian adds later that don't
-  // have official romanized names in book-titles.ts. Only the visible page
-  // is translated (bounded requests); results are cached and the original
-  // Devanagari stays as fallback.
-  const [mtNames, setMtNames] = useState<Record<string, { title: string; author: string }>>({});
-
-  useEffect(() => {
-    let cancelled = false;
-    if (language !== "en") {
-      setMtNames({});
-      return;
-    }
-    const need = paginatedItems.filter((b) => !b.titleEn);
-    if (need.length === 0) return;
-    (async () => {
-      const texts = need.flatMap((b) => [b.title, b.author]);
-      const out = await translatePool(texts, "mr", "en", 3);
-      if (cancelled) return;
-      setMtNames((prev) => {
-        const next = { ...prev };
-        need.forEach((b, i) => {
-          next[b.id] = { title: out[i * 2], author: out[i * 2 + 1] };
-        });
-        return next;
-      });
-    })();
-    return () => {
-      cancelled = true;
-    };
-  }, [paginatedItems, language]);
-
-  const displayTitle = (b: BookVolume) =>
-    language === "en"
-      ? b.titleEn || mtNames[b.id]?.title || b.titleMarathi || b.title
-      : b.titleMarathi || b.title;
-  const displayAuthor = (b: BookVolume) =>
-    language === "en"
-      ? b.authorEn || mtNames[b.id]?.author || b.author
-      : b.authorMarathi || b.author;
 
   return (
     <>
@@ -436,7 +395,7 @@ function CatalogueContent() {
                 <div className="flex items-center gap-3">
                   <span>
                     {language === "mr" ? "मुद्रित संग्रह:" : language === "hi" ? "मुद्रित संग्रह:" : "Printed Collection:"}{" "}
-                    <span className="font-extrabold text-[#800020] dark:text-[#E5B869] text-sm">{language === "en" ? "39,953" : "३९,९५३"}</span>{" "}
+                    <span className="font-extrabold text-[#800020] dark:text-[#E5B869] text-sm">३९,९५३</span>{" "}
                     <span className="text-stone-300 dark:text-[#332228]">|</span>{" "}
                     {language === "mr" ? "ऑनलाइन नोंदी:" : language === "hi" ? "ऑनलाइन प्रविष्टियाँ:" : "Online Records:"}{" "}
                     <span className="font-extrabold text-[#800020] dark:text-[#E5B869] text-sm">{totalOnlineRecords}</span>{" "}
@@ -571,7 +530,7 @@ function CatalogueContent() {
                         {book.coverImage ? (
                           <Image
                             src={book.coverImage}
-                            alt={displayTitle(book)}
+                            alt={language === "en" ? book.titleEn || book.title : book.titleMarathi || book.title}
                             fill
                             className="object-cover object-top group-hover:scale-105 transition-transform duration-300"
                             sizes="112px"
@@ -580,7 +539,7 @@ function CatalogueContent() {
                           <div className="flex flex-col items-center justify-center p-2 text-center h-full w-full bg-gradient-to-br from-[#800020] to-[#550015] text-white">
                             <BookOpen className="h-6 w-6 text-[#E5B869] mb-1" />
                             <span className="text-[9px] font-bold line-clamp-2 leading-tight">
-                              {displayTitle(book)}
+                              {language === "en" ? book.titleEn || book.title : book.titleMarathi || book.title}
                             </span>
                           </div>
                         )}
@@ -608,12 +567,12 @@ function CatalogueContent() {
 
                         <h3 className="font-devanagari text-base sm:text-lg font-bold text-gray-900 dark:text-[#FAF2E8] leading-snug group-hover:text-[#800020] dark:group-hover:text-[#E5B869] transition-colors">
                           <Link href={`/catalogue/${book.id}`}>
-                            {displayTitle(book)}
+                            {language === "en" ? book.titleEn || book.title : book.titleMarathi || book.title}
                           </Link>
                         </h3>
 
                         <p className="text-xs sm:text-sm font-semibold text-[#800020] dark:text-[#E5B869] font-devanagari">
-                          {displayAuthor(book)}
+                          {language === "en" ? book.authorEn || book.author : book.authorMarathi || book.author}
                         </p>
 
                         <p className="text-xs text-stone-600 dark:text-stone-300 line-clamp-2 leading-relaxed font-devanagari">
@@ -676,8 +635,8 @@ function CatalogueContent() {
                       {/* 3D Interactive Framer Book Cover Area */}
                       <div className="flex justify-center mb-3 py-1">
                         <Framer3DBook
-                          title={displayTitle(book)}
-                          author={displayAuthor(book)}
+                          title={language === "en" ? book.titleEn || book.title : book.titleMarathi || book.title}
+                          author={language === "en" ? book.authorEn || book.author : book.authorMarathi || book.author}
                           coverImage={book.coverImage}
                           isbn={book.isbn || book.callNumber}
                           width={170}
@@ -698,11 +657,11 @@ function CatalogueContent() {
                         </div>
 
                         <h3 className="font-devanagari text-base font-bold text-gray-900 dark:text-[#FAF2E8] leading-snug group-hover:text-[#800020] dark:group-hover:text-[#E5B869] transition-colors line-clamp-1">
-                          {displayTitle(book)}
+                          {language === "en" ? book.titleEn || book.title : book.titleMarathi || book.title}
                         </h3>
 
                         <p className="text-xs font-semibold text-[#800020] dark:text-[#E5B869] font-devanagari line-clamp-1">
-                          {displayAuthor(book)}
+                          {language === "en" ? book.authorEn || book.author : book.authorMarathi || book.author}
                         </p>
 
                         <p className="text-xs text-stone-600 dark:text-stone-300 line-clamp-2 leading-relaxed font-devanagari">

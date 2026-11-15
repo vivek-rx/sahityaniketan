@@ -57,19 +57,20 @@
   */
   --font-geist-sans: var(--font-geist-sans);
   --font-geist: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, sans-serif;
-  /* Geist first everywhere: one consistent Latin face; Devanagari (which Geist
-     has no glyphs for) falls through to Noto/Baloo unchanged. */
-  --font-sans: var(--font-geist-sans), var(--font-noto-devanagari), -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-serif: var(--font-geist-sans), var(--font-noto-devanagari), -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-heading: var(--font-geist-sans), var(--font-baloo), var(--font-noto-devanagari), sans-serif;
-  --font-marathi: var(--font-geist-sans), var(--font-noto-devanagari), sans-serif;
-  --font-marathi-heading: var(--font-geist-sans), var(--font-baloo), var(--font-noto-devanagari), sans-serif;
-  --font-marathi-serif: var(--font-geist-sans), var(--font-baloo), var(--font-noto-devanagari), sans-serif;
-  --font-marathi-editorial: var(--font-geist-sans), var(--font-noto-devanagari), sans-serif;
-  --font-marathi-display: var(--font-geist-sans), var(--font-baloo), var(--font-noto-devanagari), sans-serif;
-  --font-marathi-body: var(--font-geist-sans), var(--font-noto-devanagari), sans-serif;
-  --font-hindi: var(--font-geist-sans), var(--font-noto-devanagari), sans-serif;
-  --font-hindi-heading: var(--font-geist-sans), var(--font-baloo), var(--font-noto-devanagari), sans-serif;
+  /* Brand-era stacks (DO NOT reorder): Noto-first body, Baloo-first headings.
+     The logo/hero brand look depends on this order — changing it changes the
+     brand typography across the site. */
+  --font-sans: var(--font-noto-devanagari), var(--font-geist-sans), -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-serif: var(--font-noto-devanagari), var(--font-geist-sans), -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-heading: var(--font-baloo), var(--font-noto-devanagari), sans-serif;
+  --font-marathi: var(--font-noto-devanagari), var(--font-geist-sans), sans-serif;
+  --font-marathi-heading: var(--font-baloo), var(--font-noto-devanagari), sans-serif;
+  --font-marathi-serif: var(--font-baloo), var(--font-noto-devanagari), sans-serif;
+  --font-marathi-editorial: var(--font-noto-devanagari), var(--font-geist-sans), sans-serif;
+  --font-marathi-display: var(--font-baloo), var(--font-noto-devanagari), sans-serif;
+  --font-marathi-body: var(--font-noto-devanagari), var(--font-geist-sans), sans-serif;
+  --font-hindi: var(--font-noto-devanagari), var(--font-geist-sans), sans-serif;
+  --font-hindi-heading: var(--font-baloo), var(--font-noto-devanagari), sans-serif;
 
   --font-noto-devanagari: var(--font-noto-devanagari);
   --font-baloo: var(--font-baloo);
