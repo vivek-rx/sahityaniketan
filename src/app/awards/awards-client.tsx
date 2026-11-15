@@ -1,12 +1,13 @@
 "use client";
 
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Trophy, Vote, CheckCircle2, Loader2, Sparkles, BookOpen } from "lucide-react";
-import { Navbar, Footer, PageHeader } from "@/components/layout";
+import { Trophy, Vote, Clock, BookOpen, ChevronRight } from "lucide-react";
+import { Navbar, Footer } from "@/components/layout";
 import { useLanguage } from "@/context/language-context";
+import { categoryToSlug, CATEGORY_EN_LABELS } from "@/lib/awards-slugs";
 
 type Nominee = {
   id: string;
@@ -27,146 +28,23 @@ type AwardsPayload = {
   categories: Array<{ category: string; nominees: Nominee[] }>;
 };
 
-/** English display names for Marathi book categories (mirrors the genres page map). */
-const EN_LABELS: Record<string, string> = {
-  "अभिजात कादंबरी": "Classic Novels",
-  "पौराणिक व ऐतिहासिक": "Mythological & Historical",
-  "ज्ञानपीठ सन्मानित साहित्य": "Jnanpith Honoured Works",
-  "ऐतिहासिक कादंबरी": "Historical Novels",
-  "आधुनिक मराठी साहित्य": "Modern Marathi Literature",
-  "हिन्दी साहित्य": "Hindi Literature",
-  "संस्कृत काव्य": "Sanskrit Poetry",
-  "संतसाहित्य व आद्य ग्रंथ": "Sant Literature & Early Texts",
-  "ज्ञानपीठ व साहित्य अकादमी": "Jnanpith & Sahitya Akademi",
-  "विनोदी साहित्य": "Humour & Satire",
-  "नाटक व काव्य": "Drama & Poetry",
-  "विद्रोही व लोकसाहित्य": "Rebel & Folk Literature",
-  "आत्मचरित्र": "Autobiography",
-  "इतिहास व संशोधन": "History & Research",
-  "स्पर्धा परीक्षा व करिअर": "Competitive Exams & Career",
-};
-
 const VOTER_KEY_STORE = "sn_awards_voter_key";
 const VOTED_STORE = "sn_awards_voted";
 
-/** Persistent anonymous voter identity (random, stored once). */
-function getOrCreateVoterKey(): string {
-  if (typeof window === "undefined") return "";
-  let key = localStorage.getItem(VOTER_KEY_STORE);
-  if (!key || key.length < 8) {
-    key =
-      "vk_" +
-      Array.from(crypto.getRandomValues(new Uint8Array(12)))
-        .map((b) => b.toString(16).padStart(2, "0"))
-        .join("");
-    localStorage.setItem(VOTER_KEY_STORE, key);
-  }
-  return key;
-}
-
 export default function AwardsClient() {
   const { language } = useLanguage();
+  const isEn = language === "en";
+  const isHi = language === "hi";
   const [data, setData] = useState<AwardsPayload | null>(null);
   const [loading, setLoading] = useState(true);
-  const [voted, setVoted] = useState<Record<string, string>>({}); // category -> nomineeId
-  const [votingNominee, setVotingNominee] = useState<string | null>(null);
-  const [counts, setCounts] = useState<Record<string, Record<string, number>>>({}); // category -> nomineeId -> votes
-
-  const t = useMemo(
-    () => ({
-      heroBadge:
-        language === "mr"
-          ? "वाचकांचा निवड पुरस्कार"
-          : language === "hi"
-            ? "पाठकों की पसंद पुरस्कार"
-            : "Readers' Choice Awards",
-      title:
-        language === "mr"
-          ? "साहित्य निकेतन वाचकांचे पुरस्कार २०२६"
-          : language === "hi"
-            ? "साहित्य निकेतन पाठक पुरस्कार २०२६"
-            : "Sahitya Niketan Readers' Choice 2026",
-      subtitle:
-        language === "mr"
-          ? "प्रत्येक श्रेणीतील आवडते पुस्तक तुम्ही ठरवा. एका श्रेणीत एकच मत — निवड अंतिम!"
-          : language === "hi"
-            ? "हर श्रेणी में आपकी पसंदीदा किताब चुनें। एक श्रेणी, एक वोट — चुनाव अंतिम है!"
-            : "Pick your favourite book in each category. One vote per category — your choice is final!",
-      closed:
-        language === "mr"
-          ? "मतदान बंद आहे. पुरस्कार जाहीर झाले आहेत!"
-          : language === "hi"
-            ? "मतदान बंद है। पुरस्कार घोषित हो चुके हैं!"
-            : "Voting is closed. The winners have been announced!",
-      totalVotes:
-        language === "mr"
-          ? "एकूण मते"
-          : language === "hi"
-            ? "कुल वोट"
-            : "Total votes",
-      voteBtn:
-        language === "mr"
-          ? "मत द्या"
-          : language === "hi"
-            ? "वोट करें"
-            : "Vote",
-      voting:
-        language === "mr"
-          ? "मतदान सुरू..."
-          : language === "hi"
-            ? "वोट हो रहा है..."
-            : "Voting…",
-      votedLabel:
-        language === "mr"
-          ? "तुमचे मत नोंदवले"
-          : language === "hi"
-            ? "आपका वोट दर्ज"
-            : "Your pick",
-      alreadyVoted:
-        language === "mr"
-          ? "तुम्ही या श्रेणीत मतदान केले आहे"
-          : language === "hi"
-            ? "आपने इस श्रेणी में वोट किया है"
-            : "You already voted in this category",
-      votes:
-        language === "mr"
-          ? "मते"
-          : language === "hi"
-            ? "वोट"
-            : "votes",
-      empty:
-        language === "mr"
-          ? "नामांकन लवकरच जाहीर होतील. थांबा!"
-          : language === "hi"
-            ? "नामांकन जल्द ही घोषित होंगे। रुकें!"
-            : "Nominations will be announced soon. Stay tuned!",
-      noCovers: language === "mr" ? "पुस्तक" : language === "hi" ? "पुस्तक" : "Book",
-      browse:
-        language === "mr"
-          ? "संपूर्ण संग्रह पाहा"
-          : language === "hi"
-            ? "पूरा संग्रह देखें"
-            : "Browse the full collection",
-    }),
-    [language]
-  );
+  const [votedCount, setVotedCount] = useState(0);
 
   const load = useCallback(async () => {
     setLoading(true);
     try {
       const res = await fetch("/api/awards", { cache: "no-store" });
       const json = await res.json();
-      if (json.success) {
-        setData(json);
-        const tally: Record<string, Record<string, number>> = {};
-        for (const cat of json.categories) {
-          tally[cat.category] = {};
-          for (const n of cat.nominees) {
-            tally[cat.category][n.id] = n.votes;
-          }
-        }
-        setCounts(tally);
-      }
+      if (json.success) setData(json);
     } finally {
       setLoading(false);
     }
@@ -174,293 +52,345 @@ export default function AwardsClient() {
 
   useEffect(() => {
     load();
-    // Restore this browser's recorded picks
     try {
       const saved = JSON.parse(localStorage.getItem(VOTED_STORE) || "{}");
-      if (saved && typeof saved === "object") setVoted(saved);
+      if (saved && typeof saved === "object") {
+        setVotedCount(Object.keys(saved).length);
+      }
     } catch {}
   }, [load]);
 
-  async function castVote(category: string, nomineeId: string) {
-    if (!data?.votingOpen || voted[category]) return;
-    setVotingNominee(nomineeId);
-    try {
-      const res = await fetch("/api/awards", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ nomineeId, voterKey: getOrCreateVoterKey() }),
-      });
-      const json = await res.json();
-      if (res.status === 409) {
-        // Already voted server-side — treat as recorded for this browser too
-        const next = { ...voted, [category]: nomineeId };
-        setVoted(next);
-        localStorage.setItem(VOTED_STORE, JSON.stringify(next));
-        return;
-      }
-      if (json.success) {
-        setCounts((prev) => ({
-          ...prev,
-          [category]: { ...prev[category], ...json.counts },
-        }));
-        const next = { ...voted, [category]: nomineeId };
-        setVoted(next);
-        localStorage.setItem(VOTED_STORE, JSON.stringify(next));
-      }
-    } finally {
-      setVotingNominee(null);
-    }
-  }
-
-  const isEn = language === "en";
-  const catLabel = (c: string) =>
-    isEn ? EN_LABELS[c] || c : c;
-
-  const cardAnim = {
-    hidden: { opacity: 0, y: 24 },
-    show: (i: number) => ({
-      opacity: 1,
-      y: 0,
-      transition: { delay: i * 0.06, type: "spring" as const, stiffness: 180, damping: 20 },
-    }),
+  const t = {
+    badge: isEn ? "Readers' Choice Awards" : isHi ? "पाठकों की पसंद पुरस्कार" : "वाचकांचा निवड पुरस्कार",
+    title: isEn
+      ? "Sahitya Niketan Choice Awards 2026"
+      : isHi
+        ? "साहित्य निकेतन पाठक पुरस्कार २०२६"
+        : "साहित्य निकेतन वाचकांचे पुरस्कार २०२६",
+    subtitle: isEn
+      ? "Here are the library's most loved books. Vote now for your favourites — the readers decide the winners!"
+      : isHi
+        ? "ये हैं पुस्तकालय की सबसे प्रिय किताबें। अपनी पसंद के लिए वोट करें — विजेता पाठक तय करते हैं!"
+        : "ग्रंथालयातील सर्वाधिक प्रिय ग्रंथ येथे आहेत. आवडत्या ग्रंथासाठी मतदान करा — विजेते वाचक ठरवतात!",
+    cta: isEn ? "Vote Now" : isHi ? "अभी वोट करें" : "आता मतदान करा",
+    votingOpen: isEn ? "Voting Open" : isHi ? "मतदान चालू" : "मतदान सुरू",
+    votingClosed: isEn ? "Voting Closed" : isHi ? "मतदान बंद" : "मतदान बंद",
+    votesCast: isEn ? "Votes Cast" : isHi ? "वोट डाले गए" : "मते नोंदवली",
+    categories: isEn ? "Categories" : isHi ? "श्रेणियाँ" : "श्रेणी",
+    categoriesSub: isEn
+      ? "One vote per category. Your pick is final!"
+      : isHi
+        ? "प्रति श्रेणी एक वोट। आपकी पसंद अंतिम है!"
+        : "प्रत्येक श्रेणीसाठी एकच मत. निवड अंतिम!",
+    comingSoon: isEn ? "Nominees coming soon" : isHi ? "नामांकन जल्द आ रहे हैं" : "नामांकन लवकरच",
+    votedIn: isEn ? "Voted" : isHi ? "वोट किया" : "मतदान",
+    schedule: isEn ? "Voting Schedule" : isHi ? "मतदान कार्यक्रम" : "मतदान वेळापत्रक",
+    rules: isEn ? "Rules & Eligibility" : isHi ? "नियम व पात्रता" : "नियम व पात्रता",
   };
+
+  const catLabel = (c: string) => (isEn ? CATEGORY_EN_LABELS[c] || c : c);
+  const totalVotes = data?.totalVotes ?? 0;
+  const votingOpen = data?.votingOpen ?? false;
+
+  // Goodreads-style full roster: all canonical categories always show on the
+  // landing grid (empty ones as "coming soon"), payload supplies nominees.
+  const displayCategories = Object.keys(CATEGORY_EN_LABELS).map((mr) => ({
+    category: mr,
+    nominees: data?.categories.find((c) => c.category === mr)?.nominees || [],
+  }));
 
   return (
     <>
       <Navbar />
-      <main
-        id="main-content"
-        className="min-h-screen font-marathi-body bg-[#FAF8F5] dark:bg-[#120B0D] transition-colors pb-20"
-      >
-        {/* ─── Hero ─────────────────────────────────────────── */}
-        <section className="relative overflow-hidden bg-gradient-to-b from-[#2A050C] via-[#55000E] to-[#800020] text-white">
-          <div
-            aria-hidden
-            className="absolute inset-0 opacity-20"
-            style={{
-              backgroundImage:
-                "radial-gradient(circle at 20% 30%, #E5B86955 0, transparent 45%), radial-gradient(circle at 80% 70%, #ffffff22 0, transparent 40%)",
-            }}
-          />
-          <div className="relative max-w-[1240px] mx-auto px-4 sm:px-6 py-14 sm:py-20 text-center">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ type: "spring", stiffness: 200, damping: 18 }}
-              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-[#E5B869]/40 text-[#F4D98C] text-xs font-bold tracking-wide uppercase backdrop-blur-sm"
-            >
-              <Trophy className="h-4 w-4" />
-              {t.heroBadge}
-            </motion.div>
-            <motion.h1
-              initial={{ opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
-              className="mt-5 text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight"
-            >
-              {t.title}
-            </motion.h1>
-            <motion.p
-              initial={{ opacity: 0, y: 14 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="mt-4 max-w-2xl mx-auto text-sm sm:text-base text-white/80"
-            >
-              {t.subtitle}
-            </motion.p>
-            {data && (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.3 }}
-                className="mt-6 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black/25 text-xs font-semibold text-[#F4D98C]"
-              >
-                <Sparkles className="h-3.5 w-3.5" />
-                {t.totalVotes}: {data.totalVotes}
-              </motion.div>
-            )}
-          </div>
-        </section>
 
-        <div className="section max-w-[1240px] mx-auto pt-10 px-4 sm:px-6">
-          {!data?.votingOpen && data && (
-            <div className="mb-10 p-4 rounded-2xl bg-amber-50 dark:bg-[#1E1418] border border-amber-300/70 dark:border-[#E5B869]/30 text-amber-800 dark:text-[#E5B869] text-sm font-semibold flex items-center gap-2">
-              <CheckCircle2 className="h-4 w-4 shrink-0" />
-              {t.closed}
+      {/* ─── Masthead Hero (Goodreads-choice-awards style, brand palette) ─── */}
+      <section className="relative overflow-hidden bg-gradient-to-b from-[#3A040B] via-[#55000E] to-[#800020] text-white">
+        {/* Decorative gold rays */}
+        <div
+          className="absolute inset-0 opacity-[0.07] pointer-events-none"
+          style={{
+            backgroundImage:
+              "repeating-conic-gradient(from 0deg at 50% 120%, #E5B869 0deg 6deg, transparent 6deg 14deg)",
+          }}
+        />
+        <div className="relative max-w-[1200px] mx-auto px-4 sm:px-6 pt-14 pb-12 sm:pt-20 sm:pb-16 text-center">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5 }}
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-[#E5B869]/40 text-[#F4D98C] text-xs font-bold tracking-widest uppercase mb-6"
+          >
+            <Trophy className="w-4 h-4" />
+            <span>{t.badge}</span>
+          </motion.div>
+
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, delay: 0.08 }}
+            className="font-marathi-heading text-3xl sm:text-5xl lg:text-6xl font-black leading-tight max-w-4xl mx-auto text-white"
+          >
+            {t.title}
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, delay: 0.16 }}
+            className="text-sm sm:text-base text-white/80 max-w-2xl mx-auto mt-5 leading-relaxed"
+          >
+            {t.subtitle}
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, delay: 0.24 }}
+            className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8"
+          >
+            {votingOpen ? (
+              <a
+                href="#categories"
+                className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-[#E5B869] hover:bg-[#F4D98C] text-[#3A040B] text-sm sm:text-base font-black shadow-lg shadow-black/30 transition-all hover:scale-[1.03] active:scale-95 cursor-pointer"
+              >
+                <Vote className="w-5 h-5" />
+                <span>{t.cta}</span>
+              </a>
+            ) : (
+              <span className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-white/10 text-white/70 text-sm font-bold border border-white/20">
+                <Clock className="w-5 h-5" />
+                <span>{t.votingClosed}</span>
+              </span>
+            )}
+
+            <div className="flex items-center gap-5 text-xs sm:text-sm text-white/80">
+              <span className="flex items-center gap-2">
+                <span
+                  className={`w-2 h-2 rounded-full ${votingOpen ? "bg-emerald-400 animate-pulse" : "bg-red-400"}`}
+                />
+                <span className="font-bold">{votingOpen ? t.votingOpen : t.votingClosed}</span>
+              </span>
+              <span className="hidden sm:inline text-white/30">•</span>
+              <span>
+                <span className="font-black text-[#F4D98C] text-base">{totalVotes.toLocaleString(isEn ? "en-IN" : "mr-IN")}</span>{" "}
+                {t.votesCast}
+              </span>
+              {votedCount > 0 && (
+                <>
+                  <span className="hidden sm:inline text-white/30">•</span>
+                  <span>
+                    {isEn
+                      ? `You voted in ${votedCount}`
+                      : isHi
+                        ? `आपने ${votedCount} में वोट किया`
+                        : `तुम्ही ${votedCount} श्रेणींत मतदान केले`}
+                  </span>
+                </>
+              )}
             </div>
-          )}
+          </motion.div>
+        </div>
+
+        {/* Gold divider */}
+        <div className="h-1 bg-gradient-to-r from-[#E5B869]/0 via-[#E5B869] to-[#E5B869]/0" />
+      </section>
+
+      <main className="bg-[#FAF8F5] dark:bg-[#120B0D] transition-colors">
+        <div className="max-w-[1240px] mx-auto px-4 sm:px-6 py-12 sm:py-16">
+          {/* ─── Categories ─── */}
+          <div id="categories" className="scroll-mt-24 text-center mb-10">
+            <h2 className="font-marathi-heading text-2xl sm:text-3xl font-black text-stone-900 dark:text-[#FAF2E8]">
+              {t.categories}
+            </h2>
+            <p className="text-xs sm:text-sm text-stone-500 dark:text-[#B8A699] mt-2">{t.categoriesSub}</p>
+          </div>
 
           {loading ? (
-            <div className="flex justify-center py-24">
-              <Loader2 className="h-8 w-8 animate-spin text-[#800020] dark:text-[#E5B869]" />
-            </div>
-          ) : !data || data.categories.length === 0 ? (
-            <div className="text-center py-24 text-stone-500 dark:text-stone-400">
-              <Trophy className="h-12 w-12 mx-auto mb-4 text-[#800020]/40 dark:text-[#E5B869]/30" />
-              <p className="text-sm font-medium">{t.empty}</p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+              {Array.from({ length: 6 }).map((_, i) => (
+                <div
+                  key={i}
+                  className="h-44 rounded-2xl bg-white dark:bg-[#220508] border border-stone-200 dark:border-[#4A1217] animate-pulse"
+                />
+              ))}
             </div>
           ) : (
-            <div className="space-y-14">
-              {data.categories.map((cat, ci) => {
-                const catCounts = counts[cat.category] || {};
-                const totalInCat = Object.values(catCounts).reduce((a, b) => a + b, 0);
-                const myPick = voted[cat.category];
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+              {displayCategories.map((cat, idx) => {
+                const nominees = cat.nominees || [];
+                const covers = nominees.filter((n) => n.coverUrl).slice(0, 3);
+                const slug = categoryToSlug(cat.category);
                 return (
-                  <motion.section
+                  <motion.div
                     key={cat.category}
-                    initial="hidden"
-                    whileInView="show"
-                    viewport={{ once: true, margin: "-60px" }}
+                    initial={{ opacity: 0, y: 18 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4, delay: Math.min(idx * 0.05, 0.4) }}
                   >
-                    {/* Category heading */}
-                    <div className="flex items-end justify-between gap-4 mb-6">
-                      <h2 className="text-xl sm:text-2xl font-extrabold text-stone-900 dark:text-[#FAF2E8] flex items-center gap-3">
-                        <span className="h-7 w-1.5 rounded-full bg-gradient-to-b from-[#800020] to-[#E5B869] dark:from-[#E5B869] dark:to-[#800020]" />
-                        {catLabel(cat.category)}
-                      </h2>
-                      {totalInCat > 0 && (
-                        <span className="text-xs font-semibold text-stone-400 dark:text-stone-500 shrink-0">
-                          {totalInCat} {t.votes}
-                        </span>
+                    <Link
+                      href={`/awards/${slug}`}
+                      className={`group block h-full rounded-2xl bg-white dark:bg-[#220508] border shadow-xs transition-all duration-300 p-6 ${
+                        nominees.length > 0
+                          ? "border-stone-200 dark:border-[#4A1217] hover:shadow-lg hover:border-[#800020]/40 dark:hover:border-[#E5B869]/40"
+                          : "border-stone-200/60 dark:border-[#3A040B] opacity-75 hover:opacity-100"
+                      }`}
+                    >
+                      <div className="flex items-center justify-between mb-4">
+                        <h3
+                          className={`font-marathi-heading text-base sm:text-lg font-bold transition-colors ${
+                            nominees.length > 0
+                              ? "text-stone-900 dark:text-[#FAF2E8] group-hover:text-[#800020] dark:group-hover:text-[#E5B869]"
+                              : "text-stone-400 dark:text-[#B8A699]"
+                          }`}
+                        >
+                          {catLabel(cat.category)}
+                        </h3>
+                        {nominees.length > 0 && (
+                          <ChevronRight className="w-4 h-4 text-stone-300 dark:text-[#5A141A] group-hover:text-[#800020] dark:group-hover:text-[#E5B869] group-hover:translate-x-1 transition-all" />
+                        )}
+                      </div>
+
+                      {covers.length > 0 ? (
+                        <div className="flex items-end justify-center gap-2 h-28">
+                          {covers.map((n, ci) => (
+                            <div
+                              key={n.id}
+                              className={`relative w-[72px] h-[104px] rounded-md overflow-hidden shadow-md border border-stone-200 dark:border-[#3A040B] bg-stone-100 dark:bg-[#2A050C] ${
+                                ci === 1 ? "z-10 scale-110 -mb-1" : "opacity-90 group-hover:opacity-100"
+                              } transition-all duration-300 group-hover:-translate-y-1`}
+                              style={{ transitionDelay: `${ci * 40}ms` }}
+                            >
+                              <Image
+                                src={n.coverUrl!}
+                                alt={isEn ? n.titleEn || n.title : n.title}
+                                fill
+                                sizes="72px"
+                                className="object-cover"
+                              />
+                            </div>
+                          ))}
+                        </div>
+                      ) : (
+                        <div className="flex items-center justify-center gap-2 h-28 text-stone-300 dark:text-[#5A141A]">
+                          <BookOpen className="w-10 h-10" />
+                          <span className="text-xs font-medium text-stone-400 dark:text-[#B8A699]">
+                            {t.comingSoon}
+                          </span>
+                        </div>
                       )}
-                    </div>
 
-                    {/* Nominee cards */}
-                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 sm:gap-5">
-                      {cat.nominees.map((n, i) => {
-                        const votes = catCounts[n.id] ?? 0;
-                        const pct = totalInCat > 0 ? Math.round((votes / totalInCat) * 100) : 0;
-                        const isMine = myPick === n.id;
-                        const hasVotedHere = Boolean(myPick);
-                        return (
-                          <motion.div
-                            key={n.id}
-                            custom={i}
-                            variants={cardAnim}
-                            initial="hidden"
-                            whileInView="show"
-                            viewport={{ once: true, margin: "-40px" }}
-                            className={`group relative rounded-2xl border p-3.5 flex flex-col items-center text-center transition-all ${
-                              isMine
-                                ? "border-[#800020] dark:border-[#E5B869] bg-white dark:bg-[#1E1418] shadow-[0_8px_24px_rgba(128,0,32,0.15)]"
-                                : "border-[#E5DDD0] dark:border-[#332228] bg-white dark:bg-[#1E1418] hover:border-[#800020]/50 dark:hover:border-[#E5B869]/50 hover:shadow-md"
-                            }`}
-                          >
-                            {/* Cover */}
-                            <Link
-                              href={`/catalogue/${n.bookId}`}
-                              className="w-24 sm:w-28 aspect-[2/3] rounded-lg overflow-hidden shadow-[2px_4px_12px_rgba(0,0,0,0.15)] bg-[#FAF8F5] dark:bg-[#180E11] relative mb-3 shrink-0 block"
-                            >
-                              {n.coverUrl ? (
-                                <Image
-                                  src={n.coverUrl}
-                                  alt={isEn ? n.titleEn || n.title : n.title}
-                                  fill
-                                  className="object-cover object-top group-hover:scale-105 transition-transform duration-300"
-                                  sizes="112px"
-                                />
-                              ) : (
-                                <div className="h-full w-full bg-gradient-to-br from-[#800020] to-[#550015] flex flex-col items-center justify-center p-2 text-white">
-                                  <BookOpen className="h-5 w-5 text-[#E5B869] mb-1" />
-                                  <span className="text-[9px] font-bold line-clamp-2 leading-tight">
-                                    {isEn ? n.titleEn || n.title : n.title}
-                                  </span>
-                                </div>
-                              )}
-                              {isMine && (
-                                <div className="absolute top-1.5 right-1.5 h-6 w-6 rounded-full bg-[#800020] dark:bg-[#E5B869] flex items-center justify-center shadow">
-                                  <CheckCircle2 className="h-4 w-4 text-white dark:text-[#18080A]" />
-                                </div>
-                              )}
-                            </Link>
-
-                            {/* Meta */}
-                            <h3 className="text-xs sm:text-sm font-bold text-stone-900 dark:text-[#FAF2E8] line-clamp-2 leading-snug">
-                              {isEn ? n.titleEn || n.title : n.title}
-                            </h3>
-                            <p className="mt-1 text-[11px] text-stone-500 dark:text-stone-400 line-clamp-1">
-                              {isEn ? n.authorEn || n.author : n.author}
-                            </p>
-
-                            {/* Result bar (once any vote exists) */}
-                            {totalInCat > 0 && (
-                              <div className="w-full mt-3">
-                                <div className="flex justify-between text-[10px] font-semibold text-stone-400 dark:text-stone-500 mb-1">
-                                  <span>{pct}%</span>
-                                  <span>
-                                    {votes} {t.votes}
-                                  </span>
-                                </div>
-                                <div className="h-1.5 w-full rounded-full bg-[#E5DDD0] dark:bg-[#332228] overflow-hidden">
-                                  <motion.div
-                                    className={`h-full rounded-full ${
-                                      isMine
-                                        ? "bg-gradient-to-r from-[#800020] to-[#E5B869]"
-                                        : "bg-[#800020]/60 dark:bg-[#E5B869]/50"
-                                    }`}
-                                    initial={{ width: 0 }}
-                                    animate={{ width: `${pct}%` }}
-                                    transition={{ duration: 0.7, ease: "easeOut" }}
-                                  />
-                                </div>
-                              </div>
-                            )}
-
-                            {/* Vote button */}
-                            <button
-                              onClick={() => castVote(cat.category, n.id)}
-                              disabled={!data?.votingOpen || hasVotedHere || votingNominee === n.id}
-                              className={`mt-3 w-full py-2 rounded-full text-xs font-bold flex items-center justify-center gap-1.5 transition-all active:scale-95 ${
-                                isMine
-                                  ? "bg-gradient-to-r from-[#800020] to-[#93233B] text-white dark:from-[#E5B869] dark:to-[#C9A227] dark:text-[#18080A]"
-                                  : hasVotedHere
-                                    ? "bg-[#FAF8F5] dark:bg-[#180E11] text-stone-400 dark:text-stone-500 border border-[#E5DDD0] dark:border-[#332228] cursor-not-allowed"
-                                    : data?.votingOpen
-                                      ? "bg-[#800020] text-white dark:bg-[#E5B869] dark:text-[#18080A] hover:opacity-90 shadow-xs"
-                                      : "bg-[#FAF8F5] dark:bg-[#180E11] text-stone-400 dark:text-stone-500 border border-[#E5DDD0] dark:border-[#332228] cursor-not-allowed"
-                              }`}
-                            >
-                              {votingNominee === n.id ? (
-                                <>
-                                  <Loader2 className="h-3.5 w-3.5 animate-spin" />
-                                  {t.voting}
-                                </>
-                              ) : isMine ? (
-                                <>
-                                  <CheckCircle2 className="h-3.5 w-3.5" />
-                                  {t.votedLabel}
-                                </>
-                              ) : hasVotedHere ? (
-                                t.alreadyVoted
-                              ) : (
-                                <>
-                                  <Vote className="h-3.5 w-3.5" />
-                                  {t.voteBtn}
-                                </>
-                              )}
-                            </button>
-                          </motion.div>
-                        );
-                      })}
-                    </div>
-                  </motion.section>
+                      <div className="mt-4 pt-3 border-t border-stone-100 dark:border-[#3A040B] flex items-center justify-between text-[11px]">
+                        <span className="text-stone-400 dark:text-[#B8A699]">
+                          {nominees.length}{" "}
+                          {isEn ? "nominees" : isHi ? "नामांकित" : "नामांकित"}
+                        </span>
+                        {nominees.length > 0 ? (
+                          votingOpen ? (
+                            <span className="inline-flex items-center gap-1 font-bold text-[#800020] dark:text-[#E5B869]">
+                              <Vote className="w-3.5 h-3.5" />
+                              {t.cta}
+                            </span>
+                          ) : (
+                            <span className="font-semibold text-stone-400">{t.votingClosed}</span>
+                          )
+                        ) : (
+                          <span className="font-semibold text-stone-300 dark:text-[#5A141A]">
+                            {isEn ? "Soon" : isHi ? "जल्द" : "लवकरच"}
+                          </span>
+                        )}
+                      </div>
+                    </Link>
+                  </motion.div>
                 );
               })}
             </div>
           )}
 
-          {/* CTA to catalogue */}
-          <div className="mt-16 text-center">
-            <Link
-              href="/catalogue"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#800020] text-white dark:bg-[#E5B869] dark:text-[#18080A] text-sm font-bold hover:opacity-90 transition-opacity shadow-md"
-            >
-              <BookOpen className="h-4 w-4" />
-              {t.browse}
-            </Link>
+          {/* ─── Voting Schedule ─── */}
+          <div className="mt-16 max-w-2xl mx-auto">
+            <div className="rounded-2xl bg-white dark:bg-[#220508] border border-stone-200 dark:border-[#4A1217] p-6 sm:p-8 shadow-xs">
+              <h3 className="font-marathi-heading text-lg font-bold text-stone-900 dark:text-[#FAF2E8] mb-5 text-center">
+                {t.schedule}
+              </h3>
+              <table className="w-full text-sm">
+                <tbody className="divide-y divide-stone-100 dark:divide-[#3A040B]">
+                  <tr>
+                    <td className="py-3 font-semibold text-stone-700 dark:text-[#D5C2B4]">
+                      {isEn ? "Voting Round" : isHi ? "मतदान" : "मतदान फेरी"}
+                    </td>
+                    <td className="py-3 text-right">
+                      <span
+                        className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold ${
+                          votingOpen
+                            ? "bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400"
+                            : "bg-stone-100 dark:bg-[#2A050C] text-stone-500 dark:text-[#B8A699]"
+                        }`}
+                      >
+                        <span className={`w-1.5 h-1.5 rounded-full ${votingOpen ? "bg-emerald-500" : "bg-stone-400"}`} />
+                        {votingOpen ? t.votingOpen : t.votingClosed}
+                      </span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="py-3 font-semibold text-stone-700 dark:text-[#D5C2B4]">
+                      {isEn ? "Total Votes Cast" : isHi ? "कुल वोट" : "एकूण मते"}
+                    </td>
+                    <td className="py-3 text-right font-black text-[#800020] dark:text-[#E5B869]">
+                      {totalVotes.toLocaleString(isEn ? "en-IN" : "mr-IN")}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="py-3 font-semibold text-stone-700 dark:text-[#D5C2B4]">
+                      {isEn ? "Winners" : isHi ? "विजेता" : "विजेते"}
+                    </td>
+                    <td className="py-3 text-right text-stone-500 dark:text-[#B8A699] text-xs">
+                      {isEn
+                        ? "Announced when voting closes"
+                        : isHi
+                          ? "मतदान बंद होने पर घोषित"
+                          : "मतदान बंद झाल्यावर जाहीर"}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            {/* Rules */}
+            <div className="mt-6 rounded-2xl bg-white dark:bg-[#220508] border border-stone-200 dark:border-[#4A1217] p-6 sm:p-8 shadow-xs">
+              <h3 className="font-marathi-heading text-lg font-bold text-stone-900 dark:text-[#FAF2E8] mb-4">
+                {t.rules}
+              </h3>
+              <ul className="space-y-2.5 text-sm text-stone-600 dark:text-[#D5C2B4] leading-relaxed">
+                <li className="flex gap-2.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#800020] dark:bg-[#E5B869] mt-2 shrink-0" />
+                  {isEn
+                    ? "One vote per category, open to every visitor. No account needed."
+                    : isHi
+                      ? "प्रति श्रेणी एक वोट, हर आगंतुक के लिए खुला। कोई खाता ज़रूरी नहीं।"
+                      : "प्रत्येक श्रेणीसाठी एकच मत, सर्वांसाठी खुले. खात्याची गरज नाही."}
+                </li>
+                <li className="flex gap-2.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#800020] dark:bg-[#E5B869] mt-2 shrink-0" />
+                  {isEn
+                    ? "Your vote is final — a category cannot be changed once voted."
+                    : isHi
+                      ? "आपका वोट अंतिम है — वोट करने के बाद श्रेणी बदली नहीं जा सकती।"
+                      : "मत अंतिम — एकदा मतदान झाल्यावर श्रेणी बदलता येत नाही."}
+                </li>
+                <li className="flex gap-2.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#800020] dark:bg-[#E5B869] mt-2 shrink-0" />
+                  {isEn
+                    ? "Nominees are curated by the library from its printed collection."
+                    : isHi
+                      ? "नामांकन पुस्तकालय के मुद्रित संग्रह से चुने गए हैं।"
+                      : "नामांकने ग्रंथालयाच्या मुद्रित संग्रहातून निवडलेली आहेत."}
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </main>
+
       <Footer />
     </>
   );

@@ -27,6 +27,7 @@ import {
   Camera,
   Calendar,
   Award,
+  Trophy,
   FileText,
   Newspaper,
   BookMarked,
@@ -734,6 +735,19 @@ export function Navbar() {
                     </div>
                   );
                 })}
+                {/* Choice Awards — top-level direct link */}
+                <Link
+                  href="/awards"
+                  className={cn(
+                    "px-3 xl:px-4 py-3.5 text-[14.5px] xl:text-[15.5px] font-bold font-marathi-heading tracking-wide transition-all flex items-center gap-1.5 cursor-pointer relative whitespace-nowrap",
+                    pathname === "/awards" || pathname?.startsWith("/awards/")
+                      ? "bg-black/20 text-[#E5B869] border-b-2 border-[#E5B869]"
+                      : "text-white/90 hover:text-white hover:bg-white/10"
+                  )}
+                >
+                  <Trophy className={cn("h-4 w-4", pathname === "/awards" || pathname?.startsWith("/awards/") ? "text-[#E5B869]" : "text-[#E5B869]/80")} />
+                  <span>{isEn ? "Awards" : isHi ? "पुरस्कार" : "पुरस्कार"}</span>
+                </Link>
 
               </div>
 
@@ -901,6 +915,16 @@ export function Navbar() {
                 className="flex items-center gap-2.5 px-3.5 py-2.5 rounded-lg text-stone-800 dark:text-stone-200 hover:bg-[#F3ECE3] dark:hover:bg-[#26161B] font-bold text-base font-marathi-heading"
               >
                 <span>{language === "en" ? "Home" : language === "hi" ? "मुख्यपृष्ठ" : "मुखपृष्ठ"}</span>
+              </Link>
+
+              {/* वाचकांचा निवड पुरस्कार */}
+              <Link
+                href="/awards"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="flex items-center gap-2.5 px-3.5 py-2.5 rounded-lg text-stone-800 dark:text-stone-200 hover:bg-[#F3ECE3] dark:hover:bg-[#26161B] font-bold text-base font-marathi-heading"
+              >
+                <Trophy className="h-4 w-4 text-[#800020] dark:text-[#E5B869]" />
+                <span>{isEn ? "Choice Awards" : isHi ? "पुरस्कार" : "पुरस्कार"}</span>
               </Link>
 
               {/* 5 Categories Accordion */}
