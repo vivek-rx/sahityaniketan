@@ -1387,7 +1387,7 @@ export function FeaturedBooksSection() {
                 transition={{ duration: 0.35, ease: "easeOut" }}
                 className="h-full"
               >
-                <Card className="h-full relative overflow-hidden flex flex-col justify-between p-6 bg-zinc-950 text-white border border-zinc-800 shadow-sm hover:shadow-md transition-all duration-300 rounded-2xl group text-center items-center">
+                <Card className="h-full relative overflow-hidden flex flex-col justify-between p-6 bg-gradient-to-br from-[#800020] via-[#6E0A20] to-[#4A050E] text-white border border-[#800020]/40 dark:border-[#E5B869]/20 shadow-sm hover:shadow-lg transition-all duration-300 rounded-2xl group text-center items-center">
                   {/* Real Marathi Books Archival Background */}
                   <div className="absolute inset-0 pointer-events-none overflow-hidden">
                     <Image
@@ -1395,27 +1395,27 @@ export function FeaturedBooksSection() {
                       alt="Marathi Classic Books Collection"
                       fill
                       sizes="(max-width: 768px) 100vw, 33vw"
-                      className="object-cover object-center opacity-35 group-hover:scale-105 transition-transform duration-700"
+                      className="object-cover object-center opacity-25 group-hover:scale-105 transition-transform duration-700"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/85 to-zinc-950/90" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#3A040B] via-[#55000E]/80 to-[#800020]/60" />
                   </div>
 
                   <div className="relative z-10 flex flex-col items-center justify-center flex-1 my-auto space-y-4 py-6">
-                    <div className="w-16 h-16 rounded-full bg-white/10 backdrop-blur-md border border-white/15 flex items-center justify-center text-amber-300 group-hover:scale-110 transition-transform">
+                    <div className="w-16 h-16 rounded-full bg-white/10 backdrop-blur-md border border-[#E5B869]/30 flex items-center justify-center text-[#F4D98C] group-hover:scale-110 transition-transform">
                       <BookOpen className="w-8 h-8" />
                     </div>
 
                     <div className="space-y-2">
-                      <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-xs font-semibold text-zinc-200">
-                        <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
+                      <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-[#E5B869]/25 text-xs font-semibold text-[#F4D98C]">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#E5B869]" />
                         <span>{language === "mr" ? "३९,९५३+ मुद्रित ग्रंथ" : language === "hi" ? "३९,९५३+ मुद्रित ग्रन्थ" : "39,953+ Printed Volumes"}</span>
                       </div>
 
-                      <h3 className="font-marathi-heading text-xl font-bold text-white leading-tight group-hover:text-amber-200 transition-colors">
+                      <h3 className="font-marathi-heading text-xl font-bold text-white leading-tight group-hover:text-[#F4D98C] transition-colors">
                         {language === "mr" ? "आणखी ग्रंथ हवे आहेत?" : language === "hi" ? "और पुस्तकें देखना चाहते हैं?" : "Explore Full Catalogue"}
                       </h3>
 
-                      <p className="text-xs text-zinc-300 font-normal leading-relaxed max-w-[26ch] mx-auto font-marathi-body">
+                      <p className="text-xs text-white/75 font-normal leading-relaxed max-w-[26ch] mx-auto font-marathi-body">
                         {language === "mr"
                           ? "ऑनलाइन ग्रंथसूचीत उपलब्ध नोंदी पृष्ठवार पाहा, विषयवार शोधा व ग्रंथ मागणी करा."
                           : language === "hi"
@@ -1425,11 +1425,11 @@ export function FeaturedBooksSection() {
                     </div>
                   </div>
 
-                  <CardFooter className="w-full p-0 pt-4 border-t border-white/10 relative z-10">
+                  <CardFooter className="w-full p-0 pt-4 border-t border-white/15 relative z-10">
                     <Link href={targetCatalogueUrl} className="w-full">
                       <Button
                         variant="primary"
-                        className="w-full rounded-xl bg-white hover:bg-zinc-100 text-zinc-950 py-3 text-xs sm:text-sm font-semibold flex items-center justify-center gap-2 shadow-xs transition-all cursor-pointer font-marathi-body"
+                        className="w-full rounded-xl bg-white hover:bg-[#F4D98C] text-[#55000E] py-3 text-xs sm:text-sm font-semibold flex items-center justify-center gap-2 shadow-xs transition-all cursor-pointer font-marathi-body"
                       >
                         <span>{language === "mr" ? "संपूर्ण ग्रंथ सूची उघडा" : language === "hi" ? "संपूर्ण ग्रन्थ सूची खोलें" : "Open Books Tab"}</span>
                       </Button>

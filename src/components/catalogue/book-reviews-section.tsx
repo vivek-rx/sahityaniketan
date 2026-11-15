@@ -5,6 +5,7 @@ import { Star, MessageSquare, User, Send, CheckCircle2, ThumbsUp, Award } from "
 import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "@/context/language-context";
 import { getBookReviews, createBookReview } from "@/lib/actions/books";
+import { useTranslatedFields, type SiteLang } from "@/lib/translate";
 import { MotionSubmitButton } from "@/components/ui/motion-submit-button";
 
 interface ReviewItem {
@@ -28,7 +29,7 @@ const SAMPLE_REVIEWS: ReviewItem[] = [
     rating: 5,
     title: "मराठी साहित्यातील अमूल्य ठेवा!",
     comment: "साहित्य निकेतन ग्रंथालयात हे पुस्तक उपलब्ध असणे हे अंबाजोगाईच्या वाचकांसाठी मोठे भाग्य आहे. भाषेची समृद्धी आणि मानवी भावनांचे उत्कृष्ट चित्रण.",
-    created_at: "२०२६-०८-०१",
+    created_at: "2026-08-01T10:00:00.000Z",
   },
   {
     id: "r-2",
@@ -36,7 +37,7 @@ const SAMPLE_REVIEWS: ReviewItem[] = [
     rating: 5,
     title: "अतिशय बोधप्रद व वाचन समृद्ध करणारे पुस्तक",
     comment: "वाचताना प्रत्येक पानावरील विचार मनाला स्पर्श करतात. अभ्यासिकेत हे पुस्तक शांततेत वाचण्याचा अनुभव अप्रतिम होता.",
-    created_at: "२०२६-०७-२५",
+    created_at: "2026-07-25T10:00:00.000Z",
   },
 ];
 
@@ -45,6 +46,14 @@ export function BookReviewsSection({ bookId, bookTitle }: BookReviewsSectionProp
   const isEn = language === "en";
   const isHi = language === "hi";
   const [reviews, setReviews] = useState<ReviewItem[]>(SAMPLE_REVIEWS);
+  // Reviews (sample or reader-submitted) are authored in Marathi; readers in
+  // EN/HI mode get machine-translated text with the original as fallback.
+  const shownReviews = useTranslatedFields(
+    reviews,
+    ["reviewer_name", "title", "comment"] as any,
+    language as SiteLang,
+    () => "mr" as SiteLang
+  );
   const [name, setName] = useState("");
   const [title, setTitle] = useState("");
   const [comment, setComment] = useState("");
@@ -62,7 +71,7 @@ export function BookReviewsSection({ bookId, bookTitle }: BookReviewsSectionProp
             id: r.id || `db-r-${idx}`,
             reviewer_name: r.reviewer_name || "ग्रंथालय वाचक",
             rating: r.rating || 5,
-            title: r.title || "वाचक अभिप्राय",
+            title: r.title || (isEn ? "Reader Review" : isHi ? "पाठक समीक्षा" : "वाचक अभिप्राय"),
             comment: r.comment || "",
             created_at: r.created_at ? new Date(r.created_at).toLocaleDateString(language === "en" ? "en-IN" : language === "hi" ? "hi-IN" : "mr-IN") : (isEn ? "Fresh review" : isHi ? "नई समीक्षा" : "ताजा अभिप्राय"),
           }));
@@ -85,7 +94,7 @@ export function BookReviewsSection({ bookId, bookTitle }: BookReviewsSectionProp
         book_id: bookId,
         reviewer_name: name.trim(),
         rating: userRating,
-        title: title.trim() || "वाचक अभिप्राय",
+        title: title.trim() || (isEn ? "Reader Review" : isHi ? "पाठक समीक्षा" : "वाचक अभिप्राय"),
         comment: comment.trim(),
       };
 
@@ -95,7 +104,7 @@ export function BookReviewsSection({ bookId, bookTitle }: BookReviewsSectionProp
         id: `rev-${Date.now()}`,
         reviewer_name: name.trim(),
         rating: userRating,
-        title: title.trim() || "वाचक अभिप्राय",
+        title: title.trim() || (isEn ? "Reader Review" : isHi ? "पाठक समीक्षा" : "वाचक अभिप्राय"),
         comment: comment.trim(),
         created_at: new Date().toLocaleDateString(language === "en" ? "en-IN" : language === "hi" ? "hi-IN" : "mr-IN"),
       };
@@ -273,7 +282,7 @@ export function BookReviewsSection({ bookId, bookTitle }: BookReviewsSectionProp
         </h4>
 
         <div className="space-y-3">
-          {reviews.map((rev) => (
+          {shownReviews.map((rev) => (
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
@@ -289,7 +298,13 @@ export function BookReviewsSection({ bookId, bookTitle }: BookReviewsSectionProp
                     <h5 className="text-xs font-bold text-gray-900 dark:text-[#FAF2E8] font-marathi-body">
                       {rev.reviewer_name}
                     </h5>
-                    <span className="text-[10px] text-gray-400 dark:text-[#B8A699] block">{rev.created_at}</span>
+                    <span className="text-[10px] text-gray-400 dark:text-[#B8A699] block">
+                      {/^\d{4}-\d{2}/.test(rev.created_at)
+                        ? new Date(rev.created_at).toLocaleDateString(
+                            isEn ? "en-IN" : isHi ? "hi-IN" : "mr-IN"
+                          )
+                        : rev.created_at}
+                    </span>
                   </div>
                 </div>
 

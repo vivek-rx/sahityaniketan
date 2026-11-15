@@ -7,6 +7,7 @@ import { BookOpen, Search } from "lucide-react";
 import { useLanguage } from "@/context/language-context";
 import { PhoneticInput } from "@/components/ui/phonetic-input";
 import { devaNormalize } from "@/lib/transliterate";
+import { useTranslatedFields, type SiteLang } from "@/lib/translate";
 import { BlogGridOrange } from "@/components/ui/skiper-ui/skiper94";
 import type { Post } from "@/types/database";
 
@@ -18,7 +19,17 @@ export default function StoriesClient({ initialStories = [] }: { initialStories:
   const [stories] = useState<any[]>(rawStories);
   const [searchQuery, setSearchQuery] = useState("");
 
-  const filteredStories = stories.filter((story) => {
+  // Real-time translation: CMS stories are authored in their own language
+  // (usually Marathi); readers in EN/HI mode get machine-translated
+  // titles/excerpts while the original stays the graceful fallback.
+  const translatedStories = useTranslatedFields(
+    stories,
+    ["title", "excerpt"] as any,
+    language as SiteLang,
+    (story) => (story.language as SiteLang) || "mr"
+  );
+
+  const filteredStories = translatedStories.filter((story) => {
     // Fuzzy match: normalize Devanagari on both sides so a phonetic-typed
     // query ("swami" → स्वमि) still finds "स्वामी"-spelled titles.
     const raw = searchQuery.trim();
