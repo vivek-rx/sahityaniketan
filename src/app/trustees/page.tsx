@@ -102,9 +102,9 @@ const EARLY_TEACHERS: { name: string; nameEn: string; role: L3 }[] = [
 
 // 4. विद्यमान विश्वस्त मंडळ (वर्तमान धोरण समिती)
 const CURRENT_TRUSTEES: { name: string; nameEn: string; role: L3 }[] = [
-  { name: "डॉ. शरद पांडुरंग हबाकर", nameEn: "Dr. Sharad Pandurang Habakar", role: ["विद्यमान विश्वस्त", "वर्तमान न्यासी", "Incumbent Trustee"] },
-  { name: "श्री. रामचंद्र नरसदासजी झांवर", nameEn: "Shri Ramchandra Narsidasji Zanwar", role: ["विद्यमान विश्वस्त", "वर्तमान न्यासी", "Incumbent Trustee"] },
-  { name: "श्री. भास्करराव झुंडीरामजी धर्मपाळे", nameEn: "Shri Bhaskarrao Jhundiramji Dharmapale", role: ["विद्यमान विश्वस्त", "वर्तमान न्यासी", "Incumbent Trustee"] },
+  { name: "श्री. शरद पांडुरंग हेब्बळकर", nameEn: "Shri Sharad Pandurang Hebbalkar", role: ["विद्यमान विश्वस्त", "वर्तमान न्यासी", "Incumbent Trustee"] },
+  { name: "श्री. रामचंद्र नरसदासजी झांवर", nameEn: "Shri Ramchandra Narsingdasji Zanwar", role: ["विद्यमान विश्वस्त", "वर्तमान न्यासी", "Incumbent Trustee"] },
+  { name: "सौ. शरयु शरदराव हेब्बळकर", nameEn: "Sau. Sharayu Sharadrao Hebbalkar", role: ["विद्यमान विश्वस्त", "वर्तमान न्यासी", "Incumbent Trustee"] },
 ];
 
 export default function TrusteesPage() {
@@ -422,14 +422,14 @@ export default function TrusteesPage() {
             <div className="p-8 rounded-2xl bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-950/20 dark:to-orange-950/20 border border-amber-200/80 dark:border-amber-800/40 max-w-3xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
               <div className="text-left space-y-1">
                 <h3 className="text-lg font-bold font-marathi-heading text-stone-900 dark:text-[#FAF2E8]">
-                  {isEn ? "Incumbent Executive Committee (2023–29)" : language === "hi" ? "विद्यमान कार्यकारिणी मंडल (२०२३-२९)" : "विद्यमान कार्यकारिणी मंडळ (२०२३-२९)"}
+                  {isEn ? "Executive Committee" : language === "hi" ? "कार्यकारिणी मंडल" : "कार्यकारिणी मंडळ"}
                 </h3>
-                <p className="text-xs text-stone-600 dark:text-stone-400 font-marathi-body">
+                <p className="text-xs font-semibold text-[#800020] dark:text-[#E5B869] font-marathi-body">
                   {isEn
-                    ? "See the President, Vice President, Secretary and all esteemed committee members"
+                    ? "Term 2023–24 to 2028–29"
                     : language === "hi"
-                      ? "अध्यक्ष, उपाध्यक्ष, कार्यवाह एवं सभी सम्मानित कार्यकारिणी सदस्यों की जानकारी देखें"
-                      : "अध्यक्ष, उपाध्यक्ष, कार्यवाह व सर्व सन्माननीय कार्यकारिणी सदस्यांची माहिती पहा"}
+                      ? "कार्यकाल २०२३-२४ से २०२८-२९"
+                      : "कार्यकाल २०२३-२४ ते २०२८-२९"}
                 </p>
               </div>
 

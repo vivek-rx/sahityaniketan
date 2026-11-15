@@ -140,7 +140,7 @@ function GalleryContent() {
                 onClick={() => setActiveTab("albums")}
                 className={`relative px-4 sm:px-5 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all duration-200 flex items-center gap-2 cursor-pointer ${
                   activeTab === "albums"
-                    ? "bg-[#D4A373] text-[#0A1A2A] shadow-md"
+                    ? "bg-[#E5B869] text-[#3A040B] shadow-md"
                     : "text-zinc-300 hover:text-white hover:bg-white/10"
                 }`}
               >
@@ -149,7 +149,7 @@ function GalleryContent() {
                 <span
                   className={`px-2 py-0.5 rounded-full text-[11px] font-semibold ${
                     activeTab === "albums"
-                      ? "bg-[#0A1A2A]/20 text-[#0A1A2A]"
+                      ? "bg-black/15 text-[#3A040B]"
                       : "bg-white/15 text-zinc-300"
                   }`}
                 >
@@ -188,7 +188,7 @@ function GalleryContent() {
         <section className="py-12 md:py-16 bg-[#FAF8F5] dark:bg-[#120B0D] transition-colors font-marathi-body">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
             {/* Quick Banner Linking to Live Facebook */}
-            <div className="rounded-2xl border border-[#D4A373]/30 bg-white/70 dark:bg-[#1A1215] p-4 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xs">
+            <div className="rounded-2xl border border-[#E5B869]/30 bg-white/70 dark:bg-[#1A1215] p-4 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xs">
               <div className="flex items-center gap-3 text-center sm:text-left">
                 <div className="w-10 h-10 rounded-xl bg-[#1877F2]/10 text-[#1877F2] flex items-center justify-center shrink-0">
                   <FacebookIcon className="w-5 h-5 fill-current" />
@@ -231,7 +231,7 @@ function GalleryContent() {
                   <div
                     key={event.id}
                     onClick={() => openGalleryModal(event)}
-                    className="group h-full flex flex-col rounded-2xl bg-white dark:bg-[#1E1418] border border-[#D4A373]/40 dark:border-[#D4A373]/25 shadow-sm hover:shadow-xl hover:border-[#B8860B] dark:hover:border-[#E5B869] hover:-translate-y-2 transition-all duration-300 overflow-hidden cursor-pointer"
+                    className="group h-full flex flex-col rounded-2xl bg-white dark:bg-[#1E1418] border border-[#E5B869]/40 dark:border-[#E5B869]/25 shadow-sm hover:shadow-xl hover:border-[#B8860B] dark:hover:border-[#E5B869] hover:-translate-y-2 transition-all duration-300 overflow-hidden cursor-pointer"
                   >
                     {/* Fixed height image container */}
                     <div className="relative h-[280px] w-full overflow-hidden bg-stone-900">
@@ -310,14 +310,14 @@ function GalleryContent() {
               exit={{ opacity: 0, scale: 0.95 }}
               transition={{ duration: 0.2, ease: "easeOut" }}
               onClick={(e) => e.stopPropagation()}
-              className="relative w-full max-w-4xl max-h-[92vh] flex flex-col rounded-2xl overflow-hidden shadow-2xl border-2 border-[#D4A373] bg-[#0A1A2A]"
+              className="relative w-full max-w-4xl max-h-[92vh] flex flex-col rounded-2xl overflow-hidden shadow-2xl border border-[#E5B869]/40 bg-[#1A0206]"
               style={{
-                backgroundImage: "linear-gradient(rgba(10, 26, 42, 0.95), rgba(18, 38, 62, 0.98))",
+                backgroundImage: "linear-gradient(rgba(26, 2, 6, 0.97), rgba(42, 5, 12, 0.99))",
               }}
             >
               {/* Modal Header: Fixed top */}
-              <div className="flex-shrink-0 bg-[#0A1A2A] px-5 py-4 border-b border-[#D4A373]/40 flex items-center justify-between gap-4">
-                <h5 className="text-base sm:text-lg font-bold text-[#D4A373] font-marathi-heading leading-tight line-clamp-1">
+              <div className="flex-shrink-0 bg-[#1A0206] px-5 py-4 border-b border-[#E5B869]/25 flex items-center justify-between gap-4">
+                <h5 className="text-base sm:text-lg font-bold text-[#E5B869] font-marathi-heading leading-tight line-clamp-1">
                   {isEn
                     ? activeModalEvent.photos[currentPhotoIdx]?.captionEn || activeModalEvent.titleEn || activeModalEvent.title
                     : isHi
@@ -356,7 +356,7 @@ function GalleryContent() {
                 </div>
 
                 {/* Photo Counter Pill */}
-                <div className="absolute top-4 left-4 rounded-full bg-black/70 backdrop-blur-sm px-3 py-1 text-xs font-bold text-[#E5B869] border border-[#E5B869]/30">
+                <div className="absolute top-4 left-4 rounded-full bg-black/40 backdrop-blur-md px-3 py-1 text-xs font-bold text-[#E5B869] border border-white/15">
                   {currentPhotoIdx + 1} / {activeModalEvent.photos.length}
                 </div>
 
@@ -368,7 +368,7 @@ function GalleryContent() {
                       e.stopPropagation();
                       prevPhoto();
                     }}
-                    className="absolute left-3 top-1/2 -translate-y-1/2 z-10 rounded-full bg-[#D4A373] hover:bg-[#E5B869] text-[#0A1A2A] p-2.5 sm:p-3 shadow-lg transition-transform hover:scale-110 cursor-pointer"
+                    className="absolute left-3 top-1/2 -translate-y-1/2 z-10 rounded-full bg-black/30 hover:bg-black/55 backdrop-blur-md border border-white/20 text-white p-2.5 sm:p-3 transition-all hover:scale-105 active:scale-90 cursor-pointer"
                     aria-label={isEn ? "Previous photo" : "मागील छायाचित्र"}
                   >
                     <ChevronLeft className="h-5 w-5 sm:h-6 sm:w-6" />
@@ -383,7 +383,7 @@ function GalleryContent() {
                       e.stopPropagation();
                       nextPhoto();
                     }}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 z-10 rounded-full bg-[#D4A373] hover:bg-[#E5B869] text-[#0A1A2A] p-2.5 sm:p-3 shadow-lg transition-transform hover:scale-110 cursor-pointer"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 z-10 rounded-full bg-black/30 hover:bg-black/55 backdrop-blur-md border border-white/20 text-white p-2.5 sm:p-3 transition-all hover:scale-105 active:scale-90 cursor-pointer"
                     aria-label={isEn ? "Next photo" : "पुढील छायाचित्र"}
                   >
                     <ChevronRight className="h-5 w-5 sm:h-6 sm:w-6" />
@@ -403,7 +403,7 @@ function GalleryContent() {
                         }}
                         className={`h-2 transition-all rounded-full cursor-pointer ${
                           idx === currentPhotoIdx
-                            ? "w-6 bg-[#D4A373]"
+                            ? "w-6 bg-[#E5B869]"
                             : "w-2 bg-white/40 hover:bg-white/70"
                         }`}
                         aria-label={`Photo ${idx + 1}`}
@@ -413,9 +413,9 @@ function GalleryContent() {
                 )}
               </div>
 
-              {/* Modal Description Wrapper: Exactly matching nagarvachanalay #modalDescWrapper */}
-              <div className="flex-shrink-0 bg-[#0A1A2A]/95 text-white border-t border-[#D4A373]/40 p-4 sm:p-5 rounded-b-xl space-y-2">
-                <div className="flex items-center justify-between text-xs text-[#D4A373] font-bold">
+              {/* Modal Description Wrapper */}
+              <div className="flex-shrink-0 bg-[#1A0206]/95 text-white border-t border-[#E5B869]/25 p-4 sm:p-5 rounded-b-xl space-y-2">
+                <div className="flex items-center justify-between text-xs text-[#E5B869]/90 font-bold">
                   <span>
                     {isEn
                       ? activeModalEvent.titleEn || activeModalEvent.title

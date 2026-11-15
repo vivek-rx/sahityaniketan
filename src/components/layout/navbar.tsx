@@ -319,10 +319,10 @@ export function Navbar() {
           description: isEn ? "Respected trustees & governing council" : isHi ? "संस्था के आदरणीय ट्रस्टी व नीति समिति" : "संस्थेचे आदरणीय विश्वस्त व धोरण समिती" 
         },
         { 
-          label: isEn ? "Office Bearers" : isHi ? "विद्यमान पदाधिकारी" : "विद्यमान पदाधिकारी", 
+          label: isEn ? "Executive Committee" : isHi ? "कार्यकारिणी मंडल" : "कार्यकारिणी मंडळ", 
           href: "/about#team", 
           icon: Award, 
-          description: isEn ? "President, Vice President, Secretary & Directors" : isHi ? "अध्यक्ष, उपाध्यक्ष, सचिव व निदेशक" : "अध्यक्ष, उपाध्यक्ष, कार्यवाह व संचालक" 
+          description: isEn ? "Term 2023–24 to 2028–29" : isHi ? "कार्यकाल २०२३-२४ से २०२८-२९" : "कार्यकाल २०२३-२४ ते २०२८-२९" 
         },
         { 
           label: isEn ? "Staff & Librarians" : isHi ? "ग्रंथपाल व कर्मचारी" : "ग्रंथपाल व कर्मचारी", 

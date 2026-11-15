@@ -34,14 +34,14 @@ export const OFFICIAL_LIBRARY_HISTORY = {
       "Shri Chandragupta Biharilal Gupta"
     ],
     currentTrustees: [
-      "डॉ. शरद पांडुरंग हबाकर",
+      "श्री. शरद पांडुरंग हेब्बळकर",
       "श्री. रामचंद्र नरसदासजी झांवर",
-      "श्री. भास्करराव झुंडीरामजी धर्मपाळे"
+      "सौ. शरयु शरदराव हेब्बळकर"
     ],
     currentTrusteesEn: [
-      "Dr. Sharad Pandurang Habakar",
+      "Shri Sharad Pandurang Hebbalkar",
       "Shri Ramchandra Narsingdasji Zanwar",
-      "Shri Bhaskarrao Zhundiramji Dharmapale"
+      "Sau. Sharayu Sharadrao Hebbalkar"
     ],
   },
   motto: {
@@ -142,9 +142,9 @@ export const OFFICIAL_LIBRARY_HISTORY = {
       titleEn: "The Struggle for Space & Library Evolution",
       yearRange: "१९५८ – १९९२",
       content:
-        "सुरुवातीला ग्रंथालयाचे कामकाज विविध ठिकाणी चालले—चंदुलाल गुल्ला यांच्या इमारतीत आणि नंतर श्री. दलका कुकर यांच्या जागेत. मात्र, वाढत्या वाचकसंख्येमुळे ही जागा अपुरी पडू लागली. १९५८ मध्ये नगरपरिषदेने भाजीमार मंडई बाजार येथील १२७ क्रमांकाचा प्लॉट संस्थेस दिला. या जागेवर वर्गणी आणि देणग्यांमधून बांधकाम उभारण्यासाठी अनेक प्रयत्न झाले. प्रसिद्ध गायिका माणिक वर्मा यांच्या गाण्याच्या कार्यक्रमातूनही निधी उभारण्यात आला. सन १९८६ पासून या नव्या जागेत ग्रंथालय सुरू झाले. महिला, बाल, संदर्भ विभाग आणि वाचनकक्षाची गरज ओळखून संस्थेने आणखी विस्ताराचा निर्णय घेतला. अनेक कायदेशीर आणि स्थानिक अडचणींचा सामना करत, समोपचाराने मार्ग काढून अखेर १९९२ मध्ये समझोता झाला आणि शासनाच्या अनुदानातून एक मोठा हॉल व इतर सुविधा उभारण्यात आल्या.",
+        "सुरुवातीला ग्रंथालयाचे कामकाज विविध ठिकाणी चालले—चंदुलाल गुप्ता यांच्या इमारतीत आणि नंतर श्री. दलका कुकर यांच्या जागेत. मात्र, वाढत्या वाचकसंख्येमुळे ही जागा अपुरी पडू लागली. १९५८ मध्ये नगरपरिषदेने भाजीमार मंडई बाजार येथील १२७ क्रमांकाचा प्लॉट संस्थेस दिला. या जागेवर वर्गणी आणि देणग्यांमधून बांधकाम उभारण्यासाठी अनेक प्रयत्न झाले. प्रसिद्ध गायिका माणिक वर्मा यांच्या गाण्याच्या कार्यक्रमातूनही निधी उभारण्यात आला. सन १९८६ पासून या नव्या जागेत ग्रंथालय सुरू झाले. महिला, बाल, संदर्भ विभाग आणि वाचनकक्षाची गरज ओळखून संस्थेने आणखी विस्ताराचा निर्णय घेतला. अनेक कायदेशीर आणि स्थानिक अडचणींचा सामना करत, समोपचाराने मार्ग काढून अखेर १९९२ मध्ये समझोता झाला आणि शासनाच्या अनुदानातून एक मोठा हॉल व इतर सुविधा उभारण्यात आल्या.",
       contentEn:
-        "Initially operating from rented premises in Chandulal Gulla's building and later in Shri Dalka Kukar's space, rapid readership growth soon overwhelmed the accommodation. In 1958, the Ambajogai Municipal Council allotted Plot No. 127 in the Bhaji Mandai Market area to the institution. Rigorous community fundraising, public subscriptions, and a musical concert by legendary vocalist Manik Varma raised essential building funds. By 1986, operations moved into this permanent premises. Navigating legal and local complexities peacefully, an amicable settlement in 1992 paved the way for a grand central hall and expanded facilities with government assistance.",
+        "Initially operating from rented premises in Chandulal Gupta's building and later in Shri Dalka Kukar's space, rapid readership growth soon overwhelmed the accommodation. In 1958, the Ambajogai Municipal Council allotted Plot No. 127 in the Bhaji Mandai Market area to the institution. Rigorous community fundraising, public subscriptions, and a musical concert by legendary vocalist Manik Varma raised essential building funds. By 1986, operations moved into this permanent premises. Navigating legal and local complexities peacefully, an amicable settlement in 1992 paved the way for a grand central hall and expanded facilities with government assistance.",
       keyHighlights: [
         "१९५८: नगरपरिषदेकडून भाजी मंडईतील प्लॉट क्र. १२७ वाटप",
         "प्रसिद्ध गायिका माणिक वर्मा यांच्या कार्यक्रमातून निधी उभारणी",
@@ -178,13 +178,13 @@ export const OFFICIAL_LIBRARY_HISTORY = {
       titleEn: "Institution & Board of Trustees",
       yearRange: "नोंदणी १९६२ – वर्तमान",
       content:
-        "सोसायटीज रजिस्ट्रेशन ॲक्ट, १८६० अंतर्गत नोंदणीकृत असलेल्या या संस्थेचे (नोंदणी क्रमांक BHR/3/1962) पहिले विश्वस्त श्री. एकनाथ माधवराव कुलकर्णी, श्री. भगवानदासजी सालीग्रामजी लोहिया आणि श्री. चंद्रगुप्त बिहारीलाल गुप्त हे होते. त्यांच्या दूरदृष्टीमुळे संस्थेला भक्कम पाया मिळाला. सध्या डॉ. शरद पांडुरंग हबाकर, श्री. रामचंद्र नरसदासजी झांवर आणि श्री. भास्करराव झुंडीरामजी धर्मपाळे हे विश्वस्त म्हणून संस्थेचे कामकाज यशस्वीरीत्या पाहत आहेत.",
+        "सोसायटीज रजिस्ट्रेशन ॲक्ट, १८६० अंतर्गत नोंदणीकृत असलेल्या या संस्थेचे (नोंदणी क्रमांक BHR/3/1962) पहिले विश्वस्त श्री. एकनाथ माधवराव कुलकर्णी, श्री. भगवानदासजी सालीग्रामजी लोहिया आणि श्री. चंद्रगुप्त बिहारीलाल गुप्त हे होते. त्यांच्या दूरदृष्टीमुळे संस्थेला भक्कम पाया मिळाला. सध्या श्री. शरद पांडुरंग हेब्बळकर, श्री. रामचंद्र नरसदासजी झांवर आणि सौ. शरयु शरदराव हेब्बळकर हे विश्वस्त म्हणून संस्थेचे कामकाज यशस्वीरीत्या पाहत आहेत.",
       contentEn:
-        "Registered under the Societies Registration Act, 1860 (Registration No. BHR/3/1962), the library's foundation was solidified by its inaugural trustees: Shri Eknath Madhavrao Kulkarni, Shri Bhagwandasji Saligramji Lohia, and Shri Chandragupta Biharilal Gupta. Today, the Board of Trustees comprises Dr. Sharad Pandurang Habakar, Shri Ramchandra Narsingdasji Zanwar, and Shri Bhaskarrao Zhundiramji Dharmapale, steering the institution with distinction.",
+        "Registered under the Societies Registration Act, 1860 (Registration No. BHR/3/1962), the library's foundation was solidified by its inaugural trustees: Shri Eknath Madhavrao Kulkarni, Shri Bhagwandasji Saligramji Lohia, and Shri Chandragupta Biharilal Gupta. Today, the Board of Trustees comprises Shri Sharad Pandurang Hebbalkar, Shri Ramchandra Narsingdasji Zanwar, and Sau. Sharayu Sharadrao Hebbalkar, steering the institution with distinction.",
       keyHighlights: [
         "नोंदणी क्र.: BHR/3/1962 (सोसायटीज रजिस्ट्रेशन ॲक्ट, १८६०)",
         "पहिले विश्वस्त: ए. एम. कुलकर्णी, बी. एस. लोहिया, सी. बी. गुप्त",
-        "सध्याचे विश्वस्त: डॉ. शरद हबाकर, रामचंद्र झांवर, भास्करराव धर्मपाळे",
+        "सध्याचे विश्वस्त: श्री. शरद हेब्बळकर, रामचंद्र झांवर, सौ. शरयु हेब्बळकर",
         "लोकशाही व पारदर्शक संस्थात्मक व्यवस्थापन"
       ],
       image: "/images/real/library_window.png",

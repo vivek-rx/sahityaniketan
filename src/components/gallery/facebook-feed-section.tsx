@@ -33,7 +33,7 @@ export function FacebookFeedSection() {
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3 }}
-        className="mb-8 rounded-2xl bg-gradient-to-r from-[#1877F2]/10 via-[#800020]/5 to-[#D4A373]/15 dark:from-[#1877F2]/20 dark:via-[#331118] dark:to-[#D4A373]/10 border border-[#1877F2]/30 dark:border-[#1877F2]/40 p-5 sm:p-6 shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-4"
+        className="mb-8 rounded-2xl bg-gradient-to-r from-[#1877F2]/10 via-[#800020]/5 to-[#E5B869]/15 dark:from-[#1877F2]/20 dark:via-[#331118] dark:to-[#E5B869]/10 border border-[#1877F2]/30 dark:border-[#1877F2]/40 p-5 sm:p-6 shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-4"
       >
         <div className="space-y-1.5 max-w-2xl">
           <div className="flex items-center gap-2">

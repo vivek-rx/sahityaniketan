@@ -80,7 +80,7 @@ export function InspiringJourneySection() {
     "trustees-governance": [
       "Reg. No.: BHR/3/1962 (Societies Registration Act, 1860)",
       "First trustees: E. M. Kulkarni, B. S. Lohia, C. B. Gupta",
-      "Current trustees: Dr. Sharad Habakar, Ramchandra Zanwar, Bhaskarrao Dharmapale",
+      "Current trustees: Shri Sharad Hebbalkar, Ramchandra Zanwar, Sau. Sharayu Hebbalkar",
       "Democratic & transparent institutional governance",
     ],
     "accreditation-recognition": [
@@ -125,7 +125,7 @@ export function InspiringJourneySection() {
     "trustees-governance": [
       "पंजीकरण सं.: BHR/3/1962 (सोसायटीज रजिस्ट्रेशन एक्ट, १८६०)",
       "प्रथम न्यासी: ई. एम. कुलकर्णी, बी. एस. लोहिया, सी. बी. गुप्त",
-      "वर्तमान न्यासी: डॉ. शरद हबाकर, रामचंद्र झांवर, भास्करराव धर्मपाळे",
+      "वर्तमान न्यासी: श्री. शरद हेब्बळकर, रामचंद्र झांवर, सौ. शरयु हेब्बळकर",
       "लोकतांत्रिक एवं पारदर्शी संस्थागत प्रबंधन",
     ],
     "accreditation-recognition": [

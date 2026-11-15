@@ -13,22 +13,22 @@ import { COMMITTEE_MEMBERS, type CommitteeMember } from "@/lib/committee";
 
 const TRUSTEES_DATA = [
   {
-    name: "डॉ. शरद पांडुरंग हबाकर",
-    nameEn: "Dr. Sharad Pandurang Habakar",
+    name: "श्री. शरद पांडुरंग हेब्बळकर",
+    nameEn: "Shri Sharad Pandurang Hebbalkar",
     role: "विश्वस्त",
     roleHi: "न्यासी",
     roleEn: "Trustee",
   },
   {
     name: "श्री. रामचंद्र नरसदासजी झांवर",
-    nameEn: "Shri Ramchandra Narasdasji Zanwar",
+    nameEn: "Shri Ramchandra Narsingdasji Zanwar",
     role: "विश्वस्त",
     roleHi: "न्यासी",
     roleEn: "Trustee",
   },
   {
-    name: "श्री. भास्करराव झुंडीरामजी धर्मपाळे",
-    nameEn: "Shri Bhaskarrao Jhundiramji Dharmapale",
+    name: "सौ. शरयु शरदराव हेब्बळकर",
+    nameEn: "Sau. Sharayu Sharadrao Hebbalkar",
     role: "विश्वस्त",
     roleHi: "न्यासी",
     roleEn: "Trustee",

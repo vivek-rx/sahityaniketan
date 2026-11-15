@@ -25,7 +25,7 @@ const MARATHI_MILESTONES: ContourTimelineItem[] = [
     label: "पायाभरणी",
     title: "राष्ट्रभाषा हिंदी वर्ग व समर्पित शिक्षक सेवा",
     description:
-      "सुरुवातीच्या काळात चंदुलाल गुल्ला व नंतर दलका कुकर यांच्या जागेत ग्रंथालय चालले. सोबतच 'हिंदी प्रचार सभा, हैदराबाद' अंतर्गत वर्ग सुरू झाले. प्र. गो. भावठाणकर, ज्ञा. लु. खोपुसकर, विनायकराव जानवळकर, प्र. गो. रामदासी यांनी अल्प मानधनातून ग्रंथालय वाढीस मोठे योगदान दिले.",
+      "सुरुवातीच्या काळात चंदुलाल गुप्ता व नंतर दलका कुकर यांच्या जागेत ग्रंथालय चालले. सोबतच 'हिंदी प्रचार सभा, हैदराबाद' अंतर्गत वर्ग सुरू झाले. प्र. गो. भावठाणकर, ज्ञा. लु. खोपुसकर, विनायकराव जानवळकर, प्र. गो. रामदासी यांनी अल्प मानधनातून ग्रंथालय वाढीस मोठे योगदान दिले.",
     image: {
       src: "/images/real/library_vintage_books.webp",
       alt: "दुर्मीळ ऐतिहासिक ग्रंथ संग्रह",
@@ -100,7 +100,7 @@ const MARATHI_MILESTONES: ContourTimelineItem[] = [
     label: "सुसज्ज सभागृह",
     title: "दुसऱ्या मजल्यावर सभागृह, ३९,९५३+ ग्रंथ व अखंड ज्ञानसेवा",
     description:
-      "२०१७-१८ मध्ये दुसऱ्या मजल्याचे बांधकाम पूर्ण करून तिथे सुसज्ज सभागृह उभारण्यात आले. आज डॉ. शरद हबाकर, रामचंद्रजी झांवर, भास्करराव धर्मपाळे यांच्या नेतृत्वाखाली ३९,९५३ मुद्रित ग्रंथ व दुर्मीळ हस्तलिखितांसह ज्ञानदानाची परंपरा अव्याहत सुरू आहे.",
+      "२०१७-१८ मध्ये दुसऱ्या मजल्याचे बांधकाम पूर्ण करून तिथे सुसज्ज सभागृह उभारण्यात आले. आज श्री. शरद हेब्बळकर, रामचंद्रजी झांवर, सौ. शरयु हेब्बळकर यांच्या नेतृत्वाखाली ३९,९५३ मुद्रित ग्रंथ व दुर्मीळ हस्तलिखितांसह ज्ञानदानाची परंपरा अव्याहत सुरू आहे.",
     image: {
       src: "/images/real/marathi_books_display.png",
       alt: "साहित्य निकेतन आधुनिक दालन",
@@ -133,7 +133,7 @@ const ENGLISH_MILESTONES: ContourTimelineItem[] = [
     label: "Founding Years",
     title: "National Language Classes & Devoted Teachers",
     description:
-      "Initially housed in Chandulal Gulla's premises and then Shri Dalka Kukar's space, the library ran classes under Hindi Prachar Sabha Hyderabad. Devoted educators P. G. Bhavthankar, Dnya. Lu. Khopuskar, Vinayakrao Janwalkar, and P. G. Ramdasi contributed immensely with nominal honorariums.",
+      "Initially housed in Chandulal Gupta's premises and then Shri Dalka Kukar's space, the library ran classes under Hindi Prachar Sabha Hyderabad. Devoted educators P. G. Bhavthankar, Dnya. Lu. Khopuskar, Vinayakrao Janwalkar, and P. G. Ramdasi contributed immensely with nominal honorariums.",
     image: {
       src: "/images/real/library_vintage_books.webp",
       alt: "Vintage Rare Books",
@@ -208,7 +208,7 @@ const ENGLISH_MILESTONES: ContourTimelineItem[] = [
     label: "Auditorium & Today",
     title: "Second Floor Auditorium, 39,953+ Books & Unbroken Knowledge Service",
     description:
-      "In 2017-18, the second floor was completed with an equipped auditorium. Guided by trustees Dr. Sharad Habakar, Ramchandra Zanwar, and Bhaskarrao Dharmapale, Sahitya Niketan preserves 39,953+ volumes with unbroken dedication.",
+      "In 2017-18, the second floor was completed with an equipped auditorium. Guided by trustees Shri Sharad Hebbalkar, Ramchandra Zanwar, and Sau. Sharayu Hebbalkar, Sahitya Niketan preserves 39,953+ volumes with unbroken dedication.",
     image: {
       src: "/images/real/marathi_books_display.png",
       alt: "Modern Book Stacks",

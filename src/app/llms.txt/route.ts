@@ -14,7 +14,7 @@ export async function GET() {
 - Collection: 39,953+ printed books, rare Modi and Sanskrit manuscripts, Vivekasindhu of Aadyakavi Mukundraj and Pasodi of Sant Dasopant among rare holdings
 - Motto: "Ek Hriday Ho Bharat Janani"
 - Founding trustees (1962): Shri Eknath Madhavrao Kulkarni, Shri Bhagwandasji Saligramji Lohia, Shri Chandragupta Biharilal Gupta
-- Current leadership: trustees Dr. Sharad Habakar, Ramchandra Zanwar, Bhaskarrao Dharmapale
+- Current leadership: trustees Shri Sharad Hebbalkar, Ramchandra Zanwar, Sau. Sharayu Hebbalkar
 - Membership: standard, student, senior-citizen and lifetime categories; borrow up to 2 books for 14 days; application via /membership
 - Free facilities: reference reading room, senior-citizen newspaper section (15+ dailies in Marathi, Hindi, English; 60+ magazines)
 
