@@ -143,6 +143,7 @@ export const CATEGORY_LINKS: Record<string, SubLinkItem[]> = {
     { label: "Carousel Manager", href: "/admin/carousel" },
     { label: "Gallery Albums", href: "/admin/gallery" },
     { label: "Sahitya Sanchit Stories", href: "/admin/stories" },
+    { label: "Choice Awards (पुरस्कार)", href: "/admin/awards" },
   ],
   Community: [
     { label: "Testimonials", href: "/admin/testimonials" },
@@ -152,6 +153,7 @@ export const CATEGORY_LINKS: Record<string, SubLinkItem[]> = {
     { label: "Public Website", href: "/" },
     { label: "Library Catalogue", href: "/catalogue" },
     { label: "Events & News", href: "/events" },
+    { label: "Choice Awards (मतदान)", href: "/awards" },
     { label: "Member Portal", href: "/login" },
   ],
 };
@@ -163,7 +165,7 @@ export function DoubleNavbar() {
 
   // Determine active section based on current pathname
   const getInitialActive = () => {
-    if (pathname.includes("carousel") || pathname.includes("gallery") || pathname.includes("noticeboard") || pathname.includes("stories")) {
+    if (pathname.includes("carousel") || pathname.includes("gallery") || pathname.includes("noticeboard") || pathname.includes("stories") || pathname.includes("awards")) {
       return "Content";
     }
     if (pathname.includes("testimonials")) return "Community";
@@ -191,6 +193,9 @@ export function DoubleNavbar() {
     } else if (pathname === "/admin/stories") {
       setActive("Content");
       setActiveLink("Sahitya Sanchit Stories");
+    } else if (pathname === "/admin/awards") {
+      setActive("Content");
+      setActiveLink("Choice Awards (पुरस्कार)");
     } else if (pathname === "/admin/testimonials") {
       setActive("Community");
       setActiveLink("Testimonials");

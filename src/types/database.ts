@@ -245,6 +245,27 @@ export interface AuditLog {
   created_at: string;
 }
 
+/** Choice Awards nomination (book standing in a category for a year). */
+export interface ChoiceNominee {
+  id: string;
+  year: number;
+  category: string;
+  book_id: string;
+  display_order: number;
+  created_at: string;
+}
+
+/** One anonymous reader's vote (one per voter per category per year). */
+export interface ChoiceVote {
+  id: string;
+  nominee_id: string;
+  year: number;
+  category: string;
+  voter_key: string;
+  created_at: string;
+}
+
+
 // ─── Database interface for Supabase client ───────────────────
 export interface Database {
   public: {
@@ -343,6 +364,18 @@ export interface Database {
         Row: AuditLog;
         Insert: Partial<AuditLog>;
         Update: Partial<AuditLog>;
+        Relationships: [];
+      };
+      choice_nominees: {
+        Row: ChoiceNominee;
+        Insert: Partial<ChoiceNominee>;
+        Update: Partial<ChoiceNominee>;
+        Relationships: [];
+      };
+      choice_votes: {
+        Row: ChoiceVote;
+        Insert: Partial<ChoiceVote>;
+        Update: Partial<ChoiceVote>;
         Relationships: [];
       };
     };

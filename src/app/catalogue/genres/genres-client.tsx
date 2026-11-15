@@ -4,7 +4,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { ArrowRight, Library, Sparkles, BookOpen } from "lucide-react";
+import { ArrowRight, Library, Sparkles, BookOpen, Trophy } from "lucide-react";
 import { Navbar, Footer, PageHeader } from "@/components/layout";
 import { useLanguage } from "@/context/language-context";
 
@@ -122,6 +122,27 @@ export function GenresClient({ groups }: { groups: GenreGroup[] }) {
               <Library className="w-4 h-4 text-[#800020] dark:text-[#E5B869]" />
               {groups.length} {t("श्रेणी", "श्रेणियाँ", "genres")} • {totalBooks}{" "}
               {t("ग्रंथ", "पुस्तकें", "books")}
+            </motion.div>
+
+            {/* Choice Awards promo */}
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.28 }}
+              className="mt-5 flex justify-center"
+            >
+              <Link
+                href="/awards"
+                className="group inline-flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-gradient-to-r from-[#800020] to-[#93233B] dark:from-[#E5B869] dark:to-[#C9A227] text-white dark:text-[#18080A] text-xs sm:text-sm font-bold shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all"
+              >
+                <Trophy className="w-4 h-4" />
+                {t(
+                  "वाचकांचा निवड पुरस्कार २०२६ — मतदान करा!",
+                  "पाठकों की पसंद पुरस्कार २०२६ — वोट करें!",
+                  "Readers' Choice Awards 2026 — Vote now!"
+                )}
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+              </Link>
             </motion.div>
           </div>
         </section>
