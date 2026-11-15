@@ -15,8 +15,8 @@ const TRUSTEES_DATA = [
     roleEn: "Trustee",
   },
   {
-    name: "श्री. रामचंद्र नरसदासजी संबर",
-    nameEn: "Shri Ramchandra Narasdasji Sanbar",
+    name: "श्री. रामचंद्र नरसदासजी झांवर",
+    nameEn: "Shri Ramchandra Narasdasji Zanwar",
     role: "विश्वस्त",
     roleHi: "न्यासी",
     roleEn: "Trustee",

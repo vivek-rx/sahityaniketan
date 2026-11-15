@@ -103,7 +103,7 @@ const EARLY_TEACHERS: { name: string; nameEn: string; role: L3 }[] = [
 // 4. विद्यमान विश्वस्त मंडळ (वर्तमान धोरण समिती)
 const CURRENT_TRUSTEES: { name: string; nameEn: string; role: L3 }[] = [
   { name: "डॉ. शरद पांडुरंग हबाकर", nameEn: "Dr. Sharad Pandurang Habakar", role: ["विद्यमान विश्वस्त", "वर्तमान न्यासी", "Incumbent Trustee"] },
-  { name: "श्री. रामचंद्र नरसदासजी संबर", nameEn: "Shri Ramchandra Narsidasji Sambar", role: ["विद्यमान विश्वस्त", "वर्तमान न्यासी", "Incumbent Trustee"] },
+  { name: "श्री. रामचंद्र नरसदासजी झांवर", nameEn: "Shri Ramchandra Narsidasji Zanwar", role: ["विद्यमान विश्वस्त", "वर्तमान न्यासी", "Incumbent Trustee"] },
   { name: "श्री. भास्करराव झुंडीरामजी धर्मपाळे", nameEn: "Shri Bhaskarrao Jhundiramji Dharmapale", role: ["विद्यमान विश्वस्त", "वर्तमान न्यासी", "Incumbent Trustee"] },
 ];
 

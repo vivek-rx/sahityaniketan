@@ -5,7 +5,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { Navbar, Footer, PageHeader, Breadcrumbs } from "@/components/layout";
 import { InspiringJourneySection } from "@/components/history/inspiring-journey-section";
-import { VoiceOfEldersPlayer } from "@/components/history/voice-of-elders-player";
 import { ScrollTimeline } from "@/components/history/scroll-timeline";
 import { RareBookFeatureCard } from "@/components/history/rare-book-feature-card";
 import { 
@@ -75,12 +74,6 @@ export default function HistoryPage() {
               >
                 {language === "en" ? "Chronological Timeline" : "ऐतिहासिक कालक्रम"}
               </a>
-              <a
-                href="#voice-of-elders"
-                className="px-3.5 py-1.5 rounded-xl bg-white/10 hover:bg-[#800020] text-white transition-colors border border-white/15"
-              >
-                {language === "en" ? "Voices of Elders (Audio)" : "ज्येष्ठांचे बोल (ध्वनीमुद्रण)"}
-              </a>
             </div>
           </div>
         </section>
@@ -93,31 +86,7 @@ export default function HistoryPage() {
         </div>
 
         {/* =================================================================
-            2. SECTION: VOICE OF ELDERS (Oral History Audio Player)
-           ================================================================= */}
-        <section id="voice-of-elders" className="py-14 sm:py-20 px-4 sm:px-6 max-w-5xl mx-auto">
-          <div className="text-center max-w-2xl mx-auto mb-10 space-y-2">
-            <h2 className="text-2xl sm:text-4xl font-extrabold font-marathi-heading text-stone-900 dark:text-white">
-              {language === "en"
-                ? "Recorded Reflections of the Founders & Senior Guides"
-                : language === "hi"
-                  ? "संस्थापक एवं ज्येष्ठ मार्गदर्शकों के ध्वनिमुद्रित विचार"
-                  : "संस्थापक व ज्येष्ठ मार्गदर्शकांचे ध्वनीमुद्रित विचार"}
-            </h2>
-            <p className="text-xs sm:text-sm text-stone-600 dark:text-stone-300">
-              {language === "en"
-                ? "The Hyderabad liberation struggle, the reading movement, and the library's founding — in the words of senior office-bearers."
-                : language === "hi"
-                  ? "हैदराबाद मुक्ति संग्राम, वाचन आंदोलन और पुस्तकालय की स्थापना की जानकारी ज्येष्ठ पदाधिकारियों के मुख से."
-                  : "हैदराबाद मुक्ती लढा, वाचन चळवळ आणि ग्रंथालयाच्या स्थापनेची माहिती ज्येष्ठ पदाधिकाऱ्यांच्या मुखातून."}
-            </p>
-          </div>
-
-          <VoiceOfEldersPlayer />
-        </section>
-
-        {/* =================================================================
-            3. SECTION: SCROLL-DRIVEN TIMELINE (Decade Markers & Ken Burns)
+            2. SECTION: SCROLL-DRIVEN TIMELINE (Decade Markers & Ken Burns)
            ================================================================= */}
         <section id="timeline" className="py-14 sm:py-20 px-4 sm:px-6 bg-[#F3ECE3]/80 dark:bg-[#160E11] border-y border-[#E5DDD0] dark:border-[#332228]">
           <div className="max-w-5xl mx-auto space-y-10">
@@ -143,7 +112,7 @@ export default function HistoryPage() {
         </section>
 
         {/* =================================================================
-            4. SECTION: RARE BOOK STORY OF THE WEEK (Facebook & WhatsApp Circulation)
+            3. SECTION: RARE BOOK STORY OF THE WEEK (Facebook & WhatsApp Circulation)
            ================================================================= */}
         <section className="py-14 sm:py-20 px-4 sm:px-6 max-w-5xl mx-auto">
           <div className="text-center max-w-2xl mx-auto mb-10 space-y-2">

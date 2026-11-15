@@ -100,7 +100,7 @@ const MARATHI_MILESTONES: ContourTimelineItem[] = [
     label: "सुसज्ज सभागृह",
     title: "दुसऱ्या मजल्यावर सभागृह, ३९,९५३+ ग्रंथ व अखंड ज्ञानसेवा",
     description:
-      "२०१७-१८ मध्ये दुसऱ्या मजल्याचे बांधकाम पूर्ण करून तिथे सुसज्ज सभागृह उभारण्यात आले. आज डॉ. शरद हबाकर, रामचंद्रजी संबर, भास्करराव धर्मपाळे यांच्या नेतृत्वाखाली ३९,९५३ मुद्रित ग्रंथ व दुर्मीळ हस्तलिखितांसह ज्ञानदानाची परंपरा अव्याहत सुरू आहे.",
+      "२०१७-१८ मध्ये दुसऱ्या मजल्याचे बांधकाम पूर्ण करून तिथे सुसज्ज सभागृह उभारण्यात आले. आज डॉ. शरद हबाकर, रामचंद्रजी झांवर, भास्करराव धर्मपाळे यांच्या नेतृत्वाखाली ३९,९५३ मुद्रित ग्रंथ व दुर्मीळ हस्तलिखितांसह ज्ञानदानाची परंपरा अव्याहत सुरू आहे.",
     image: {
       src: "/images/real/marathi_books_display.png",
       alt: "साहित्य निकेतन आधुनिक दालन",
@@ -208,7 +208,7 @@ const ENGLISH_MILESTONES: ContourTimelineItem[] = [
     label: "Auditorium & Today",
     title: "Second Floor Auditorium, 39,953+ Books & Unbroken Knowledge Service",
     description:
-      "In 2017-18, the second floor was completed with an equipped auditorium. Guided by trustees Dr. Sharad Habakar, Ramchandra Sanbar, and Bhaskarrao Dharmapale, Sahitya Niketan preserves 39,953+ volumes with unbroken dedication.",
+      "In 2017-18, the second floor was completed with an equipped auditorium. Guided by trustees Dr. Sharad Habakar, Ramchandra Zanwar, and Bhaskarrao Dharmapale, Sahitya Niketan preserves 39,953+ volumes with unbroken dedication.",
     image: {
       src: "/images/real/marathi_books_display.png",
       alt: "Modern Book Stacks",

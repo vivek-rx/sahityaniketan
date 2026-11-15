@@ -35,12 +35,12 @@ export const OFFICIAL_LIBRARY_HISTORY = {
     ],
     currentTrustees: [
       "डॉ. शरद पांडुरंग हबाकर",
-      "श्री. रामचंद्र नरसदासजी संबर",
+      "श्री. रामचंद्र नरसदासजी झांवर",
       "श्री. भास्करराव झुंडीरामजी धर्मपाळे"
     ],
     currentTrusteesEn: [
       "Dr. Sharad Pandurang Habakar",
-      "Shri Ramchandra Narsingdasji Sanbar (Zanwar)",
+      "Shri Ramchandra Narsingdasji Zanwar",
       "Shri Bhaskarrao Zhundiramji Dharmapale"
     ],
   },
@@ -163,13 +163,13 @@ export const OFFICIAL_LIBRARY_HISTORY = {
       titleEn: "Institution & Board of Trustees",
       yearRange: "नोंदणी १९६२ – वर्तमान",
       content:
-        "सोसायटीज रजिस्ट्रेशन ॲक्ट, १८६० अंतर्गत नोंदणीकृत असलेल्या या संस्थेचे (नोंदणी क्रमांक BHR/3/1962) पहिले विश्वस्त श्री. एकनाथ माधवराव कुलकर्णी, श्री. भगवानदासजी सालीग्रामजी लोहिया आणि श्री. चंद्रगुप्त बिहारीलाल गुप्त हे होते. त्यांच्या दूरदृष्टीमुळे संस्थेला भक्कम पाया मिळाला. सध्या डॉ. शरद पांडुरंग हबाकर, श्री. रामचंद्र नरसदासजी संबर आणि श्री. भास्करराव झुंडीरामजी धर्मपाळे हे विश्वस्त म्हणून संस्थेचे कामकाज यशस्वीरीत्या पाहत आहेत.",
+        "सोसायटीज रजिस्ट्रेशन ॲक्ट, १८६० अंतर्गत नोंदणीकृत असलेल्या या संस्थेचे (नोंदणी क्रमांक BHR/3/1962) पहिले विश्वस्त श्री. एकनाथ माधवराव कुलकर्णी, श्री. भगवानदासजी सालीग्रामजी लोहिया आणि श्री. चंद्रगुप्त बिहारीलाल गुप्त हे होते. त्यांच्या दूरदृष्टीमुळे संस्थेला भक्कम पाया मिळाला. सध्या डॉ. शरद पांडुरंग हबाकर, श्री. रामचंद्र नरसदासजी झांवर आणि श्री. भास्करराव झुंडीरामजी धर्मपाळे हे विश्वस्त म्हणून संस्थेचे कामकाज यशस्वीरीत्या पाहत आहेत.",
       contentEn:
-        "Registered under the Societies Registration Act, 1860 (Registration No. BHR/3/1962), the library's foundation was solidified by its inaugural trustees: Shri Eknath Madhavrao Kulkarni, Shri Bhagwandasji Saligramji Lohia, and Shri Chandragupta Biharilal Gupta. Today, the Board of Trustees comprises Dr. Sharad Pandurang Habakar, Shri Ramchandra Narsingdasji Sanbar (Zanwar), and Shri Bhaskarrao Zhundiramji Dharmapale, steering the institution with distinction.",
+        "Registered under the Societies Registration Act, 1860 (Registration No. BHR/3/1962), the library's foundation was solidified by its inaugural trustees: Shri Eknath Madhavrao Kulkarni, Shri Bhagwandasji Saligramji Lohia, and Shri Chandragupta Biharilal Gupta. Today, the Board of Trustees comprises Dr. Sharad Pandurang Habakar, Shri Ramchandra Narsingdasji Zanwar, and Shri Bhaskarrao Zhundiramji Dharmapale, steering the institution with distinction.",
       keyHighlights: [
         "नोंदणी क्र.: BHR/3/1962 (सोसायटीज रजिस्ट्रेशन ॲक्ट, १८६०)",
         "पहिले विश्वस्त: ए. एम. कुलकर्णी, बी. एस. लोहिया, सी. बी. गुप्त",
-        "सध्याचे विश्वस्त: डॉ. शरद हबाकर, रामचंद्र संबर, भास्करराव धर्मपाळे",
+        "सध्याचे विश्वस्त: डॉ. शरद हबाकर, रामचंद्र झांवर, भास्करराव धर्मपाळे",
         "लोकशाही व पारदर्शक संस्थात्मक व्यवस्थापन"
       ],
       image: "/images/real/library_window.png",
