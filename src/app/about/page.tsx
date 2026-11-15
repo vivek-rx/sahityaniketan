@@ -32,7 +32,14 @@ const TRUSTEES_DATA = [
   },
 ];
 
-const EXECUTIVE_COMMITTEE = [
+const EXECUTIVE_COMMITTEE: Array<{
+  name: string;
+  nameEn: string;
+  role: string;
+  roleHi: string;
+  roleEn: string;
+  photo?: string;
+}> = [
   {
     name: "श्री. दत्तप्रसाद पांडुरंग रांदड़",
     nameEn: "Shri Dattaprasad Pandurang Randad",
@@ -411,18 +418,30 @@ export default function AboutPage() {
                       scale={1.04}
                       glare={true}
                       glareOpacity={0.25}
-                      className="w-52 h-64 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 flex items-center justify-center text-zinc-400 dark:text-zinc-500 shadow-md group-hover:shadow-xl transition-shadow cursor-pointer"
+                      className="w-52 h-64 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 flex items-center justify-center text-zinc-400 dark:text-zinc-500 shadow-md group-hover:shadow-xl transition-shadow cursor-pointer relative overflow-hidden"
                     >
-                      <MotionSkeleton className="absolute inset-0 opacity-40 pointer-events-none rounded-2xl" />
-                      <div
-                        style={{ transform: "translateZ(30px)" }}
-                        className="relative z-10 flex flex-col items-center justify-center pointer-events-none"
-                      >
-                        <Users className="h-16 w-16 text-zinc-400 dark:text-zinc-500 group-hover:scale-110 group-hover:text-zinc-700 dark:group-hover:text-zinc-200 transition-all duration-300" />
-                        <span className="text-[10px] text-zinc-500 dark:text-zinc-400 mt-2 font-medium tracking-wide">
-                          {isEn ? "Official Portrait" : isHi ? "आधिकारिक चित्र" : "अधिकृत छायाचित्र"}
-                        </span>
-                      </div>
+                      {member.photo ? (
+                        <Image
+                          src={member.photo}
+                          alt={isEn ? member.nameEn : member.name}
+                          fill
+                          sizes="208px"
+                          className="absolute inset-0 object-cover object-top group-hover:scale-[1.03] transition-transform duration-500"
+                        />
+                      ) : (
+                        <>
+                          <MotionSkeleton className="absolute inset-0 opacity-40 pointer-events-none rounded-2xl" />
+                          <div
+                            style={{ transform: "translateZ(30px)" }}
+                            className="relative z-10 flex flex-col items-center justify-center pointer-events-none"
+                          >
+                            <Users className="h-16 w-16 text-zinc-400 dark:text-zinc-500 group-hover:scale-110 group-hover:text-zinc-700 dark:group-hover:text-zinc-200 transition-all duration-300" />
+                            <span className="text-[10px] text-zinc-500 dark:text-zinc-400 mt-2 font-medium tracking-wide">
+                              {isEn ? "Official Portrait" : isHi ? "आधिकारिक चित्र" : "अधिकृत छायाचित्र"}
+                            </span>
+                          </div>
+                        </>
+                      )}
                     </TiltCard>
                     <h3 className="text-lg font-medium text-zinc-800 dark:text-zinc-200 mt-3 font-marathi-heading">
                       {isEn ? member.nameEn : member.name}
