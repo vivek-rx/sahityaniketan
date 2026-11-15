@@ -188,28 +188,28 @@ const DEFAULT_TICKET: Required<ContourTimelineTicket> = {
 
 const DEFAULT_FONTS: Required<ContourTimelineFonts> = {
   year: {
-    fontFamily: '"Contour Geist", Geist, sans-serif',
+    fontFamily: "var(--font-geist-sans), sans-serif",
     fontWeight: 500,
     fontSize: 34,
     letterSpacing: "-0.05em",
     lineHeight: "1.2em",
   },
   title: {
-    fontFamily: '"Contour Geist", Geist, sans-serif',
+    fontFamily: "var(--font-geist-sans), sans-serif",
     fontWeight: 500,
     fontSize: 22,
     letterSpacing: "-0.04em",
     lineHeight: "1.16em",
   },
   body: {
-    fontFamily: '"Contour Geist", Geist, sans-serif',
+    fontFamily: "var(--font-geist-sans), sans-serif",
     fontWeight: 400,
     fontSize: 13,
     letterSpacing: "-0.015em",
     lineHeight: "1.55em",
   },
   label: {
-    fontFamily: '"Contour Geist", Geist, sans-serif',
+    fontFamily: "var(--font-geist-sans), sans-serif",
     fontWeight: 500,
     fontSize: 10,
     letterSpacing: "0.045em",

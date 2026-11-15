@@ -7,7 +7,7 @@ export default function AdminLoading() {
         <BobbingDots size="lg" className="text-[#800020]" />
         <p
           className="text-slate-400 text-sm font-medium tracking-wider"
-          style={{ fontFamily: "Kohinoor Devanagari, sans-serif" }}
+          style={{ fontFamily: "var(--font-noto-devanagari), sans-serif" }}
         >
           प्रशासक नियंत्रण कक्ष लोड होत आहे...
         </p>

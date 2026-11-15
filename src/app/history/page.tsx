@@ -5,7 +5,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { Navbar, Footer, PageHeader, Breadcrumbs } from "@/components/layout";
 import { InspiringJourneySection } from "@/components/history/inspiring-journey-section";
-import { DigitalManuscriptViewer } from "@/components/history/digital-manuscript-viewer";
 import { VoiceOfEldersPlayer } from "@/components/history/voice-of-elders-player";
 import { ScrollTimeline } from "@/components/history/scroll-timeline";
 import { RareBookFeatureCard } from "@/components/history/rare-book-feature-card";
@@ -77,12 +76,6 @@ export default function HistoryPage() {
                 {language === "en" ? "Chronological Timeline" : "ऐतिहासिक कालक्रम"}
               </a>
               <a
-                href="#manuscript-viewer"
-                className="px-3.5 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-white transition-colors border border-white/15"
-              >
-                {language === "en" ? "Rare Manuscripts" : "दुर्मीळ हस्तलिखिते"}
-              </a>
-              <a
                 href="#voice-of-elders"
                 className="px-3.5 py-1.5 rounded-xl bg-white/10 hover:bg-[#800020] text-white transition-colors border border-white/15"
               >
@@ -100,31 +93,7 @@ export default function HistoryPage() {
         </div>
 
         {/* =================================================================
-            2. SECTION: DIGITAL MANUSCRIPT VIEWER (Rare Manuscripts Reader)
-           ================================================================= */}
-        <section id="manuscript-viewer" className="py-14 sm:py-20 px-4 sm:px-6 max-w-5xl mx-auto">
-          <div className="text-center max-w-2xl mx-auto mb-10 space-y-2">
-            <h2 className="text-2xl sm:text-4xl font-extrabold font-marathi-heading text-stone-900 dark:text-white">
-              {language === "en"
-                ? "Historical & Rare Manuscript Collection"
-                : language === "hi"
-                  ? "ऐतिहासिक एवं दुर्लभ हस्तलिखित संग्रह"
-                  : "ऐतिहासिक व दुर्मीळ हस्तलिखित संग्रह"}
-            </h2>
-            <p className="text-xs sm:text-sm text-stone-600 dark:text-stone-300">
-              {language === "en"
-                ? "Scholarly digital presentations of the original manuscript folios of Aadyakavi Mukundraj's Vivekasindhu and Sant Dasopant's Pasodi."
-                : language === "hi"
-                  ? "आद्यकवि मुकुंदराज रचित 'विवेकसिंधु' और संत दासोपंत की 'पासोडी' — इन मूल हस्तलिखित प्रतियों का शास्त्रानुसार डिजिटल रूप."
-                  : "आद्यकवी मुकुंदराज रचित 'विवेकसिंधू' आणि संत दासोपंत यांची 'पासोडी' या मूळ हस्तलिखित प्रतींचे शास्त्रोक्त डिजिटल स्वरूप."}
-            </p>
-          </div>
-
-          <DigitalManuscriptViewer />
-        </section>
-
-        {/* =================================================================
-            3. SECTION: VOICE OF ELDERS (Oral History Audio Player)
+            2. SECTION: VOICE OF ELDERS (Oral History Audio Player)
            ================================================================= */}
         <section id="voice-of-elders" className="py-14 sm:py-20 px-4 sm:px-6 max-w-5xl mx-auto">
           <div className="text-center max-w-2xl mx-auto mb-10 space-y-2">
@@ -148,7 +117,7 @@ export default function HistoryPage() {
         </section>
 
         {/* =================================================================
-            4. SECTION: SCROLL-DRIVEN TIMELINE (Decade Markers & Ken Burns)
+            3. SECTION: SCROLL-DRIVEN TIMELINE (Decade Markers & Ken Burns)
            ================================================================= */}
         <section id="timeline" className="py-14 sm:py-20 px-4 sm:px-6 bg-[#F3ECE3]/80 dark:bg-[#160E11] border-y border-[#E5DDD0] dark:border-[#332228]">
           <div className="max-w-5xl mx-auto space-y-10">
@@ -174,7 +143,7 @@ export default function HistoryPage() {
         </section>
 
         {/* =================================================================
-            5. SECTION: RARE BOOK STORY OF THE WEEK (Facebook & WhatsApp Circulation)
+            4. SECTION: RARE BOOK STORY OF THE WEEK (Facebook & WhatsApp Circulation)
            ================================================================= */}
         <section className="py-14 sm:py-20 px-4 sm:px-6 max-w-5xl mx-auto">
           <div className="text-center max-w-2xl mx-auto mb-10 space-y-2">

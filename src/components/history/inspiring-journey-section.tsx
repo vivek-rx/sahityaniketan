@@ -265,7 +265,7 @@ export function InspiringJourneySection() {
       </div>
 
       {/* ── GOVERNANCE & TRUSTEES CARD ── */}
-      <div className="p-8 sm:p-10 rounded-3xl bg-gradient-to-br from-stone-900 to-stone-950 text-white border border-stone-800 shadow-xl space-y-8">
+      <div className="p-8 sm:p-10 rounded-3xl bg-[#FAF8F5] dark:bg-gradient-to-br dark:from-stone-900 dark:to-stone-950 text-stone-900 dark:text-white border border-[#E5DDD0] dark:border-stone-800 shadow-xl space-y-8">
         <div className="text-center max-w-2xl mx-auto space-y-2">
           <span className="text-xs font-bold text-amber-400 uppercase tracking-widest">
             {isEn ? registration.actEn : registration.act} (
@@ -279,7 +279,7 @@ export function InspiringJourneySection() {
                 ? "न्यासी मण्डल एवं मार्गदर्शक धरोहर"
                 : "विश्वस्त मंडळ व मार्गदर्शक वारसा"}
           </h3>
-          <p className="text-xs sm:text-sm text-stone-300">
+          <p className="text-xs sm:text-sm text-stone-600 dark:text-stone-300">
             {isEn
               ? "Guided by legendary pioneers in 1962 and sustained by distinguished public trustees today."
               : isHi
@@ -290,8 +290,8 @@ export function InspiringJourneySection() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 pt-4">
           {/* First Trustees */}
-          <div className="p-6 rounded-2xl bg-white/5 border border-white/10 space-y-3">
-            <div className="flex items-center gap-2 text-amber-400 font-bold text-sm">
+          <div className="p-6 rounded-2xl bg-white dark:bg-white/5 border border-[#E5DDD0] dark:border-white/10 space-y-3">
+            <div className="flex items-center gap-2 text-[#800020] dark:text-amber-400 font-bold text-sm">
               <Award className="w-5 h-5" />
               <span>
                 {isEn
@@ -301,7 +301,7 @@ export function InspiringJourneySection() {
                     : "पहिले विश्वस्त मंडळ (१९६२)"}
               </span>
             </div>
-            <ul className="space-y-2 text-xs sm:text-sm text-stone-200">
+            <ul className="space-y-2 text-xs sm:text-sm text-stone-700 dark:text-stone-200">
               {(isEn ? registration.firstTrusteesEn : registration.firstTrustees).map((t, idx) => (
                 <li key={idx} className="flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
@@ -312,8 +312,8 @@ export function InspiringJourneySection() {
           </div>
 
           {/* Current Trustees */}
-          <div className="p-6 rounded-2xl bg-white/5 border border-white/10 space-y-3">
-            <div className="flex items-center gap-2 text-amber-400 font-bold text-sm">
+          <div className="p-6 rounded-2xl bg-white dark:bg-white/5 border border-[#E5DDD0] dark:border-white/10 space-y-3">
+            <div className="flex items-center gap-2 text-[#800020] dark:text-amber-400 font-bold text-sm">
               <Users className="w-5 h-5" />
               <span>
                 {isEn
@@ -323,7 +323,7 @@ export function InspiringJourneySection() {
                     : "विद्यमान विश्वस्त मंडळ"}
               </span>
             </div>
-            <ul className="space-y-2 text-xs sm:text-sm text-stone-200">
+            <ul className="space-y-2 text-xs sm:text-sm text-stone-700 dark:text-stone-200">
               {(isEn ? registration.currentTrusteesEn : registration.currentTrustees).map((t, idx) => (
                 <li key={idx} className="flex items-center gap-2 font-medium">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
@@ -335,9 +335,9 @@ export function InspiringJourneySection() {
         </div>
 
         {/* Founding Youth & Dedicated Teachers Memorial Strip */}
-        <div className="pt-6 border-t border-white/10 grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs text-stone-300">
+        <div className="pt-6 border-t border-[#E5DDD0] dark:border-white/10 grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs text-stone-600 dark:text-stone-300">
           <div>
-            <span className="text-amber-300 font-bold block mb-1">
+            <span className="text-[#800020] dark:text-amber-300 font-bold block mb-1">
               {isEn
                 ? "Pioneering Youth Founders (1945):"
                 : isHi
@@ -349,7 +349,7 @@ export function InspiringJourneySection() {
             </span>
           </div>
           <div>
-            <span className="text-amber-300 font-bold block mb-1">
+            <span className="text-[#800020] dark:text-amber-300 font-bold block mb-1">
               {isEn
                 ? "Early Dedicated Teachers (Honorary Service):"
                 : isHi
