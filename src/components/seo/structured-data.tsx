@@ -97,3 +97,98 @@ export function BreadcrumbSchema({
     />
   );
 }
+
+/**
+ * FAQPage — the highest-leverage schema for Google AI Overviews / assistant
+ * citations. Render once per page (membership, contact). Bilingual Q&A pairs
+ * are allowed as separate Question entries.
+ */
+export function FAQPageSchema({
+  faqs,
+}: {
+  faqs: { question: string; answer: string }[];
+}) {
+  const schemaData = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqs.map((f) => ({
+      "@type": "Question",
+      "name": f.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": f.answer,
+      },
+    })),
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
+    />
+  );
+}
+
+/**
+ * ItemList of Events for the /events page — lets AI surfaces and Google show
+ * upcoming library programmes. Events without a machine-readable ISO date
+ * are still listed with name/description/url (no startDate).
+ */
+export function EventListSchema({
+  events,
+}: {
+  events: {
+    slug?: string;
+    title: string;
+    description?: string;
+    date?: string | null;
+    image?: string | null;
+  }[];
+}) {
+  const schemaData = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "itemListElement": events.slice(0, 20).map((ev, idx) => {
+      const iso = ev.date && /^\d{4}-\d{2}-\d{2}/.test(ev.date) ? ev.date : null;
+      const node: Record<string, unknown> = {
+        "@type": "ListItem",
+        "position": idx + 1,
+        "item": {
+          "@type": "Event",
+          "name": ev.title,
+          "description": ev.description ?? undefined,
+          "url": `${SITE_URL}/events${ev.slug ? `#${ev.slug}` : ""}`,
+          "image": ev.image || undefined,
+          "location": {
+            "@type": "Place",
+            "name": "Sahitya Niketan Public Library, Ambajogai",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Mandai Bazar Road, Prashant Nagar, Gawli Pura",
+              "addressLocality": "Ambajogai",
+              "addressRegion": "Maharashtra",
+              "postalCode": "431517",
+              "addressCountry": "IN",
+            },
+          },
+          "organizer": {
+            "@type": "Library",
+            "name": "Sahitya Niketan Public Library",
+            "url": SITE_URL,
+          },
+        },
+      };
+      if (iso) {
+        (node.item as Record<string, unknown>).startDate = iso;
+      }
+      return node;
+    }),
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
+    />
+  );
+}

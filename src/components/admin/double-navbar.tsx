@@ -117,13 +117,10 @@ export interface NavSectionItem {
 }
 
 export const mainLinksMockdata: NavSectionItem[] = [
-  { icon: IconHome2, label: "Home" },
   { icon: IconGauge, label: "Dashboard" },
-  { icon: IconCalendarStats, label: "Releases" },
-  { icon: IconDeviceDesktopAnalytics, label: "Analytics" },
-  { icon: IconFingerprint, label: "Security" },
-  { icon: IconUser, label: "Account" },
-  { icon: IconSettings, label: "Settings" },
+  { icon: IconCalendarStats, label: "Content" },
+  { icon: IconUser, label: "Community" },
+  { icon: IconHome2, label: "Website" },
 ];
 
 interface SubLinkItem {
@@ -133,64 +130,31 @@ interface SubLinkItem {
 }
 
 export const CATEGORY_LINKS: Record<string, SubLinkItem[]> = {
-  Home: [
+  Dashboard: [
+    { label: "Overview", href: "/admin" },
+    { label: "Notice Board", href: "/admin/noticeboard" },
+    { label: "Carousel Slides", href: "/admin/carousel" },
+    { label: "Photo Gallery", href: "/admin/gallery" },
+    { label: "Stories (साहित्य संचित)", href: "/admin/stories" },
+    { label: "Testimonials (अभिप्राय)", href: "/admin/testimonials" },
+  ],
+  Content: [
+    { label: "Notice Board", href: "/admin/noticeboard", badge: "Live" },
+    { label: "Carousel Manager", href: "/admin/carousel" },
+    { label: "Gallery Albums", href: "/admin/gallery" },
+    { label: "Sahitya Sanchit Stories", href: "/admin/stories" },
+  ],
+  Community: [
+    { label: "Testimonials", href: "/admin/testimonials" },
+    { label: "Trustees & Staff", href: "/about/trustees" },
+  ],
+  Website: [
     { label: "Public Website", href: "/" },
     { label: "Library Catalogue", href: "/catalogue" },
     { label: "Events & News", href: "/events" },
     { label: "Member Portal", href: "/login" },
   ],
-  Dashboard: [
-    { label: "Overview", href: "/admin" },
-    { label: "Daily Notice Banner", href: "/admin#daily-banner" },
-    { label: "Physical Notice Board", href: "/admin/noticeboard" },
-    { label: "Carousel Slides", href: "/admin/carousel" },
-    { label: "Photo Gallery", href: "/admin/gallery" },
-    { label: "Testimonials (अभिप्राय)", href: "/admin/testimonials" },
-  ],
-  Releases: [
-    { label: "Notice Board", href: "/admin/noticeboard", badge: "Live" },
-    { label: "Carousel Manager", href: "/admin/carousel" },
-    { label: "Gallery Albums", href: "/admin/gallery" },
-    { label: "Testimonials", href: "/admin/testimonials" },
-    { label: "Sahitya Sanchit (Stories)", href: "/admin/stories" },
-    { label: "Catalogue Books", href: "/catalogue" },
-  ],
-  Analytics: [
-    { label: "Live System Stats", href: "/admin#stats" },
-    { label: "Book Circulation", href: "/admin#circulation" },
-    { label: "Member Growth", href: "/admin#members" },
-    { label: "Activity Stream", href: "/admin#activity" },
-  ],
-  Security: [
-    { label: "Audit Logs", href: "/admin#audit-logs" },
-    { label: "Auth Guard Status", href: "/admin#security" },
-    { label: "Database Health", href: "/admin#database" },
-  ],
-  Account: [
-    { label: "Admin Profile", href: "/admin#profile" },
-    { label: "Trustees & Staff", href: "/about/trustees" },
-    { label: "Sign Out", href: "#signout" },
-  ],
-  Settings: [
-    { label: "Language & Locale", href: "/admin#language" },
-    { label: "Banner Priority", href: "/admin#banner-settings" },
-    { label: "System Diagnostics", href: "/admin#diagnostics" },
-  ],
 };
-
-export const linksMockdata = [
-  "Security",
-  "Settings",
-  "Dashboard",
-  "Releases",
-  "Account",
-  "Orders",
-  "Clients",
-  "Databases",
-  "Pull Requests",
-  "Open Issues",
-  "Wiki pages",
-];
 
 export function DoubleNavbar() {
   const pathname = usePathname();
@@ -199,10 +163,10 @@ export function DoubleNavbar() {
 
   // Determine active section based on current pathname
   const getInitialActive = () => {
-    if (pathname.includes("carousel") || pathname.includes("gallery") || pathname.includes("noticeboard") || pathname.includes("testimonials")) {
-      return "Releases";
+    if (pathname.includes("carousel") || pathname.includes("gallery") || pathname.includes("noticeboard") || pathname.includes("stories")) {
+      return "Content";
     }
-    if (pathname === "/admin") return "Dashboard";
+    if (pathname.includes("testimonials")) return "Community";
     return "Dashboard";
   };
 
@@ -216,16 +180,19 @@ export function DoubleNavbar() {
       setActive("Dashboard");
       setActiveLink("Overview");
     } else if (pathname === "/admin/noticeboard") {
-      setActive("Releases");
+      setActive("Content");
       setActiveLink("Notice Board");
     } else if (pathname === "/admin/carousel") {
-      setActive("Releases");
+      setActive("Content");
       setActiveLink("Carousel Manager");
     } else if (pathname === "/admin/gallery") {
-      setActive("Releases");
+      setActive("Content");
       setActiveLink("Gallery Albums");
+    } else if (pathname === "/admin/stories") {
+      setActive("Content");
+      setActiveLink("Sahitya Sanchit Stories");
     } else if (pathname === "/admin/testimonials") {
-      setActive("Releases");
+      setActive("Community");
       setActiveLink("Testimonials");
     }
   }, [pathname]);
@@ -238,19 +205,6 @@ export function DoubleNavbar() {
   };
 
   const handleLinkClick = (event: React.MouseEvent, item: SubLinkItem) => {
-    if (item.href === "#signout") {
-      event.preventDefault();
-      handleSignOut();
-      return;
-    }
-    if (item.href?.startsWith("#")) {
-      event.preventDefault();
-      const id = item.href.replace("#", "");
-      const el = document.getElementById(id);
-      if (el) {
-        el.scrollIntoView({ behavior: "smooth" });
-      }
-    }
     setActiveLink(item.label);
   };
 
@@ -280,9 +234,7 @@ export function DoubleNavbar() {
   ));
 
   // Determine which sub-links to display for the active section
-  const currentSubLinks: SubLinkItem[] =
-    CATEGORY_LINKS[active] ||
-    linksMockdata.map((name) => ({ label: name, href: `/admin#${name.toLowerCase()}` }));
+  const currentSubLinks: SubLinkItem[] = CATEGORY_LINKS[active] || CATEGORY_LINKS.Dashboard;
 
   const links = currentSubLinks.map((item) => {
     const isCurrentActive =
@@ -290,32 +242,13 @@ export function DoubleNavbar() {
       (item.href && item.href !== "/admin" && pathname === item.href) ||
       (item.href === "/admin" && pathname === "/admin" && activeLink === item.label);
 
-    if (item.href && !item.href.startsWith("#")) {
-      return (
-        <Link
-          key={item.label}
-          href={item.href}
-          className={classes.link}
-          data-active={isCurrentActive || undefined}
-          onClick={(e) => handleLinkClick(e, item)}
-        >
-          <span className="truncate">{item.label}</span>
-          {item.badge && (
-            <span className="ml-2 px-1.5 py-0.5 text-[10px] font-extrabold rounded-md bg-[#800020] text-white">
-              {item.badge}
-            </span>
-          )}
-        </Link>
-      );
-    }
-
     return (
-      <a
+      <Link
+        key={item.label}
+        href={item.href || "/admin"}
         className={classes.link}
         data-active={isCurrentActive || undefined}
-        href={item.href || "#"}
-        onClick={(event) => handleLinkClick(event, item)}
-        key={item.label}
+        onClick={(e) => handleLinkClick(e, item)}
       >
         <span className="truncate">{item.label}</span>
         {item.badge && (
@@ -323,7 +256,7 @@ export function DoubleNavbar() {
             {item.badge}
           </span>
         )}
-      </a>
+      </Link>
     );
   });
 

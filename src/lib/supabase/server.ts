@@ -32,3 +32,28 @@ export async function createClient() {
     }
   );
 }
+
+/**
+ * Anonymous public client — NO cookies() call.
+ *
+ * `createClient()` (above) touches `cookies()`, which opts every route that
+ * imports it into dynamic rendering. Public, cacheable reads (stories, events,
+ * catalogue listings) must use this cookie-free anon client instead so pages
+ * can stay static + ISR. Row visibility still follows RLS policies.
+ */
+export function createPublicClient() {
+  return createServerClient<Database>(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    {
+      cookies: {
+        getAll() {
+          return [];
+        },
+        setAll() {
+          // Read-only context — nothing to persist.
+        },
+      },
+    }
+  );
+}

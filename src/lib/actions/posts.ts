@@ -1,13 +1,18 @@
 "use server";
 
 import { createAdminClient } from "@/lib/supabase/admin";
-import { createClient } from "@/lib/supabase/server";
+import { createPublicClient } from "@/lib/supabase/server";
 import { requireAdmin } from "@/lib/auth/require-admin";
 import { logAction } from "./audit";
 import type { Post } from "@/types/database";
 
+/**
+ * Public listing (no auth). Uses the cookie-free anon client so pages that
+ * render this can remain static + ISR (the cookie-bound client would force
+ * dynamic rendering). Row visibility follows RLS.
+ */
 export async function getPosts(status?: string) {
-  const supabase = (await createClient()) as any;
+  const supabase = createPublicClient() as any;
   let query = supabase.from("posts").select("*").order("created_at", { ascending: false });
   if (status) query = query.eq("status", status);
   const { data, error } = await query;
@@ -15,8 +20,20 @@ export async function getPosts(status?: string) {
   return data ?? [];
 }
 
+/** Admin-only listing across every status — service role, guarded. */
+export async function getAllPostsAdmin() {
+  await requireAdmin();
+  const supabase = createAdminClient() as any;
+  const { data, error } = await supabase
+    .from("posts")
+    .select("*")
+    .order("created_at", { ascending: false });
+  if (error) throw new Error(error.message);
+  return data ?? [];
+}
+
 export async function getPublishedPosts(limit = 20) {
-  const supabase = (await createClient()) as any;
+  const supabase = createPublicClient() as any;
   const { data, error } = await supabase
     .from("posts")
     .select("*")
@@ -28,7 +45,7 @@ export async function getPublishedPosts(limit = 20) {
 }
 
 export async function getPostBySlug(slug: string) {
-  const supabase = (await createClient()) as any;
+  const supabase = createPublicClient() as any;
   // maybeSingle() — a missing/unpublished slug is a normal 404, not a server
   // error; .single() would throw PGRST116 and render a 500 for the visitor.
   const { data, error } = await supabase
