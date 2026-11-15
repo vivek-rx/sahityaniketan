@@ -148,8 +148,10 @@ function CatalogueContent() {
         [
           item.title,
           item.titleMarathi,
+          item.titleEn,
           item.author,
           item.authorMarathi,
+          item.authorEn,
           item.description,
           item.descriptionMarathi,
           item.category,
@@ -528,7 +530,7 @@ function CatalogueContent() {
                         {book.coverImage ? (
                           <Image
                             src={book.coverImage}
-                            alt={book.title}
+                            alt={language === "en" ? book.titleEn || book.title : book.titleMarathi || book.title}
                             fill
                             className="object-cover object-top group-hover:scale-105 transition-transform duration-300"
                             sizes="112px"
@@ -537,7 +539,7 @@ function CatalogueContent() {
                           <div className="flex flex-col items-center justify-center p-2 text-center h-full w-full bg-gradient-to-br from-[#800020] to-[#550015] text-white">
                             <BookOpen className="h-6 w-6 text-[#E5B869] mb-1" />
                             <span className="text-[9px] font-bold line-clamp-2 leading-tight">
-                              {book.title}
+                              {language === "en" ? book.titleEn || book.title : book.titleMarathi || book.title}
                             </span>
                           </div>
                         )}
@@ -565,12 +567,12 @@ function CatalogueContent() {
 
                         <h3 className="font-devanagari text-base sm:text-lg font-bold text-gray-900 dark:text-[#FAF2E8] leading-snug group-hover:text-[#800020] dark:group-hover:text-[#E5B869] transition-colors">
                           <Link href={`/catalogue/${book.id}`}>
-                            {language === "en" ? book.title : book.titleMarathi || book.title}
+                            {language === "en" ? book.titleEn || book.title : book.titleMarathi || book.title}
                           </Link>
                         </h3>
 
                         <p className="text-xs sm:text-sm font-semibold text-[#800020] dark:text-[#E5B869] font-devanagari">
-                          {language === "en" ? book.author : book.authorMarathi || book.author}
+                          {language === "en" ? book.authorEn || book.author : book.authorMarathi || book.author}
                         </p>
 
                         <p className="text-xs text-stone-600 dark:text-stone-300 line-clamp-2 leading-relaxed font-devanagari">
@@ -633,8 +635,8 @@ function CatalogueContent() {
                       {/* 3D Interactive Framer Book Cover Area */}
                       <div className="flex justify-center mb-3 py-1">
                         <Framer3DBook
-                          title={language === "en" ? book.title : book.titleMarathi || book.title}
-                          author={language === "en" ? book.author : book.authorMarathi || book.author}
+                          title={language === "en" ? book.titleEn || book.title : book.titleMarathi || book.title}
+                          author={language === "en" ? book.authorEn || book.author : book.authorMarathi || book.author}
                           coverImage={book.coverImage}
                           isbn={book.isbn || book.callNumber}
                           width={170}
@@ -655,11 +657,11 @@ function CatalogueContent() {
                         </div>
 
                         <h3 className="font-devanagari text-base font-bold text-gray-900 dark:text-[#FAF2E8] leading-snug group-hover:text-[#800020] dark:group-hover:text-[#E5B869] transition-colors line-clamp-1">
-                          {language === "en" ? book.title : book.titleMarathi || book.title}
+                          {language === "en" ? book.titleEn || book.title : book.titleMarathi || book.title}
                         </h3>
 
                         <p className="text-xs font-semibold text-[#800020] dark:text-[#E5B869] font-devanagari line-clamp-1">
-                          {language === "en" ? book.author : book.authorMarathi || book.author}
+                          {language === "en" ? book.authorEn || book.author : book.authorMarathi || book.author}
                         </p>
 
                         <p className="text-xs text-stone-600 dark:text-stone-300 line-clamp-2 leading-relaxed font-devanagari">

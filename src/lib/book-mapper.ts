@@ -1,5 +1,6 @@
 import type { Book } from "@/types/database";
 import type { BookVolume } from "@/lib/book-api";
+import { titleEnFor, authorEnFor, categoryEnFor } from "@/lib/book-titles";
 
 /**
  * True when a stored cover can be rendered directly. Only absolute https URLs
@@ -63,8 +64,10 @@ export function mapDbBookToVolume(book: Book, index = 0): BookVolume {
     id: book.id || `db-${index}`,
     title,
     titleMarathi: book.title_marathi || title,
+    titleEn: titleEnFor(title) || titleEnFor(book.title_marathi),
     author,
     authorMarathi: author,
+    authorEn: authorEnFor(author),
     authors: [author],
     description:
       book.description ||
@@ -77,6 +80,7 @@ export function mapDbBookToVolume(book: Book, index = 0): BookVolume {
     languageName: languageName(book.language),
     category,
     categoryMarathi: category,
+    categoryEn: categoryEnFor(category),
     year: book.publication_year ?? "—",
     publisher: book.publisher || "साहित्य निकेतन ग्रंथालय",
     isbn: book.isbn || undefined,

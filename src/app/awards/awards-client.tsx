@@ -12,7 +12,9 @@ type Nominee = {
   id: string;
   bookId: string;
   title: string;
+  titleEn?: string;
   author: string;
+  authorEn?: string;
   coverUrl: string | null;
   votes: number;
 };
@@ -352,7 +354,7 @@ export default function AwardsClient() {
                               {n.coverUrl ? (
                                 <Image
                                   src={n.coverUrl}
-                                  alt={n.title}
+                                  alt={isEn ? n.titleEn || n.title : n.title}
                                   fill
                                   className="object-cover object-top group-hover:scale-105 transition-transform duration-300"
                                   sizes="112px"
@@ -361,7 +363,7 @@ export default function AwardsClient() {
                                 <div className="h-full w-full bg-gradient-to-br from-[#800020] to-[#550015] flex flex-col items-center justify-center p-2 text-white">
                                   <BookOpen className="h-5 w-5 text-[#E5B869] mb-1" />
                                   <span className="text-[9px] font-bold line-clamp-2 leading-tight">
-                                    {n.title}
+                                    {isEn ? n.titleEn || n.title : n.title}
                                   </span>
                                 </div>
                               )}
@@ -374,10 +376,10 @@ export default function AwardsClient() {
 
                             {/* Meta */}
                             <h3 className="text-xs sm:text-sm font-bold text-stone-900 dark:text-[#FAF2E8] line-clamp-2 leading-snug">
-                              {n.title}
+                              {isEn ? n.titleEn || n.title : n.title}
                             </h3>
                             <p className="mt-1 text-[11px] text-stone-500 dark:text-stone-400 line-clamp-1">
-                              {n.author}
+                              {isEn ? n.authorEn || n.author : n.author}
                             </p>
 
                             {/* Result bar (once any vote exists) */}

@@ -220,39 +220,8 @@ export function AdminTopbar({ title, subtitle }: AdminTopbarProps) {
         </div>
       </div>
 
-      {/* Lower Bar: Permanent Desktop CMS Navigation Bar */}
-      <nav className="hidden lg:block border-t border-slate-200 dark:border-slate-800 bg-slate-50/80 dark:bg-slate-900/80">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4 py-2">
-          <div className="flex items-center gap-2 overflow-x-auto">
-            {NAV_ITEMS.map((item) => {
-              const Icon = item.icon;
-              const isActive = item.href === "/admin" ? pathname === "/admin" : pathname.startsWith(item.href);
-
-              return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  target={item.external ? "_blank" : undefined}
-                  className={cn(
-                    "inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-bold transition-all shrink-0 cursor-pointer",
-                    isActive
-                      ? "bg-[#800020] text-white shadow-xs"
-                      : "text-slate-700 dark:text-slate-300 hover:bg-slate-200/70 dark:hover:bg-slate-800 hover:text-slate-900"
-                  )}
-                >
-                  <Icon className="h-4.5 w-4.5" />
-                  <span>{item.label}</span>
-                  {item.external && <ExternalLink className="h-3 w-3 opacity-60" />}
-                </Link>
-              );
-            })}
-          </div>
-
-          <div className="shrink-0 hidden xl:block">
-            <Breadcrumbs variant="minimal" />
-          </div>
-        </div>
-      </nav>
+      {/* Lower bar removed: the DoubleNavbar sidebar is the single CMS menu
+          (mobile keeps the hamburger sheet above). */}
     </header>
   );
 }

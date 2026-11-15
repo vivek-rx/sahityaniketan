@@ -17,6 +17,7 @@ import {
   CheckCircle2,
 } from "lucide-react";
 import { AdminTopbar } from "@/components/admin/admin-topbar";
+import { AdminLoader } from "@/components/admin/admin-loader";
 import { AdminModal } from "@/components/admin/admin-modal";
 import {
   getAllPostsAdmin,
@@ -265,10 +266,7 @@ export default function AdminStoriesPage() {
 
         {/* Content */}
         {loading ? (
-          <div className="flex flex-col items-center justify-center py-20 space-y-3">
-            <Loader2 className="w-8 h-8 animate-spin text-slate-400" />
-            <p className="text-xs text-slate-400">Loading stories...</p>
-          </div>
+          <AdminLoader />
         ) : visible.length === 0 ? (
           <div className="text-center py-20 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-8 space-y-3">
             <BookOpen className="w-12 h-12 mx-auto text-slate-400" />

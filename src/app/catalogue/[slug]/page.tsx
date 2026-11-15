@@ -72,8 +72,8 @@ export default function BookDetailPage({ params }: { params: Promise<{ slug: str
       <Navbar />
       <main id="main-content" className="font-marathi-body bg-[#FAF8F5] dark:bg-[#120B0D] min-h-screen transition-colors">
         <PageHeader
-          title={book.titleMarathi || book.title}
-          titleHindi={book.authorMarathi || book.author}
+          title={isEn ? book.titleEn || book.titleMarathi || book.title : book.titleMarathi || book.title}
+          titleHindi={isEn ? book.authorEn || book.authorMarathi || book.author : book.authorMarathi || book.author}
           subtitle={`${isEn ? "Call Number" : isHi ? "वर्गीकरण क्रमांक" : "वर्गीकरण क्रमांक"}: ${book.callNumber} • ${isEn ? "Shelf" : isHi ? "शैल्फ" : "कप्पा"}: ${book.shelf}`}
           breadcrumbs={[
             { label: isEn ? "Catalogue" : isHi ? "ग्रंथसूची" : "ग्रंथसूची", href: "/catalogue" },
@@ -96,8 +96,8 @@ export default function BookDetailPage({ params }: { params: Promise<{ slug: str
               <div className="w-full md:w-72 shrink-0 space-y-4">
                 <div className="flex justify-center w-full py-2">
                   <Framer3DBook
-                    title={book.titleMarathi || book.title}
-                    author={book.authorMarathi || book.author}
+                    title={isEn ? book.titleEn || book.titleMarathi || book.title : book.titleMarathi || book.title}
+                    author={isEn ? book.authorEn || book.authorMarathi || book.author : book.authorMarathi || book.author}
                     coverImage={book.coverImage}
                     isbn={book.isbn || book.callNumber}
                     width={220}
@@ -124,7 +124,7 @@ export default function BookDetailPage({ params }: { params: Promise<{ slug: str
               <div className="flex-1 space-y-5">
                 <div className="flex flex-wrap items-center gap-2">
                   <span className="rounded-md bg-[#800020]/10 dark:bg-[#800020]/25 border border-[#800020]/20 dark:border-[#800020]/40 px-3 py-1 text-xs font-bold text-[#800020] dark:text-[#E5B869]">
-                    {book.categoryMarathi || book.category}
+                    {isEn ? book.categoryEn || book.category : book.categoryMarathi || book.category}
                   </span>
                   {book.ratingsCount > 0 && (
                     <div className="flex items-center gap-1.5 bg-amber-50 dark:bg-amber-950/40 border border-amber-200/60 dark:border-amber-800/40 px-2 py-0.5 rounded-md text-xs font-bold text-amber-600 dark:text-[#E5B869]">
@@ -146,16 +146,16 @@ export default function BookDetailPage({ params }: { params: Promise<{ slug: str
                   {/* The page H1 lives in <PageHeader> above — this is the
                       book title within the detail card, so it is an h2. */}
                   <h2 className="text-2xl sm:text-3xl font-extrabold text-stone-900 dark:text-[#FAF2E8] leading-tight font-marathi-heading">
-                    {book.titleMarathi || book.title}
+                    {isEn ? book.titleEn || book.titleMarathi || book.title : book.titleMarathi || book.title}
                   </h2>
                   {book.titleMarathi && book.title !== book.titleMarathi && (
-                    <p className="text-sm font-medium text-stone-500 dark:text-[#D5C2B4] mt-0.5">{book.title}</p>
+                    <p className="text-sm font-medium text-stone-500 dark:text-[#D5C2B4] mt-0.5">{isEn ? book.titleMarathi || book.title : book.title}</p>
                   )}
                 </div>
 
                 <div className="flex items-center gap-2 text-sm text-stone-700 dark:text-[#D5C2B4]">
                   <User className="h-4 w-4 text-[#800020] dark:text-[#E5B869]" />
-                  <span className="font-bold text-stone-900 dark:text-[#FAF2E8]">{book.authorMarathi || book.author}</span>
+                  <span className="font-bold text-stone-900 dark:text-[#FAF2E8]">{isEn ? book.authorEn || book.authorMarathi || book.author : book.authorMarathi || book.author}</span>
                 </div>
 
                 <div className="border-t border-b border-[#E5DDD0] dark:border-[#332228] py-4 space-y-2">
@@ -227,7 +227,7 @@ export default function BookDetailPage({ params }: { params: Promise<{ slug: str
             <div className="mt-12">
               <BookReviewsSection
                 bookId={book.id}
-                bookTitle={book.titleMarathi || book.title}
+                bookTitle={isEn ? book.titleEn || book.titleMarathi || book.title : book.titleMarathi || book.title}
               />
             </div>
           </div>

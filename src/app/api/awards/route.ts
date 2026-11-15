@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
+import { titleEnFor, authorEnFor } from "@/lib/book-titles";
 import { createClient } from "@supabase/supabase-js";
 import type { Database } from "@/types/database";
 
@@ -24,7 +25,9 @@ export type AwardsPayload = {
       id: string;
       bookId: string;
       title: string;
+      titleEn?: string;
       author: string;
+      authorEn?: string;
       coverUrl: string | null;
       votes: number;
     }>;
@@ -89,7 +92,9 @@ export async function GET() {
         id: n.id,
         bookId: book.id,
         title: book.title_marathi || book.title,
+        titleEn: titleEnFor(book.title_marathi || book.title),
         author: book.author,
+        authorEn: authorEnFor(book.author),
         coverUrl: book.cover_url ?? null,
         votes: counts.get(n.id) ?? 0,
       });

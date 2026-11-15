@@ -8,9 +8,11 @@ export interface BookVolume {
   id: string;
   title: string;
   titleMarathi?: string;
+  titleEn?: string;
   subtitle?: string;
   author: string;
   authorMarathi?: string;
+  authorEn?: string;
   authors: string[];
   description: string;
   descriptionMarathi?: string;
@@ -19,6 +21,7 @@ export interface BookVolume {
   languageName: string;
   category: string;
   categoryMarathi: string;
+  categoryEn?: string;
   year: string | number;
   pageCount?: number;
   publisher: string;

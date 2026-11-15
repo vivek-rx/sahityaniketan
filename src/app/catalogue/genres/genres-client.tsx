@@ -7,31 +7,13 @@ import { motion } from "framer-motion";
 import { ArrowRight, Library, Sparkles, BookOpen, Trophy } from "lucide-react";
 import { Navbar, Footer, PageHeader } from "@/components/layout";
 import { useLanguage } from "@/context/language-context";
+import { CATEGORY_EN as EN_LABELS } from "@/lib/book-titles";
 
 export interface GenreGroup {
   category: string;
   count: number;
   covers: string[];
 }
-
-/** English display names for the seeded Marathi genres; new categories fall back gracefully. */
-const EN_LABELS: Record<string, string> = {
-  "अभिजात कादंबरी": "Classic Novels",
-  "पौराणिक व ऐतिहासिक": "Mythological & Historical",
-  "ज्ञानपीठ सन्मानित साहित्य": "Jnanpith Honoured Works",
-  "ऐतिहासिक कादंबरी": "Historical Novels",
-  "आधुनिक मराठी साहित्य": "Modern Marathi Literature",
-  "हिन्दी साहित्य": "Hindi Literature",
-  "संस्कृत काव्य": "Sanskrit Poetry",
-  "संतसाहित्य व आद्य ग्रंथ": "Sant Literature & Early Texts",
-  "ज्ञानपीठ व साहित्य अकादमी": "Jnanpith & Sahitya Akademi",
-  "विनोदी साहित्य": "Humour & Satire",
-  "नाटक व काव्य": "Drama & Poetry",
-  "विद्रोही व लोकसाहित्य": "Rebel & Folk Literature",
-  "आत्मचरित्र": "Autobiography",
-  "इतिहास व संशोधन": "History & Research",
-  "स्पर्धा परीक्षा व करिअर": "Competitive Exams & Career",
-};
 
 /** Choice-Awards-style rotating card gradients (maroon-first, warm parchment family). */
 const CARD_STYLES = [
@@ -221,11 +203,16 @@ export function GenresClient({ groups }: { groups: GenreGroup[] }) {
                       </div>
 
                       <h2 className="font-marathi-heading text-base sm:text-lg font-extrabold leading-snug">
-                        {g.category}
+                        {isEn ? en || g.category : g.category}
                       </h2>
-                      {en && (
+                      {en && !isEn && (
                         <p className="text-[11px] font-medium text-white/70 mt-0.5">
                           {en}
+                        </p>
+                      )}
+                      {en && isEn && (
+                        <p className="text-[11px] font-medium text-white/70 mt-0.5">
+                          {g.category}
                         </p>
                       )}
 
