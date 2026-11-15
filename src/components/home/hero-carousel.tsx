@@ -68,7 +68,7 @@ const DEFAULT_HERO_SLIDES: CarouselSlide[] = [
     dateEn: "Serving since 1 August 1945",
     location: "अंबाजोगाई, जि. बीड (महाराष्ट्र)",
     locationEn: "Ambajogai, Dist. Beed (Maharashtra)",
-    image: "/images/real/library_inauguration_plaque.webp",
+    image: "/images/real/library_signboard.webp",
     tagMarathi: "स्थापना व वारसा",
     tagHindi: "स्थापना एवं धरोहर",
     tagEn: "Heritage Foundation",
@@ -91,7 +91,7 @@ const DEFAULT_HERO_SLIDES: CarouselSlide[] = [
     dateEn: "Treasures from 12th Century",
     location: "दुर्मीळ ग्रंथ दालन, कप्पा क्र. १",
     locationEn: "Rare Manuscript Wing, Shelf No. 1",
-    image: "/images/real/library_vintage_books.webp",
+    image: "/images/real/library_cupboards.webp",
     tagMarathi: "दुर्मीळ दस्तऐवज",
     tagHindi: "दुर्लभ पाण्डुलिपियां",
     tagEn: "Rare Archives",
@@ -246,9 +246,10 @@ export function HeroCarousel() {
   return (
     <section className="w-full bg-transparent py-5 sm:py-7 font-marathi-body transition-colors">
       <div className="section">
-        {/* Untitled UI Style Header Strip */}
+        {/* Header Strip */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4 sm:mb-5">
-          <div className="flex items-center gap-2.5">
+          <div className="flex items-center gap-3">
+            <span className="hidden sm:block h-6 w-1.5 rounded-full bg-gradient-to-b from-[#800020] to-[#E5B869]" />
             <h2 className="text-base sm:text-lg font-bold text-gray-900 dark:text-[#FAF2E8] font-marathi-heading">
               {language === "mr"
                 ? "साहित्य निकेतनची झलक"
@@ -258,11 +259,10 @@ export function HeroCarousel() {
             </h2>
           </div>
 
-          {/* Untitled UI Navigation Controls */}
           <div className="flex items-center gap-2 self-end sm:self-auto">
             <Link
               href="/events"
-              className="text-xs font-bold text-[#C0392B] dark:text-[#E8B830] hover:underline flex items-center gap-1 transition-colors font-marathi-body"
+              className="group inline-flex items-center gap-1 text-xs font-bold text-[#800020] dark:text-[#E5B869] hover:text-[#55000E] dark:hover:text-[#F4D98C] transition-colors font-marathi-body"
             >
               <span>
                 {language === "mr"
@@ -271,6 +271,7 @@ export function HeroCarousel() {
                     ? "सभी कार्यक्रम"
                     : "View All"}
               </span>
+              <ChevronRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
             </Link>
           </div>
         </div>
@@ -303,8 +304,8 @@ export function HeroCarousel() {
                       className="object-cover object-center transform-gpu will-change-transform transition-transform duration-700"
                     />
 
-                    {/* Stronger legibility gradient (text sits over busy archival photos) */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/55 to-black/10" />
+                    {/* Legibility gradient — maroon-tinted, softer than pure black */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#1A0206]/95 via-[#2A050C]/45 to-transparent" />
 
                     {/* Slide Content Box */}
                     <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-8 md:p-10 flex flex-col sm:flex-row sm:items-end justify-between gap-4 text-white z-10">
@@ -316,18 +317,18 @@ export function HeroCarousel() {
                       >
                         <div className="flex flex-wrap items-center gap-2">
                           <span
-                            className="rounded-full bg-[#C0392B] px-3 py-0.5 text-[11px] font-bold text-white font-marathi-body shadow-xs"
+                            className="rounded-full bg-[#E5B869] px-3 py-0.5 text-[11px] font-bold text-[#3A040B] font-marathi-body shadow-xs"
                           >
                             {tagText}
                           </span>
 
                           <span className="flex items-center gap-1 text-[11px] text-gray-200 font-marathi-body bg-black/50 backdrop-blur-xs px-2.5 py-0.5 rounded-full border border-white/10">
-                            <Calendar className="h-3 w-3 text-[#E8B830]" />
+                            <Calendar className="h-3 w-3 text-[#E5B869]" />
                             <span>{dateText}</span>
                           </span>
 
                           <span className="flex items-center gap-1 text-[11px] text-gray-200 font-marathi-body bg-black/50 backdrop-blur-xs px-2.5 py-0.5 rounded-full border border-white/10 hidden md:flex">
-                            <MapPin className="h-3 w-3 text-[#FF8A80]" />
+                            <MapPin className="h-3 w-3 text-[#F4D98C]" />
                             <span>{locationText}</span>
                           </span>
                         </div>
@@ -355,9 +356,9 @@ export function HeroCarousel() {
                                 `https://www.youtube.com/embed/${slide.youtubeId || "D-ktRXhUL30"}?autoplay=1`
                               )
                             }
-                            className="flex items-center gap-2 rounded-lg bg-[#C0392B] hover:bg-[#A93226] text-white px-4 sm:px-5 py-2 sm:py-2.5 text-xs sm:text-sm font-bold shadow-sm transition-all cursor-pointer font-marathi-body"
+                            className="flex items-center gap-2 rounded-full bg-[#E5B869] hover:bg-[#F4D98C] text-[#3A040B] px-4 sm:px-5 py-2 sm:py-2.5 text-xs sm:text-sm font-bold shadow-md shadow-black/30 transition-all hover:scale-[1.03] active:scale-95 cursor-pointer font-marathi-body"
                           >
-                            <Play className="h-3.5 w-3.5 fill-white" />
+                            <Play className="h-3.5 w-3.5 fill-[#3A040B]" />
                             <span>
                               {language === "mr"
                                 ? "माहितीपट पाहा"
@@ -369,9 +370,9 @@ export function HeroCarousel() {
                         ) : (
                           <Link
                             href={slide.buttonLink || "/events"}
-                            className="flex items-center gap-2 rounded-lg bg-[#C0392B] hover:bg-[#A93226] text-white px-4 sm:px-5 py-2 sm:py-2.5 text-xs sm:text-sm font-bold shadow-sm transition-all cursor-pointer font-marathi-body"
+                            className="flex items-center gap-2 rounded-full bg-[#E5B869] hover:bg-[#F4D98C] text-[#3A040B] px-4 sm:px-5 py-2 sm:py-2.5 text-xs sm:text-sm font-bold shadow-md shadow-black/30 transition-all hover:scale-[1.03] active:scale-95 cursor-pointer font-marathi-body"
                           >
-                            <BookOpen className="h-3.5 w-3.5 text-[#FFD9CC]" />
+                            <BookOpen className="h-3.5 w-3.5 text-[#800020]" />
                             <span>
                               {language === "en"
                                 ? slide.buttonTextEn || "Read Story"
@@ -389,41 +390,41 @@ export function HeroCarousel() {
             </div>
           </div>
 
-          {/* Slide progress row (below the card — never overlaps slide content) */}
-          <div className="flex items-center justify-between gap-3 pt-3">
-            <button
-              onClick={scrollPrev}
-              className="h-9 w-9 sm:h-10 sm:w-10 rounded-full border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-800 text-zinc-700 dark:text-zinc-200 shadow-2xs hover:bg-zinc-50 dark:hover:bg-zinc-700 flex items-center justify-center transition-all cursor-pointer shrink-0"
-              aria-label="Previous Slide"
-            >
-              <ChevronLeft className="h-4 w-4" />
-            </button>
-
-            <div className="flex flex-1 items-center justify-center gap-1.5 min-w-0">
-              {scrollSnaps.map((_, idx) => (
+          {/* Integrated controls — glass overlays over the image (no strip below) */}
+          <div className="absolute top-3 right-3 sm:top-4 sm:right-4 z-30 flex items-center gap-2 rounded-full bg-black/35 backdrop-blur-md border border-white/15 px-3 py-1.5">
+            <div className="flex items-center gap-1.5">
+              {scrollSnaps.map((_, dot) => (
                 <button
-                  key={idx}
-                  onClick={() => scrollTo(idx)}
-                  className={`h-2 rounded-full transition-all duration-300 cursor-pointer shrink-0 ${selectedIndex === idx
-                      ? "w-8 sm:w-10 bg-[#800020] dark:bg-[#E5B869]"
-                      : "w-3 sm:w-4 bg-[#800020]/25 dark:bg-[#E5B869]/30 hover:bg-[#800020]/50 dark:hover:bg-[#E5B869]/60"
-                    }`}
-                  aria-label={`Go to slide ${idx + 1}`}
+                  key={dot}
+                  onClick={() => scrollTo(dot)}
+                  className={`rounded-full transition-all duration-300 cursor-pointer ${
+                    selectedIndex === dot
+                      ? "h-1.5 w-5 bg-[#E5B869]"
+                      : "h-1.5 w-1.5 bg-white/40 hover:bg-white/70"
+                  }`}
+                  aria-label={`Go to slide ${dot + 1}`}
                 />
               ))}
-              <span className="text-[11px] font-mono text-zinc-500 dark:text-zinc-400 ml-2 pl-2 border-l border-zinc-200 dark:border-zinc-700 shrink-0">
-                0{selectedIndex + 1} / 0{scrollSnaps.length || 4}
-              </span>
             </div>
-
-            <button
-              onClick={scrollNext}
-              className="h-9 w-9 sm:h-10 sm:w-10 rounded-full border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-800 text-zinc-700 dark:text-zinc-200 shadow-2xs hover:bg-zinc-50 dark:hover:bg-zinc-700 flex items-center justify-center transition-all cursor-pointer shrink-0"
-              aria-label="Next Slide"
-            >
-              <ChevronRight className="h-4 w-4" />
-            </button>
+            <span className="text-[10px] font-mono text-white/70 tabular-nums border-l border-white/20 pl-2">
+              0{selectedIndex + 1} / 0{scrollSnaps.length || 4}
+            </span>
           </div>
+
+          <button
+            onClick={scrollPrev}
+            className="absolute left-2.5 sm:left-4 top-1/2 -translate-y-1/2 z-30 h-9 w-9 sm:h-10 sm:w-10 rounded-full bg-black/30 hover:bg-black/55 backdrop-blur-md border border-white/20 text-white flex items-center justify-center transition-all cursor-pointer active:scale-90"
+            aria-label="Previous Slide"
+          >
+            <ChevronLeft className="h-4 w-4" />
+          </button>
+          <button
+            onClick={scrollNext}
+            className="absolute right-2.5 sm:right-4 top-1/2 -translate-y-1/2 z-30 h-9 w-9 sm:h-10 sm:w-10 rounded-full bg-black/30 hover:bg-black/55 backdrop-blur-md border border-white/20 text-white flex items-center justify-center transition-all cursor-pointer active:scale-90"
+            aria-label="Next Slide"
+          >
+            <ChevronRight className="h-4 w-4" />
+          </button>
         </div>
       </div>
 

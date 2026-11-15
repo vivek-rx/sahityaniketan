@@ -153,7 +153,7 @@ export default function TrusteesPage() {
                     </span>
                   </div>
 
-                  <h2 className="text-2xl sm:text-3xl font-bold font-gajraj text-[#FFFDF8] tracking-normal leading-snug">
+                  <h2 className="text-2xl sm:text-3xl font-bold font-marathi-heading text-[#FFFDF8] tracking-normal leading-snug">
                     {isEn
                       ? "First Board of Trustees (1962 — Foundation)"
                       : language === "hi"
@@ -212,7 +212,7 @@ export default function TrusteesPage() {
               <span className="text-xs font-bold text-[#800020] dark:text-[#E5B869] uppercase tracking-widest block mb-2 font-mono">
                 {isEn ? "FOUNDING BOARD OF TRUSTEES · 1962" : language === "hi" ? "प्रथम न्यासी मंडल · १९६२" : "पहिले विश्वस्त मंडळ · १९६२"}
               </span>
-              <h2 className="text-3xl font-bold font-gajraj text-stone-900 dark:text-[#FAF2E8]">
+              <h2 className="text-3xl font-bold font-marathi-heading text-stone-900 dark:text-[#FAF2E8]">
                 {isEn ? "First Trustees — Distinguished Personalities" : language === "hi" ? "आद्य न्यासी — आदरणीय व्यक्तित्व" : "आद्य विश्वस्त — महनीय व्यक्तिमत्त्वे"}
               </h2>
               <p className="text-sm text-stone-600 dark:text-stone-400 mt-2 font-marathi-body">
@@ -259,7 +259,7 @@ export default function TrusteesPage() {
                   {/* Trustee Details */}
                   <div className="flex-1 flex flex-col justify-between">
                     <div>
-                      <h3 className="text-xl font-bold font-gajraj text-stone-900 dark:text-[#FAF2E8] group-hover:text-[#800020] dark:group-hover:text-[#E5B869] transition-colors">
+                      <h3 className="text-xl font-bold font-marathi-heading text-stone-900 dark:text-[#FAF2E8] group-hover:text-[#800020] dark:group-hover:text-[#E5B869] transition-colors">
                         {isEn ? trustee.nameEn : trustee.name}
                       </h3>
                       <div className="text-xs font-semibold text-[#800020] dark:text-[#E5B869] mt-0.5 font-marathi-heading">
@@ -299,7 +299,7 @@ export default function TrusteesPage() {
               <span className="text-xs font-bold text-amber-700 dark:text-amber-400 uppercase tracking-widest block mb-2 font-mono">
                 {isEn ? "1 AUGUST 1945 · FOUNDING PIONEERS" : language === "hi" ? "1 अगस्त १९४५ · संस्थापक अग्रणी" : "१ ऑगस्ट १९४५ · संस्थापक अग्रणी"}
               </span>
-              <h2 className="text-2xl sm:text-3xl font-bold font-gajraj text-stone-900 dark:text-[#FAF2E8]">
+              <h2 className="text-2xl sm:text-3xl font-bold font-marathi-heading text-stone-900 dark:text-[#FAF2E8]">
                 {isEn ? "The Idealistic Founding Circle (1945)" : language === "hi" ? "आदर्शवादी संस्थापक युवा मंडल (१९४५)" : "संस्थापक ध्येयवादी तरुण मंडळ (१९४५)"}
               </h2>
               <p className="text-sm text-stone-600 dark:text-stone-400 mt-1.5 font-marathi-body">
@@ -341,7 +341,7 @@ export default function TrusteesPage() {
               <span className="text-xs font-bold text-amber-700 dark:text-amber-400 uppercase tracking-widest block mb-2 font-mono">
                 {isEn ? "DEVOTED TEACHERS & LIBRARIANS (1945–1955)" : language === "hi" ? "समर्पित शिक्षक एवं ग्रंथसेवक (१९४५-१९५५)" : "समर्पित शिक्षक व ग्रंथसेवक (१९४५-१९५५)"}
               </span>
-              <h2 className="text-2xl sm:text-3xl font-bold font-gajraj text-stone-900 dark:text-[#FAF2E8]">
+              <h2 className="text-2xl sm:text-3xl font-bold font-marathi-heading text-stone-900 dark:text-[#FAF2E8]">
                 {isEn ? "Early Devoted Teachers & Librarians" : language === "hi" ? "प्रारंभिक समर्पित शिक्षक एवं ग्रंथसेवक" : "प्रारंभीचे समर्पित शिक्षक व ग्रंथसेवक"}
               </h2>
               <p className="text-sm text-stone-600 dark:text-stone-400 mt-1.5 font-marathi-body">
@@ -383,7 +383,7 @@ export default function TrusteesPage() {
               <span className="text-xs font-bold text-[#800020] dark:text-[#E5B869] uppercase tracking-widest block mb-2 font-mono">
                 {isEn ? "CURRENT BOARD OF TRUSTEES" : language === "hi" ? "वर्तमान न्यासी मंडल" : "विद्यमान विश्वस्त मंडळ"}
               </span>
-              <h2 className="text-2xl sm:text-3xl font-bold font-gajraj text-stone-900 dark:text-[#FAF2E8]">
+              <h2 className="text-2xl sm:text-3xl font-bold font-marathi-heading text-stone-900 dark:text-[#FAF2E8]">
                 {isEn ? "Incumbent Board of Trustees" : language === "hi" ? "विद्यमान न्यासी मंडल" : "विद्यमान विश्वस्त मंडळ"}
               </h2>
               <p className="text-sm text-stone-600 dark:text-stone-400 mt-1.5 font-marathi-body">
@@ -404,7 +404,7 @@ export default function TrusteesPage() {
                   <div className="h-14 w-14 rounded-full bg-[#800020]/10 text-[#800020] dark:bg-amber-400/10 dark:text-amber-300 flex items-center justify-center font-bold text-base mb-3">
                     <Users className="h-7 w-7" />
                   </div>
-                  <h3 className="text-base font-bold font-gajraj text-stone-900 dark:text-[#FAF2E8]">
+                  <h3 className="text-base font-bold font-marathi-heading text-stone-900 dark:text-[#FAF2E8]">
                     {isEn ? member.nameEn : member.name}
                   </h3>
                   <p className="text-xs text-stone-500 dark:text-stone-400 font-marathi-body mt-1">
@@ -421,7 +421,7 @@ export default function TrusteesPage() {
           <section className="mt-8 pt-8 border-t border-stone-200 dark:border-stone-800 text-center">
             <div className="p-8 rounded-2xl bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-950/20 dark:to-orange-950/20 border border-amber-200/80 dark:border-amber-800/40 max-w-3xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
               <div className="text-left space-y-1">
-                <h3 className="text-lg font-bold font-gajraj text-stone-900 dark:text-[#FAF2E8]">
+                <h3 className="text-lg font-bold font-marathi-heading text-stone-900 dark:text-[#FAF2E8]">
                   {isEn ? "Incumbent Executive Committee (2023–29)" : language === "hi" ? "विद्यमान कार्यकारिणी मंडल (२०२३-२९)" : "विद्यमान कार्यकारिणी मंडळ (२०२३-२९)"}
                 </h3>
                 <p className="text-xs text-stone-600 dark:text-stone-400 font-marathi-body">
