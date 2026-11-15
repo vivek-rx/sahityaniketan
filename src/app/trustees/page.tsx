@@ -89,15 +89,15 @@ const FOUNDING_MEMBERS_1945: { name: string; nameEn: string; role: L3 }[] = [
   { name: "श्री. विपत वहमवार", nameEn: "Shri Vipat Wahamwar", role: ["संस्थापक सदस्य (१९४५)", "संस्थापक सदस्य (१९४५)", "Founding Member (1945)"] },
   { name: "श्री. चंद्रगुप्त आर्य", nameEn: "Shri Chandragupta Arya", role: ["संस्थापक सदस्य (१९४५)", "संस्थापक सदस्य (१९४५)", "Founding Member (1945)"] },
   { name: "श्री. के. बी. पाटील", nameEn: "Shri K. B. Patil", role: ["संस्थापक सदस्य (१९४५)", "संस्थापक सदस्य (१९४५)", "Founding Member (1945)"] },
-  { name: "श्री. प्र. गो. रामदासी", nameEn: "Shri Pr. Go. Ramdasi", role: ["संस्थापक सदस्य व शिक्षक (१९४५)", "संस्थापक सदस्य एवं शिक्षक (१९४५)", "Founding Member & Teacher (1945)"] },
+  { name: "श्री. प्र. गो. रामदासी", nameEn: "Shri P. G. Ramdasi", role: ["संस्थापक सदस्य व शिक्षक (१९४५)", "संस्थापक सदस्य एवं शिक्षक (१९४५)", "Founding Member & Teacher (1945)"] },
 ];
 
 // 3. प्रारंभीचे समर्पित शिक्षक व ग्रंथसेवक (१९४५-१९५५)
 const EARLY_TEACHERS: { name: string; nameEn: string; role: L3 }[] = [
-  { name: "प्र. गो. भावठाणकर", nameEn: "Pr. Go. Bhavthankar", role: ["समर्पित शिक्षक व मार्गदर्शक (१९४५-१९५५)", "समर्पित शिक्षक एवं मार्गदर्शक (१९४५-१९५५)", "Devoted Teacher & Guide (1945–1955)"] },
-  { name: "ज्ञा. लु. खोपुसकर", nameEn: "Gya. Lu. Khopuskar", role: ["राष्ट्रभाषा वर्ग शिक्षक (१९४५-१९५५)", "राष्ट्रभाषा वर्ग शिक्षक (१९४५-१९५५)", "National-Language Class Teacher (1945–1955)"] },
+  { name: "प्र. गो. भावठाणकर", nameEn: "P. G. Bhavthankar", role: ["समर्पित शिक्षक व मार्गदर्शक (१९४५-१९५५)", "समर्पित शिक्षक एवं मार्गदर्शक (१९४५-१९५५)", "Devoted Teacher & Guide (1945–1955)"] },
+  { name: "ज्ञा. लु. खोपुसकर", nameEn: "Dnya. Lu. Khopuskar", role: ["राष्ट्रभाषा वर्ग शिक्षक (१९४५-१९५५)", "राष्ट्रभाषा वर्ग शिक्षक (१९४५-१९५५)", "National-Language Class Teacher (1945–1955)"] },
   { name: "विनायकराव जानवळकर", nameEn: "Vinayakrao Janwalkar", role: ["वाचनालय मार्गदर्शक (१९४५-१९५५)", "वाचनालय मार्गदर्शक (१९४५-१९५५)", "Reading-Room Guide (1945–1955)"] },
-  { name: "प्र. गो. रामदासी", nameEn: "Pr. Go. Ramdasi", role: ["संस्थापक शिक्षक व ग्रंथसेवक (१९४५-१९५५)", "संस्थापक शिक्षक एवं ग्रंथसेवक (१९४५-१९५५)", "Founding Teacher & Librarian (1945–1955)"] },
+  { name: "प्र. गो. रामदासी", nameEn: "P. G. Ramdasi", role: ["संस्थापक शिक्षक व ग्रंथसेवक (१९४५-१९५५)", "संस्थापक शिक्षक एवं ग्रंथसेवक (१९४५-१९५५)", "Founding Teacher & Librarian (1945–1955)"] },
 ];
 
 // 4. विद्यमान विश्वस्त मंडळ (वर्तमान धोरण समिती)
@@ -296,7 +296,7 @@ export default function TrusteesPage() {
               ========================================================= */}
           <section className="py-12 border-t border-stone-200 dark:border-stone-800">
             <div className="text-center max-w-2xl mx-auto mb-10">
-              <span className="text-xs font-bold text-amber-700 dark:text-amber-400 uppercase tracking-widest block mb-2 font-mono">
+              <span className="text-xs font-bold text-[#800020] dark:text-[#E5B869] uppercase tracking-widest block mb-2 font-mono">
                 {isEn ? "1 AUGUST 1945 · FOUNDING PIONEERS" : language === "hi" ? "1 अगस्त १९४५ · संस्थापक अग्रणी" : "१ ऑगस्ट १९४५ · संस्थापक अग्रणी"}
               </span>
               <h2 className="text-2xl sm:text-3xl font-bold font-marathi-heading text-stone-900 dark:text-[#FAF2E8]">
@@ -315,16 +315,16 @@ export default function TrusteesPage() {
               {FOUNDING_MEMBERS_1945.map((member, i) => (
                 <div
                   key={member.name}
-                  className="p-4 rounded-xl bg-white dark:bg-[#1A1215] border border-stone-200/80 dark:border-stone-800 flex items-center gap-3.5 hover:border-[#800020]/40 transition-colors shadow-xs"
+                  className="p-5 rounded-2xl bg-white dark:bg-[#1A1215] border border-stone-200/80 dark:border-stone-800 flex items-start gap-4 hover:border-[#E5B869]/70 dark:hover:border-[#E5B869]/50 hover:shadow-md transition-all shadow-xs"
                 >
-                  <div className="h-10 w-10 rounded-lg bg-[#800020]/10 text-[#800020] dark:bg-amber-400/10 dark:text-[#E5B869] flex items-center justify-center font-bold text-sm shrink-0 font-mono">
+                  <div className="h-11 w-11 rounded-xl bg-gradient-to-br from-[#800020] to-[#55000E] text-[#F4D98C] flex items-center justify-center font-bold text-sm shrink-0 font-mono shadow-sm">
                     0{i + 1}
                   </div>
                   <div className="min-w-0">
-                    <h4 className="text-sm font-bold text-stone-900 dark:text-[#FAF2E8] font-marathi-heading truncate">
+                    <h4 className="text-sm font-bold text-stone-900 dark:text-[#FAF2E8] font-marathi-heading leading-snug">
                       {isEn ? member.nameEn : member.name}
                     </h4>
-                    <p className="text-[11px] text-stone-500 dark:text-stone-400 font-marathi-body truncate">
+                    <p className="text-[11px] text-stone-500 dark:text-stone-400 font-marathi-body mt-1 leading-relaxed">
                       {pick(member.role)}
                     </p>
                   </div>
@@ -338,7 +338,7 @@ export default function TrusteesPage() {
               ========================================================= */}
           <section className="py-12 border-t border-stone-200 dark:border-stone-800">
             <div className="text-center max-w-2xl mx-auto mb-10">
-              <span className="text-xs font-bold text-amber-700 dark:text-amber-400 uppercase tracking-widest block mb-2 font-mono">
+              <span className="text-xs font-bold text-[#800020] dark:text-[#E5B869] uppercase tracking-widest block mb-2 font-mono">
                 {isEn ? "DEVOTED TEACHERS & LIBRARIANS (1945–1955)" : language === "hi" ? "समर्पित शिक्षक एवं ग्रंथसेवक (१९४५-१९५५)" : "समर्पित शिक्षक व ग्रंथसेवक (१९४५-१९५५)"}
               </span>
               <h2 className="text-2xl sm:text-3xl font-bold font-marathi-heading text-stone-900 dark:text-[#FAF2E8]">
@@ -357,16 +357,16 @@ export default function TrusteesPage() {
               {EARLY_TEACHERS.map((teacher, i) => (
                 <div
                   key={teacher.name}
-                  className="p-4 rounded-xl bg-amber-50/40 dark:bg-amber-950/15 border border-amber-200/60 dark:border-amber-900/30 flex items-center gap-3.5 shadow-xs"
+                  className="p-5 rounded-2xl bg-amber-50/40 dark:bg-amber-950/15 border border-amber-200/60 dark:border-amber-900/30 flex items-start gap-4 hover:border-[#E5B869]/70 dark:hover:border-[#E5B869]/50 hover:shadow-md transition-all shadow-xs"
                 >
-                  <div className="h-10 w-10 rounded-lg bg-amber-500/10 text-amber-800 dark:text-amber-300 flex items-center justify-center font-bold text-sm shrink-0">
+                  <div className="h-11 w-11 rounded-xl bg-gradient-to-br from-[#800020] to-[#55000E] text-[#F4D98C] flex items-center justify-center shrink-0 shadow-sm">
                     <BookOpen className="h-5 w-5" />
                   </div>
                   <div className="min-w-0">
-                    <h4 className="text-sm font-bold text-stone-900 dark:text-[#FAF2E8] font-marathi-heading truncate">
+                    <h4 className="text-sm font-bold text-stone-900 dark:text-[#FAF2E8] font-marathi-heading leading-snug">
                       {isEn ? teacher.nameEn : teacher.name}
                     </h4>
-                    <p className="text-[11px] text-stone-500 dark:text-stone-400 font-marathi-body truncate">
+                    <p className="text-[11px] text-stone-500 dark:text-stone-400 font-marathi-body mt-1 leading-relaxed">
                       {pick(teacher.role)}
                     </p>
                   </div>

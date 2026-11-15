@@ -345,30 +345,44 @@ export function InspiringJourneySection() {
         </div>
 
         {/* Founding Youth & Dedicated Teachers Memorial Strip */}
-        <div className="pt-6 border-t border-stone-100 dark:border-stone-800 grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs text-stone-600 dark:text-stone-300">
-          <div>
-            <span className="text-amber-600 dark:text-amber-300 font-bold block mb-1">
+        <div className="pt-6 border-t border-stone-100 dark:border-stone-800 grid grid-cols-1 sm:grid-cols-2 gap-5 text-xs text-stone-600 dark:text-stone-300">
+          <div className="p-4 rounded-2xl bg-amber-50/40 dark:bg-amber-950/15 border border-amber-200/50 dark:border-amber-900/30">
+            <span className="text-[#800020] dark:text-[#E5B869] font-bold block mb-2.5">
               {isEn
                 ? "Pioneering Youth Founders (1945):"
                 : isHi
                   ? "स्थापना के ध्येयवादी युवा (१९४५):"
                   : "स्थापनेतील ध्येयवादी तरुण (१९४५):"}
             </span>
-            <span className="leading-relaxed">
-              {foundingList.join(" • ")}
-            </span>
+            <div className="flex flex-wrap gap-1.5">
+              {foundingList.map((name, idx) => (
+                <span
+                  key={idx}
+                  className="px-2.5 py-1 rounded-full bg-white dark:bg-[#1A1215] border border-stone-200/80 dark:border-stone-700/60 font-medium text-stone-700 dark:text-stone-200 leading-relaxed"
+                >
+                  {name}
+                </span>
+              ))}
+            </div>
           </div>
-          <div>
-            <span className="text-amber-600 dark:text-amber-300 font-bold block mb-1">
+          <div className="p-4 rounded-2xl bg-amber-50/40 dark:bg-amber-950/15 border border-amber-200/50 dark:border-amber-900/30">
+            <span className="text-[#800020] dark:text-[#E5B869] font-bold block mb-2.5">
               {isEn
                 ? "Early Dedicated Teachers (Honorary Service):"
                 : isHi
                   ? "प्रारंभिक समर्पित शिक्षक (अल्प मानदेय सेवा):"
                   : "प्रारंभीचे समर्पित शिक्षक (अल्प मानधन सेवा):"}
             </span>
-            <span className="leading-relaxed">
-              {teacherList.join(" • ")}
-            </span>
+            <div className="flex flex-wrap gap-1.5">
+              {teacherList.map((name, idx) => (
+                <span
+                  key={idx}
+                  className="px-2.5 py-1 rounded-full bg-white dark:bg-[#1A1215] border border-stone-200/80 dark:border-stone-700/60 font-medium text-stone-700 dark:text-stone-200 leading-relaxed"
+                >
+                  {name}
+                </span>
+              ))}
+            </div>
           </div>
         </div>
       </div>
