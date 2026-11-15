@@ -135,6 +135,7 @@ export const CATEGORY_LINKS: Record<string, SubLinkItem[]> = {
     { label: "Notice Board", href: "/admin/noticeboard" },
     { label: "Carousel Slides", href: "/admin/carousel" },
     { label: "Photo Gallery", href: "/admin/gallery" },
+    { label: "Committee Photos", href: "/admin/committee" },
     { label: "Stories (साहित्य संचित)", href: "/admin/stories" },
     { label: "Testimonials (अभिप्राय)", href: "/admin/testimonials" },
   ],
@@ -165,7 +166,7 @@ export function DoubleNavbar() {
 
   // Determine active section based on current pathname
   const getInitialActive = () => {
-    if (pathname.includes("carousel") || pathname.includes("gallery") || pathname.includes("noticeboard") || pathname.includes("stories") || pathname.includes("awards")) {
+    if (pathname.includes("carousel") || pathname.includes("gallery") || pathname.includes("noticeboard") || pathname.includes("stories") || pathname.includes("awards") || pathname.includes("committee")) {
       return "Content";
     }
     if (pathname.includes("testimonials")) return "Community";
@@ -196,6 +197,9 @@ export function DoubleNavbar() {
     } else if (pathname === "/admin/awards") {
       setActive("Content");
       setActiveLink("Choice Awards (पुरस्कार)");
+    } else if (pathname === "/admin/committee") {
+      setActive("Content");
+      setActiveLink("Committee Photos");
     } else if (pathname === "/admin/testimonials") {
       setActive("Community");
       setActiveLink("Testimonials");

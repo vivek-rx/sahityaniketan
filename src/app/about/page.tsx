@@ -7,6 +7,9 @@ import { Users, Landmark, ArrowRight, BookOpen, ShieldCheck, History, Award, Spa
 import { MotionSkeleton } from "@/components/ui/loader-skeleton";
 import { TiltCard } from "@/components/ui/tilt-card";
 import { useLanguage } from "@/context/language-context";
+import { useEffect, useState } from "react";
+import { getCommitteePhotos } from "@/lib/actions/committee";
+import { COMMITTEE_MEMBERS, type CommitteeMember } from "@/lib/committee";
 
 const TRUSTEES_DATA = [
   {
@@ -32,118 +35,23 @@ const TRUSTEES_DATA = [
   },
 ];
 
-const EXECUTIVE_COMMITTEE: Array<{
-  name: string;
-  nameEn: string;
-  role: string;
-  roleHi: string;
-  roleEn: string;
-  photo?: string;
-}> = [
-  {
-    name: "श्री. दत्तप्रसाद पांडुरंग रांदड़",
-    nameEn: "Shri Dattaprasad Pandurang Randad",
-    role: "अध्यक्ष",
-    roleHi: "अध्यक्ष",
-    roleEn: "President",
-  },
-  {
-    name: "श्री. सुभाष हरिभाऊ देशपांडे",
-    nameEn: "Shri Subhash Haribhau Deshpande",
-    role: "उपाध्यक्ष",
-    roleHi: "उपाध्यक्ष",
-    roleEn: "Vice President",
-  },
-  {
-    name: "श्री. शंतनु शंकरराव हिरळकर",
-    nameEn: "Shri Shantanu Shankarrao Hiralkar",
-    role: "कार्यवाह",
-    roleHi: "कार्यवाह",
-    roleEn: "Secretary",
-  },
-  {
-    name: "श्री. कोस्तुभ श्रीराम कोदरकर",
-    nameEn: "Shri Kostubh Shriram Kodarkar",
-    role: "सहकार्यवाहक",
-    roleHi: "सह-कार्यवाहक",
-    roleEn: "Joint Secretary",
-  },
-  {
-    name: "श्री. सूर्यकांत पंठरीनाथ कानडे",
-    nameEn: "Shri Suryakant Pantharinath Kanade",
-    role: "कोषाध्यक्ष",
-    roleHi: "कोषाध्यक्ष",
-    roleEn: "Treasurer",
-  },
-  {
-    name: "ॲड. श्री. मकरंद माधवराव पत्की",
-    nameEn: "Adv. Shri Makarand Madhavrao Patki",
-    role: "सदस्य",
-    roleHi: "सदस्य",
-    roleEn: "Member",
-  },
-  {
-    name: "श्री. विपीन माणिकराव खीरसागर",
-    nameEn: "Shri Vipin Manikrao Kshirsagar",
-    role: "सदस्य",
-    roleHi: "सदस्य",
-    roleEn: "Member",
-  },
-  {
-    name: "श्री. अमोल शंकरराव जड",
-    nameEn: "Shri Amol Shankarrao Jad",
-    role: "सदस्य",
-    roleHi: "सदस्य",
-    roleEn: "Member",
-  },
-  {
-    name: "श्री. ललितकुमार रामविलास बजाज",
-    nameEn: "Shri Lalitkumar Ramvilas Bajaj",
-    role: "सदस्य",
-    roleHi: "सदस्य",
-    roleEn: "Member",
-  },
-  {
-    name: "ॲड. श्री. अक्षय प्रकाशराव खडके",
-    nameEn: "Adv. Shri Akshay Prakashrao Khadke",
-    role: "सदस्य",
-    roleHi: "सदस्य",
-    roleEn: "Member",
-  },
-  {
-    name: "सौ. प्रतिभा दिपक देवळे",
-    nameEn: "Mrs. Pratibha Deepak Devale",
-    role: "सदस्य",
-    roleHi: "सदस्य",
-    roleEn: "Member",
-  },
-  {
-    name: "सौ. मंजुषा प्रकाशराव कुलकर्णी",
-    nameEn: "Mrs. Manjusha Prakashrao Kulkarni",
-    role: "सदस्य",
-    roleHi: "सदस्य",
-    roleEn: "Member",
-  },
-  {
-    name: "श्री. जितेंद्र अरविंद देशपांडे",
-    nameEn: "Shri Jitendra Arvind Deshpande",
-    role: "स्वीकृत सदस्य",
-    roleHi: "स्वीकृत सदस्य",
-    roleEn: "Nominated Member",
-  },
-  {
-    name: "श्री. दत्तप्रसाद चिंतामणी गोस्वामी",
-    nameEn: "Shri Dattaprasad Chintamani Goswami",
-    role: "स्वीकृत सदस्य",
-    roleHi: "स्वीकृत सदस्य",
-    roleEn: "Nominated Member",
-  },
-];
 
 export default function AboutPage() {
   const { language } = useLanguage();
   const isEn = language === "en";
   const isHi = language === "hi";
+
+  // Portraits uploaded via /admin/committee (Supabase: committee_photos).
+  // Members without a photo keep the archival "Official Portrait" frame.
+  const [photos, setPhotos] = useState<Record<string, string>>({});
+  useEffect(() => {
+    let cancelled = false;
+    getCommitteePhotos().then((map) => {
+      if (!cancelled) setPhotos(map);
+    }).catch(() => {});
+    return () => { cancelled = true; };
+  }, []);
+
 
   return (
     <>
@@ -407,9 +315,9 @@ export default function AboutPage() {
                 {isEn ? "(Term 2023–24 to 2028–29)" : isHi ? "(सत्र २०२३-२४ से २०२८-२९)" : "(सन २०२३-२४ ते २०२८-२९)"}
               </p>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 sm:gap-16 justify-items-center">
-                {EXECUTIVE_COMMITTEE.map((member) => (
+                {COMMITTEE_MEMBERS.map((member: CommitteeMember) => (
                   <div
-                    key={member.name}
+                    key={member.slug}
                     className="flex flex-col items-center text-center group"
                   >
                     {/* Archival Photo Frame with Motion 3D Tilt Card & metallic shimmer */}
@@ -420,9 +328,9 @@ export default function AboutPage() {
                       glareOpacity={0.25}
                       className="w-52 h-64 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 flex items-center justify-center text-zinc-400 dark:text-zinc-500 shadow-md group-hover:shadow-xl transition-shadow cursor-pointer relative overflow-hidden"
                     >
-                      {member.photo ? (
+                      {photos[member.slug] ? (
                         <Image
-                          src={member.photo}
+                          src={photos[member.slug]}
                           alt={isEn ? member.nameEn : member.name}
                           fill
                           sizes="208px"
