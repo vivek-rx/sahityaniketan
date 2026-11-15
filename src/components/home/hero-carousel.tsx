@@ -58,7 +58,7 @@ const DEFAULT_HERO_SLIDES: CarouselSlide[] = [
   {
     id: "default-slide-1",
     type: "photo",
-    title: "Sahitya Niketan Public Library, Ambajogai",
+    title: "Sahitya Niketan Library, Ambajogai",
     titleMarathi: "साहित्य निकेतन सार्वजनिक ग्रंथालय, अंबाजोगाई",
     titleHindi: "साहित्य निकेतन सार्वजनिक ग्रन्थालय, अंबाजोगाई",
     subtitle: "Government recognized Class 'A' Library founded on 1 August 1945.",

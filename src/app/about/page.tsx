@@ -178,7 +178,7 @@ export default function AboutPage() {
 
                 <p className="text-sm sm:text-base text-zinc-600 dark:text-zinc-300 font-marathi-body leading-relaxed">
                   {isEn
-                    ? "Established on 1 August 1945 during the pre-liberation Nizam era, Sahitya Niketan Public Library was founded by patriotic thinkers to protect Marathi literature, culture, and democratic expression. Today, recognized with the highest Grade 'A' status by the Government of Maharashtra, it serves thousands of readers, scholars, and youth."
+                    ? "Established on 1 August 1945 during the pre-liberation Nizam era, Sahitya Niketan Library was founded by patriotic thinkers to protect Marathi literature, culture, and democratic expression. Today, recognized with the highest Grade 'A' status by the Government of Maharashtra, it serves thousands of readers, scholars, and youth."
                     : isHi
                     ? "हैदराबाद रियासत के दौर में १ अगस्त १९४५ को स्वतंत्रता सेनानियों एवं विचारकों द्वारा साहित्य निकेतन सार्वजनिक पुस्तकालय की आधारशिला रखी गई। महाराष्ट्र शासन द्वारा सर्वोच्च वर्ग 'अ' मान्यता प्राप्त यह संस्था आज हजारों पाठकों और प्रतियोगी परीक्षा परीक्षार्थियों की ज्ञान स्थली है।"
                     : "हैदराबाद संस्थानातील पारतंत्र्यात मराठी भाषा, संस्कृती आणि साहित्याचे रक्षण करण्यासाठी १ ऑगस्ट १९४५ रोजी साहित्य निकेतन ग्रंथालयाची स्थापना झाली. स्वातंत्र्योत्तर काळात लोकसहभागातून वाढलेले हे ग्रंथालय आज महाराष्ट्र शासनाच्या सर्वोच्च 'वर्ग अ' दर्जासह अंबाजोगाई व मराठवाड्यातील प्रमुख सांस्कृतिक केंद्र म्हणून कार्यरत आहे."}
@@ -221,7 +221,7 @@ export default function AboutPage() {
                       {isEn ? "Founding Inscription (1945)" : "मूळ ऐतिहासिक स्थापना शिलालेख (१९४५)"}
                     </span>
                     <p className="text-sm font-bold font-marathi-heading">
-                      {isEn ? "Sahitya Niketan Public Library, Ambajogai" : "साहित्य निकेतन सार्वजनिक ग्रंथालय, अंबाजोगाई"}
+                      {isEn ? "Sahitya Niketan Library, Ambajogai" : "साहित्य निकेतन सार्वजनिक ग्रंथालय, अंबाजोगाई"}
                     </p>
                     <p className="text-xs text-zinc-300">
                       {isEn ? "Reg. No. BHR/3/1962 • Grade 'A' Recognized" : "नोंदणी क्र. BHR/3/1962 • महाराष्ट्र शासन 'वर्ग अ' मान्यताप्राप्त"}

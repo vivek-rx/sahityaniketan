@@ -161,7 +161,7 @@ export function EventListSchema({
           "image": ev.image || undefined,
           "location": {
             "@type": "Place",
-            "name": "Sahitya Niketan Public Library, Ambajogai",
+            "name": "Sahitya Niketan Library, Ambajogai",
             "address": {
               "@type": "PostalAddress",
               "streetAddress": "Mandai Bazar Road, Prashant Nagar, Gawli Pura",
@@ -173,7 +173,7 @@ export function EventListSchema({
           },
           "organizer": {
             "@type": "Library",
-            "name": "Sahitya Niketan Public Library",
+            "name": "Sahitya Niketan Library",
             "url": SITE_URL,
           },
         },

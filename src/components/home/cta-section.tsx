@@ -25,7 +25,7 @@ export function CTASection() {
     description: {
       mr: "साहित्य निकेतन सार्वजनिक वाचनालय व ग्रंथालयाचे सभासदत्व स्थानिक नागरिक, अभ्यासक व विद्यार्थ्यांसाठी खुले आहे. ग्रंथ देवाणघेवाण, संदर्भ कक्ष आणि अभ्यासिका सुविधेसाठी विहित नमुन्यात अर्ज करावा.",
       hi: "साहित्य निकेतन सार्वजनिक वाचनालय एवं ग्रन्थालय की सदस्यता नागरिकों, शोधार्थियों व छात्रों हेतु खुली है। ग्रन्थ वितरण, सन्दर्भ कक्ष एवं अध्ययन कक्ष सुविधा हेतु विहित प्रपत्र में आवेदन करें।",
-      en: "Membership to Sahitya Niketan Public Library is open to citizens, researchers, and students. Submit the prescribed application for borrowing privileges, reference access, and reading room facilities.",
+      en: "Membership to Sahitya Niketan Library is open to citizens, researchers, and students. Submit the prescribed application for borrowing privileges, reference access, and reading room facilities.",
     },
     timing: {
       mr: "कार्यालयीन वेळ: सकाळी ८.०० ते रात्री ८.३०",

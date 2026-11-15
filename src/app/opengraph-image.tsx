@@ -3,7 +3,7 @@ import fs from "node:fs/promises";
 import path from "node:path";
 
 export const runtime = "nodejs";
-export const alt = "साहित्य निकेतन सार्वजनिक ग्रंथालय, अंबाजोगाई — Sahitya Niketan Public Library, Ambajogai (Est. 1945)";
+export const alt = "साहित्य निकेतन सार्वजनिक ग्रंथालय, अंबाजोगाई — Sahitya Niketan Library, Ambajogai (Est. 1945)";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 

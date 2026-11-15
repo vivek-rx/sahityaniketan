@@ -122,7 +122,7 @@ export function DigitalManuscriptViewer() {
     const text = pick([
       `साहित्य निकेतन ग्रंथालयातील १२ व्या शतकातील दुर्मीळ हस्तलिखित '${currentManuscript.title}' ऑनलाइन उघडून पहा: ${window.location.href}`,
       `साहित्य निकेतन पुस्तकालय में संरक्षित १२ वीं शताब्दी का दुर्लभ हस्तलिखित '${currentManuscript.title}' ऑनलाइन देखें: ${window.location.href}`,
-      `Explore the rare 12th-century manuscript '${currentManuscript.title}' preserved at Sahitya Niketan Public Library, online: ${window.location.href}`,
+      `Explore the rare 12th-century manuscript '${currentManuscript.title}' preserved at Sahitya Niketan Library, online: ${window.location.href}`,
     ]);
     navigator.clipboard.writeText(text);
     setCopiedShare(true);

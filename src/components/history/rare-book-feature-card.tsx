@@ -52,7 +52,7 @@ export function RareBookFeatureCard({ className }: RareBookFeatureCardProps) {
       `⏳ कालखंड: १२ वीं शताब्दी (ई. ११८८) (८००+ वर्ष पुराना)\n` +
       `🏛️ पंजीकरण सं.: ${bookData.accessionNo}\n\n` +
       `मराठी का पहला दार्शनिक आदिग्रंथ अब डिजिटल रूप में देखें और पढ़ें:\n${typeof window !== "undefined" ? window.location.href : `${SITE_URL}/history`}`,
-    `📚 *Sahitya Niketan Public Library, Ambajogai — Rare Book Series*\n\n` +
+    `📚 *Sahitya Niketan Library, Ambajogai — Rare Book Series*\n\n` +
       `📖 *${bookData.englishTitle}*\n` +
       `✍️ Author: Aadyakavi Mukundraj (Ambajogai)\n` +
       `⏳ Period: 12th Century (c. 1188 CE) (800+ years old)\n` +

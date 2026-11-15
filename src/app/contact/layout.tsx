@@ -17,7 +17,7 @@ const CONTACT_FAQS = [
   {
     question: "Where is Sahitya Niketan Library located in Ambajogai?",
     answer:
-      "Sahitya Niketan Public Library is located at Mandai Bazar Road, Prashant Nagar, Gawli Pura, Ambajogai, Maharashtra 431517, India.",
+      "Sahitya Niketan Library is located at Mandai Bazar Road, Prashant Nagar, Gawli Pura, Ambajogai, Maharashtra 431517, India.",
   },
   {
     question: "How can I contact the library?",

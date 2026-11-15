@@ -48,6 +48,17 @@ const securityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
+  async redirects() {
+    return [
+      // Legacy/deep-link support: ?filter=genre → the genres index
+      {
+        source: "/catalogue",
+        has: [{ type: "query", key: "filter", value: "genre" }],
+        destination: "/catalogue/genres",
+        permanent: false,
+      },
+    ];
+  },
   images: {
     formats: ["image/avif", "image/webp"],
     deviceSizes: [360, 420, 640, 750, 828, 1080, 1200, 1920],

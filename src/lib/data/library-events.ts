@@ -269,7 +269,7 @@ export const LIBRARY_EVENTS: LibraryEvent[] = [
         id: "p6-1",
         url: "/images/real/library_signboard.webp",
         caption: "साहित्य निकेतन सार्वजनिक ग्रंथालय अंबाजोगाई",
-        captionEn: "Sahitya Niketan Public Library, Ambajogai",
+        captionEn: "Sahitya Niketan Library, Ambajogai",
         captionHi: "साहित्य निकेतन सार्वजनिक पुस्तकालय, अंबाजोगाई",
       },
       {

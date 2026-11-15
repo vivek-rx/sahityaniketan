@@ -3,7 +3,6 @@ import type { Metadata } from "next";
 import { buildPageMetadata } from "@/lib/metadata";
 import { EventListSchema } from "@/components/seo/structured-data";
 import { createPublicClient } from "@/lib/supabase/server";
-import { LIBRARY_EVENTS } from "@/lib/data/library-events";
 
 export const metadata: Metadata = buildPageMetadata({
   title: "कार्यक्रम व उपक्रम",
@@ -41,18 +40,9 @@ async function fetchEventsForSchema(): Promise<DbEvent[]> {
 }
 
 export default async function EventsLayout({ children }: { children: ReactNode }) {
-  // DB first; when the events table is empty (seed-only deployment), fall back
-  // to the curated static LIBRARY_EVENTS so AI surfaces still see real content.
-  let events = await fetchEventsForSchema();
-  if (events.length === 0) {
-    events = LIBRARY_EVENTS.slice(0, 10).map((ev) => ({
-      title: ev.title,
-      title_marathi: null,
-      description: ev.descriptionEn ?? ev.description,
-      event_date: null, // static dates are display strings, not ISO
-      image_url: ev.coverImage ?? null,
-    }));
-  }
+  // Schema only from real DB events — no static fallback (content is managed
+  // in the admin panel now).
+  const events = await fetchEventsForSchema();
 
   return (
     <>

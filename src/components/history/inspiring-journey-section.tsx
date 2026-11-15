@@ -137,6 +137,8 @@ export function InspiringJourneySection() {
   };
 
   const { chapters, registration, motto, foundingMembers, earlyTeachers } = OFFICIAL_LIBRARY_HISTORY;
+  const foundingList = isEn ? OFFICIAL_LIBRARY_HISTORY.foundingMembersEn : foundingMembers;
+  const teacherList = isEn ? OFFICIAL_LIBRARY_HISTORY.earlyTeachersEn : earlyTeachers;
 
   return (
     <section className="py-14 sm:py-20 px-4 sm:px-6 max-w-5xl mx-auto space-y-16">
@@ -353,7 +355,7 @@ export function InspiringJourneySection() {
                   : "स्थापनेतील ध्येयवादी तरुण (१९४५):"}
             </span>
             <span className="leading-relaxed">
-              {foundingMembers.join(" • ")}
+              {foundingList.join(" • ")}
             </span>
           </div>
           <div>
@@ -365,7 +367,7 @@ export function InspiringJourneySection() {
                   : "प्रारंभीचे समर्पित शिक्षक (अल्प मानधन सेवा):"}
             </span>
             <span className="leading-relaxed">
-              {earlyTeachers.join(" • ")}
+              {teacherList.join(" • ")}
             </span>
           </div>
         </div>

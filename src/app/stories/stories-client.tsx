@@ -10,45 +10,11 @@ import { devaNormalize } from "@/lib/transliterate";
 import { BlogGridOrange } from "@/components/ui/skiper-ui/skiper94";
 import type { Post } from "@/types/database";
 
-const DEFAULT_STORIES: any[] = [
-  {
-    id: "default-1",
-    title: "अंबाजोगाईची ज्ञानसाधना: आद्यकवी मुकुंदराज व संत दासोपंतांचा समृद्ध वारसा",
-    slug: "ambajogai-literary-heritage-mukundraj-dasopant",
-    category: "blog",
-    date: "ऐतिहासिक शोधनिबंध",
-    thumbnail_url: "/images/real/library_vintage_books.png",
-    excerpt: "अंबाजोगाई ही मराठी साहित्याची पावन जन्मभूमी मानली जाते. याच मातीत आद्यकवी मुकुंदराज यांनी मराठीतील पहिला ग्रंथ विवेकसिंधू लिहिला. संत दासोपंतांच्या पदस्पर्शाने पुनीत झालेल्या या साहित्यनगरीत ग्रंथ चळवळ कशी बहरली याचा हा विशेष मागोवा...",
-    author: "प्रा. डॉ. सदानंद मोरे",
-    readTime: "५ मिनिटे वाचन",
-  },
-  {
-    id: "default-2",
-    title: "वाचन संस्कृतीची ८१ वर्षे: १ ऑगस्ट १९४५ पासूनचा गौरवशाली ग्रंथालय प्रवास",
-    slug: "80-years-of-sahitya-niketan-ambajogai",
-    category: "news",
-    date: "स्थापना: १ ऑगस्ट १९४५",
-    thumbnail_url: "/images/real/library_inauguration_plaque.webp",
-    excerpt: "१ ऑगस्ट १९४५ रोजी स्थापन झालेले साहित्य निकेतन ग्रंथालय आज मराठवाड्यातील अग्रगण्य सार्वजनिक वाचनालय ठरले आहे. ३९,९५३ ग्रंथांचा अमूल्य संग्रह आणि स्पर्धा परीक्षा अभ्यासिकेच्या माध्यमातून हजारो युवकांना घडविणारे हे ज्ञानतीर्थ...",
-    author: "साहित्य निकेतन संपादक मंडळ",
-    readTime: "४ मिनिटे वाचन",
-  },
-  {
-    id: "default-3",
-    title: "मराठीतील आद्य ग्रंथ 'विवेकसिंधू' आणि दुर्मीळ मोडी हस्तलिखितांचे जतन",
-    slug: "vivekasindhu-modi-manuscripts-preservation",
-    category: "blog",
-    date: "दुर्मीळ दस्तऐवज व संदर्भ",
-    thumbnail_url: "/images/real/library_cupboards.png",
-    excerpt: "मुकुंदराजकालीन संदर्भ, पेशवेकालीन सनदा आणि मोडी लिपीतील ऐतिहासिक हस्तलिखितांचे जतन साहित्य निकेतन ग्रंथालयाच्या लाकडी कपाटांमध्ये शास्त्रोक्त पद्धतीने कसे केले जाते याचा अभ्यासपूर्ण आढावा...",
-    author: "संशोधन व संदर्भ कक्ष",
-    readTime: "६ मिनिटे वाचन",
-  },
-];
+
 
 export default function StoriesClient({ initialStories = [] }: { initialStories: Post[] }) {
   const { language } = useLanguage();
-  const rawStories = initialStories.length > 0 ? initialStories : DEFAULT_STORIES;
+  const rawStories = initialStories;
   const [stories] = useState<any[]>(rawStories);
   const [searchQuery, setSearchQuery] = useState("");
 

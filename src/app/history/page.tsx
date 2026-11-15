@@ -6,7 +6,6 @@ import Image from "next/image";
 import { Navbar, Footer, PageHeader, Breadcrumbs } from "@/components/layout";
 import { InspiringJourneySection } from "@/components/history/inspiring-journey-section";
 import { ScrollTimeline } from "@/components/history/scroll-timeline";
-import { RareBookFeatureCard } from "@/components/history/rare-book-feature-card";
 import { 
   History, 
   BookOpen, 
@@ -109,30 +108,6 @@ export default function HistoryPage() {
 
             <ScrollTimeline />
           </div>
-        </section>
-
-        {/* =================================================================
-            3. SECTION: RARE BOOK STORY OF THE WEEK (Facebook & WhatsApp Circulation)
-           ================================================================= */}
-        <section className="py-14 sm:py-20 px-4 sm:px-6 max-w-5xl mx-auto">
-          <div className="text-center max-w-2xl mx-auto mb-10 space-y-2">
-            <h2 className="text-2xl sm:text-4xl font-extrabold font-marathi-heading text-stone-900 dark:text-white">
-              {language === "en"
-                ? "Rare & Notable Books of the Library"
-                : language === "hi"
-                  ? "ग्रंथालय के विशिष्ट दुर्लभ ग्रंथ"
-                  : "ग्रंथालयातील वैशिष्ट्यपूर्ण दुर्मीळ ग्रंथ"}
-            </h2>
-            <p className="text-xs sm:text-sm text-stone-600 dark:text-stone-300">
-              {language === "en"
-                ? "An introduction and reference guide to the historical and rare books preserved in the Sahitya Niketan archives."
-                : language === "hi"
-                  ? "साहित्य निकेतन के अभिलेखागार में संरक्षित ऐतिहासिक एवं दुर्लभ ग्रंथों का परिचय और संदर्भ."
-                  : "साहित्य निकेतनच्या अभिलेखागारातील ऐतिहासिक व दुर्मीळ ग्रंथांचा परिचय व संदर्भ."}
-            </p>
-          </div>
-
-          <RareBookFeatureCard />
         </section>
 
       </main>

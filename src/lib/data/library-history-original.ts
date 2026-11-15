@@ -59,11 +59,26 @@ export const OFFICIAL_LIBRARY_HISTORY = {
     "के. बी. पाटील",
     "प्र. गो. रामदासी"
   ],
+  foundingMembersEn: [
+    "Shri Govindlal Jaju",
+    "Vishwarao Jadhav",
+    "Ramchandraji Kshirsagar",
+    "Vipat Wahamwar",
+    "Chandragupta Arya",
+    "K. B. Patil",
+    "P. G. Ramdasi"
+  ],
   earlyTeachers: [
     "प्र. गो. भावठाणकर",
     "ज्ञा. लु. खोपुसकर",
     "विनायकराव जानवळकर",
     "प्र. गो. रामदासी"
+  ],
+  earlyTeachersEn: [
+    "P. G. Bhavthankar",
+    "Dnya. Lu. Khopuskar",
+    "Vinayakrao Janwalkar",
+    "P. G. Ramdasi"
   ],
   chapters: [
     {

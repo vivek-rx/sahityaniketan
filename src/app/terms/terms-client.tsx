@@ -40,7 +40,7 @@ const LAST_UPDATED_DATE: L3 = [
 const CONTACT_TITLE: L3 = [
   "साहित्य निकेतन सार्वजनिक ग्रंथालय",
   "साहित्य निकेतन सार्वजनिक पुस्तकालय",
-  "Sahitya Niketan Public Library",
+  "Sahitya Niketan Library",
 ];
 
 const EMAIL_LABEL: L3 = ["ईमेल:", "ईमेल:", "Email:"];

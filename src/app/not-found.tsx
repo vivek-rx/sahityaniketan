@@ -40,7 +40,7 @@ const I18N = {
     desc: "This page flew away. Maybe it's tucked inside one of these.",
     homeBtn: "Back to home",
     searchBtn: "Search Catalogue",
-    footer: "Sahitya Niketan Public Library, Ambajogai — Est. 1 August 1945",
+    footer: "Sahitya Niketan Library, Ambajogai — Est. 1 August 1945",
   },
 };
 

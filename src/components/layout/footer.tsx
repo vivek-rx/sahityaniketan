@@ -78,7 +78,7 @@ export function Footer() {
               successMsg: "Subscribed successfully! 🎉",
               errorMsg: "Please try again.",
               copyright:
-                "Sahitya Niketan Public Library, Ambajogai. All rights reserved.",
+                "Sahitya Niketan Library, Ambajogai. All rights reserved.",
               termsLink: "Terms of Use",
               grievanceLink: "Grievance Contact",
             }

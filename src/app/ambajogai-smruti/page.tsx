@@ -464,7 +464,7 @@ export default function RememberingAmbajogaiPage() {
                 <div className="mt-6 pt-4 border-t border-[#E5DDD0] dark:border-[#332228] flex items-center justify-between">
                   <span className="text-[11px] font-mono text-stone-400">
                     {isEn
-                      ? "Sahitya Niketan Public Library, Ambajogai"
+                      ? "Sahitya Niketan Library, Ambajogai"
                       : isHi
                       ? "साहित्य निकेतन पुस्तकालय, अंबाजोगाई"
                       : "साहित्य निकेतन ग्रंथालय, अंबाजोगाई"}

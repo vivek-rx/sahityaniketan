@@ -324,6 +324,13 @@ function CatalogueContent() {
               <Filter className="h-3 w-3 text-[#800020] dark:text-[#E5B869]" />
               <span>{language === "en" ? "Filter:" : "दालन:"}</span>
             </span>
+            <Link
+              href="/catalogue/genres"
+              className="shrink-0 px-3.5 py-1.5 rounded-full text-xs font-bold flex items-center gap-1.5 active:scale-95 bg-[#800020] text-white dark:bg-[#E5B869] dark:text-[#18080A] shadow-xs hover:opacity-90 transition-opacity"
+            >
+              <BookOpen className="h-3 w-3" />
+              <span>{language === "mr" ? "विषयानुसार ब्राउज़" : language === "hi" ? "विषय अनुसार ब्राउज़" : "Browse by Genre"}</span>
+            </Link>
             {[
               { id: "all", label: language === "mr" ? "सर्व दालने" : language === "hi" ? "सभी संग्रह" : "All" },
               { id: "कादंबरी", label: language === "mr" ? "अभिजात कादंबरी" : language === "hi" ? "क्लासिक उपन्यास" : "Classics" },
@@ -516,15 +523,15 @@ function CatalogueContent() {
                       {/* Book Miniature Cover */}
                       <Link
                         href={`/catalogue/${book.id}`}
-                        className="w-20 sm:w-24 shrink-0 aspect-[2/3] rounded-xl overflow-hidden border border-[#E5DDD0] dark:border-[#332228] bg-[#FAF8F5] dark:bg-[#180E11] relative shadow-xs flex items-center justify-center group-hover:shadow-sm"
+                        className="w-24 sm:w-28 shrink-0 aspect-[2/3] rounded-lg overflow-hidden border border-[#E5DDD0] dark:border-[#332228] bg-[#FAF8F5] dark:bg-[#180E11] relative shadow-[2px_4px_10px_rgba(0,0,0,0.12)] group-hover:shadow-[3px_6px_16px_rgba(0,0,0,0.18)] transition-shadow"
                       >
                         {book.coverImage ? (
                           <Image
                             src={book.coverImage}
                             alt={book.title}
                             fill
-                            className="object-cover group-hover:scale-105 transition-transform duration-300"
-                            sizes="96px"
+                            className="object-cover object-top group-hover:scale-105 transition-transform duration-300"
+                            sizes="112px"
                           />
                         ) : (
                           <div className="flex flex-col items-center justify-center p-2 text-center h-full w-full bg-gradient-to-br from-[#800020] to-[#550015] text-white">

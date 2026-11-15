@@ -28,7 +28,7 @@ export const SITE_URL = resolvedUrl.replace(/\/+$/, "");
 
 export const SITE_NAME_MR =
   "साहित्य निकेतन सार्वजनिक ग्रंथालय, अंबाजोगाई";
-export const SITE_NAME_EN = "Sahitya Niketan Public Library, Ambajogai";
+export const SITE_NAME_EN = "Sahitya Niketan Library, Ambajogai";
 
 /** Official interim inbox. Swap to contact@sahityaniketan.org once domain email exists. */
 export const SITE_EMAIL =
@@ -43,7 +43,7 @@ export const SITE_WHATSAPP_NUMBER = "919096642583";
 export const SITE_ADDRESS_MR =
   "साहित्य निकेतन सार्वजनिक ग्रंथालय, मंडई बाजार रोड, प्रशांत नगर, गावलीपुरा, अंबाजोगाई - ४३१५१७, जि. बीड, महाराष्ट्र";
 export const SITE_ADDRESS_EN =
-  "Sahitya Niketan Public Library, Mandai Bazar Road, Prashant Nagar, Gawli Pura, Ambajogai - 431517, Dist. Beed, Maharashtra";
+  "Sahitya Niketan Library, Mandai Bazar Road, Prashant Nagar, Gawli Pura, Ambajogai - 431517, Dist. Beed, Maharashtra";
 
 export const FOUNDED_YEAR = 1945;
 

@@ -169,7 +169,7 @@ export function BeforeAfterSlider({
           {pick([
             "छायाचित्र संदर्भ: साहित्य निकेतन ग्रंथालय अभिलेखागार",
             "छायाचित्र संदर्भ: साहित्य निकेतन पुस्तकालय अभिलेखागार",
-            "Photo credit: Sahitya Niketan Public Library Archives",
+            "Photo credit: Sahitya Niketan Library Archives",
           ])}
         </div>
       </div>

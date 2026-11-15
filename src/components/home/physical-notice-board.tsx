@@ -62,7 +62,7 @@ export function PhysicalNoticeBoard() {
                     </span>
                   </div>
                   <h3 className="font-marathi-heading text-lg sm:text-xl font-bold text-stone-900 dark:text-[#FAF2E8] mt-1.5">
-                    {language === "en" ? "Sahitya Niketan Public Library, Ambajogai" : "साहित्य निकेतन सार्वजनिक वाचनालय, अंबाजोगाई"}
+                    {language === "en" ? "Sahitya Niketan Library, Ambajogai" : "साहित्य निकेतन सार्वजनिक वाचनालय, अंबाजोगाई"}
                   </h3>
                   <p className="text-xs text-stone-500 dark:text-stone-400 mt-0.5">
                     {language === "en"
