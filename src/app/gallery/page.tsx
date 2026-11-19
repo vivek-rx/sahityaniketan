@@ -340,7 +340,7 @@ function GalleryContent() {
                 {/* Main Photo (fit contain so aspect ratio stays exact) */}
                 <div className="relative w-full h-full flex items-center justify-center p-4">
                   <Image
-                    src={activeModalEvent.photos[currentPhotoIdx]?.url || activeModalEvent.coverImage}
+                    src={activeModalEvent.photos[currentPhotoIdx]?.url || activeModalEvent.coverImage || "/images/real/library_signboard.webp"}
                     alt={
                       isEn
                         ? activeModalEvent.photos[currentPhotoIdx]?.captionEn || activeModalEvent.titleEn || activeModalEvent.title
