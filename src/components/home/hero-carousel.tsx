@@ -356,9 +356,9 @@ export function HeroCarousel() {
                                 `https://www.youtube.com/embed/${slide.youtubeId || "D-ktRXhUL30"}?autoplay=1`
                               )
                             }
-                            className="flex items-center gap-2 rounded-full bg-[#E5B869] hover:bg-[#F4D98C] text-[#3A040B] px-4 sm:px-5 py-2 sm:py-2.5 text-xs sm:text-sm font-bold shadow-md shadow-black/30 transition-all hover:scale-[1.03] active:scale-95 cursor-pointer font-marathi-body"
+                            className="flex items-center gap-2 rounded-full bg-[#800020] hover:bg-[#66001A] text-white px-4 sm:px-5 py-2 sm:py-2.5 text-xs sm:text-sm font-bold shadow-md shadow-black/30 transition-all hover:scale-[1.03] active:scale-95 cursor-pointer font-marathi-body"
                           >
-                            <Play className="h-3.5 w-3.5 fill-[#3A040B]" />
+                            <Play className="h-3.5 w-3.5 fill-white" />
                             <span>
                               {language === "mr"
                                 ? "माहितीपट पाहा"
@@ -370,9 +370,9 @@ export function HeroCarousel() {
                         ) : (
                           <Link
                             href={slide.buttonLink || "/events"}
-                            className="flex items-center gap-2 rounded-full bg-[#E5B869] hover:bg-[#F4D98C] text-[#3A040B] px-4 sm:px-5 py-2 sm:py-2.5 text-xs sm:text-sm font-bold shadow-md shadow-black/30 transition-all hover:scale-[1.03] active:scale-95 cursor-pointer font-marathi-body"
+                            className="flex items-center gap-2 rounded-full bg-[#800020] hover:bg-[#66001A] text-white px-4 sm:px-5 py-2 sm:py-2.5 text-xs sm:text-sm font-bold shadow-md shadow-black/30 transition-all hover:scale-[1.03] active:scale-95 cursor-pointer font-marathi-body"
                           >
-                            <BookOpen className="h-3.5 w-3.5 text-[#800020]" />
+                            <BookOpen className="h-3.5 w-3.5 text-white" />
                             <span>
                               {language === "en"
                                 ? slide.buttonTextEn || "Read Story"
